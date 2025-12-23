@@ -480,6 +480,123 @@
             document.getElementById('successScreen').classList.remove('hidden');
         }
     </script>
+    <!-- FOMO-style Social Proof Toasts -->
+<div id="fomo-toasts" aria-live="polite" aria-atomic="true"></div>
+
+<style>
+  #fomo-toasts{
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+    max-width: min(360px, calc(100vw - 32px));
+  }
+  .fomo-toast{
+    pointer-events: auto;
+    background: rgba(15, 23, 42, 0.92);
+    color: #e2e8f0;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 14px;
+    padding: 12px 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    backdrop-filter: blur(10px);
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    transform: translateY(12px);
+    opacity: 0;
+    animation: fomoIn .35s ease forwards;
+  }
+  .fomo-icon{
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    background: rgba(59, 130, 246, 0.18);
+    border: 1px solid rgba(59, 130, 246, 0.22);
+    font-size: 18px;
+  }
+  .fomo-title{ font-weight: 700; font-size: 0.95rem; margin: 0; line-height: 1.1;}
+  .fomo-sub{ font-size: 0.85rem; margin: 2px 0 0; color: rgba(226,232,240,0.85); }
+  .fomo-time{ font-size: 0.75rem; color: rgba(226,232,240,0.65); white-space: nowrap; }
+  .fomo-x{
+    pointer-events: auto;
+    border: 0;
+    background: transparent;
+    color: rgba(226,232,240,0.7);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 10px;
+  }
+  .fomo-x:hover{ background: rgba(226,232,240,0.08); color: #e2e8f0; }
+
+  @keyframes fomoIn {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fomoOut {
+    to { transform: translateY(8px); opacity: 0; }
+  }
+
+  /* Mobile placement */
+  @media (max-width: 520px){
+    #fomo-toasts{ right: 12px; left: 12px; bottom: 12px; max-width: none; }
+  }
+</style>
+
+<script>
+(function(){
+  // 1) Edit these events to match your business (keep them truthful/general)
+  const seedEvents = [
+    { icon: "📍", title: "New quote requested", sub: "Chicago area • TV wall mount", minutesAgo: 6 },
+    { icon: "✅", title: "Install booked", sub: "65” mounting • Near Oak Lawn", minutesAgo: 22 },
+    { icon: "🛠️", title: "Same-day slot opened", sub: "Limited availability today", minutesAgo: 41 },
+    { icon: "⭐", title: "5-star review", sub: "“Clean work and fast.”", minutesAgo: 75 },
+    { icon: "📩", title: "Question received", sub: "Full-motion mount request", minutesAgo: 120 }
+  ];
+
+  // 2) Optional: load events from /events.json (so you can update without code changes)
+  // Create a file at your site root: /events.json with same fields as above.
+  async function loadEvents(){
+    try{
+      const res = await fetch("/events.json", { cache: "no-store" });
+      if(!res.ok) return seedEvents;
+      const data = await res.json();
+      return Array.isArray(data) && data.length ? data : seedEvents;
+    }catch(e){
+      return seedEvents;
+    }
+  }
+
+  const container = document.getElementById("fomo-toasts");
+  let events = [];
+  let idx = 0;
+
+  function fmtTime(mins){
+    if(mins < 60) return `${mins}m ago`;
+    const h = Math.round(mins/60);
+    return `${h}h ago`;
+  }
+
+  function showToast(e){
+    // Respect "reduced motion"
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const toast = document.createElement("div");
+    toast.className = "fomo-toast";
+    toast.innerHTML = `
+      <div class="fomo-icon">${e.icon || "✅"}</div>
+      <div>
+        <p class="fomo-title">${e.title}</p>
+        <p class="fomo-sub">${e.sub || ""}</p>
+      </div>
+      <div style="display:flex; align-items
+
 </body>
 
 </html>
