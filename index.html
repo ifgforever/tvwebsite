@@ -480,74 +480,6 @@
             document.getElementById('successScreen').classList.remove('hidden');
         }
     </script>
-    <!-- FOMO-style Social Proof Toasts -->
-<div id="fomo-toasts" aria-live="polite" aria-atomic="true"></div>
-
-<style>
-  #fomo-toasts{
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    pointer-events: none;
-    max-width: min(360px, calc(100vw - 32px));
-  }
-  .fomo-toast{
-    pointer-events: auto;
-    background: rgba(15, 23, 42, 0.92);
-    color: #e2e8f0;
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    border-radius: 14px;
-    padding: 12px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.25);
-    backdrop-filter: blur(10px);
-    display: grid;
-    grid-template-columns: 36px 1fr auto;
-    gap: 10px;
-    align-items: center;
-    transform: translateY(12px);
-    opacity: 0;
-    animation: fomoIn .35s ease forwards;
-  }
-  .fomo-icon{
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    display: grid; place-items: center;
-    background: rgba(59, 130, 246, 0.18);
-    border: 1px solid rgba(59, 130, 246, 0.22);
-    font-size: 18px;
-  }
-  .fomo-title{ font-weight: 700; font-size: 0.95rem; margin: 0; line-height: 1.1;}
-  .fomo-sub{ font-size: 0.85rem; margin: 2px 0 0; color: rgba(226,232,240,0.85); }
-  .fomo-time{ font-size: 0.75rem; color: rgba(226,232,240,0.65); white-space: nowrap; }
-  .fomo-x{
-    pointer-events: auto;
-    border: 0;
-    background: transparent;
-    color: rgba(226,232,240,0.7);
-    font-size: 18px;
-    line-height: 1;
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 10px;
-  }
-  .fomo-x:hover{ background: rgba(226,232,240,0.08); color: #e2e8f0; }
-
-  @keyframes fomoIn {
-    to { transform: translateY(0); opacity: 1; }
-  }
-  @keyframes fomoOut {
-    to { transform: translateY(8px); opacity: 0; }
-  }
-
-  @media (max-width: 520px){
-    #fomo-toasts{ right: 12px; left: 12px; bottom: 12px; max-width: none; }
-  }
-</style>
-
 <script>
 (function(){
   const seedEvents = [
@@ -587,20 +519,20 @@
     setTimeout(() => {
       toast.style.animation = "fomoOut .3s ease forwards";
       setTimeout(() => toast.remove(), 300);
-    }, 7000);
+    }, 10000); // Toast stays for 10 seconds
   }
 
-  // Show first toast after 3 seconds (reduced for testing)
+  // Show first toast after 10 seconds
   setTimeout(() => {
     showToast(seedEvents[idx % seedEvents.length]);
     idx++;
 
-    // Show new toast every 12 seconds
+    // Show new toast every 30-45 seconds (randomized)
     setInterval(() => {
       showToast(seedEvents[idx % seedEvents.length]);
       idx++;
-    }, 12000);
-  }, 3000);
+    }, Math.random() * 15000 + 30000); // 30-45 seconds
+  }, 10000);
 })();
 </script>
 </body>
