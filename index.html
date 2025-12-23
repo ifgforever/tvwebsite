@@ -2,8 +2,6 @@
 <html lang="en">
 
 <head>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <meta charset="UTF-8">
@@ -326,14 +324,6 @@
                             placeholder="Any special requests or details we should know about..."></textarea>
                     </div>
 
-                    <div class="flex justify-center">
-                        <div class="g-recaptcha" data-sitekey="6LfR6S8sAAAAAFYy3iMjinfcJdvjc8wS_PwGdM_E"></div>
-                    </div>
-
-                    <div id="captchaError" class="hidden bg-red-100 border-l-4 border-red-500 p-4 text-red-700 text-sm">
-                        ⚠️ Please complete the reCAPTCHA verification to continue.
-                    </div>
-
                     <button onclick="submitBooking()"
                         class="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:from-red-700 hover:to-green-700 transition shadow-lg hover:shadow-xl">
                         🎄 Request Holiday Appointment 🎄
@@ -435,17 +425,6 @@
                 return;
             }
 
-            // Validate reCAPTCHA
-            const captchaResponse = grecaptcha.getResponse();
-            if (!captchaResponse || captchaResponse.length === 0) {
-                document.getElementById('captchaError').classList.remove('hidden');
-                document.getElementById('captchaError').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
-            }
-
-            // Hide error if it was showing
-            document.getElementById('captchaError').classList.add('hidden');
-
             const total = calculateTotal();
 
             const booking = {
@@ -465,7 +444,6 @@
             formData.append('preferredTime', preferredTime);
             formData.append('additionalNotes', additionalNotes);
             formData.append('total', '$' + total);
-            formData.append('g-recaptcha-response', captchaResponse);
 
             fetch('https://formspree.io/f/xeoyyygd', {
                 method: 'POST',
