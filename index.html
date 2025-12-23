@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/favicon.png?v=3">
+
+    <title>TV Mounting Service - Book Your Appointment - Merry Christmas!</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            user-select: none;
+            cursor: default;
+            animation-name: snowfall;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .christmas-lights {
+            background: linear-gradient(90deg,
+                    #ff0000 0%, #ff0000 10%,
+                    #00ff00 10%, #00ff00 20%,
+                    #ffff00 20%, #ffff00 30%,
+                    #0000ff 30%, #0000ff 40%,
+                    #ff0000 40%, #ff0000 50%,
+                    #00ff00 50%, #00ff00 60%,
+                    #ffff00 60%, #ffff00 70%,
+                    #0000ff 70%, #0000ff 80%,
+                    #ff0000 80%, #ff0000 90%,
+                    #00ff00 90%, #00ff00 100%);
+            height: 8px;
+            animation: lights 2s linear infinite;
+        }
+
+        @keyframes lights {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .santa-hat {
+            position: relative;
+        }
+
+        .santa-hat::after {
+            content: '🎅';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-red-50 via-green-50 to-red-100 min-h-screen">
+    <div class="christmas-lights"></div>
+    <div id="snowflakes"></div>
+
+    <div class="py-12 px-4" id="mainContent">
+        <div class="max-w-4xl mx-auto">
+
+            <div class="text-center mb-12">
+                <div class="text-6xl mb-4 animate-bounce">🎄</div>
+                <h1 class="text-5xl font-bold text-red-700 mb-2">Merry Christmas!</h1>
+                <div class="flex items-center justify-center mb-4">
+                    <img src="xmastvlogo.png" alt="TV Install Chicago Christmas Logo" class="h-50 w-auto">
+                </div>
+                <p class="text-xl text-green-700 font-semibold">🎁 Season's Greetings • Same-day service available 🎁
+                </p>
+                <p class="text-lg text-red-600 mt-2">✨ Happy Holidays from our family to yours! ✨</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 border-4 border-red-200">
+                <h2 class="text-2xl font-bold text-green-700 mb-6 flex items-center">
+                    <span
+                        class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">🎄</span>
+                    Holiday Pricing
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div
+                        class="border-2 border-green-300 rounded-lg p-4 hover:border-red-400 transition bg-gradient-to-br from-red-50 to-green-50">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">Up to 42"</span>
+                            <span class="text-2xl font-bold text-red-600">$99</span>
+                        </div>
+                    </div>
+                    <div
+                        class="border-2 border-green-300 rounded-lg p-4 hover:border-red-400 transition bg-gradient-to-br from-red-50 to-green-50">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">43" - 55"</span>
+                            <span class="text-2xl font-bold text-red-600">$129</span>
+                        </div>
+                    </div>
+                    <div
+                        class="border-2 border-green-300 rounded-lg p-4 hover:border-red-400 transition bg-gradient-to-br from-red-50 to-green-50">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">56" - 70"</span>
+                            <span class="text-2xl font-bold text-red-600">$159</span>
+                        </div>
+                    </div>
+                    <div
+                        class="border-2 border-green-300 rounded-lg p-4 hover:border-red-400 transition bg-gradient-to-br from-red-50 to-green-50">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">71" - 85"</span>
+                            <span class="text-2xl font-bold text-red-600">$199</span>
+                        </div>
+                    </div>
+                    <div
+                        class="border-2 border-green-300 rounded-lg p-4 hover:border-red-400 transition md:col-span-2 bg-gradient-to-br from-red-50 to-green-50">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">86"+</span>
+                            <span class="text-2xl font-bold text-red-600">$249</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="font-semibold text-green-700 mb-3">🎁 Mount Type Options:</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between bg-green-50 rounded-lg p-3 border-2 border-green-200">
+                        <div>
+                            <span class="font-medium text-gray-800">Fixed Mount</span>
+                            <span class="text-sm text-gray-600 ml-2">- Flat against the wall</span>
+                        </div>
+                        <span class="text-green-600 font-semibold">+$50</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-red-50 rounded-lg p-3 border-2 border-red-200">
+                        <div>
+                            <span class="font-medium text-gray-800">Tilting Mount</span>
+                            <span class="text-sm text-gray-600 ml-2">- Adjustable tilt angle</span>
+                        </div>
+                        <span class="text-red-600 font-semibold">+$50</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-green-50 rounded-lg p-3 border-2 border-green-200">
+                        <div>
+                            <span class="font-medium text-gray-800">Full Motion Mount</span>
+                            <span class="text-sm text-gray-600 ml-2">- Swivel and extend</span>
+                        </div>
+                        <span class="text-green-600 font-semibold">+$65</span>
+                    </div>
+                </div>
+
+                <h3 class="font-semibold text-green-700 mb-3 mt-6">🎄 Wire Concealment Options:</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between bg-green-50 rounded-lg p-3 border-2 border-green-200">
+                        <div>
+                            <span class="font-medium text-gray-800">No Wire Concealment</span>
+                            <span class="text-sm text-gray-600 ml-2">- Standard installation</span>
+                        </div>
+                        <span class="text-green-600 font-semibold">Included</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-red-50 rounded-lg p-3 border-2 border-red-200">
+                        <div>
+                            <span class="font-medium text-gray-800">External Strip</span>
+                            <span class="text-sm text-gray-600 ml-2">- Surface-mounted wire cover</span>
+                        </div>
+                        <span class="text-red-600 font-semibold">+$35</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-green-50 rounded-lg p-3 border-2 border-green-200">
+                        <div>
+                            <span class="font-medium text-gray-800">In-Wall Concealment</span>
+                            <span class="text-sm text-gray-600 ml-2">- Wires hidden inside wall</span>
+                        </div>
+                        <span class="text-green-600 font-semibold">+$60</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-red-50 rounded-lg p-3 border-2 border-red-200">
+                        <div>
+                            <span class="font-medium text-gray-800">Electrical Outlet Installation</span>
+                            <span class="text-sm text-gray-600 ml-2">- New outlet behind TV</span>
+                        </div>
+                        <span class="text-red-600 font-semibold">+$250</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-red-50 border-l-4 border-red-500 p-4">
+                    <p class="text-sm text-gray-700">
+                        🎄 All installations include level mounting and debris cleanup
+                    </p>
+                    <p class="text-sm text-red-600 font-semibold mt-2">
+                        🎅 Wishing you and your loved ones a wonderful holiday season!
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-4 border-green-200">
+                <h2 class="text-2xl font-bold text-green-700 mb-6 flex items-center">
+                    <span
+                        class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">🎁</span>
+                    Book Your Holiday Appointment
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                            <input type="text" id="name" required
+                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none"
+                                placeholder="John Smith">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                            <input type="tel" id="phone" required
+                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none"
+                                placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input type="email" id="email" required
+                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none"
+                            placeholder="john@example.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Address *</label>
+                        <input type="text" id="address" required
+                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none"
+                            placeholder="123 Main St, City, State ZIP">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
+                            <select id="tvSize" required onchange="calculateTotal()"
+                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                <option value="">Select size</option>
+                                <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                <option value="86-plus" data-price="249">86"+ - $249</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
+                            <select id="mountType" required onchange="calculateTotal()"
+                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                <option value="">Select mount type</option>
+                                <option value="own" data-price="0">Own Mount - +$0</option>
+                                <option value="fixed" data-price="50">Fixed Mount - +$50</option>
+                                <option value="tilt" data-price="100">Tilting Mount - +$50</option>
+                                <option value="full" data-price="115">Full Motion - +$75</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
+                        <select id="wireConcealment" required onchange="calculateTotal()"
+                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                            <option value="">Select wire concealment option</option>
+                            <option value="none" data-price="0">No Wire Concealment - Included</option>
+                            <option value="external" data-price="35">External Strip - +$35</option>
+                            <option value="inwall" data-price="60">In-Wall Concealment - +$60</option>
+                            <option value="outlet" data-price="250">Electrical Outlet Installation - +$250</option>
+                        </select>
+                    </div>
+
+                    <div id="priceTotal"
+                        class="hidden bg-gradient-to-r from-red-100 to-green-100 border-4 border-red-300 rounded-xl p-6 text-center">
+                        <p class="text-lg font-semibold text-gray-700 mb-2">🎄 Your Estimated Total 🎄</p>
+                        <p class="text-5xl font-bold text-red-600" id="totalAmount">$0</p>
+                        <p class="text-sm text-gray-600 mt-2">All-inclusive pricing • No hidden fees</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date *</label>
+                            <input type="date" id="preferredDate" required
+                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time *</label>
+                            <select id="preferredTime" required
+                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                <option value="">Select time</option>
+                                <option value="8:00 AM - 10:00 AM">8:00 AM - 10:00 AM</option>
+                                <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                                <option value="12:00 PM - 2:00 PM">12:00 PM - 2:00 PM</option>
+                                <option value="2:00 PM - 4:00 PM">2:00 PM - 4:00 PM</option>
+                                <option value="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
+                        <textarea id="additionalNotes" rows="4"
+                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none"
+                            placeholder="Any special requests or details we should know about..."></textarea>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="g-recaptcha" data-sitekey="6LfR6S8sAAAAAFYy3iMjinfcJdvjc8wS_PwGdM_E"></div>
+                    </div>
+
+                    <div id="captchaError" class="hidden bg-red-100 border-l-4 border-red-500 p-4 text-red-700 text-sm">
+                        ⚠️ Please complete the reCAPTCHA verification to continue.
+                    </div>
+
+                    <button onclick="submitBooking()"
+                        class="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:from-red-700 hover:to-green-700 transition shadow-lg hover:shadow-xl">
+                        🎄 Request Holiday Appointment 🎄
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 text-gray-700">
+                <p class="text-lg font-semibold text-red-600">🎅 Merry Christmas & Happy Holidays! 🎅</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+                    <a href="tel:+13129317096"
+                        class="px-5 py-3 rounded-lg bg-red-700 text-white font-bold hover:opacity-90">
+                        Call: (312) 931-7096
+                    </a>
+                    <a href="mailto:tvinstallchicago@gmail.com"
+                        class="px-5 py-3 rounded-lg bg-green-700 text-white font-bold hover:opacity-90">
+                        Email: tvinstallchicago@gmail.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successScreen"
+        class="hidden min-h-screen bg-gradient-to-br from-red-50 via-green-50 to-red-100 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center border-4 border-red-300">
+            <div class="text-6xl mb-4">🎄</div>
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-red-700 mb-4">Booking Received!</h2>
+            <p class="text-lg text-green-700 font-semibold mb-4">🎁 Merry Christmas! 🎁</p>
+            <p class="text-gray-600 mb-6" id="successMessage">
+                Thank you! We've received your appointment request and will contact you shortly to confirm your booking.
+            </p>
+            <div class="bg-red-50 rounded-lg p-4 text-left border-2 border-red-200" id="bookingDetails"></div>
+            <p class="text-sm text-gray-600 mt-6">Happy Holidays from our team! ❄️</p>
+        </div>
+    </div>
+
+    <script>
+        function createSnowflakes() {
+            const snowflakeContainer = document.getElementById('snowflakes');
+            const snowflakeChars = ['❄', '❅', '❆'];
+
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 3 + 7) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                snowflakeContainer.appendChild(snowflake);
+            }
+        }
+
+        createSnowflakes();
+
+        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+
+        function calculateTotal() {
+            const tvSizeSelect = document.getElementById('tvSize');
+            const mountTypeSelect = document.getElementById('mountType');
+            const wireConcealmentSelect = document.getElementById('wireConcealment');
+
+            const tvSizePrice = tvSizeSelect.selectedOptions[0]?.dataset.price || 0;
+            const mountTypePrice = mountTypeSelect.selectedOptions[0]?.dataset.price || 0;
+            const wireConcealmentPrice = wireConcealmentSelect.selectedOptions[0]?.dataset.price || 0;
+
+            const total = parseInt(tvSizePrice) + parseInt(mountTypePrice) + parseInt(wireConcealmentPrice);
+
+            if (total > 0) {
+                document.getElementById('priceTotal').classList.remove('hidden');
+                document.getElementById('totalAmount').textContent = '$' + total;
+            } else {
+                document.getElementById('priceTotal').classList.add('hidden');
+            }
+
+            return total;
+        }
+
+        function submitBooking() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const tvSize = document.getElementById('tvSize').value;
+            const mountType = document.getElementById('mountType').value;
+            const wireConcealment = document.getElementById('wireConcealment').value;
+            const preferredDate = document.getElementById('preferredDate').value;
+            const preferredTime = document.getElementById('preferredTime').value;
+            const additionalNotes = document.getElementById('additionalNotes').value;
+
+            if (!name || !phone || !email || !address || !tvSize || !mountType || !wireConcealment || !preferredDate || !preferredTime) {
+                alert('Please fill in all required fields marked with *');
+                return;
+            }
+
+            // Validate reCAPTCHA
+            const captchaResponse = grecaptcha.getResponse();
+            if (!captchaResponse || captchaResponse.length === 0) {
+                document.getElementById('captchaError').classList.remove('hidden');
+                document.getElementById('captchaError').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Hide error if it was showing
+            document.getElementById('captchaError').classList.add('hidden');
+
+            const total = calculateTotal();
+
+            const booking = {
+                name, phone, email, address, tvSize, mountType, wireConcealment,
+                preferredDate, preferredTime, additionalNotes, total
+            };
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('email', email);
+            formData.append('address', address);
+            formData.append('tvSize', tvSize);
+            formData.append('mountType', mountType);
+            formData.append('wireConcealment', wireConcealment);
+            formData.append('preferredDate', preferredDate);
+            formData.append('preferredTime', preferredTime);
+            formData.append('additionalNotes', additionalNotes);
+            formData.append('total', '$' + total);
+            formData.append('g-recaptcha-response', captchaResponse);
+
+            fetch('https://formspree.io/f/xeoyyygd', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Form submitted successfully');
+                    showSuccessScreen(name, email, preferredDate, preferredTime, total);
+                } else {
+                    console.log('Form submission error');
+                    alert('There was an error submitting your booking. Please try again or call us directly.');
+                }
+            }).catch(error => {
+                console.log('Error:', error);
+                alert('There was an error submitting your booking. Please try again or call us directly.');
+            });
+        }
+
+        function showSuccessScreen(name, email, preferredDate, preferredTime, total) {
+            document.getElementById('successMessage').innerHTML =
+                `Thank you, ${name}! 🎄 We've received your holiday appointment request and will contact you shortly to confirm your booking. Merry Christmas!`;
+
+            document.getElementById('bookingDetails').innerHTML = `
+                <p class="text-sm text-gray-700 mb-2"><strong>Preferred Date:</strong> ${preferredDate}</p>
+                <p class="text-sm text-gray-700 mb-2"><strong>Time:</strong> ${preferredTime}</p>
+                <p class="text-sm text-gray-700 mb-2"><strong>Email:</strong> ${email}</p>
+                <p class="text-sm text-gray-700 mt-3 pt-3 border-t-2 border-red-200"><strong>Estimated Total:</strong> <span class="text-xl font-bold text-red-600">$${total}</span></p>
+            `;
+
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('successScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
