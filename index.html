@@ -481,6 +481,7 @@
         }
     </script>
     <!-- FOMO-style Social Proof Toasts -->
+    <script>
 <div id="fomo-toasts" aria-live="polite" aria-atomic="true"></div>
 
 <style>
@@ -501,7 +502,7 @@
     color: #e2e8f0;
     border: 1px solid rgba(148, 163, 184, 0.25);
     border-radius: 14px;
-    padding: 12px 12px;
+    padding: 12px;
     box-shadow: 0 12px 30px rgba(0,0,0,.25);
     backdrop-filter: blur(10px);
     display: grid;
@@ -543,7 +544,6 @@
     to { transform: translateY(8px); opacity: 0; }
   }
 
-  /* Mobile placement */
   @media (max-width: 520px){
     #fomo-toasts{ right: 12px; left: 12px; bottom: 12px; max-width: none; }
   }
@@ -551,86 +551,57 @@
 
 <script>
 (function(){
-  // Edit these events to match your business (keep them truthful/general)
   const seedEvents = [
     { icon: "📍", title: "New quote requested", sub: "Chicago area • TV wall mount", minutesAgo: 6 },
     { icon: "✅", title: "Install booked", sub: "65\" mounting • Near Oak Lawn", minutesAgo: 22 },
     { icon: "🛠️", title: "Same-day slot opened", sub: "Limited availability today", minutesAgo: 41 },
-    { icon: "⭐", title: "5-star review", sub: ""Clean work and fast."", minutesAgo: 75 },
+    { icon: "⭐", title: "5-star review", sub: "Clean work and fast.", minutesAgo: 75 },
     { icon: "📩", title: "Question received", sub: "Full-motion mount request", minutesAgo: 120 }
   ];
 
-  // Optional: load events from /events.json
-  async function loadEvents(){
-    try{
-      const res = await fetch("/events.json", { cache: "no-store" });
-      if(!res.ok) return seedEvents;
-      const data = await res.json();
-      return Array.isArray(data) && data.length ? data : seedEvents;
-    }catch(e){
-      return seedEvents;
-    }
-  }
-
   const container = document.getElementById("fomo-toasts");
-  let events = [];
   let idx = 0;
 
   function fmtTime(mins){
-    if(mins < 60) return `${mins}m ago`;
+    if(mins < 60) return mins + "m ago";
     const h = Math.round(mins/60);
-    return `${h}h ago`;
+    return h + "h ago";
   }
 
   function showToast(e){
-    // Respect "reduced motion"
-    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     const toast = document.createElement("div");
     toast.className = "fomo-toast";
     toast.innerHTML = `
-      <div class="fomo-icon">${e.icon || "✅"}</div>
+      <div class="fomo-icon">${e.icon}</div>
       <div>
         <p class="fomo-title">${e.title}</p>
-        <p class="fomo-sub">${e.sub || ""}</p>
+        <p class="fomo-sub">${e.sub}</p>
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
         <span class="fomo-time">${fmtTime(e.minutesAgo)}</span>
-        <button class="fomo-x" aria-label="Dismiss" onclick="this.closest('.fomo-toast').remove()">×</button>
+        <button class="fomo-x" aria-label="Dismiss" onclick="this.parentElement.parentElement.remove()">×</button>
       </div>
     `;
 
     container.appendChild(toast);
 
-    // Auto-dismiss after 7 seconds
     setTimeout(() => {
-      if(!prefersReduced){
-        toast.style.animation = "fomoOut .3s ease forwards";
-        setTimeout(() => toast.remove(), 300);
-      }else{
-        toast.remove();
-      }
+      toast.style.animation = "fomoOut .3s ease forwards";
+      setTimeout(() => toast.remove(), 300);
     }, 7000);
   }
 
-  async function start(){
-    events = await loadEvents();
-    if(!events.length) return;
+  // Show first toast after 3 seconds (reduced for testing)
+  setTimeout(() => {
+    showToast(seedEvents[idx % seedEvents.length]);
+    idx++;
 
-    // Show first toast after 8 seconds
-    setTimeout(() => {
-      showToast(events[idx % events.length]);
+    // Show new toast every 12 seconds
+    setInterval(() => {
+      showToast(seedEvents[idx % seedEvents.length]);
       idx++;
-
-      // Then show a new one every 15-25 seconds
-      setInterval(() => {
-        showToast(events[idx % events.length]);
-        idx++;
-      }, Math.random() * 10000 + 15000); // 15-25 seconds
-    }, 8000);
-  }
-
-  start();
+    }, 12000);
+  }, 3000);
 })();
 </script>
 </body>
