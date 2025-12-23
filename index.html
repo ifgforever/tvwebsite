@@ -551,17 +551,16 @@
 
 <script>
 (function(){
-  // 1) Edit these events to match your business (keep them truthful/general)
+  // Edit these events to match your business (keep them truthful/general)
   const seedEvents = [
     { icon: "📍", title: "New quote requested", sub: "Chicago area • TV wall mount", minutesAgo: 6 },
-    { icon: "✅", title: "Install booked", sub: "65” mounting • Near Oak Lawn", minutesAgo: 22 },
+    { icon: "✅", title: "Install booked", sub: "65\" mounting • Near Oak Lawn", minutesAgo: 22 },
     { icon: "🛠️", title: "Same-day slot opened", sub: "Limited availability today", minutesAgo: 41 },
-    { icon: "⭐", title: "5-star review", sub: "“Clean work and fast.”", minutesAgo: 75 },
+    { icon: "⭐", title: "5-star review", sub: ""Clean work and fast."", minutesAgo: 75 },
     { icon: "📩", title: "Question received", sub: "Full-motion mount request", minutesAgo: 120 }
   ];
 
-  // 2) Optional: load events from /events.json (so you can update without code changes)
-  // Create a file at your site root: /events.json with same fields as above.
+  // Optional: load events from /events.json
   async function loadEvents(){
     try{
       const res = await fetch("/events.json", { cache: "no-store" });
@@ -595,7 +594,48 @@
         <p class="fomo-title">${e.title}</p>
         <p class="fomo-sub">${e.sub || ""}</p>
       </div>
-      <div style="display:flex; align-items
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="fomo-time">${fmtTime(e.minutesAgo)}</span>
+        <button class="fomo-x" aria-label="Dismiss" onclick="this.closest('.fomo-toast').remove()">×</button>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    // Auto-dismiss after 7 seconds
+    setTimeout(() => {
+      if(!prefersReduced){
+        toast.style.animation = "fomoOut .3s ease forwards";
+        setTimeout(() => toast.remove(), 300);
+      }else{
+        toast.remove();
+      }
+    }, 7000);
+  }
+
+  async function start(){
+    events = await loadEvents();
+    if(!events.length) return;
+
+    // Show first toast after 8 seconds
+    setTimeout(() => {
+      showToast(events[idx % events.length]);
+      idx++;
+
+      // Then show a new one every 15-25 seconds
+      setInterval(() => {
+        showToast(events[idx % events.length]);
+        idx++;
+      }, Math.random() * 10000 + 15000); // 15-25 seconds
+    }, 8000);
+  }
+
+  start();
+})();
+</script>
+</body>
+
+</html>
 
 </body>
 
