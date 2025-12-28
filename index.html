@@ -80,6 +80,19 @@
             right: -10px;
             font-size: 2rem;
         }
+
+        .discount-badge {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
     </style>
 </head>
 
@@ -107,6 +120,14 @@
                         class="bg-red-100 text-red-600 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">🎄</span>
                     Holiday Pricing
                 </h2>
+
+                <!-- Multiple TV Discount Banner -->
+                <div class="discount-badge bg-gradient-to-r from-red-500 to-green-500 text-white rounded-xl p-4 mb-6 text-center shadow-lg">
+                    <p class="text-lg font-bold">🎁 MULTI-TV SPECIAL 🎁</p>
+                    <p class="text-2xl font-extrabold">20% OFF</p>
+                    <p class="text-sm">When you mount 2 or more TVs!</p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div
                         class="border-2 border-green-300 rounded-lg p-4 hover:border-red-400 transition bg-gradient-to-br from-red-50 to-green-50">
@@ -250,49 +271,244 @@
                             placeholder="123 Main St, City, State ZIP">
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
-                            <select id="tvSize" required onchange="calculateTotal()"
-                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
-                                <option value="">Select size</option>
-                                <option value="up-to-42" data-price="99">Up to 42" - $99</option>
-                                <option value="43-55" data-price="129">43" - 55" - $129</option>
-                                <option value="56-70" data-price="159">56" - 70" - $159</option>
-                                <option value="71-85" data-price="199">71" - 85" - $199</option>
-                                <option value="86-plus" data-price="249">86"+ - $249</option>
-                            </select>
-                        </div>
+                    <!-- Number of TVs Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Number of TVs *</label>
+                        <select id="numTvs" required onchange="updateTvForms(); calculateTotal()"
+                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                            <option value="1">1 TV</option>
+                            <option value="2">2 TVs - 20% OFF! 🎁</option>
+                            <option value="3">3 TVs - 20% OFF! 🎁</option>
+                            <option value="4">4 TVs - 20% OFF! 🎁</option>
+                            <option value="5">5+ TVs - 20% OFF! 🎁</option>
+                        </select>
+                        <p id="discountNote" class="hidden text-sm text-green-600 font-semibold mt-2">🎉 20% multi-TV discount will be applied!</p>
+                    </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
-                            <select id="mountType" required onchange="calculateTotal()"
-                                class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
-                                <option value="">Select mount type</option>
-                                <option value="own" data-price="0">Own Mount - +$0</option>
-                                <option value="fixed" data-price="50">Fixed Mount - +$50</option>
-                                <option value="tilt" data-price="100">Tilting Mount - +$50</option>
-                                <option value="full" data-price="115">Full Motion - +$75</option>
-                            </select>
+                    <!-- TV 1 (Always visible) -->
+                    <div id="tv1-section" class="bg-gradient-to-r from-red-50 to-green-50 rounded-xl p-4 border-2 border-red-200">
+                        <h3 class="font-bold text-red-700 mb-4">📺 TV 1</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
+                                <select id="tvSize1" required onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
+                                <select id="mountType1" required onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment1" required onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
-                        <select id="wireConcealment" required onchange="calculateTotal()"
-                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
-                            <option value="">Select wire concealment option</option>
-                            <option value="none" data-price="0">No Wire Concealment - Included</option>
-                            <option value="external" data-price="35">External Strip - +$35</option>
-                            <option value="inwall" data-price="60">In-Wall Concealment - +$60</option>
-                            <option value="outlet" data-price="250">Electrical Outlet Installation - +$250</option>
-                        </select>
+                    <!-- TV 2 (Hidden by default) -->
+                    <div id="tv2-section" class="hidden bg-gradient-to-r from-green-50 to-red-50 rounded-xl p-4 border-2 border-green-200">
+                        <h3 class="font-bold text-green-700 mb-4">📺 TV 2</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
+                                <select id="tvSize2" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
+                                <select id="mountType2" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment2" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 3 (Hidden by default) -->
+                    <div id="tv3-section" class="hidden bg-gradient-to-r from-red-50 to-green-50 rounded-xl p-4 border-2 border-red-200">
+                        <h3 class="font-bold text-red-700 mb-4">📺 TV 3</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
+                                <select id="tvSize3" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
+                                <select id="mountType3" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment3" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 4 (Hidden by default) -->
+                    <div id="tv4-section" class="hidden bg-gradient-to-r from-green-50 to-red-50 rounded-xl p-4 border-2 border-green-200">
+                        <h3 class="font-bold text-green-700 mb-4">📺 TV 4</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
+                                <select id="tvSize4" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
+                                <select id="mountType4" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment4" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 5 (Hidden by default) -->
+                    <div id="tv5-section" class="hidden bg-gradient-to-r from-red-50 to-green-50 rounded-xl p-4 border-2 border-red-200">
+                        <h3 class="font-bold text-red-700 mb-4">📺 TV 5+</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">TV Size *</label>
+                                <select id="tvSize5" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Mount Type *</label>
+                                <select id="mountType5" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment5" onchange="calculateTotal()"
+                                    class="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-3">📝 For more than 5 TVs, please add details in the notes section below.</p>
                     </div>
 
                     <div id="priceTotal"
                         class="hidden bg-gradient-to-r from-red-100 to-green-100 border-4 border-red-300 rounded-xl p-6 text-center">
                         <p class="text-lg font-semibold text-gray-700 mb-2">🎄 Your Estimated Total 🎄</p>
+                        <div id="subtotalRow" class="hidden">
+                            <p class="text-xl text-gray-500 line-through" id="subtotalAmount">$0</p>
+                        </div>
                         <p class="text-5xl font-bold text-red-600" id="totalAmount">$0</p>
+                        <p id="savingsAmount" class="hidden text-lg font-bold text-green-600 mt-2">You save: $0</p>
                         <p class="text-sm text-gray-600 mt-2">All-inclusive pricing • No hidden fees</p>
                     </div>
 
@@ -387,25 +603,77 @@
 
         document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
 
+        function updateTvForms() {
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            const discountNote = document.getElementById('discountNote');
+            
+            // Show/hide discount note
+            if (numTvs >= 2) {
+                discountNote.classList.remove('hidden');
+            } else {
+                discountNote.classList.add('hidden');
+            }
+            
+            // Show/hide TV sections
+            for (let i = 2; i <= 5; i++) {
+                const section = document.getElementById(`tv${i}-section`);
+                if (i <= numTvs) {
+                    section.classList.remove('hidden');
+                    // Make fields required
+                    section.querySelectorAll('select').forEach(sel => sel.required = true);
+                } else {
+                    section.classList.add('hidden');
+                    // Remove required and reset values
+                    section.querySelectorAll('select').forEach(sel => {
+                        sel.required = false;
+                        sel.value = '';
+                    });
+                }
+            }
+        }
+
         function calculateTotal() {
-            const tvSizeSelect = document.getElementById('tvSize');
-            const mountTypeSelect = document.getElementById('mountType');
-            const wireConcealmentSelect = document.getElementById('wireConcealment');
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            let subtotal = 0;
+            
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSizeSelect = document.getElementById(`tvSize${i}`);
+                const mountTypeSelect = document.getElementById(`mountType${i}`);
+                const wireConcealmentSelect = document.getElementById(`wireConcealment${i}`);
 
-            const tvSizePrice = tvSizeSelect.selectedOptions[0]?.dataset.price || 0;
-            const mountTypePrice = mountTypeSelect.selectedOptions[0]?.dataset.price || 0;
-            const wireConcealmentPrice = wireConcealmentSelect.selectedOptions[0]?.dataset.price || 0;
+                const tvSizePrice = tvSizeSelect?.selectedOptions[0]?.dataset.price || 0;
+                const mountTypePrice = mountTypeSelect?.selectedOptions[0]?.dataset.price || 0;
+                const wireConcealmentPrice = wireConcealmentSelect?.selectedOptions[0]?.dataset.price || 0;
 
-            const total = parseInt(tvSizePrice) + parseInt(mountTypePrice) + parseInt(wireConcealmentPrice);
+                subtotal += parseInt(tvSizePrice) + parseInt(mountTypePrice) + parseInt(wireConcealmentPrice);
+            }
 
-            if (total > 0) {
+            // Apply 20% discount for multiple TVs
+            let total = subtotal;
+            let savings = 0;
+            if (numTvs >= 2 && subtotal > 0) {
+                savings = Math.round(subtotal * 0.20);
+                total = subtotal - savings;
+            }
+
+            if (subtotal > 0) {
                 document.getElementById('priceTotal').classList.remove('hidden');
                 document.getElementById('totalAmount').textContent = '$' + total;
+                
+                if (numTvs >= 2) {
+                    document.getElementById('subtotalRow').classList.remove('hidden');
+                    document.getElementById('subtotalAmount').textContent = '$' + subtotal;
+                    document.getElementById('savingsAmount').classList.remove('hidden');
+                    document.getElementById('savingsAmount').textContent = '🎉 You save: $' + savings + ' (20% off!)';
+                } else {
+                    document.getElementById('subtotalRow').classList.add('hidden');
+                    document.getElementById('savingsAmount').classList.add('hidden');
+                }
             } else {
                 document.getElementById('priceTotal').classList.add('hidden');
             }
 
-            return total;
+            return { subtotal, total, savings };
         }
 
         function submitBooking() {
@@ -413,36 +681,52 @@
             const phone = document.getElementById('phone').value;
             const email = document.getElementById('email').value;
             const address = document.getElementById('address').value;
-            const tvSize = document.getElementById('tvSize').value;
-            const mountType = document.getElementById('mountType').value;
-            const wireConcealment = document.getElementById('wireConcealment').value;
+            const numTvs = parseInt(document.getElementById('numTvs').value);
             const preferredDate = document.getElementById('preferredDate').value;
             const preferredTime = document.getElementById('preferredTime').value;
             const additionalNotes = document.getElementById('additionalNotes').value;
 
-            if (!name || !phone || !email || !address || !tvSize || !mountType || !wireConcealment || !preferredDate || !preferredTime) {
+            // Validate basic fields
+            if (!name || !phone || !email || !address || !preferredDate || !preferredTime) {
                 alert('Please fill in all required fields marked with *');
                 return;
             }
 
-            const total = calculateTotal();
+            // Validate TV selections
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSize = document.getElementById(`tvSize${i}`).value;
+                const mountType = document.getElementById(`mountType${i}`).value;
+                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
+                
+                if (!tvSize || !mountType || !wireConcealment) {
+                    alert(`Please fill in all fields for TV ${i}`);
+                    return;
+                }
+            }
 
-            const booking = {
-                name, phone, email, address, tvSize, mountType, wireConcealment,
-                preferredDate, preferredTime, additionalNotes, total
-            };
+            const { subtotal, total, savings } = calculateTotal();
+
+            // Build TV details string
+            let tvDetails = '';
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSize = document.getElementById(`tvSize${i}`).value;
+                const mountType = document.getElementById(`mountType${i}`).value;
+                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
+                tvDetails += `TV${i}: Size=${tvSize}, Mount=${mountType}, Wire=${wireConcealment}; `;
+            }
 
             const formData = new FormData();
             formData.append('name', name);
             formData.append('phone', phone);
             formData.append('email', email);
             formData.append('address', address);
-            formData.append('tvSize', tvSize);
-            formData.append('mountType', mountType);
-            formData.append('wireConcealment', wireConcealment);
+            formData.append('numTvs', numTvs);
+            formData.append('tvDetails', tvDetails);
             formData.append('preferredDate', preferredDate);
             formData.append('preferredTime', preferredTime);
             formData.append('additionalNotes', additionalNotes);
+            formData.append('subtotal', '$' + subtotal);
+            formData.append('discount', numTvs >= 2 ? '20% ($' + savings + ')' : 'None');
             formData.append('total', '$' + total);
 
             fetch('https://formspree.io/f/xeoyyygd', {
@@ -454,7 +738,7 @@
             }).then(response => {
                 if (response.ok) {
                     console.log('Form submitted successfully');
-                    showSuccessScreen(name, email, preferredDate, preferredTime, total);
+                    showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, savings);
                 } else {
                     console.log('Form submission error');
                     alert('There was an error submitting your booking. Please try again or call us directly.');
@@ -465,14 +749,21 @@
             });
         }
 
-        function showSuccessScreen(name, email, preferredDate, preferredTime, total) {
+        function showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, savings) {
             document.getElementById('successMessage').innerHTML =
                 `Thank you, ${name}! 🎄 We've received your holiday appointment request and will contact you shortly to confirm your booking. Merry Christmas!`;
 
+            let savingsHtml = '';
+            if (numTvs >= 2) {
+                savingsHtml = `<p class="text-sm text-green-600 font-bold">🎉 Multi-TV Discount: -$${savings}</p>`;
+            }
+
             document.getElementById('bookingDetails').innerHTML = `
+                <p class="text-sm text-gray-700 mb-2"><strong>Number of TVs:</strong> ${numTvs}</p>
                 <p class="text-sm text-gray-700 mb-2"><strong>Preferred Date:</strong> ${preferredDate}</p>
                 <p class="text-sm text-gray-700 mb-2"><strong>Time:</strong> ${preferredTime}</p>
                 <p class="text-sm text-gray-700 mb-2"><strong>Email:</strong> ${email}</p>
+                ${savingsHtml}
                 <p class="text-sm text-gray-700 mt-3 pt-3 border-t-2 border-red-200"><strong>Estimated Total:</strong> <span class="text-xl font-bold text-red-600">$${total}</span></p>
             `;
 
@@ -535,10 +826,6 @@
   }, 10000);
 })();
 </script>
-</body>
-
-</html>
-
 </body>
 
 </html>
