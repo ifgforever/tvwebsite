@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 - TV Install Chicago</title>
+  <style>
+    html, body { margin:0; height:100%; background:#fff; overflow:hidden; }
+    canvas { position:fixed; inset:0; display:block; }
+
+    /* Invisible-but-tappable phone area (so it still feels “just a drawing”) */
+    a#callHit {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 6vh;
+      width: min(92vw, 720px);
+      height: 12vh;
+      min-height: 70px;
+      max-height: 120px;
+      text-decoration: none;
+      /* Uncomment next line for debugging the hitbox */
+      /* outline: 2px dashed rgba(255,0,0,.35); */
+    }
+
+    /* Small helper hint (optional) */
+    .hint {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 2vh;
+      font: 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: rgba(0,0,0,.45);
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<!-- Tap-to-call overlay (covers the crayon phone text area) -->
+<a id="callHit" href="tel:3129317096" aria-label="Call 312-931-7096"></a>
+<div class="hint">Tap the phone number to call</div>
+
+<script>
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  const dpr = Math.max(1, Math.min(2, devicePixelRatio || 1));
+  canvas.width = Math.floor(innerWidth * dpr);
+  canvas.height = Math.floor(innerHeight * dpr);
+  canvas.style.width = innerWidth + "px";
+  canvas.style.height = innerHeight + "px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  drawOnce();
+}
+addEventListener("resize", resize);
+
+/* ------------ Load drawing ------------ */
+const img = new Image();
+img.src = "jrtv.jpg";
+let imgReady = false;
+img.onload = () => { imgReady = true; drawOnce(); };
+img.onerror = () => { imgReady = false; drawOnce(); };
+
+/* ------------ Layout (center image) ------------ */
+function computePlacement() {
+  const topMargin = innerHeight * 0.22;     // slightly more room for “404” message
+  const bottomMargin = innerHeight * 0.20;
+
+  const availW = innerWidth * 0.92;
+  const availH = innerHeight - topMargin - bottomMargin;
+
+  const iw = img.naturalWidth || img.width || 1;
+  const ih = img.naturalHeight || img.height || 1;
+
+  const s = Math.min(availW / iw, availH / ih);
+  const w = iw * s;
+  const h = ih * s;
+  const x = (innerWidth - w) / 2;
+  const y = topMargin + (availH - h) / 2;
+
+  return { x, y, w, h };
+}
+
+/* ------------ Crayon-ish text (messy letters, stable) ------------ */
+const CRAYON = ["#ff1a1a","#ff8c00","#ffd400","#00c853","#00b0ff","#2962ff","#aa00ff","#ff2d9a","#6d4c41","#111"];
+
+function crayonLetterStable(ch, x, y, size, color, rot, seed) {
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(rot);
+
+  ctx.font = `900 ${size}px "Comic Sans MS","Chalkboard SE","Marker Felt",system-ui`;
+  ctx.textBaseline = "alphabetic";
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+
+  ctx.strokeStyle = "rgba(0,0,0,0.35)";
+  ctx.fillStyle = color;
+
+  const passes = 7;
+  for (let i=0;i<passes;i++){
+    const jx = Math.sin(seed*10 + i*2.1) * 1.2;
+    const jy = Math.cos(seed*11 + i*2.3) * 1.2;
+
+    ctx.lineWidth = 4.5 + (Math.sin(seed*3 + i) * 1.2);
+    ctx.strokeText(ch, jx, jy);
+
+    ctx.globalAlpha = 0.85;
+    ctx.fillText(ch, jx*0.6, jy*0.6);
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.restore();
+}
+
+function crayonPhraseStable(text, cx, baseY, size, opts={}) {
+  const maxTilt = opts.maxTilt ?? 0.20;
+  const maxBounce = opts.maxBounce ?? size*0.26;
+  const kernJ = opts.maxKerningJitter ?? size*0.10;
+
+  ctx.save();
+  ctx.font = `900 ${size}px "Comic Sans MS","Chalkboard SE","Marker Felt",system-ui`;
+  const widths = [...text].map(ch => ctx.measureText(ch).width);
+  const total = widths.reduce((a,b)=>a+b,0);
+  ctx.restore();
+
+  let x = cx - total/2;
+  let drift = 0;
+
+  for (let i=0;i<text.length;i++){
+    const ch = text[i];
+    if (ch === " ") { x += widths[i]*0.6; continue; }
+
+    const seed = i * 0.77 + 1.23;
+    const color = CRAYON[i % CRAYON.length];
+    const tilt = Math.sin(seed*2.7) * maxTilt;
+    const bounce = drift + Math.sin(seed*3.1) * maxBounce * 0.55;
+    const k = Math.sin(seed*4.3) * kernJ;
+
+    crayonLetterStable(ch, x+k, baseY+bounce, size, color, tilt, seed);
+
+    x += widths[i] + k*0.15;
+    drift += Math.sin(seed*1.9) * maxBounce * 0.08;
+    drift = Math.max(-maxBounce, Math.min(maxBounce, drift));
+  }
+}
+
+/* ------------ Draw once (no animation) ------------ */
+function drawOnce() {
+  if (!canvas.width) return;
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+
+  const big = Math.max(40, Math.min(92, innerWidth*0.08));
+  const mid = Math.max(22, Math.min(56, innerWidth*0.052));
+  const phone = Math.max(26, Math.min(62, innerWidth*0.055));
+
+  // Kid-style 404 message
+  crayonPhraseStable("404", innerWidth/2, innerHeight*0.10, big, {
+    maxTilt: 0.28, maxBounce: big*0.34, maxKerningJitter: big*0.12
+  });
+
+  crayonPhraseStable("Oops! Page not found", innerWidth/2, innerHeight*0.17, mid, {
+    maxTilt: 0.22, maxBounce: mid*0.30, maxKerningJitter: mid*0.12
+  });
+
+  // Drawing
+  if (imgReady) {
+    const p = computePlacement();
+    ctx.drawImage(img, p.x, p.y, p.w, p.h);
+  } else {
+    ctx.save();
+    ctx.fillStyle = "#111";
+    ctx.font = "600 16px system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText("Put jrtv.jpg next to 404.html", innerWidth/2, innerHeight/2);
+    ctx.restore();
+  }
+
+  // Phone
+  crayonPhraseStable("CALL 312-931-7096", innerWidth/2, innerHeight*0.92, phone, {
+    maxTilt: 0.22, maxBounce: phone*0.28, maxKerningJitter: phone*0.12
+  });
+}
+
+resize();
+</script>
+</body>
+</html>
