@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/sbfavicon.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/faviconjan1.png">
+
+    <title>TV Mounting Service - Book Your Appointment - Game Day Ready!</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Stadium Lights Canvas */
+        #stadium-lights-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Yard line pattern overlay */
+        .yard-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10%,
+                rgba(200, 56, 3, 0.3) 10%,
+                rgba(200, 56, 3, 0.3) 10.5%
+            );
+        }
+
+        /* BEARS COLORS: LED bar with navy and orange */
+        .led-bar {
+            background: linear-gradient(90deg,
+                    #C83803 0%, #0B162A 15%,
+                    #ffffff 25%, #0B162A 40%,
+                    #C83803 50%, #0B162A 60%,
+                    #ffffff 75%, #0B162A 85%,
+                    #C83803 100%);
+            height: 4px;
+            animation: led-sweep 3s linear infinite;
+            box-shadow: 0 0 15px rgba(200, 56, 3, 0.6), 0 0 30px rgba(200, 56, 3, 0.3);
+        }
+
+        @keyframes led-sweep {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        /* BEARS COLORS: Stadium spotlight glow effect */
+        .spotlight-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+            filter: blur(80px);
+            animation: spotlight-pulse 4s ease-in-out infinite;
+        }
+
+        .spotlight-1 {
+            top: -100px;
+            left: 10%;
+            background: radial-gradient(circle, #C83803 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .spotlight-2 {
+            top: -100px;
+            right: 10%;
+            background: radial-gradient(circle, #0B162A 0%, transparent 70%);
+            animation-delay: 2s;
+        }
+
+        .spotlight-3 {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            animation-delay: 1s;
+        }
+
+        @keyframes spotlight-pulse {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.25;
+                transform: scale(1.1);
+            }
+        }
+
+        /* BEARS COLORS: Electric glow text effect - orange */
+        .electric-glow {
+            text-shadow: 0 0 10px rgba(200, 56, 3, 0.8),
+                         0 0 20px rgba(200, 56, 3, 0.6),
+                         0 0 40px rgba(200, 56, 3, 0.4),
+                         0 0 60px rgba(200, 56, 3, 0.2);
+        }
+
+        /* BEARS COLORS: Metallic shimmer for headline - orange/white */
+        .metallic-shimmer {
+            background: linear-gradient(90deg, 
+                #C83803 0%, 
+                #ff6b35 25%, 
+                #C83803 50%, 
+                #ff6b35 75%, 
+                #C83803 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: metallic 4s linear infinite;
+        }
+
+        @keyframes metallic {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        /* BEARS COLORS: Game day badge pulse - orange */
+        .gameday-badge {
+            animation: badge-pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gameday-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: badge-sweep 3s infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(200, 56, 3, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 30px rgba(200, 56, 3, 0.5);
+            }
+        }
+
+        @keyframes badge-sweep {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        /* BEARS COLORS: Stadium card styling - navy with orange accents */
+        .stadium-card {
+            position: relative;
+            background: rgba(11, 22, 42, 0.95);
+            border: 2px solid rgba(200, 56, 3, 0.3);
+            box-shadow: 
+                0 0 20px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .stadium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #C83803, transparent);
+            opacity: 0.6;
+        }
+
+        /* BEARS COLORS: Broadcast button style - orange gradient */
+        .broadcast-btn {
+            position: relative;
+            background: linear-gradient(135deg, #C83803 0%, #e04a10 50%, #9a2a00 100%);
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .broadcast-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .broadcast-btn:hover::before {
+            left: 100%;
+        }
+
+        .broadcast-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(200, 56, 3, 0.4);
+        }
+
+        /* BEARS COLORS: Price card hover - orange highlight effect */
+        .price-card {
+            transition: all 0.3s ease;
+            border: 2px solid rgba(200, 56, 3, 0.2);
+            background: linear-gradient(135deg, rgba(11, 22, 42, 0.9) 0%, rgba(20, 35, 60, 0.9) 100%);
+        }
+
+        .price-card:hover {
+            border-color: #C83803;
+            box-shadow: 0 0 20px rgba(200, 56, 3, 0.3), inset 0 0 20px rgba(200, 56, 3, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* BEARS COLORS: Input styling - navy theme */
+        .stadium-input {
+            background: rgba(11, 22, 42, 0.9) !important;
+            border: 2px solid rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease;
+        }
+
+        .stadium-input:focus {
+            border-color: #C83803 !important;
+            box-shadow: 0 0 15px rgba(200, 56, 3, 0.2);
+        }
+
+        .stadium-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Select dropdown styling */
+        .stadium-input option {
+            background: #0B162A;
+            color: #ffffff;
+        }
+
+        /* BEARS COLORS: TV section cards */
+        .tv-section-card {
+            background: linear-gradient(135deg, rgba(11, 22, 42, 0.95) 0%, rgba(20, 35, 60, 0.95) 100%);
+            border: 2px solid rgba(200, 56, 3, 0.2);
+        }
+
+        .tv-section-card-alt {
+            background: linear-gradient(135deg, rgba(20, 35, 60, 0.95) 0%, rgba(30, 50, 80, 0.95) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Floating icon animation */
+        .floating-icon {
+            position: fixed;
+            z-index: 2;
+            user-select: none;
+            cursor: default;
+            animation-name: float-drift;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            opacity: 0.15;
+            font-size: 24px;
+        }
+
+        @keyframes float-drift {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+            75% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+        }
+
+        /* Ensure content is above effects */
+        #mainContent, #successScreen {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* BEARS COLORS: Service option styling */
+        .service-option {
+            background: linear-gradient(135deg, rgba(11, 22, 42, 0.95) 0%, rgba(15, 28, 50, 0.95) 100%);
+            border: 2px solid rgba(200, 56, 3, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .service-option:hover {
+            border-color: rgba(200, 56, 3, 0.4);
+            box-shadow: 0 0 15px rgba(200, 56, 3, 0.1);
+        }
+
+        .service-option-alt {
+            background: linear-gradient(135deg, rgba(20, 35, 60, 0.95) 0%, rgba(25, 45, 75, 0.95) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-option-alt:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* BEARS COLORS: Total display styling */
+        .total-display {
+            background: linear-gradient(135deg, rgba(11, 22, 42, 0.95) 0%, rgba(15, 28, 50, 0.95) 100%);
+            border: 3px solid #C83803;
+            box-shadow: 0 0 30px rgba(200, 56, 3, 0.2);
+        }
+
+        /* Label styling for dark theme */
+        .form-label {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<!-- BEARS COLORS: Navy background -->
+<body class="bg-gradient-to-br from-[#0B162A] via-[#0f1e38] to-[#0B162A] min-h-screen">
+    <!-- LED bar -->
+    <div class="led-bar"></div>
+    
+    <!-- Stadium lights canvas -->
+    <canvas id="stadium-lights-canvas"></canvas>
+    
+    <!-- Yard line pattern overlay -->
+    <div class="yard-lines"></div>
+    
+    <!-- Spotlight glows -->
+    <div class="spotlight-glow spotlight-1"></div>
+    <div class="spotlight-glow spotlight-2"></div>
+    <div class="spotlight-glow spotlight-3"></div>
+    
+    <!-- Floating icons container -->
+    <div id="floating-icons-container"></div>
+
+    <div class="py-12 px-4" id="mainContent">
+        <div class="max-w-4xl mx-auto">
+
+            <!-- Hero Section - Bears Theme -->
+            <div class="text-center mb-12">
+                <div class="text-6xl mb-4">🐻</div>
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-2 electric-glow tracking-tight">GAME DAY READY.</h1>
+                <p class="text-4xl md:text-5xl font-black metallic-shimmer mb-6">BIG SCREEN ENERGY</p>
+                <div class="flex items-center justify-center mb-6">
+                    <img src="sbtvlogonb.png" alt="TV Install Chicago Logo" class="h-50 w-auto">
+                </div>
+                <!-- Bears themed subheadlines -->
+                <p class="text-xl text-[#C83803] font-bold tracking-wide">📺 Big Screens. Clean Wires. Kickoff-Ready. 📺</p>
+                <p class="text-lg text-gray-300 mt-2">🔥 Professional TV Mounting — Done Right Before Game Time 🔥</p>
+            </div>
+
+            <!-- Pricing Card - Bears styling -->
+            <div class="stadium-card backdrop-blur-sm rounded-2xl shadow-2xl p-8 mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <span class="bg-[#C83803]/20 text-[#C83803] rounded-full w-10 h-10 flex items-center justify-center mr-3 text-lg">📺</span>
+                    Game Day Pricing
+                </h2>
+
+                <!-- Bears Special Banner -->
+                <div class="gameday-badge bg-gradient-to-r from-[#0B162A] via-[#C83803] to-[#0B162A] text-white rounded-xl p-5 mb-6 text-center shadow-lg border border-[#C83803]/30">
+                    <p class="text-lg font-bold text-white">🐻 BEARS GAME DAY SPECIAL 🐻</p>
+                    <p class="text-3xl font-black text-white">20% OFF LABOR</p>
+                    <p class="text-sm text-white font-semibold">Mount 2+ TVs before kickoff and save!</p>
+                    <p class="text-xs mt-1 text-white/80">(Discount applies to installation & wire concealment, not mount hardware)</p>
+                </div>
+
+                <!-- Price cards with Bears styling -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="price-card rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300 font-medium">Up to 42"</span>
+                            <span class="text-2xl font-bold text-[#C83803]">$99</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300 font-medium">43" - 55"</span>
+                            <span class="text-2xl font-bold text-[#C83803]">$129</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300 font-medium">56" - 70"</span>
+                            <span class="text-2xl font-bold text-[#C83803]">$159</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300 font-medium">71" - 85"</span>
+                            <span class="text-2xl font-bold text-[#C83803]">$199</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-lg p-4 md:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300 font-medium">86"+</span>
+                            <span class="text-2xl font-bold text-[#C83803]">$249</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mount Type Options with Bears styling -->
+                <h3 class="font-semibold text-[#C83803] mb-3">🐻 Mount Type Options:</h3>
+                <div class="space-y-3">
+                    <div class="service-option flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">Fixed Mount</span>
+                            <span class="text-sm text-gray-400 ml-2">- Flat against the wall</span>
+                        </div>
+                        <span class="text-[#C83803] font-semibold">+$50</span>
+                    </div>
+                    <div class="service-option-alt flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">Tilting Mount</span>
+                            <span class="text-sm text-gray-400 ml-2">- Adjustable tilt angle</span>
+                        </div>
+                        <span class="text-gray-300 font-semibold">+$50</span>
+                    </div>
+                    <div class="service-option flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">Full Motion Mount</span>
+                            <span class="text-sm text-gray-400 ml-2">- Swivel and extend</span>
+                        </div>
+                        <span class="text-[#C83803] font-semibold">+$65</span>
+                    </div>
+                </div>
+
+                <!-- Wire Concealment Options -->
+                <h3 class="font-semibold text-[#C83803] mb-3 mt-6">📺 Wire Concealment Options:</h3>
+                <div class="space-y-3">
+                    <div class="service-option flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">No Wire Concealment</span>
+                            <span class="text-sm text-gray-400 ml-2">- Standard installation</span>
+                        </div>
+                        <span class="text-[#C83803] font-semibold">Included</span>
+                    </div>
+                    <div class="service-option-alt flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">External Strip</span>
+                            <span class="text-sm text-gray-400 ml-2">- Surface-mounted wire cover</span>
+                        </div>
+                        <span class="text-gray-300 font-semibold">+$35</span>
+                    </div>
+                    <div class="service-option flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">In-Wall Concealment</span>
+                            <span class="text-sm text-gray-400 ml-2">- Wires hidden inside wall</span>
+                        </div>
+                        <span class="text-[#C83803] font-semibold">+$60</span>
+                    </div>
+                    <div class="service-option-alt flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">Electrical Outlet Installation</span>
+                            <span class="text-sm text-gray-400 ml-2">- New outlet behind TV</span>
+                        </div>
+                        <span class="text-gray-300 font-semibold">+$250</span>
+                    </div>
+                </div>
+
+                <!-- Soundbar Mounting -->
+                <h3 class="font-semibold text-[#C83803] mb-3 mt-6">🔊 Soundbar Mounting:</h3>
+                <div class="space-y-3">
+                    <div class="service-option flex items-center justify-between rounded-lg p-3">
+                        <div>
+                            <span class="font-medium text-white">Soundbar Mounting</span>
+                            <span class="text-sm text-gray-400 ml-2">- Mount your soundbar below TV</span>
+                        </div>
+                        <span class="text-[#C83803] font-semibold">+$60</span>
+                    </div>
+                </div>
+
+                <!-- Info box -->
+                <div class="mt-6 bg-[#C83803]/10 border-l-4 border-[#C83803] p-4 rounded-r-lg">
+                    <p class="text-sm text-gray-300">
+                        🐻 All installations include level mounting and debris cleanup
+                    </p>
+                    <p class="text-sm text-[#C83803] font-semibold mt-2">
+                        📺 Get your setup ready for the big game!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Booking Form Card - Bears styling -->
+            <div class="stadium-card backdrop-blur-sm rounded-2xl shadow-2xl p-8 border-2 border-[#C83803]/20">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <span class="bg-[#C83803]/20 text-[#C83803] rounded-full w-10 h-10 flex items-center justify-center mr-3 text-lg">🔥</span>
+                    Book Your Game Day Setup
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Full Name *</label>
+                            <input type="text" id="name" required
+                                class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                                placeholder="John Smith">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Phone Number *</label>
+                            <input type="tel" id="phone" required
+                                class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                                placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Email Address *</label>
+                        <input type="email" id="email" required
+                            class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                            placeholder="john@example.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Service Address *</label>
+                        <input type="text" id="address" required
+                            class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                            placeholder="123 Main St, City, State ZIP">
+                    </div>
+
+                    <!-- Number of TVs Selection -->
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Number of TVs *</label>
+                        <select id="numTvs" required onchange="updateTvForms(); calculateTotal()"
+                            class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                            <option value="1">1 TV</option>
+                            <option value="2">2 TVs - 20% OFF! 🐻</option>
+                            <option value="3">3 TVs - 20% OFF! 🐻</option>
+                            <option value="4">4 TVs - 20% OFF! 🐻</option>
+                            <option value="5">5+ TVs - 20% OFF! 🐻</option>
+                        </select>
+                        <p id="discountNote" class="hidden text-sm text-[#C83803] font-semibold mt-2">🐻 20% multi-TV discount will be applied!</p>
+                    </div>
+
+                    <!-- TV 1 (Always visible) -->
+                    <div id="tv1-section" class="tv-section-card rounded-xl p-4">
+                        <h3 class="font-bold text-[#C83803] mb-4">📺 TV 1</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize1" required onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType1" required onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment1" required onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar1" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 2 (Hidden by default) -->
+                    <div id="tv2-section" class="hidden tv-section-card-alt rounded-xl p-4">
+                        <h3 class="font-bold text-gray-300 mb-4">📺 TV 2</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize2" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType2" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment2" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar2" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 3 (Hidden by default) -->
+                    <div id="tv3-section" class="hidden tv-section-card rounded-xl p-4">
+                        <h3 class="font-bold text-[#C83803] mb-4">📺 TV 3</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize3" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType3" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment3" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar3" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 4 (Hidden by default) -->
+                    <div id="tv4-section" class="hidden tv-section-card-alt rounded-xl p-4">
+                        <h3 class="font-bold text-gray-300 mb-4">📺 TV 4</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize4" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType4" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment4" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar4" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 5 (Hidden by default) -->
+                    <div id="tv5-section" class="hidden tv-section-card rounded-xl p-4">
+                        <h3 class="font-bold text-[#C83803] mb-4">📺 TV 5+</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize5" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType5" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment5" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar5" onchange="calculateTotal()"
+                                    class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-3">📝 For more than 5 TVs, please add details in the notes section below.</p>
+                    </div>
+
+                    <!-- Total display with Bears styling -->
+                    <div id="priceTotal"
+                        class="hidden total-display rounded-xl p-6 text-center">
+                        <p class="text-lg font-semibold text-gray-300 mb-2">🐻 Your Estimated Total 🐻</p>
+                        <div id="subtotalRow" class="hidden">
+                            <p class="text-xl text-gray-500 line-through" id="subtotalAmount">$0</p>
+                        </div>
+                        <p class="text-5xl font-black text-[#C83803]" id="totalAmount">$0</p>
+                        <p id="savingsAmount" class="hidden text-lg font-bold text-white mt-2">You save: $0</p>
+                        <p class="text-sm text-gray-400 mt-2">All-inclusive pricing • No hidden fees</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Preferred Date *</label>
+                            <input type="date" id="preferredDate" required
+                                class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Preferred Time *</label>
+                            <select id="preferredTime" required
+                                class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                <option value="">Select time</option>
+                                <option value="8:00 AM - 10:00 AM">8:00 AM - 10:00 AM</option>
+                                <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                                <option value="12:00 PM - 2:00 PM">12:00 PM - 2:00 PM</option>
+                                <option value="2:00 PM - 4:00 PM">2:00 PM - 4:00 PM</option>
+                                <option value="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Additional Notes</label>
+                        <textarea id="additionalNotes" rows="4"
+                            class="stadium-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                            placeholder="Any special requests or details we should know about..."></textarea>
+                    </div>
+
+                    <!-- Bears-style submit button -->
+                    <button onclick="submitBooking()"
+                        class="broadcast-btn w-full text-white py-4 px-6 rounded-lg font-black text-lg shadow-lg uppercase tracking-wider">
+                        🐻 Request Game Day Appointment 🐻
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer section with Bears theme -->
+            <div class="text-center mt-8 text-white">
+                <p class="text-lg font-bold text-[#C83803]">🐻 TV Install Chicago — Game Day Experts 🐻</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+                    <a href="tel:+13129317096"
+                        class="px-5 py-3 rounded-lg bg-[#0B162A] border-2 border-[#C83803] text-[#C83803] font-bold hover:bg-[#C83803] hover:text-white transition-all">
+                        Call: (312) 931-7096
+                    </a>
+                    <a href="mailto:tvinstallchicago@gmail.com"
+                        class="px-5 py-3 rounded-lg bg-[#0B162A] border-2 border-white text-white font-bold hover:bg-white hover:text-[#0B162A] transition-all">
+                        Email: tvinstallchicago@gmail.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Screen with Bears theme -->
+    <div id="successScreen"
+        class="hidden min-h-screen bg-gradient-to-br from-[#0B162A] via-[#0f1e38] to-[#0B162A] flex items-center justify-center p-4">
+        <div class="stadium-card rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+            <div class="text-6xl mb-4">🐻</div>
+            <div class="w-20 h-20 bg-[#C83803]/20 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#C83803]">
+                <svg class="w-10 h-10 text-[#C83803]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <!-- Bears success messaging -->
+            <h2 class="text-3xl font-black text-white mb-4 electric-glow">YOU'RE GAME DAY READY!</h2>
+            <p class="text-lg text-[#C83803] font-bold mb-4">📺 Booking Received! 📺</p>
+            <p class="text-gray-300 mb-6" id="successMessage">
+                Thank you! We've received your appointment request and will confirm before kickoff.
+            </p>
+            <div class="bg-[#0B162A] rounded-lg p-4 text-left border-2 border-[#C83803]/30 mb-6" id="bookingDetails"></div>
+            
+            <button onclick="downloadEstimate()" 
+                class="broadcast-btn w-full text-white py-3 px-6 rounded-lg font-bold text-lg shadow-lg mb-4">
+                📄 Download Estimate (PDF)
+            </button>
+            
+            <p class="text-sm text-gray-400">🔥 Bear Down! See you on game day! 🔥</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // STADIUM LIGHTS ANIMATION
+        // ============================================
+        const canvas = document.getElementById('stadium-lights-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Stadium light beam class - BEARS COLORS
+        class LightBeam {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = 0;
+                this.width = 20 + Math.random() * 40;
+                this.height = canvas.height;
+                this.alpha = 0;
+                this.maxAlpha = 0.03 + Math.random() * 0.05;
+                this.speed = 0.005 + Math.random() * 0.01;
+                this.direction = 1;
+                this.angle = -15 + Math.random() * 30;
+                // BEARS COLORS: Orange and white
+                this.color = Math.random() > 0.7 ? '#C83803' : '#ffffff';
+            }
+
+            update() {
+                if (this.direction === 1) {
+                    this.alpha += this.speed;
+                    if (this.alpha >= this.maxAlpha) {
+                        this.direction = -1;
+                    }
+                } else {
+                    this.alpha -= this.speed;
+                    if (this.alpha <= 0) {
+                        this.reset();
+                    }
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, 0);
+                ctx.rotate((this.angle * Math.PI) / 180);
+                
+                const gradient = ctx.createLinearGradient(0, 0, 0, this.height);
+                gradient.addColorStop(0, this.color);
+                gradient.addColorStop(1, 'transparent');
+                
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = gradient;
+                ctx.fillRect(-this.width / 2, 0, this.width, this.height);
+                ctx.restore();
+            }
+        }
+
+        // Particle for ambient stadium dust/atmosphere
+        class AtmosphereParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = 1 + Math.random() * 2;
+                this.speedX = -0.2 + Math.random() * 0.4;
+                this.speedY = -0.1 + Math.random() * 0.2;
+                this.alpha = 0.1 + Math.random() * 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const lightBeams = [];
+        const atmosphereParticles = [];
+
+        // Create light beams
+        for (let i = 0; i < 8; i++) {
+            lightBeams.push(new LightBeam());
+        }
+
+        // Create atmosphere particles
+        for (let i = 0; i < 50; i++) {
+            atmosphereParticles.push(new AtmosphereParticle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw and update light beams
+            lightBeams.forEach(beam => {
+                beam.update();
+                beam.draw();
+            });
+
+            // Draw and update atmosphere particles
+            atmosphereParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // ============================================
+        // FLOATING ICONS - Bears themed
+        // ============================================
+        function createFloatingIcons() {
+            const container = document.getElementById('floating-icons-container');
+            const icons = ['🐻', '📺', '🔥', '🏈'];
+
+            for (let i = 0; i < 12; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icon';
+                icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                icon.style.left = Math.random() * 100 + '%';
+                icon.style.top = Math.random() * 100 + '%';
+                icon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                icon.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(icon);
+            }
+        }
+
+        createFloatingIcons();
+
+        // ============================================
+        // FORM FUNCTIONALITY
+        // ============================================
+        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+
+        let estimateData = {};
+
+        function generateEstimateNumber() {
+            const now = new Date();
+            return 'EST-' + now.getFullYear() + 
+                   String(now.getMonth() + 1).padStart(2, '0') + 
+                   String(now.getDate()).padStart(2, '0') + '-' +
+                   String(now.getHours()).padStart(2, '0') + 
+                   String(now.getMinutes()).padStart(2, '0') +
+                   String(now.getSeconds()).padStart(2, '0');
+        }
+
+        function getTvSizeLabel(value) {
+            const labels = {
+                'up-to-42': 'Up to 42"',
+                '43-55': '43" - 55"',
+                '56-70': '56" - 70"',
+                '71-85': '71" - 85"',
+                '86-plus': '86"+'
+            };
+            return labels[value] || value;
+        }
+
+        function getMountLabel(value) {
+            const labels = {
+                'own': 'Customer\'s Own Mount',
+                'fixed': 'Fixed Mount',
+                'tilt': 'Tilting Mount',
+                'full': 'Full Motion Mount'
+            };
+            return labels[value] || value;
+        }
+
+        function getWireLabel(value) {
+            const labels = {
+                'none': 'No Wire Concealment',
+                'external': 'External Strip',
+                'inwall': 'In-Wall Concealment',
+                'outlet': 'Electrical Outlet Installation'
+            };
+            return labels[value] || value;
+        }
+
+        function downloadEstimate() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            let y = 20;
+            
+            // BEARS COLORS: Header - Navy background
+            doc.setFillColor(11, 22, 42); // Navy
+            doc.rect(0, 0, pageWidth, 40, 'F');
+            
+            doc.setTextColor(200, 56, 3); // Bears Orange
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.text('TV Install Chicago', pageWidth / 2, 18, { align: 'center' });
+            
+            doc.setTextColor(255, 255, 255); // White
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Professional TV Mounting Services', pageWidth / 2, 28, { align: 'center' });
+            doc.text('(312) 931-7096 | tvinstallchicago@gmail.com', pageWidth / 2, 36, { align: 'center' });
+            
+            y = 55;
+            
+            // Estimate Title
+            doc.setTextColor(200, 56, 3);
+            doc.setFontSize(20);
+            doc.setFont('helvetica', 'bold');
+            doc.text('SERVICE ESTIMATE', pageWidth / 2, y, { align: 'center' });
+            
+            y += 15;
+            
+            // Estimate Info Box
+            doc.setDrawColor(200, 56, 3);
+            doc.setLineWidth(0.5);
+            doc.rect(15, y, pageWidth - 30, 30);
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Estimate #:', 20, y + 8);
+            doc.text('Date:', 20, y + 16);
+            doc.text('Valid Until:', 20, y + 24);
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.estimateNumber, 55, y + 8);
+            doc.text(estimateData.createdDate, 55, y + 16);
+            doc.text(estimateData.validUntil, 55, y + 24);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.text('Preferred Date:', 110, y + 8);
+            doc.text('Preferred Time:', 110, y + 16);
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.preferredDate, 150, y + 8);
+            doc.text(estimateData.preferredTime, 150, y + 16);
+            
+            y += 40;
+            
+            // Customer Info
+            doc.setFillColor(240, 240, 240);
+            doc.rect(15, y, pageWidth - 30, 8, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(12);
+            doc.text('CUSTOMER INFORMATION', 20, y + 6);
+            
+            y += 15;
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Name:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.name, 50, y);
+            
+            y += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Phone:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.phone, 50, y);
+            
+            y += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Email:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.email, 50, y);
+            
+            y += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Address:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            const addressLines = doc.splitTextToSize(estimateData.address, 130);
+            doc.text(addressLines, 50, y);
+            y += (addressLines.length * 5);
+            
+            y += 10;
+            
+            // Services Table Header - BEARS COLORS
+            doc.setFillColor(11, 22, 42); // Navy
+            doc.rect(15, y, pageWidth - 30, 10, 'F');
+            doc.setTextColor(200, 56, 3); // Orange
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.text('SERVICES', 20, y + 7);
+            doc.text('PRICE', pageWidth - 35, y + 7, { align: 'right' });
+            
+            y += 15;
+            doc.setTextColor(0, 0, 0);
+            
+            // TV Details
+            for (let i = 0; i < estimateData.tvs.length; i++) {
+                const tv = estimateData.tvs[i];
+                
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.text(`TV ${i + 1}`, 20, y);
+                y += 7;
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                
+                doc.text(`   TV Size: ${getTvSizeLabel(tv.size)}`, 20, y);
+                doc.text(`$${tv.sizePrice}`, pageWidth - 35, y, { align: 'right' });
+                y += 6;
+                
+                doc.text(`   Mount: ${getMountLabel(tv.mount)}`, 20, y);
+                doc.text(`$${tv.mountPrice}`, pageWidth - 35, y, { align: 'right' });
+                y += 6;
+                
+                doc.text(`   Wire Concealment: ${getWireLabel(tv.wire)}`, 20, y);
+                doc.text(`$${tv.wirePrice}`, pageWidth - 35, y, { align: 'right' });
+                y += 6;
+                
+                if (tv.soundbar === 'yes') {
+                    doc.text(`   Soundbar Mounting`, 20, y);
+                    doc.text(`$${tv.soundbarPrice}`, pageWidth - 35, y, { align: 'right' });
+                    y += 6;
+                }
+                
+                y += 4;
+                
+                if (y > 250) {
+                    doc.addPage();
+                    y = 20;
+                }
+            }
+            
+            // Totals Section
+            y += 5;
+            doc.setDrawColor(200, 200, 200);
+            doc.line(15, y, pageWidth - 15, y);
+            y += 10;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text('Subtotal:', 120, y);
+            doc.text(`$${estimateData.subtotal}`, pageWidth - 35, y, { align: 'right' });
+            
+            if (estimateData.numTvs >= 2) {
+                y += 8;
+                doc.setTextColor(200, 56, 3); // Bears Orange
+                doc.setFont('helvetica', 'bold');
+                doc.text('Multi-TV Discount (20% off labor):', 90, y);
+                doc.text(`-$${estimateData.savings}`, pageWidth - 35, y, { align: 'right' });
+            }
+            
+            y += 12;
+            doc.setFillColor(200, 56, 3); // Bears Orange
+            doc.rect(100, y - 6, pageWidth - 115, 12, 'F');
+            doc.setTextColor(255, 255, 255); // White text
+            doc.setFontSize(14);
+            doc.text('TOTAL:', 105, y + 2);
+            doc.text(`$${estimateData.total}`, pageWidth - 35, y + 2, { align: 'right' });
+            
+            y += 20;
+            
+            // Notes
+            if (estimateData.notes && estimateData.notes.trim()) {
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Additional Notes:', 20, y);
+                y += 6;
+                doc.setFont('helvetica', 'normal');
+                const notesLines = doc.splitTextToSize(estimateData.notes, pageWidth - 40);
+                doc.text(notesLines, 20, y);
+                y += (notesLines.length * 5) + 10;
+            }
+            
+            // Footer
+            const footerY = 270;
+            doc.setDrawColor(200, 56, 3);
+            doc.line(15, footerY, pageWidth - 15, footerY);
+            
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'italic');
+            doc.text('This is an estimate only. Final pricing may vary based on site conditions.', pageWidth / 2, footerY + 8, { align: 'center' });
+            doc.text('All installations include level mounting and debris cleanup.', pageWidth / 2, footerY + 14, { align: 'center' });
+            doc.text('Thank you for choosing TV Install Chicago! Bear Down!', pageWidth / 2, footerY + 20, { align: 'center' });
+            
+            doc.save(`TVInstallChicago_Estimate_${estimateData.estimateNumber}.pdf`);
+        }
+
+        function updateTvForms() {
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            const discountNote = document.getElementById('discountNote');
+            
+            if (numTvs >= 2) {
+                discountNote.classList.remove('hidden');
+            } else {
+                discountNote.classList.add('hidden');
+            }
+            
+            for (let i = 2; i <= 5; i++) {
+                const section = document.getElementById(`tv${i}-section`);
+                if (i <= numTvs) {
+                    section.classList.remove('hidden');
+                    section.querySelectorAll('select').forEach(sel => sel.required = true);
+                } else {
+                    section.classList.add('hidden');
+                    section.querySelectorAll('select').forEach(sel => {
+                        sel.required = false;
+                        sel.value = '';
+                    });
+                }
+            }
+        }
+
+        function calculateTotal() {
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            let discountableTotal = 0;
+            let mountTotal = 0;
+            
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSizeSelect = document.getElementById(`tvSize${i}`);
+                const mountTypeSelect = document.getElementById(`mountType${i}`);
+                const wireConcealmentSelect = document.getElementById(`wireConcealment${i}`);
+                const soundbarSelect = document.getElementById(`soundbar${i}`);
+
+                const tvSizePrice = parseInt(tvSizeSelect?.selectedOptions[0]?.dataset.price || 0);
+                const mountTypePrice = parseInt(mountTypeSelect?.selectedOptions[0]?.dataset.price || 0);
+                const wireConcealmentPrice = parseInt(wireConcealmentSelect?.selectedOptions[0]?.dataset.price || 0);
+                const soundbarPrice = parseInt(soundbarSelect?.selectedOptions[0]?.dataset.price || 0);
+
+                discountableTotal += tvSizePrice + wireConcealmentPrice + soundbarPrice;
+                mountTotal += mountTypePrice;
+            }
+
+            let subtotal = discountableTotal + mountTotal;
+            
+            let total = subtotal;
+            let savings = 0;
+            if (numTvs >= 2 && discountableTotal > 0) {
+                savings = Math.round(discountableTotal * 0.20);
+                total = subtotal - savings;
+            }
+
+            if (subtotal > 0) {
+                document.getElementById('priceTotal').classList.remove('hidden');
+                document.getElementById('totalAmount').textContent = '$' + total;
+                
+                if (numTvs >= 2) {
+                    document.getElementById('subtotalRow').classList.remove('hidden');
+                    document.getElementById('subtotalAmount').textContent = '$' + subtotal;
+                    document.getElementById('savingsAmount').classList.remove('hidden');
+                    document.getElementById('savingsAmount').textContent = '🐻 You save: $' + savings + ' (20% off labor!)';
+                } else {
+                    document.getElementById('subtotalRow').classList.add('hidden');
+                    document.getElementById('savingsAmount').classList.add('hidden');
+                }
+            } else {
+                document.getElementById('priceTotal').classList.add('hidden');
+            }
+
+            return { subtotal, total, savings };
+        }
+
+        function submitBooking() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            const preferredDate = document.getElementById('preferredDate').value;
+            const preferredTime = document.getElementById('preferredTime').value;
+            const additionalNotes = document.getElementById('additionalNotes').value;
+
+            if (!name || !phone || !email || !address || !preferredDate || !preferredTime) {
+                alert('Please fill in all required fields marked with *');
+                return;
+            }
+
+            let tvs = [];
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSize = document.getElementById(`tvSize${i}`).value;
+                const mountType = document.getElementById(`mountType${i}`).value;
+                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
+                const soundbar = document.getElementById(`soundbar${i}`).value;
+                
+                if (!tvSize || !mountType || !wireConcealment) {
+                    alert(`Please fill in all fields for TV ${i}`);
+                    return;
+                }
+
+                const sizePrice = parseInt(document.getElementById(`tvSize${i}`).selectedOptions[0].dataset.price);
+                const mountPrice = parseInt(document.getElementById(`mountType${i}`).selectedOptions[0].dataset.price);
+                const wirePrice = parseInt(document.getElementById(`wireConcealment${i}`).selectedOptions[0].dataset.price);
+                const soundbarPrice = parseInt(document.getElementById(`soundbar${i}`).selectedOptions[0].dataset.price);
+
+                tvs.push({
+                    size: tvSize,
+                    mount: mountType,
+                    wire: wireConcealment,
+                    soundbar: soundbar,
+                    sizePrice: sizePrice,
+                    mountPrice: mountPrice,
+                    wirePrice: wirePrice,
+                    soundbarPrice: soundbarPrice
+                });
+            }
+
+            const { subtotal, total, savings } = calculateTotal();
+
+            const estimateNumber = generateEstimateNumber();
+            const today = new Date();
+            const createdDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const validDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+            const validUntil = validDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            estimateData = {
+                estimateNumber,
+                createdDate,
+                validUntil,
+                name,
+                phone,
+                email,
+                address,
+                numTvs,
+                tvs,
+                preferredDate,
+                preferredTime,
+                notes: additionalNotes,
+                subtotal,
+                total,
+                savings
+            };
+
+            let tvDetails = '';
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSize = document.getElementById(`tvSize${i}`).value;
+                const mountType = document.getElementById(`mountType${i}`).value;
+                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
+                const soundbar = document.getElementById(`soundbar${i}`).value;
+                tvDetails += `TV${i}: Size=${tvSize}, Mount=${mountType}, Wire=${wireConcealment}, Soundbar=${soundbar}; `;
+            }
+
+            const formData = new FormData();
+            formData.append('estimateNumber', estimateNumber);
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('email', email);
+            formData.append('address', address);
+            formData.append('numTvs', numTvs);
+            formData.append('tvDetails', tvDetails);
+            formData.append('preferredDate', preferredDate);
+            formData.append('preferredTime', preferredTime);
+            formData.append('additionalNotes', additionalNotes);
+            formData.append('subtotal', '$' + subtotal);
+            formData.append('discount', numTvs >= 2 ? '20% ($' + savings + ')' : 'None');
+            formData.append('total', '$' + total);
+
+            fetch('https://formspree.io/f/xeoyyygd', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Form submitted successfully');
+                    showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, savings, estimateNumber);
+                } else {
+                    console.log('Form submission error');
+                    alert('There was an error submitting your booking. Please try again or call us directly.');
+                }
+            }).catch(error => {
+                console.log('Error:', error);
+                alert('There was an error submitting your booking. Please try again or call us directly.');
+            });
+        }
+
+        function showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, savings, estimateNumber) {
+            document.getElementById('successMessage').innerHTML =
+                `Thank you, ${name}! 🐻 We've received your appointment request and will confirm before kickoff. Bear Down!`;
+
+            let savingsHtml = '';
+            if (numTvs >= 2) {
+                savingsHtml = `<p class="text-sm text-[#C83803] font-bold">🐻 Multi-TV Discount: -$${savings}</p>`;
+            }
+
+            document.getElementById('bookingDetails').innerHTML = `
+                <p class="text-sm text-gray-300 mb-2"><strong class="text-white">Estimate #:</strong> ${estimateNumber}</p>
+                <p class="text-sm text-gray-300 mb-2"><strong class="text-white">Number of TVs:</strong> ${numTvs}</p>
+                <p class="text-sm text-gray-300 mb-2"><strong class="text-white">Preferred Date:</strong> ${preferredDate}</p>
+                <p class="text-sm text-gray-300 mb-2"><strong class="text-white">Time:</strong> ${preferredTime}</p>
+                <p class="text-sm text-gray-300 mb-2"><strong class="text-white">Email:</strong> ${email}</p>
+                ${savingsHtml}
+                <p class="text-sm text-gray-300 mt-3 pt-3 border-t-2 border-[#C83803]/30"><strong class="text-white">Estimated Total:</strong> <span class="text-xl font-bold text-[#C83803]">$${total}</span></p>
+            `;
+
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('successScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
