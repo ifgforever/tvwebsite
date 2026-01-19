@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/png" href="rosetvlogo.png">
+    <link rel="icon" type="image/png" href="/sbfavicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/bearlikelogo.png">
     <title>TV Mounting Service - Valentine's Romance Movie Night Ready!</title>
     
     <!-- Google Fonts - Romantic Typography -->
@@ -436,7 +437,7 @@
                 <p class="text-4xl md:text-5xl font-black rose-gold-shimmer mb-4">ROMANCE READY</p>
                 
                 <div class="flex items-center justify-center mb-6">
-                    <img src="rosetvlogo.png" alt="TV Install Chicago Logo" class="h-50 w-auto" style="mix-blend-mode: lighten; background: transparent;">
+                    <img src="sbtvlogonb.png" alt="TV Install Chicago Logo" class="h-50 w-auto" style="mix-blend-mode: lighten; background: transparent;">
                 </div>
                 
                 <!-- Romantic movie quote -->
@@ -954,8 +955,8 @@
                         class="px-6 py-3 rounded-xl bg-[#1a0a10] border-2 border-[#D4AF37] text-[#D4AF37] font-bold hover:bg-[#D4AF37] hover:text-[#1a0a10] transition-all">
                         Call: (312) 931-7096
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#0672706f687572676a6a656e6f6567616946616b676f6a2865696b" class="px-6 py-3 rounded-xl bg-[#1a0a10] border-2 border-[#C1566D] text-[#F5D6DC] font-bold hover:bg-[#C1566D] hover:text-white transition-all">
-                        Email: <span class="__cf_email__" data-cfemail="cdb9bba4a3beb9aca1a1aea5a4aeacaaa28daaa0aca4a1e3aea2a0">[email&#160;protected]</span>
+                    <a href="mailto:tvinstallchicago@gmail.com" class="px-6 py-3 rounded-xl bg-[#1a0a10] border-2 border-[#C1566D] text-[#F5D6DC] font-bold hover:bg-[#C1566D] hover:text-white transition-all">
+                        Email: tvinstallchicago@gmail.com
                     </a>
                 </div>
                 <p class="mt-6 text-[#8B2942] text-sm script-font">"All you need is love... and a perfectly mounted TV." 🎬</p>
@@ -990,7 +991,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ============================================
         // FLOATING HEARTS ANIMATION
         // ============================================
@@ -1608,4 +1609,13 @@
                 <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Time:</strong> ${preferredTime}</p>
                 <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Email:</strong> ${email}</p>
                 ${savingsHtml}
-                <p class="text-sm text-[#E8A0B0] mt-3 pt-3 border-t border-[#D4AF37]/30"><strong class="text-white">Estimated Total:</strong> <span class="text-xl font-bold text-[#D4AF37]">$$
+                <p class="text-sm text-[#E8A0B0] mt-3 pt-3 border-t border-[#D4AF37]/30"><strong class="text-white">Estimated Total:</strong> <span class="text-xl font-bold text-[#D4AF37]">$${total}</span></p>
+            `;
+
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('successScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
