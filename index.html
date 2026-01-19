@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/sbfavicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/bearlikelogo.png">
+    <title>TV Mounting Service - Valentine's Romance Movie Night Ready!</title>
+    
+    <!-- Google Fonts - Romantic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --rose-deep: #8B2942;
+            --rose-medium: #C1566D;
+            --rose-light: #E8A0B0;
+            --rose-blush: #F5D6DC;
+            --cream: #FFF8F0;
+            --champagne: #F7E7CE;
+            --gold: #D4AF37;
+            --burgundy: #722F37;
+            --mauve: #E0B0C0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1a0a10 0%, #2d1018 25%, #1a0a10 50%, #0d0508 100%);
+        }
+
+        h1, h2, h3, .display-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .script-font {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        /* Floating Hearts Canvas */
+        #hearts-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Candle flicker glow overlay */
+        .candle-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(ellipse at 20% 30%, rgba(255, 180, 120, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 40%, rgba(255, 180, 120, 0.06) 0%, transparent 45%),
+                        radial-gradient(ellipse at 50% 80%, rgba(255, 150, 100, 0.05) 0%, transparent 40%);
+            animation: candle-flicker 4s ease-in-out infinite;
+        }
+
+        @keyframes candle-flicker {
+            0%, 100% { opacity: 0.8; }
+            25% { opacity: 1; }
+            50% { opacity: 0.7; }
+            75% { opacity: 0.95; }
+        }
+
+        /* Rose petal pattern overlay */
+        .petal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5 Q35 15 30 25 Q25 15 30 5' fill='%23C1566D'/%3E%3C/svg%3E");
+        }
+
+        /* Romantic LED bar with rose gold shimmer */
+        .led-bar {
+            background: linear-gradient(90deg,
+                    #8B2942 0%, #D4AF37 15%,
+                    #C1566D 25%, #F5D6DC 40%,
+                    #D4AF37 50%, #8B2942 60%,
+                    #F5D6DC 75%, #C1566D 85%,
+                    #D4AF37 100%);
+            height: 4px;
+            animation: led-sweep 4s linear infinite;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(193, 86, 109, 0.3);
+        }
+
+        @keyframes led-sweep {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Romantic spotlight glows */
+        .spotlight-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.12;
+            filter: blur(100px);
+            animation: spotlight-pulse 6s ease-in-out infinite;
+        }
+
+        .spotlight-1 {
+            top: -150px;
+            left: 5%;
+            background: radial-gradient(circle, #C1566D 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .spotlight-2 {
+            top: -100px;
+            right: 10%;
+            background: radial-gradient(circle, #D4AF37 0%, transparent 70%);
+            animation-delay: 2s;
+        }
+
+        .spotlight-3 {
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, #8B2942 0%, transparent 70%);
+            animation-delay: 4s;
+        }
+
+        @keyframes spotlight-pulse {
+            0%, 100% { opacity: 0.08; transform: scale(1); }
+            50% { opacity: 0.18; transform: scale(1.15); }
+        }
+
+        /* Romantic glow text effect */
+        .romantic-glow {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6),
+                         0 0 20px rgba(193, 86, 109, 0.5),
+                         0 0 40px rgba(139, 41, 66, 0.3),
+                         0 0 60px rgba(139, 41, 66, 0.2);
+        }
+
+        /* Rose gold shimmer for headline */
+        .rose-gold-shimmer {
+            background: linear-gradient(90deg, 
+                #D4AF37 0%, 
+                #F5D6DC 20%, 
+                #C1566D 40%, 
+                #D4AF37 60%,
+                #F5D6DC 80%,
+                #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        /* Valentine badge pulse */
+        .valentine-badge {
+            animation: heart-pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .valentine-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: badge-sweep 4s infinite;
+        }
+
+        @keyframes heart-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(193, 86, 109, 0.4);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 35px rgba(193, 86, 109, 0.6);
+            }
+        }
+
+        @keyframes badge-sweep {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        /* Romantic card styling */
+        .romantic-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(26, 10, 16, 0.95) 0%, rgba(45, 16, 24, 0.9) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 
+                0 0 30px rgba(0, 0, 0, 0.5),
+                0 0 60px rgba(139, 41, 66, 0.1),
+                inset 0 1px 0 rgba(212, 175, 55, 0.1);
+        }
+
+        .romantic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, #C1566D, #D4AF37, transparent);
+            opacity: 0.6;
+        }
+
+        /* Romantic button style */
+        .romantic-btn {
+            position: relative;
+            background: linear-gradient(135deg, #8B2942 0%, #C1566D 50%, #8B2942 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .romantic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .romantic-btn:hover::before {
+            left: 100%;
+        }
+
+        .romantic-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 41, 66, 0.4), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Price card hover */
+        .price-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: linear-gradient(135deg, rgba(26, 10, 16, 0.9) 0%, rgba(35, 12, 20, 0.9) 100%);
+        }
+
+        .price-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 25px rgba(193, 86, 109, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            transform: translateY(-2px);
+        }
+
+        /* Input styling */
+        .romantic-input {
+            background: rgba(26, 10, 16, 0.9) !important;
+            border: 1px solid rgba(212, 175, 55, 0.25) !important;
+            color: #F5D6DC !important;
+            transition: all 0.3s ease;
+        }
+
+        .romantic-input:focus {
+            border-color: #D4AF37 !important;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .romantic-input::placeholder {
+            color: rgba(193, 86, 109, 0.5);
+        }
+
+        .romantic-input option {
+            background: #1a0a10;
+            color: #F5D6DC;
+        }
+
+        /* TV section cards */
+        .tv-section-card {
+            background: linear-gradient(135deg, rgba(26, 10, 16, 0.95) 0%, rgba(45, 16, 24, 0.95) 100%);
+            border: 1px solid rgba(193, 86, 109, 0.2);
+        }
+
+        .tv-section-card-alt {
+            background: linear-gradient(135deg, rgba(35, 12, 20, 0.95) 0%, rgba(55, 20, 30, 0.95) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        /* Floating elements animation */
+        .floating-element {
+            position: fixed;
+            z-index: 2;
+            user-select: none;
+            cursor: default;
+            animation-name: float-romantic;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            opacity: 0.12;
+            font-size: 20px;
+        }
+
+        @keyframes float-romantic {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(8deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(15px) rotate(-8deg); }
+        }
+
+        /* Ensure content is above effects */
+        #mainContent, #successScreen {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Service option styling */
+        .service-option {
+            background: linear-gradient(135deg, rgba(26, 10, 16, 0.95) 0%, rgba(35, 12, 20, 0.95) 100%);
+            border: 1px solid rgba(193, 86, 109, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .service-option:hover {
+            border-color: rgba(212, 175, 55, 0.35);
+            box-shadow: 0 0 15px rgba(193, 86, 109, 0.1);
+        }
+
+        .service-option-alt {
+            background: linear-gradient(135deg, rgba(35, 12, 20, 0.95) 0%, rgba(45, 16, 24, 0.95) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .service-option-alt:hover {
+            border-color: rgba(193, 86, 109, 0.3);
+        }
+
+        /* Total display styling */
+        .total-display {
+            background: linear-gradient(135deg, rgba(26, 10, 16, 0.95) 0%, rgba(45, 16, 24, 0.95) 100%);
+            border: 2px solid #D4AF37;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15), 0 0 60px rgba(193, 86, 109, 0.1);
+        }
+
+        /* Label styling */
+        .form-label {
+            color: #F5D6DC;
+        }
+
+        /* Heart decoration */
+        .heart-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .heart-divider::before,
+        .heart-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+        }
+
+        /* Candle icon animation */
+        .candle-icon {
+            animation: candle-dance 3s ease-in-out infinite;
+        }
+
+        @keyframes candle-dance {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.05); }
+        }
+
+        /* Movie reel decoration */
+        .movie-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(212, 175, 55, 0.7);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <!-- LED bar -->
+    <div class="led-bar"></div>
+    
+    <!-- Hearts canvas -->
+    <canvas id="hearts-canvas"></canvas>
+    
+    <!-- Candle glow overlay -->
+    <div class="candle-glow"></div>
+    
+    <!-- Petal pattern overlay -->
+    <div class="petal-overlay"></div>
+    
+    <!-- Spotlight glows -->
+    <div class="spotlight-glow spotlight-1"></div>
+    <div class="spotlight-glow spotlight-2"></div>
+    <div class="spotlight-glow spotlight-3"></div>
+    
+    <!-- Floating elements container -->
+    <div id="floating-elements-container"></div>
+
+    <div class="py-12 px-4" id="mainContent">
+        <div class="max-w-4xl mx-auto">
+
+            <!-- Hero Section - Valentine Theme -->
+            <div class="text-center mb-12">
+                <div class="mb-6">
+                    <span class="text-5xl">🕯️</span>
+                    <span class="text-6xl mx-4">💕</span>
+                    <span class="text-5xl">🕯️</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-3 romantic-glow tracking-tight">MOVIE NIGHT</h1>
+                <p class="text-4xl md:text-5xl font-black rose-gold-shimmer mb-4">ROMANCE READY</p>
+                
+                <div class="flex items-center justify-center mb-6">
+                    <img src="sbtvlogonb.png" alt="TV Install Chicago Logo" class="h-50 w-auto opacity-90">
+                </div>
+                
+                <!-- Romantic movie quote -->
+                <p class="movie-quote text-xl mb-4">"You had me at hello..." — Jerry Maguire</p>
+                
+                <!-- Valentine subheadlines -->
+                <div class="heart-divider">
+                    <span class="text-2xl">💝</span>
+                </div>
+                <p class="text-xl text-[#D4AF37] font-semibold tracking-wide">📺 Perfect Setup for Your Rom-Com Marathon 📺</p>
+                <p class="text-lg text-[#E8A0B0] mt-2">🌹 Candles, Blankets & The Perfect View — We'll Handle The TV 🌹</p>
+            </div>
+
+            <!-- Pricing Card - Valentine styling -->
+            <div class="romantic-card backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center display-font">
+                    <span class="bg-[#8B2942]/30 text-[#D4AF37] rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">🎬</span>
+                    Romance Night Pricing
+                </h2>
+
+                <!-- Valentine Special Banner -->
+                <div class="valentine-badge bg-gradient-to-r from-[#8B2942] via-[#C1566D] to-[#8B2942] text-white rounded-2xl p-6 mb-6 text-center shadow-lg border border-[#D4AF37]/30">
+                    <p class="text-lg font-bold text-[#F5D6DC] script-font text-2xl">💕 Valentine's Day Special 💕</p>
+                    <p class="text-4xl font-black text-white display-font mt-2">20% OFF LABOR</p>
+                    <p class="text-base text-[#F5D6DC] font-semibold mt-2">Mount 2+ TVs & Create The Perfect Movie Night!</p>
+                    <p class="text-xs mt-2 text-white/70">(Discount applies to installation & wire concealment, not mount hardware)</p>
+                </div>
+
+                <!-- Price cards with Valentine styling -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="price-card rounded-xl p-5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#E8A0B0] font-medium">Up to 42"</span>
+                            <span class="text-2xl font-bold text-[#D4AF37] display-font">$99</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-xl p-5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#E8A0B0] font-medium">43" - 55"</span>
+                            <span class="text-2xl font-bold text-[#D4AF37] display-font">$129</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-xl p-5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#E8A0B0] font-medium">56" - 70"</span>
+                            <span class="text-2xl font-bold text-[#D4AF37] display-font">$159</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-xl p-5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#E8A0B0] font-medium">71" - 85"</span>
+                            <span class="text-2xl font-bold text-[#D4AF37] display-font">$199</span>
+                        </div>
+                    </div>
+                    <div class="price-card rounded-xl p-5 md:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#E8A0B0] font-medium">86"+</span>
+                            <span class="text-2xl font-bold text-[#D4AF37] display-font">$249</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mount Type Options -->
+                <h3 class="font-semibold text-[#D4AF37] mb-3 display-font text-lg">🎥 Mount Type Options:</h3>
+                <div class="space-y-3">
+                    <div class="service-option flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">Fixed Mount</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Sleek against the wall</span>
+                        </div>
+                        <span class="text-[#D4AF37] font-semibold">+$50</span>
+                    </div>
+                    <div class="service-option-alt flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">Tilting Mount</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Perfect angle from the couch</span>
+                        </div>
+                        <span class="text-[#F5D6DC] font-semibold">+$50</span>
+                    </div>
+                    <div class="service-option flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">Full Motion Mount</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- View from anywhere</span>
+                        </div>
+                        <span class="text-[#D4AF37] font-semibold">+$65</span>
+                    </div>
+                </div>
+
+                <!-- Wire Concealment Options -->
+                <h3 class="font-semibold text-[#D4AF37] mb-3 mt-6 display-font text-lg">✨ Wire Concealment Options:</h3>
+                <div class="space-y-3">
+                    <div class="service-option flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">No Wire Concealment</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Standard installation</span>
+                        </div>
+                        <span class="text-[#D4AF37] font-semibold">Included</span>
+                    </div>
+                    <div class="service-option-alt flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">External Strip</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Neat & tidy look</span>
+                        </div>
+                        <span class="text-[#F5D6DC] font-semibold">+$35</span>
+                    </div>
+                    <div class="service-option flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">In-Wall Concealment</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Seamless romantic ambiance</span>
+                        </div>
+                        <span class="text-[#D4AF37] font-semibold">+$60</span>
+                    </div>
+                    <div class="service-option-alt flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">Electrical Outlet Installation</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Hidden power behind TV</span>
+                        </div>
+                        <span class="text-[#F5D6DC] font-semibold">+$250</span>
+                    </div>
+                </div>
+
+                <!-- Soundbar Mounting -->
+                <h3 class="font-semibold text-[#D4AF37] mb-3 mt-6 display-font text-lg">🔊 Soundbar Mounting:</h3>
+                <div class="space-y-3">
+                    <div class="service-option flex items-center justify-between rounded-xl p-4">
+                        <div>
+                            <span class="font-medium text-white">Soundbar Mounting</span>
+                            <span class="text-sm text-[#E8A0B0] ml-2">- Hear every "I love you"</span>
+                        </div>
+                        <span class="text-[#D4AF37] font-semibold">+$60</span>
+                    </div>
+                </div>
+
+                <!-- Info box -->
+                <div class="mt-6 bg-[#8B2942]/20 border-l-4 border-[#D4AF37] p-5 rounded-r-xl">
+                    <p class="text-sm text-[#E8A0B0]">
+                        🌹 All installations include level mounting and debris cleanup
+                    </p>
+                    <p class="text-sm text-[#D4AF37] font-semibold mt-2 script-font text-lg">
+                        💕 "Get your setup ready for The Notebook marathon!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Booking Form Card - Valentine styling -->
+            <div class="romantic-card backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-[#D4AF37]/20">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center display-font">
+                    <span class="bg-[#8B2942]/30 text-[#D4AF37] rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">💝</span>
+                    Book Your Movie Night Setup
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Full Name *</label>
+                            <input type="text" id="name" required
+                                class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none"
+                                placeholder="Your name">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Phone Number *</label>
+                            <input type="tel" id="phone" required
+                                class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none"
+                                placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Email Address *</label>
+                        <input type="email" id="email" required
+                            class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none"
+                            placeholder="your@email.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Service Address *</label>
+                        <input type="text" id="address" required
+                            class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none"
+                            placeholder="123 Main St, City, State ZIP">
+                    </div>
+
+                    <!-- Number of TVs Selection -->
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Number of TVs *</label>
+                        <select id="numTvs" required onchange="updateTvForms(); calculateTotal()"
+                            class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                            <option value="1">1 TV</option>
+                            <option value="2">2 TVs - 20% OFF! 💕</option>
+                            <option value="3">3 TVs - 20% OFF! 💕</option>
+                            <option value="4">4 TVs - 20% OFF! 💕</option>
+                            <option value="5">5+ TVs - 20% OFF! 💕</option>
+                        </select>
+                        <p id="discountNote" class="hidden text-sm text-[#D4AF37] font-semibold mt-2">💕 20% multi-TV discount will be applied!</p>
+                    </div>
+
+                    <!-- TV 1 (Always visible) -->
+                    <div id="tv1-section" class="tv-section-card rounded-2xl p-5">
+                        <h3 class="font-bold text-[#D4AF37] mb-4 display-font">🎬 TV 1 — Living Room Romance</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize1" required onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType1" required onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment1" required onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar1" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 2 (Hidden by default) -->
+                    <div id="tv2-section" class="hidden tv-section-card-alt rounded-2xl p-5">
+                        <h3 class="font-bold text-[#F5D6DC] mb-4 display-font">🎬 TV 2 — Bedroom Bliss</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize2" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType2" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment2" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar2" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 3 (Hidden by default) -->
+                    <div id="tv3-section" class="hidden tv-section-card rounded-2xl p-5">
+                        <h3 class="font-bold text-[#D4AF37] mb-4 display-font">🎬 TV 3 — Cozy Den</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize3" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType3" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment3" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar3" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 4 (Hidden by default) -->
+                    <div id="tv4-section" class="hidden tv-section-card-alt rounded-2xl p-5">
+                        <h3 class="font-bold text-[#F5D6DC] mb-4 display-font">🎬 TV 4 — Guest Suite</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize4" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType4" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment4" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar4" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV 5 (Hidden by default) -->
+                    <div id="tv5-section" class="hidden tv-section-card rounded-2xl p-5">
+                        <h3 class="font-bold text-[#D4AF37] mb-4 display-font">🎬 TV 5+ — Home Theater</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">TV Size *</label>
+                                <select id="tvSize5" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select size</option>
+                                    <option value="up-to-42" data-price="99">Up to 42" - $99</option>
+                                    <option value="43-55" data-price="129">43" - 55" - $129</option>
+                                    <option value="56-70" data-price="159">56" - 70" - $159</option>
+                                    <option value="71-85" data-price="199">71" - 85" - $199</option>
+                                    <option value="86-plus" data-price="249">86"+ - $249</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Mount Type *</label>
+                                <select id="mountType5" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select mount</option>
+                                    <option value="own" data-price="0">Own Mount - +$0</option>
+                                    <option value="fixed" data-price="50">Fixed - +$50</option>
+                                    <option value="tilt" data-price="50">Tilting - +$50</option>
+                                    <option value="full" data-price="65">Full Motion - +$65</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Wire Concealment *</label>
+                                <select id="wireConcealment5" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="">Select option</option>
+                                    <option value="none" data-price="0">None - Included</option>
+                                    <option value="external" data-price="35">External - +$35</option>
+                                    <option value="inwall" data-price="60">In-Wall - +$60</option>
+                                    <option value="outlet" data-price="250">Outlet - +$250</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium form-label mb-2">Soundbar Mounting 🔊</label>
+                                <select id="soundbar5" onchange="calculateTotal()"
+                                    class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                    <option value="no" data-price="0">No soundbar</option>
+                                    <option value="yes" data-price="60">Yes, mount my soundbar - +$60</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="text-sm text-[#E8A0B0] mt-3">📝 For more than 5 TVs, please add details in the notes section below.</p>
+                    </div>
+
+                    <!-- Total display with Valentine styling -->
+                    <div id="priceTotal"
+                        class="hidden total-display rounded-2xl p-6 text-center">
+                        <p class="text-lg font-semibold text-[#E8A0B0] mb-2 script-font text-xl">💕 Your Romance-Ready Total 💕</p>
+                        <div id="subtotalRow" class="hidden">
+                            <p class="text-xl text-[#8B2942] line-through" id="subtotalAmount">$0</p>
+                        </div>
+                        <p class="text-5xl font-black text-[#D4AF37] display-font" id="totalAmount">$0</p>
+                        <p id="savingsAmount" class="hidden text-lg font-bold text-[#F5D6DC] mt-2">You save: $0</p>
+                        <p class="text-sm text-[#E8A0B0] mt-2">All-inclusive pricing • No hidden fees</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Preferred Date *</label>
+                            <input type="date" id="preferredDate" required
+                                class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium form-label mb-2">Preferred Time *</label>
+                            <select id="preferredTime" required
+                                class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none">
+                                <option value="">Select time</option>
+                                <option value="8:00 AM - 10:00 AM">8:00 AM - 10:00 AM</option>
+                                <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                                <option value="12:00 PM - 2:00 PM">12:00 PM - 2:00 PM</option>
+                                <option value="2:00 PM - 4:00 PM">2:00 PM - 4:00 PM</option>
+                                <option value="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium form-label mb-2">Additional Notes</label>
+                        <textarea id="additionalNotes" rows="4"
+                            class="romantic-input w-full px-4 py-3 rounded-xl focus:outline-none"
+                            placeholder="Any special requests? Setting up for a proposal? Let us know! 💍"></textarea>
+                    </div>
+
+                    <!-- Valentine-style submit button -->
+                    <button onclick="submitBooking()"
+                        class="romantic-btn w-full text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg tracking-wide">
+                        💕 Request Your Movie Night Setup 💕
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer section with Valentine theme -->
+            <div class="text-center mt-10 text-white">
+                <div class="heart-divider">
+                    <span class="text-3xl">💝</span>
+                </div>
+                <p class="text-xl font-bold text-[#D4AF37] display-font mt-4">TV Install Chicago</p>
+                <p class="script-font text-[#E8A0B0] text-lg mt-1">"Setting the scene for love..."</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+                    <a href="tel:+13129317096"
+                        class="px-6 py-3 rounded-xl bg-[#1a0a10] border-2 border-[#D4AF37] text-[#D4AF37] font-bold hover:bg-[#D4AF37] hover:text-[#1a0a10] transition-all">
+                        Call: (312) 931-7096
+                    </a>
+                    <a href="mailto:tvinstallchicago@gmail.com"
+                        class="px-6 py-3 rounded-xl bg-[#1a0a10] border-2 border-[#C1566D] text-[#F5D6DC] font-bold hover:bg-[#C1566D] hover:text-white transition-all">
+                        Email: tvinstallchicago@gmail.com
+                    </a>
+                </div>
+                <p class="mt-6 text-[#8B2942] text-sm script-font">"All you need is love... and a perfectly mounted TV." 🎬</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Screen with Valentine theme -->
+    <div id="successScreen"
+        class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="romantic-card rounded-3xl shadow-2xl p-8 max-w-md w-full text-center">
+            <div class="text-6xl mb-4">💕</div>
+            <div class="w-20 h-20 bg-[#8B2942]/30 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#D4AF37]">
+                <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <!-- Valentine success messaging -->
+            <h2 class="text-3xl font-black text-white mb-4 romantic-glow display-font">IT'S A DATE!</h2>
+            <p class="text-lg text-[#D4AF37] font-bold mb-4 script-font text-xl">📺 Booking Received! 📺</p>
+            <p class="text-[#E8A0B0] mb-6" id="successMessage">
+                Thank you! We've received your appointment request. Time to pick out your movies!
+            </p>
+            <div class="bg-[#1a0a10] rounded-xl p-4 text-left border border-[#D4AF37]/30 mb-6" id="bookingDetails"></div>
+            
+            <button onclick="downloadEstimate()" 
+                class="romantic-btn w-full text-white py-3 px-6 rounded-xl font-bold text-lg shadow-lg mb-4">
+                📄 Download Estimate (PDF)
+            </button>
+            
+            <p class="text-sm text-[#8B2942] script-font">"Love is in the air... and on your new TV!" 🌹</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // FLOATING HEARTS ANIMATION
+        // ============================================
+        const canvas = document.getElementById('hearts-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Heart shape drawing function
+        function drawHeart(x, y, size, color, alpha) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x, y + size / 4);
+            ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + size / 4);
+            ctx.bezierCurveTo(x - size / 2, y + size / 2, x, y + size * 0.75, x, y + size);
+            ctx.bezierCurveTo(x, y + size * 0.75, x + size / 2, y + size / 2, x + size / 2, y + size / 4);
+            ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + size / 4);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // Floating heart class
+        class FloatingHeart {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 50;
+                this.size = 10 + Math.random() * 25;
+                this.speedY = 0.3 + Math.random() * 0.8;
+                this.speedX = -0.5 + Math.random() * 1;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = -0.02 + Math.random() * 0.04;
+                this.alpha = 0.1 + Math.random() * 0.2;
+                const colors = ['#C1566D', '#D4AF37', '#E8A0B0', '#8B2942', '#F5D6DC'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX + Math.sin(this.y * 0.01) * 0.3;
+                this.rotation += this.rotationSpeed;
+
+                if (this.y < -50) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                drawHeart(0, 0, this.size, this.color, this.alpha);
+                ctx.restore();
+            }
+        }
+
+        // Candle glow particle
+        class CandleParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = 1 + Math.random() * 2;
+                this.speedX = -0.1 + Math.random() * 0.2;
+                this.speedY = -0.05 + Math.random() * 0.1;
+                this.alpha = 0.05 + Math.random() * 0.1;
+                this.color = Math.random() > 0.5 ? '#FFB478' : '#D4AF37';
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const floatingHearts = [];
+        const candleParticles = [];
+
+        // Create floating hearts
+        for (let i = 0; i < 15; i++) {
+            const heart = new FloatingHeart();
+            heart.y = Math.random() * canvas.height; // Start at random positions
+            floatingHearts.push(heart);
+        }
+
+        // Create candle particles
+        for (let i = 0; i < 40; i++) {
+            candleParticles.push(new CandleParticle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw and update hearts
+            floatingHearts.forEach(heart => {
+                heart.update();
+                heart.draw();
+            });
+
+            // Draw and update candle particles
+            candleParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // ============================================
+        // FLOATING ELEMENTS - Valentine themed
+        // ============================================
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements-container');
+            const elements = ['🌹', '💕', '🕯️', '🎬', '✨', '💝', '🥂', '🍫'];
+
+            for (let i = 0; i < 14; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.animationDuration = (Math.random() * 5 + 7) + 's';
+                element.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(element);
+            }
+        }
+
+        createFloatingElements();
+
+        // ============================================
+        // FORM FUNCTIONALITY
+        // ============================================
+        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+
+        let estimateData = {};
+
+        function generateEstimateNumber() {
+            const now = new Date();
+            return 'EST-' + now.getFullYear() + 
+                   String(now.getMonth() + 1).padStart(2, '0') + 
+                   String(now.getDate()).padStart(2, '0') + '-' +
+                   String(now.getHours()).padStart(2, '0') + 
+                   String(now.getMinutes()).padStart(2, '0') +
+                   String(now.getSeconds()).padStart(2, '0');
+        }
+
+        function getTvSizeLabel(value) {
+            const labels = {
+                'up-to-42': 'Up to 42"',
+                '43-55': '43" - 55"',
+                '56-70': '56" - 70"',
+                '71-85': '71" - 85"',
+                '86-plus': '86"+'
+            };
+            return labels[value] || value;
+        }
+
+        function getMountLabel(value) {
+            const labels = {
+                'own': 'Customer\'s Own Mount',
+                'fixed': 'Fixed Mount',
+                'tilt': 'Tilting Mount',
+                'full': 'Full Motion Mount'
+            };
+            return labels[value] || value;
+        }
+
+        function getWireLabel(value) {
+            const labels = {
+                'none': 'No Wire Concealment',
+                'external': 'External Strip',
+                'inwall': 'In-Wall Concealment',
+                'outlet': 'Electrical Outlet Installation'
+            };
+            return labels[value] || value;
+        }
+
+        function downloadEstimate() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            let y = 20;
+            
+            // VALENTINE COLORS: Header - Deep rose background
+            doc.setFillColor(139, 41, 66); // Deep rose
+            doc.rect(0, 0, pageWidth, 45, 'F');
+            
+            doc.setTextColor(212, 175, 55); // Gold
+            doc.setFontSize(26);
+            doc.setFont('helvetica', 'bold');
+            doc.text('TV Install Chicago', pageWidth / 2, 18, { align: 'center' });
+            
+            doc.setTextColor(245, 214, 220); // Blush
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Romance Movie Night Ready', pageWidth / 2, 30, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('(312) 931-7096 | tvinstallchicago@gmail.com', pageWidth / 2, 40, { align: 'center' });
+            
+            y = 60;
+            
+            // Estimate Title
+            doc.setTextColor(139, 41, 66);
+            doc.setFontSize(22);
+            doc.setFont('helvetica', 'bold');
+            doc.text('SERVICE ESTIMATE', pageWidth / 2, y, { align: 'center' });
+            
+            y += 15;
+            
+            // Estimate Info Box
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(0.5);
+            doc.rect(15, y, pageWidth - 30, 30);
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Estimate #:', 20, y + 8);
+            doc.text('Date:', 20, y + 16);
+            doc.text('Valid Until:', 20, y + 24);
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.estimateNumber, 55, y + 8);
+            doc.text(estimateData.createdDate, 55, y + 16);
+            doc.text(estimateData.validUntil, 55, y + 24);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.text('Preferred Date:', 110, y + 8);
+            doc.text('Preferred Time:', 110, y + 16);
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.preferredDate, 150, y + 8);
+            doc.text(estimateData.preferredTime, 150, y + 16);
+            
+            y += 40;
+            
+            // Customer Info
+            doc.setFillColor(245, 214, 220);
+            doc.rect(15, y, pageWidth - 30, 8, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(12);
+            doc.setTextColor(139, 41, 66);
+            doc.text('CUSTOMER INFORMATION', 20, y + 6);
+            
+            y += 15;
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Name:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.name, 50, y);
+            
+            y += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Phone:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.phone, 50, y);
+            
+            y += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Email:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(estimateData.email, 50, y);
+            
+            y += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Address:', 20, y);
+            doc.setFont('helvetica', 'normal');
+            const addressLines = doc.splitTextToSize(estimateData.address, 130);
+            doc.text(addressLines, 50, y);
+            y += (addressLines.length * 5);
+            
+            y += 10;
+            
+            // Services Table Header - VALENTINE COLORS
+            doc.setFillColor(139, 41, 66); // Deep rose
+            doc.rect(15, y, pageWidth - 30, 10, 'F');
+            doc.setTextColor(212, 175, 55); // Gold
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.text('SERVICES', 20, y + 7);
+            doc.text('PRICE', pageWidth - 35, y + 7, { align: 'right' });
+            
+            y += 15;
+            doc.setTextColor(0, 0, 0);
+            
+            // TV Details
+            for (let i = 0; i < estimateData.tvs.length; i++) {
+                const tv = estimateData.tvs[i];
+                
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.text(`TV ${i + 1}`, 20, y);
+                y += 7;
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                
+                doc.text(`   TV Size: ${getTvSizeLabel(tv.size)}`, 20, y);
+                doc.text(`$${tv.sizePrice}`, pageWidth - 35, y, { align: 'right' });
+                y += 6;
+                
+                doc.text(`   Mount: ${getMountLabel(tv.mount)}`, 20, y);
+                doc.text(`$${tv.mountPrice}`, pageWidth - 35, y, { align: 'right' });
+                y += 6;
+                
+                doc.text(`   Wire Concealment: ${getWireLabel(tv.wire)}`, 20, y);
+                doc.text(`$${tv.wirePrice}`, pageWidth - 35, y, { align: 'right' });
+                y += 6;
+                
+                if (tv.soundbar === 'yes') {
+                    doc.text(`   Soundbar Mounting`, 20, y);
+                    doc.text(`$${tv.soundbarPrice}`, pageWidth - 35, y, { align: 'right' });
+                    y += 6;
+                }
+                
+                y += 4;
+                
+                if (y > 250) {
+                    doc.addPage();
+                    y = 20;
+                }
+            }
+            
+            // Totals Section
+            y += 5;
+            doc.setDrawColor(200, 200, 200);
+            doc.line(15, y, pageWidth - 15, y);
+            y += 10;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text('Subtotal:', 120, y);
+            doc.text(`$${estimateData.subtotal}`, pageWidth - 35, y, { align: 'right' });
+            
+            if (estimateData.numTvs >= 2) {
+                y += 8;
+                doc.setTextColor(139, 41, 66);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Valentine\'s Multi-TV Discount (20%):', 80, y);
+                doc.text(`-$${estimateData.savings}`, pageWidth - 35, y, { align: 'right' });
+            }
+            
+            y += 12;
+            doc.setFillColor(212, 175, 55); // Gold
+            doc.rect(100, y - 6, pageWidth - 115, 12, 'F');
+            doc.setTextColor(139, 41, 66);
+            doc.setFontSize(14);
+            doc.text('TOTAL:', 105, y + 2);
+            doc.text(`$${estimateData.total}`, pageWidth - 35, y + 2, { align: 'right' });
+            
+            y += 20;
+            
+            // Notes
+            if (estimateData.notes && estimateData.notes.trim()) {
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Additional Notes:', 20, y);
+                y += 6;
+                doc.setFont('helvetica', 'normal');
+                const notesLines = doc.splitTextToSize(estimateData.notes, pageWidth - 40);
+                doc.text(notesLines, 20, y);
+                y += (notesLines.length * 5) + 10;
+            }
+            
+            // Footer
+            const footerY = 270;
+            doc.setDrawColor(212, 175, 55);
+            doc.line(15, footerY, pageWidth - 15, footerY);
+            
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'italic');
+            doc.text('This is an estimate only. Final pricing may vary based on site conditions.', pageWidth / 2, footerY + 8, { align: 'center' });
+            doc.text('All installations include level mounting and debris cleanup.', pageWidth / 2, footerY + 14, { align: 'center' });
+            doc.text('Thank you for choosing TV Install Chicago! Happy Valentine\'s Day!', pageWidth / 2, footerY + 20, { align: 'center' });
+            
+            doc.save(`TVInstallChicago_Estimate_${estimateData.estimateNumber}.pdf`);
+        }
+
+        function updateTvForms() {
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            const discountNote = document.getElementById('discountNote');
+            
+            if (numTvs >= 2) {
+                discountNote.classList.remove('hidden');
+            } else {
+                discountNote.classList.add('hidden');
+            }
+            
+            for (let i = 2; i <= 5; i++) {
+                const section = document.getElementById(`tv${i}-section`);
+                if (i <= numTvs) {
+                    section.classList.remove('hidden');
+                    section.querySelectorAll('select').forEach(sel => sel.required = true);
+                } else {
+                    section.classList.add('hidden');
+                    section.querySelectorAll('select').forEach(sel => {
+                        sel.required = false;
+                        sel.value = '';
+                    });
+                }
+            }
+        }
+
+        function calculateTotal() {
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            let discountableTotal = 0;
+            let mountTotal = 0;
+            
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSizeSelect = document.getElementById(`tvSize${i}`);
+                const mountTypeSelect = document.getElementById(`mountType${i}`);
+                const wireConcealmentSelect = document.getElementById(`wireConcealment${i}`);
+                const soundbarSelect = document.getElementById(`soundbar${i}`);
+
+                const tvSizePrice = parseInt(tvSizeSelect?.selectedOptions[0]?.dataset.price || 0);
+                const mountTypePrice = parseInt(mountTypeSelect?.selectedOptions[0]?.dataset.price || 0);
+                const wireConcealmentPrice = parseInt(wireConcealmentSelect?.selectedOptions[0]?.dataset.price || 0);
+                const soundbarPrice = parseInt(soundbarSelect?.selectedOptions[0]?.dataset.price || 0);
+
+                discountableTotal += tvSizePrice + wireConcealmentPrice + soundbarPrice;
+                mountTotal += mountTypePrice;
+            }
+
+            let subtotal = discountableTotal + mountTotal;
+            
+            let total = subtotal;
+            let savings = 0;
+            if (numTvs >= 2 && discountableTotal > 0) {
+                savings = Math.round(discountableTotal * 0.20);
+                total = subtotal - savings;
+            }
+
+            if (subtotal > 0) {
+                document.getElementById('priceTotal').classList.remove('hidden');
+                document.getElementById('totalAmount').textContent = '$' + total;
+                
+                if (numTvs >= 2) {
+                    document.getElementById('subtotalRow').classList.remove('hidden');
+                    document.getElementById('subtotalAmount').textContent = '$' + subtotal;
+                    document.getElementById('savingsAmount').classList.remove('hidden');
+                    document.getElementById('savingsAmount').textContent = '💕 You save: $' + savings + ' (20% off labor!)';
+                } else {
+                    document.getElementById('subtotalRow').classList.add('hidden');
+                    document.getElementById('savingsAmount').classList.add('hidden');
+                }
+            } else {
+                document.getElementById('priceTotal').classList.add('hidden');
+            }
+
+            return { subtotal, total, savings };
+        }
+
+        function submitBooking() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const numTvs = parseInt(document.getElementById('numTvs').value);
+            const preferredDate = document.getElementById('preferredDate').value;
+            const preferredTime = document.getElementById('preferredTime').value;
+            const additionalNotes = document.getElementById('additionalNotes').value;
+
+            if (!name || !phone || !email || !address || !preferredDate || !preferredTime) {
+                alert('Please fill in all required fields marked with *');
+                return;
+            }
+
+            let tvs = [];
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSize = document.getElementById(`tvSize${i}`).value;
+                const mountType = document.getElementById(`mountType${i}`).value;
+                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
+                const soundbar = document.getElementById(`soundbar${i}`).value;
+                
+                if (!tvSize || !mountType || !wireConcealment) {
+                    alert(`Please fill in all fields for TV ${i}`);
+                    return;
+                }
+
+                const sizePrice = parseInt(document.getElementById(`tvSize${i}`).selectedOptions[0].dataset.price);
+                const mountPrice = parseInt(document.getElementById(`mountType${i}`).selectedOptions[0].dataset.price);
+                const wirePrice = parseInt(document.getElementById(`wireConcealment${i}`).selectedOptions[0].dataset.price);
+                const soundbarPrice = parseInt(document.getElementById(`soundbar${i}`).selectedOptions[0].dataset.price);
+
+                tvs.push({
+                    size: tvSize,
+                    mount: mountType,
+                    wire: wireConcealment,
+                    soundbar: soundbar,
+                    sizePrice: sizePrice,
+                    mountPrice: mountPrice,
+                    wirePrice: wirePrice,
+                    soundbarPrice: soundbarPrice
+                });
+            }
+
+            const { subtotal, total, savings } = calculateTotal();
+
+            const estimateNumber = generateEstimateNumber();
+            const today = new Date();
+            const createdDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const validDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+            const validUntil = validDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            estimateData = {
+                estimateNumber,
+                createdDate,
+                validUntil,
+                name,
+                phone,
+                email,
+                address,
+                numTvs,
+                tvs,
+                preferredDate,
+                preferredTime,
+                notes: additionalNotes,
+                subtotal,
+                total,
+                savings
+            };
+
+            let tvDetails = '';
+            for (let i = 1; i <= numTvs; i++) {
+                const tvSize = document.getElementById(`tvSize${i}`).value;
+                const mountType = document.getElementById(`mountType${i}`).value;
+                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
+                const soundbar = document.getElementById(`soundbar${i}`).value;
+                tvDetails += `TV${i}: Size=${tvSize}, Mount=${mountType}, Wire=${wireConcealment}, Soundbar=${soundbar}; `;
+            }
+
+            const formData = new FormData();
+            formData.append('estimateNumber', estimateNumber);
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('email', email);
+            formData.append('address', address);
+            formData.append('numTvs', numTvs);
+            formData.append('tvDetails', tvDetails);
+            formData.append('preferredDate', preferredDate);
+            formData.append('preferredTime', preferredTime);
+            formData.append('additionalNotes', additionalNotes);
+            formData.append('subtotal', '$' + subtotal);
+            formData.append('discount', numTvs >= 2 ? '20% ($' + savings + ')' : 'None');
+            formData.append('total', '$' + total);
+
+            fetch('https://formspree.io/f/xeoyyygd', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Form submitted successfully');
+                    showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, savings, estimateNumber);
+                } else {
+                    console.log('Form submission error');
+                    alert('There was an error submitting your booking. Please try again or call us directly.');
+                }
+            }).catch(error => {
+                console.log('Error:', error);
+                alert('There was an error submitting your booking. Please try again or call us directly.');
+            });
+        }
+
+        function showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, savings, estimateNumber) {
+            document.getElementById('successMessage').innerHTML =
+                `Thank you, ${name}! 💕 We've received your appointment request. Time to pick the perfect rom-com lineup!`;
+
+            let savingsHtml = '';
+            if (numTvs >= 2) {
+                savingsHtml = `<p class="text-sm text-[#D4AF37] font-bold">💕 Valentine's Discount: -$${savings}</p>`;
+            }
+
+            document.getElementById('bookingDetails').innerHTML = `
+                <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Estimate #:</strong> ${estimateNumber}</p>
+                <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Number of TVs:</strong> ${numTvs}</p>
+                <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Preferred Date:</strong> ${preferredDate}</p>
+                <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Time:</strong> ${preferredTime}</p>
+                <p class="text-sm text-[#E8A0B0] mb-2"><strong class="text-white">Email:</strong> ${email}</p>
+                ${savingsHtml}
+                <p class="text-sm text-[#E8A0B0] mt-3 pt-3 border-t border-[#D4AF37]/30"><strong class="text-white">Estimated Total:</strong> <span class="text-xl font-bold text-[#D4AF37]">$${total}</span></p>
+            `;
+
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('successScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
