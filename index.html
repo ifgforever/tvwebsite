@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="icon" type="image/png" href="/goldtvlogo.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Mounting Service - $100 Flat Rate. Any TV. Always.</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -23,1270 +20,675 @@
             --rust: #C45C2E;
             --slate: #3A4A5C;
             --slate-light: #6B7E94;
-            --cream: #FAF7F2;
         }
-
         * { box-sizing: border-box; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--ink);
-            color: var(--paper);
-            overflow-x: hidden;
-        }
-
+        body { font-family: 'DM Sans', sans-serif; background: var(--ink); color: var(--paper); overflow-x: hidden; }
         .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
-        .serif { font-family: 'DM Serif Display', serif; }
 
-        /* ======= TICKER TAPE ======= */
-        .ticker-wrap {
-            background: var(--gold);
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 10px 0;
-        }
-        .ticker-inner {
-            display: inline-block;
-            animation: ticker 22s linear infinite;
-        }
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .ticker-item {
-            display: inline-block;
-            color: var(--ink);
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 0 40px;
-        }
-        .ticker-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: var(--ink);
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 40px;
-        }
+        .ticker-wrap { background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+        .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item { display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
+        .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
 
-        /* ======= HERO ======= */
-        .hero-section {
-            background: var(--ink);
-            border-bottom: 1px solid rgba(200,169,74,0.3);
-            position: relative;
-            overflow: hidden;
-        }
+        .hero-section { background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; }
+        .hero-section::before { content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 42vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }
+        .hero-number { font-family: 'Bebas Neue', sans-serif; font-size: clamp(120px, 25vw, 260px); line-height: 0.9; letter-spacing: -0.02em; background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 40%, #F0D890 70%, #C8A94A 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gold-shift 6s ease-in-out infinite; }
+        @keyframes gold-shift { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.15); } }
+        .hero-tagline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 5vw, 56px); color: var(--paper); letter-spacing: 0.04em; line-height: 1.1; }
+        .hero-sub { color: var(--slate-light); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
 
-        .hero-section::before {
-            content: '$100';
-            position: absolute;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 42vw;
-            color: rgba(200,169,74,0.04);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-            pointer-events: none;
-            line-height: 1;
-        }
-
-        .hero-number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(120px, 25vw, 260px);
-            line-height: 0.9;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 40%, #F0D890 70%, #C8A94A 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gold-shift 6s ease-in-out infinite;
-        }
-
-        @keyframes gold-shift {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.15); }
-        }
-
-        .hero-tagline {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(28px, 5vw, 56px);
-            color: var(--paper);
-            letter-spacing: 0.04em;
-            line-height: 1.1;
-        }
-
-        .hero-sub {
-            color: var(--slate-light);
-            font-size: 15px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-
-        /* ======= PROMISE STRIP ======= */
-        .promise-strip {
-            background: var(--paper);
-            color: var(--ink);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .promise-item {
-            padding: 28px 24px;
-            border-right: 1px solid var(--paper-dark);
-            text-align: center;
-        }
+        .promise-strip { background: var(--paper); color: var(--ink); display: grid; grid-template-columns: repeat(3, 1fr); }
+        .promise-item { padding: 28px 24px; border-right: 1px solid var(--paper-dark); text-align: center; }
         .promise-item:last-child { border-right: none; }
-        .promise-number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 52px;
-            color: var(--rust);
-            line-height: 1;
-        }
-        .promise-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--slate);
-            font-weight: 600;
-            margin-top: 4px;
-        }
+        .promise-number { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--rust); line-height: 1; }
+        .promise-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--slate); font-weight: 600; margin-top: 4px; }
 
-        /* ======= CARDS ======= */
-        .price-board {
-            background: var(--paper);
-            color: var(--ink);
-            border-radius: 4px;
-            border: 1px solid rgba(200,169,74,0.2);
-        }
+        .price-board { background: var(--paper); color: var(--ink); border-radius: 4px; border: 1px solid rgba(200,169,74,0.2); }
+        .board-header { background: var(--ink); color: var(--paper); padding: 18px 28px; border-radius: 3px 3px 0 0; display: flex; align-items: center; gap: 14px; }
+        .board-number-badge { background: var(--gold); color: var(--ink); font-family: 'Bebas Neue', sans-serif; font-size: 16px; padding: 4px 12px; border-radius: 2px; }
+        .hundred-display { background: var(--ink); border-radius: 4px; padding: 36px; text-align: center; border: 1px solid rgba(200,169,74,0.25); position: relative; overflow: hidden; }
+        .hundred-display::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(200,169,74,0.07) 0%, transparent 70%); pointer-events: none; }
+        .hundred-big { font-family: 'Bebas Neue', sans-serif; font-size: 96px; line-height: 1; background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 50%, #F0D890 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .board-header {
-            background: var(--ink);
-            color: var(--paper);
-            padding: 18px 28px;
-            border-radius: 3px 3px 0 0;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .board-header .bebas {
-            font-size: 22px;
-            letter-spacing: 0.06em;
-        }
-
-        .board-number-badge {
-            background: var(--gold);
-            color: var(--ink);
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 16px;
-            padding: 4px 12px;
-            border-radius: 2px;
-        }
-
-        /* Big $100 center display */
-        .hundred-display {
-            background: var(--ink);
-            border-radius: 4px;
-            padding: 36px;
-            text-align: center;
-            border: 1px solid rgba(200,169,74,0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hundred-display::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(200,169,74,0.07) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hundred-big {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 96px;
-            line-height: 1;
-            background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 50%, #F0D890 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Line items */
-        .line-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-            border-bottom: 1px solid rgba(10,10,10,0.08);
-            transition: background 0.15s;
-        }
+        .line-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(10,10,10,0.08); transition: background 0.15s; }
         .line-item:last-child { border-bottom: none; }
         .line-item:hover { background: rgba(200,169,74,0.06); }
         .line-item-name { font-weight: 500; font-size: 14px; color: var(--ink); }
         .line-item-desc { font-size: 12px; color: var(--slate-light); margin-top: 2px; }
-        .line-price {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 22px;
-            letter-spacing: 0.02em;
-            color: var(--slate);
-        }
-        .line-price.gold { color: var(--rust); }
-        .line-price.included { color: #6aaa6a; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .line-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.02em; color: var(--rust); }
+        .line-price.included { color: #5a9a5a; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .section-head { padding: 12px 20px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--slate); font-weight: 700; background: rgba(200,169,74,0.08); border-bottom: 1px solid rgba(10,10,10,0.08); }
 
-        .section-head {
-            padding: 12px 20px 8px;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--slate);
-            font-weight: 700;
-            background: rgba(200,169,74,0.08);
-            border-bottom: 1px solid rgba(10,10,10,0.08);
-        }
-
-        /* ======= FORM SECTION ======= */
-        .form-card {
-            background: #0F0F0F;
-            border: 1px solid rgba(200,169,74,0.2);
-            border-radius: 4px;
-        }
-
-        .form-card-header {
-            background: var(--gold);
-            color: var(--ink);
-            padding: 18px 28px;
-            border-radius: 3px 3px 0 0;
-        }
-
-        label {
-            display: block;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            color: var(--slate-light);
-            margin-bottom: 7px;
-        }
-
-        .field-input {
-            width: 100%;
-            background: #161616;
-            border: 1px solid rgba(200,169,74,0.2);
-            color: var(--paper);
-            padding: 12px 16px;
-            border-radius: 3px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            outline: none;
-        }
-        .field-input:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(200,169,74,0.12);
-        }
+        .form-card { background: #0F0F0F; border: 1px solid rgba(200,169,74,0.2); border-radius: 4px; }
+        .form-card-header { background: var(--gold); color: var(--ink); padding: 18px 28px; border-radius: 3px 3px 0 0; }
+        label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--slate-light); margin-bottom: 7px; }
+        .field-input { width: 100%; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 16px; border-radius: 3px; font-family: 'DM Sans', sans-serif; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+        .field-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,169,74,0.12); }
         .field-input::placeholder { color: rgba(200,169,74,0.25); }
         .field-input option { background: #161616; color: var(--paper); }
 
-        /* TV section */
-        .tv-block {
-            background: #0A0A0A;
-            border: 1px solid rgba(200,169,74,0.15);
-            border-radius: 4px;
-            overflow: hidden;
-        }
+        .tv-block { background: #0A0A0A; border: 1px solid rgba(200,169,74,0.15); border-radius: 4px; overflow: hidden; }
+        .tv-block-header { background: #161616; border-bottom: 1px solid rgba(200,169,74,0.15); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+        .tv-num-badge { background: var(--gold); color: var(--ink); font-family: 'Bebas Neue', sans-serif; font-size: 20px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 2px; flex-shrink: 0; }
+        .tv-block-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.05em; color: var(--paper); }
+        .tv-block-price { margin-left: auto; font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--gold); }
 
-        .tv-block-header {
-            background: #161616;
-            border-bottom: 1px solid rgba(200,169,74,0.15);
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .total-bar { background: var(--gold); color: var(--ink); border-radius: 4px; padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; }
+        .total-label { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.08em; opacity: 0.7; }
+        .total-amount { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; }
+        .total-sub { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; margin-top: 4px; }
 
-        .tv-num-badge {
-            background: var(--gold);
-            color: var(--ink);
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 20px;
-            width: 34px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 2px;
-        }
+        .cta-btn { background: var(--ink); color: var(--gold); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; }
+        .cta-btn:hover { background: var(--gold); color: var(--ink); }
 
-        .tv-block-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 20px;
-            letter-spacing: 0.05em;
-            color: var(--paper);
-        }
+        .site-footer { background: #050505; border-top: 1px solid rgba(200,169,74,0.15); padding: 40px 24px; text-align: center; }
+        .contact-pill { display: inline-flex; align-items: center; gap: 8px; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+        .contact-pill:hover { border-color: var(--gold); color: var(--gold); }
 
-        .tv-block-price {
-            margin-left: auto;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 24px;
-            color: var(--gold);
-        }
+        .success-card { background: #0F0F0F; border: 1px solid rgba(200,169,74,0.25); border-radius: 4px; max-width: 480px; width: 100%; }
+        .success-header { background: var(--gold); color: var(--ink); padding: 32px; text-align: center; border-radius: 3px 3px 0 0; }
+        .divider-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(200,169,74,0.4), transparent); margin: 24px 0; }
 
-        /* Total display */
-        .total-bar {
-            background: var(--gold);
-            color: var(--ink);
-            border-radius: 4px;
-            padding: 24px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .total-bar .label-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 18px;
-            letter-spacing: 0.08em;
-            opacity: 0.7;
-        }
-
-        .total-bar .amount-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 64px;
-            line-height: 1;
-            letter-spacing: -0.01em;
-        }
-
-        .total-bar .sub-text {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            opacity: 0.65;
-            margin-top: 4px;
-        }
-
-        /* CTA Button */
-        .cta-btn {
-            background: var(--ink);
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 22px;
-            letter-spacing: 0.1em;
-            padding: 18px 32px;
-            border-radius: 3px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--gold);
-            transform: translateX(-101%);
-            transition: transform 0.25s ease;
-            pointer-events: none;
-        }
-        .cta-btn:hover::before { transform: translateX(0); }
-        .cta-btn:hover { color: var(--ink); }
-        .cta-btn span { position: relative; z-index: 1; }
-
-        /* Footer */
-        .site-footer {
-            background: #050505;
-            border-top: 1px solid rgba(200,169,74,0.15);
-            padding: 40px 24px;
-            text-align: center;
-        }
-
-        .contact-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #161616;
-            border: 1px solid rgba(200,169,74,0.2);
-            color: var(--paper);
-            padding: 12px 24px;
-            border-radius: 3px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: border-color 0.2s, color 0.2s;
-        }
-        .contact-pill:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        /* Success */
-        .success-card {
-            background: #0F0F0F;
-            border: 1px solid rgba(200,169,74,0.25);
-            border-radius: 4px;
-            max-width: 480px;
-            width: 100%;
-        }
-
-        .success-header {
-            background: var(--gold);
-            color: var(--ink);
-            padding: 32px;
-            text-align: center;
-            border-radius: 3px 3px 0 0;
-        }
-
-        .divider-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(200,169,74,0.4), transparent);
-            margin: 24px 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .promise-strip { grid-template-columns: 1fr; }
-            .promise-item { border-right: none; border-bottom: 1px solid var(--paper-dark); }
-        }
-
-        /* Content z-index */
+        @media (max-width: 640px) { .promise-strip { grid-template-columns: 1fr; } .promise-item { border-right: none; border-bottom: 1px solid var(--paper-dark); } }
         #mainContent, #successScreen { position: relative; z-index: 10; }
-
-        /* Subtle scan lines texture */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0,0,0,0.08) 2px,
-                rgba(0,0,0,0.08) 4px
-            );
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.3;
-        }
+        body::after { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 0; opacity: 0.3; }
     </style>
 </head>
-
 <body>
 
-    <!-- Ticker tape -->
-    <div class="ticker-wrap">
-        <div class="ticker-inner">
-            <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-            <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
-            <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
-            <span class="ticker-item">TV Install Chicago</span><span class="ticker-dot"></span>
-            <span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span>
-            <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
-            <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-            <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
-            <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
-            <span class="ticker-item">TV Install Chicago</span><span class="ticker-dot"></span>
-            <span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span>
-            <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+<div class="ticker-wrap">
+    <div class="ticker-inner">
+        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
+        <span class="ticker-item">TV Install Chicago</span><span class="ticker-dot"></span>
+        <span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
+        <span class="ticker-item">TV Install Chicago</span><span class="ticker-dot"></span>
+        <span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+    </div>
+</div>
+
+<div id="mainContent">
+
+    <section class="hero-section px-6 py-16 md:py-24">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-12">
+                <div class="flex-1 text-center md:text-left">
+                    <p class="hero-sub mb-4">TV Install Chicago — The Promise</p>
+                    <div class="hero-number">$100</div>
+                    <div class="hero-tagline mt-4">ANY TV.<br>ANY SIZE.<br>ALWAYS.</div>
+                    <p class="mt-6 max-w-sm mx-auto md:mx-0" style="font-size:15px; line-height:1.7; color: var(--slate-light);">
+                        One flat rate. No surprises. Whether it's a 32" bedroom set or an 85" living room beast — the price never changes.
+                    </p>
+                </div>
+                <div class="flex-shrink-0 text-center">
+                    <img src="goldtvlogo.webp" alt="TV Install Chicago" class="h-40 w-auto mx-auto" style="mix-blend-mode: lighten;">
+                    <p class="mt-3 text-xs uppercase tracking-widest" style="color: var(--gold); font-weight: 700;">TV Install Chicago</p>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <div class="promise-strip">
+        <div class="promise-item"><div class="promise-number">$100</div><div class="promise-label">Every TV, Every Time</div></div>
+        <div class="promise-item"><div class="promise-number">0</div><div class="promise-label">Hidden Fees, Ever</div></div>
+        <div class="promise-item"><div class="promise-number">100%</div><div class="promise-label">Level. Guaranteed.</div></div>
     </div>
 
-    <div id="mainContent">
+    <div class="max-w-4xl mx-auto px-4 py-12 space-y-8">
 
-        <!-- HERO -->
-        <section class="hero-section px-6 py-16 md:py-24">
-            <div class="max-w-5xl mx-auto">
-                <div class="flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-12">
-                    <div class="flex-1 text-center md:text-left">
-                        <p class="hero-sub mb-4">TV Install Chicago — The Promise</p>
-                        <div class="hero-number">$100</div>
-                        <div class="hero-tagline mt-4">
-                            ANY TV.<br>ANY SIZE.<br>ALWAYS.
-                        </div>
-                        <p class="mt-6 text-slate-400 max-w-sm mx-auto md:mx-0" style="font-size:15px; line-height:1.7;">
-                            One flat rate. No surprises. Whether it's a 32" bedroom set or an 85" living room beast — the price never changes.
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0 text-center">
-                        <img src="goldtvlogo.webp" alt="TV Install Chicago" class="h-40 w-auto mx-auto" style="mix-blend-mode: lighten;">
-                        <p class="mt-3 text-xs uppercase tracking-widest" style="color: var(--gold); font-weight: 700;">TV Install Chicago</p>
-                    </div>
+        <div class="price-board">
+            <div class="board-header">
+                <span class="bebas" style="font-size:22px;">The $100 Promise</span>
+                <span class="board-number-badge">ALL SIZES INCLUDED</span>
+            </div>
+            <div class="hundred-display m-6 rounded-sm">
+                <div class="hundred-big">$100</div>
+                <p class="mt-3 text-sm font-semibold uppercase tracking-widest" style="color: var(--gold-light);">Per TV Installation — Any Size</p>
+                <p class="mt-2 text-xs" style="color: var(--slate-light); letter-spacing: 0.06em;">Up to 42" · 43–55" · 56–70" · 71–85" · 86"+ · All $100</p>
+                <div class="mt-4 inline-flex items-start gap-2 px-4 py-3 rounded-sm text-left" style="background: rgba(200,169,74,0.08); border: 1px solid rgba(200,169,74,0.2); max-width: 420px;">
+                    <span style="color: var(--gold); font-size:16px; flex-shrink:0; margin-top:1px;">⚠</span>
+                    <p class="text-xs" style="color: rgba(245,240,232,0.7); line-height:1.6;">The <strong style="color: var(--gold);">$100 flat rate</strong> applies when the customer agrees to assist with lifting on larger TVs (56"+). We handle placement, leveling, and all hardware — we just need an extra set of hands for the heavy lift.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- PROMISE STRIP -->
-        <div class="promise-strip">
-            <div class="promise-item">
-                <div class="promise-number">$100</div>
-                <div class="promise-label">Every TV, Every Time</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-number">0</div>
-                <div class="promise-label">Hidden Fees, Ever</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-number">100%</div>
-                <div class="promise-label">Level. Guaranteed.</div>
+            <div class="section-head">Mount Type — You Choose</div>
+            <div class="line-item"><div><div class="line-item-name">Fixed Mount</div><div class="line-item-desc">Flush to the wall. Clean. Simple.</div></div><div class="line-price">+$50</div></div>
+            <div class="line-item"><div><div class="line-item-name">Tilting Mount</div><div class="line-item-desc">Angle it down from your couch.</div></div><div class="line-price">+$50</div></div>
+            <div class="line-item"><div><div class="line-item-name">Full Motion Mount</div><div class="line-item-desc">Swivel. Extend. Perfect from anywhere.</div></div><div class="line-price">+$65</div></div>
+
+            <div class="section-head">Wire Concealment — Your Call</div>
+            <div class="line-item"><div><div class="line-item-name">No Concealment</div><div class="line-item-desc">Standard clean install.</div></div><div class="line-price included">Included</div></div>
+            <div class="line-item"><div><div class="line-item-name">External Cable Strip</div><div class="line-item-desc">Tidy channels along the wall.</div></div><div class="line-price">+$35</div></div>
+            <div class="line-item"><div><div class="line-item-name">In-Wall Concealment</div><div class="line-item-desc">Zero visible wires. Magazine-worthy.</div></div><div class="line-price">+$60</div></div>
+            <div class="line-item"><div><div class="line-item-name">Electrical Outlet Install</div><div class="line-item-desc">Hidden power right behind the TV.</div></div><div class="line-price">+$250</div></div>
+
+            <div class="section-head">Soundbar — Optional Add-On</div>
+            <div class="line-item" style="border-bottom:none;"><div><div class="line-item-name">Soundbar Mounting</div><div class="line-item-desc">Mounted perfectly below your display.</div></div><div class="line-price">+$60</div></div>
+
+            <div class="m-6 mt-2 rounded-sm p-4 text-sm" style="background: rgba(200,169,74,0.07); border-left: 3px solid var(--gold); color: var(--slate-light);">
+                ✓ Every install includes level mounting &amp; full debris cleanup.
             </div>
         </div>
 
-        <div class="max-w-4xl mx-auto px-4 py-12 space-y-8">
-
-            <!-- PRICING BOARD -->
-            <div class="price-board">
-                <div class="board-header">
-                    <span class="bebas" style="font-size:22px;">The $100 Promise</span>
-                    <span class="board-number-badge">ALL SIZES INCLUDED</span>
-                </div>
-
-                <!-- Big center display -->
-                <div class="hundred-display m-6 rounded-sm">
-                    <div class="hundred-big">$100</div>
-                    <p class="mt-3 text-sm font-semibold uppercase tracking-widest" style="color: var(--gold-light);">Per TV Installation — Any Size</p>
-                    <p class="mt-2 text-xs" style="color: var(--slate-light); letter-spacing: 0.06em;">Up to 42" · 43–55" · 56–70" · 71–85" · 86"+ · All $100</p>
-                    <div class="mt-4 inline-flex items-start gap-2 px-4 py-3 rounded-sm text-left" style="background: rgba(200,169,74,0.08); border: 1px solid rgba(200,169,74,0.2); max-width: 420px;">
-                        <span style="color: var(--gold); font-size:16px; flex-shrink:0; margin-top:1px;">⚠</span>
-                        <p class="text-xs" style="color: rgba(245,240,232,0.7); line-height:1.6;">The <strong style="color: var(--gold);">$100 flat rate</strong> applies when the customer agrees to assist with lifting on larger TVs (56"+). We handle placement, leveling, and all hardware — we just need an extra set of hands for the heavy lift.</p>
-                    </div>
-                </div>
-
-                <!-- Mount Options -->
-                <div class="section-head">Mount Type — You Choose</div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">Fixed Mount</div>
-                        <div class="line-item-desc">Flush to the wall. Clean. Simple.</div>
-                    </div>
-                    <div class="line-price gold">+$50</div>
-                </div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">Tilting Mount</div>
-                        <div class="line-item-desc">Angle it down from your couch.</div>
-                    </div>
-                    <div class="line-price gold">+$50</div>
-                </div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">Full Motion Mount</div>
-                        <div class="line-item-desc">Swivel. Extend. Perfect from anywhere.</div>
-                    </div>
-                    <div class="line-price gold">+$65</div>
-                </div>
-
-                <!-- Wire Concealment -->
-                <div class="section-head">Wire Concealment — Your Call</div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">No Concealment</div>
-                        <div class="line-item-desc">Standard clean install.</div>
-                    </div>
-                    <div class="line-price included">Included</div>
-                </div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">External Cable Strip</div>
-                        <div class="line-item-desc">Tidy channels along the wall.</div>
-                    </div>
-                    <div class="line-price gold">+$35</div>
-                </div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">In-Wall Concealment</div>
-                        <div class="line-item-desc">Zero visible wires. Magazine-worthy.</div>
-                    </div>
-                    <div class="line-price gold">+$60</div>
-                </div>
-                <div class="line-item">
-                    <div>
-                        <div class="line-item-name">Electrical Outlet Install</div>
-                        <div class="line-item-desc">Hidden power right behind the TV.</div>
-                    </div>
-                    <div class="line-price gold">+$250</div>
-                </div>
-
-                <!-- Soundbar -->
-                <div class="section-head">Soundbar — Optional Add-On</div>
-                <div class="line-item" style="border-bottom: none;">
-                    <div>
-                        <div class="line-item-name">Soundbar Mounting</div>
-                        <div class="line-item-desc">Mounted perfectly below your display.</div>
-                    </div>
-                    <div class="line-price gold">+$60</div>
-                </div>
-
-                <div class="m-6 mt-2 rounded-sm p-4 text-sm" style="background: rgba(200,169,74,0.07); border-left: 3px solid var(--gold); color: var(--slate-light);">
-                    ✓ Every install includes level mounting &amp; full debris cleanup.
-                </div>
+        <div class="form-card">
+            <div class="form-card-header">
+                <span class="bebas" style="font-size:24px;">Book Your $100 Install</span>
+                <p class="text-xs font-semibold uppercase tracking-widest mt-1" style="opacity:0.65;">Fill out below — we'll confirm within hours</p>
             </div>
 
-            <!-- BOOKING FORM -->
-            <div class="form-card">
-                <div class="form-card-header">
-                    <span class="bebas" style="font-size:24px;">Book Your $100 Install</span>
-                    <p class="text-xs font-semibold uppercase tracking-widest mt-1" style="opacity:0.65;">Fill out below — we'll confirm within hours</p>
+            <div class="p-6 md:p-8 space-y-6">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div><label>Full Name *</label><input type="text" id="name" required class="field-input" placeholder="Your full name"></div>
+                    <div><label>Phone Number *</label><input type="tel" id="phone" required class="field-input" placeholder="(555) 123-4567"></div>
+                </div>
+                <div><label>Email Address *</label><input type="email" id="email" required class="field-input" placeholder="your@email.com"></div>
+                <div><label>Service Address *</label><input type="text" id="address" required class="field-input" placeholder="123 Main St, City, State ZIP"></div>
+
+                <div>
+                    <label>Number of TVs *</label>
+                    <select id="numTvs" required onchange="updateTvForms(); calculateTotal()" class="field-input">
+                        <option value="1">1 TV — $100</option>
+                        <option value="2">2 TVs — $200 Total</option>
+                        <option value="3">3 TVs — $300 Total</option>
+                        <option value="4">4 TVs — $400 Total</option>
+                        <option value="5">5+ TVs — Call for Quote</option>
+                    </select>
                 </div>
 
-                <div class="p-6 md:p-8 space-y-6">
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label>Full Name *</label>
-                            <input type="text" id="name" required class="field-input" placeholder="Your full name">
-                        </div>
-                        <div>
-                            <label>Phone Number *</label>
-                            <input type="tel" id="phone" required class="field-input" placeholder="(555) 123-4567">
-                        </div>
+                <!-- TV 1 -->
+                <div id="tv1-section" class="tv-block">
+                    <div class="tv-block-header"><div class="tv-num-badge">1</div><div class="tv-block-title">First TV</div><div class="tv-block-price">$100</div></div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label>TV Size *</label>
+                            <select id="tvSize1" required onchange="calculateTotal()" class="field-input">
+                                <option value="">Select size</option>
+                                <option value="up-to-42" data-price="100">Up to 42" — $100</option>
+                                <option value="43-55" data-price="100">43"–55" — $100</option>
+                                <option value="56-70" data-price="100">56"–70" — $100</option>
+                                <option value="71-85" data-price="100">71"–85" — $100</option>
+                                <option value="86-plus" data-price="100">86"+ — $100</option>
+                            </select></div>
+                        <div><label>Mount Type *</label>
+                            <select id="mountType1" required onchange="calculateTotal()" class="field-input">
+                                <option value="">Select mount</option>
+                                <option value="own" data-price="0">Own Mount — +$0</option>
+                                <option value="fixed" data-price="50">Fixed — +$50</option>
+                                <option value="tilt" data-price="50">Tilting — +$50</option>
+                                <option value="full" data-price="65">Full Motion — +$65</option>
+                            </select></div>
+                        <div><label>Wire Concealment *</label>
+                            <select id="wireConcealment1" required onchange="calculateTotal()" class="field-input">
+                                <option value="">Select option</option>
+                                <option value="none" data-price="0">None — Included</option>
+                                <option value="external" data-price="35">External Strip — +$35</option>
+                                <option value="inwall" data-price="60">In-Wall — +$60</option>
+                                <option value="outlet" data-price="250">Outlet Install — +$250</option>
+                            </select></div>
+                        <div><label>Soundbar Mounting</label>
+                            <select id="soundbar1" onchange="calculateTotal()" class="field-input">
+                                <option value="no" data-price="0">No soundbar</option>
+                                <option value="yes" data-price="60">Yes — +$60</option>
+                            </select></div>
                     </div>
+                </div>
 
-                    <div>
-                        <label>Email Address *</label>
-                        <input type="email" id="email" required class="field-input" placeholder="your@email.com">
+                <!-- TV 2 -->
+                <div id="tv2-section" class="hidden tv-block">
+                    <div class="tv-block-header"><div class="tv-num-badge">2</div><div class="tv-block-title">Second TV</div><div class="tv-block-price">$100</div></div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label>TV Size *</label>
+                            <select id="tvSize2" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select size</option>
+                                <option value="up-to-42" data-price="100">Up to 42" — $100</option>
+                                <option value="43-55" data-price="100">43"–55" — $100</option>
+                                <option value="56-70" data-price="100">56"–70" — $100</option>
+                                <option value="71-85" data-price="100">71"–85" — $100</option>
+                                <option value="86-plus" data-price="100">86"+ — $100</option>
+                            </select></div>
+                        <div><label>Mount Type *</label>
+                            <select id="mountType2" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select mount</option>
+                                <option value="own" data-price="0">Own Mount — +$0</option>
+                                <option value="fixed" data-price="50">Fixed — +$50</option>
+                                <option value="tilt" data-price="50">Tilting — +$50</option>
+                                <option value="full" data-price="65">Full Motion — +$65</option>
+                            </select></div>
+                        <div><label>Wire Concealment *</label>
+                            <select id="wireConcealment2" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select option</option>
+                                <option value="none" data-price="0">None — Included</option>
+                                <option value="external" data-price="35">External Strip — +$35</option>
+                                <option value="inwall" data-price="60">In-Wall — +$60</option>
+                                <option value="outlet" data-price="250">Outlet Install — +$250</option>
+                            </select></div>
+                        <div><label>Soundbar Mounting</label>
+                            <select id="soundbar2" onchange="calculateTotal()" class="field-input">
+                                <option value="no" data-price="0">No soundbar</option>
+                                <option value="yes" data-price="60">Yes — +$60</option>
+                            </select></div>
                     </div>
+                </div>
 
-                    <div>
-                        <label>Service Address *</label>
-                        <input type="text" id="address" required class="field-input" placeholder="123 Main St, City, State ZIP">
+                <!-- TV 3 -->
+                <div id="tv3-section" class="hidden tv-block">
+                    <div class="tv-block-header"><div class="tv-num-badge">3</div><div class="tv-block-title">Third TV</div><div class="tv-block-price">$100</div></div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label>TV Size *</label>
+                            <select id="tvSize3" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select size</option>
+                                <option value="up-to-42" data-price="100">Up to 42" — $100</option>
+                                <option value="43-55" data-price="100">43"–55" — $100</option>
+                                <option value="56-70" data-price="100">56"–70" — $100</option>
+                                <option value="71-85" data-price="100">71"–85" — $100</option>
+                                <option value="86-plus" data-price="100">86"+ — $100</option>
+                            </select></div>
+                        <div><label>Mount Type *</label>
+                            <select id="mountType3" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select mount</option>
+                                <option value="own" data-price="0">Own Mount — +$0</option>
+                                <option value="fixed" data-price="50">Fixed — +$50</option>
+                                <option value="tilt" data-price="50">Tilting — +$50</option>
+                                <option value="full" data-price="65">Full Motion — +$65</option>
+                            </select></div>
+                        <div><label>Wire Concealment *</label>
+                            <select id="wireConcealment3" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select option</option>
+                                <option value="none" data-price="0">None — Included</option>
+                                <option value="external" data-price="35">External Strip — +$35</option>
+                                <option value="inwall" data-price="60">In-Wall — +$60</option>
+                                <option value="outlet" data-price="250">Outlet Install — +$250</option>
+                            </select></div>
+                        <div><label>Soundbar Mounting</label>
+                            <select id="soundbar3" onchange="calculateTotal()" class="field-input">
+                                <option value="no" data-price="0">No soundbar</option>
+                                <option value="yes" data-price="60">Yes — +$60</option>
+                            </select></div>
                     </div>
+                </div>
 
+                <!-- TV 4 -->
+                <div id="tv4-section" class="hidden tv-block">
+                    <div class="tv-block-header"><div class="tv-num-badge">4</div><div class="tv-block-title">Fourth TV</div><div class="tv-block-price">$100</div></div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label>TV Size *</label>
+                            <select id="tvSize4" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select size</option>
+                                <option value="up-to-42" data-price="100">Up to 42" — $100</option>
+                                <option value="43-55" data-price="100">43"–55" — $100</option>
+                                <option value="56-70" data-price="100">56"–70" — $100</option>
+                                <option value="71-85" data-price="100">71"–85" — $100</option>
+                                <option value="86-plus" data-price="100">86"+ — $100</option>
+                            </select></div>
+                        <div><label>Mount Type *</label>
+                            <select id="mountType4" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select mount</option>
+                                <option value="own" data-price="0">Own Mount — +$0</option>
+                                <option value="fixed" data-price="50">Fixed — +$50</option>
+                                <option value="tilt" data-price="50">Tilting — +$50</option>
+                                <option value="full" data-price="65">Full Motion — +$65</option>
+                            </select></div>
+                        <div><label>Wire Concealment *</label>
+                            <select id="wireConcealment4" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select option</option>
+                                <option value="none" data-price="0">None — Included</option>
+                                <option value="external" data-price="35">External Strip — +$35</option>
+                                <option value="inwall" data-price="60">In-Wall — +$60</option>
+                                <option value="outlet" data-price="250">Outlet Install — +$250</option>
+                            </select></div>
+                        <div><label>Soundbar Mounting</label>
+                            <select id="soundbar4" onchange="calculateTotal()" class="field-input">
+                                <option value="no" data-price="0">No soundbar</option>
+                                <option value="yes" data-price="60">Yes — +$60</option>
+                            </select></div>
+                    </div>
+                </div>
+
+                <!-- TV 5 -->
+                <div id="tv5-section" class="hidden tv-block">
+                    <div class="tv-block-header"><div class="tv-num-badge">5</div><div class="tv-block-title">Additional TVs</div><div class="tv-block-price">$100 ea.</div></div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label>TV Size *</label>
+                            <select id="tvSize5" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select size</option>
+                                <option value="up-to-42" data-price="100">Up to 42" — $100</option>
+                                <option value="43-55" data-price="100">43"–55" — $100</option>
+                                <option value="56-70" data-price="100">56"–70" — $100</option>
+                                <option value="71-85" data-price="100">71"–85" — $100</option>
+                                <option value="86-plus" data-price="100">86"+ — $100</option>
+                            </select></div>
+                        <div><label>Mount Type *</label>
+                            <select id="mountType5" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select mount</option>
+                                <option value="own" data-price="0">Own Mount — +$0</option>
+                                <option value="fixed" data-price="50">Fixed — +$50</option>
+                                <option value="tilt" data-price="50">Tilting — +$50</option>
+                                <option value="full" data-price="65">Full Motion — +$65</option>
+                            </select></div>
+                        <div><label>Wire Concealment *</label>
+                            <select id="wireConcealment5" onchange="calculateTotal()" class="field-input">
+                                <option value="">Select option</option>
+                                <option value="none" data-price="0">None — Included</option>
+                                <option value="external" data-price="35">External Strip — +$35</option>
+                                <option value="inwall" data-price="60">In-Wall — +$60</option>
+                                <option value="outlet" data-price="250">Outlet Install — +$250</option>
+                            </select></div>
+                        <div><label>Soundbar Mounting</label>
+                            <select id="soundbar5" onchange="calculateTotal()" class="field-input">
+                                <option value="no" data-price="0">No soundbar</option>
+                                <option value="yes" data-price="60">Yes — +$60</option>
+                            </select></div>
+                    </div>
+                    <p class="px-5 pb-5 text-xs" style="color: var(--slate-light);">For more than 5 TVs, use the notes field below.</p>
+                </div>
+
+                <!-- TOTAL -->
+                <div id="priceTotal" class="hidden total-bar">
                     <div>
-                        <label>Number of TVs *</label>
-                        <select id="numTvs" required onchange="updateTvForms(); calculateTotal()" class="field-input">
-                            <option value="1">1 TV — $100</option>
-                            <option value="2">2 TVs — $200 Total</option>
-                            <option value="3">3 TVs — $300 Total</option>
-                            <option value="4">4 TVs — $400 Total</option>
-                            <option value="5">5+ TVs — Call for Quote</option>
+                        <div class="total-label">Your Total</div>
+                        <div class="total-sub">All-inclusive · No hidden fees</div>
+                    </div>
+                    <div class="total-amount" id="totalAmount">$0</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div><label>Preferred Date *</label><input type="date" id="preferredDate" required class="field-input"></div>
+                    <div>
+                        <label>Preferred Time *</label>
+                        <select id="preferredTime" required class="field-input">
+                            <option value="">Select window</option>
+                            <option value="8:00 AM - 10:00 AM">8:00 AM – 10:00 AM</option>
+                            <option value="10:00 AM - 12:00 PM">10:00 AM – 12:00 PM</option>
+                            <option value="12:00 PM - 2:00 PM">12:00 PM – 2:00 PM</option>
+                            <option value="2:00 PM - 4:00 PM">2:00 PM – 4:00 PM</option>
+                            <option value="4:00 PM - 6:00 PM">4:00 PM – 6:00 PM</option>
                         </select>
                     </div>
-
-                    <!-- TV 1 -->
-                    <div id="tv1-section" class="tv-block">
-                        <div class="tv-block-header">
-                            <div class="tv-num-badge">1</div>
-                            <div class="tv-block-title">First TV</div>
-                            <div class="tv-block-price">$100</div>
-                        </div>
-                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label>TV Size *</label>
-                                <select id="tvSize1" required onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select size</option>
-                                    <option value="up-to-42" data-price="100">Up to 42" — $100</option>
-                                    <option value="43-55" data-price="100">43"–55" — $100</option>
-                                    <option value="56-70" data-price="100">56"–70" — $100</option>
-                                    <option value="71-85" data-price="100">71"–85" — $100</option>
-                                    <option value="86-plus" data-price="100">86"+ — $100</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Mount Type *</label>
-                                <select id="mountType1" required onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select mount</option>
-                                    <option value="own" data-price="0">Own Mount — +$0</option>
-                                    <option value="fixed" data-price="50">Fixed — +$50</option>
-                                    <option value="tilt" data-price="50">Tilting — +$50</option>
-                                    <option value="full" data-price="65">Full Motion — +$65</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Wire Concealment *</label>
-                                <select id="wireConcealment1" required onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select option</option>
-                                    <option value="none" data-price="0">None — Included</option>
-                                    <option value="external" data-price="35">External Strip — +$35</option>
-                                    <option value="inwall" data-price="60">In-Wall — +$60</option>
-                                    <option value="outlet" data-price="250">Outlet Install — +$250</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Soundbar Mounting</label>
-                                <select id="soundbar1" onchange="calculateTotal()" class="field-input">
-                                    <option value="no" data-price="0">No soundbar</option>
-                                    <option value="yes" data-price="60">Yes — +$60</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TV 2 -->
-                    <div id="tv2-section" class="hidden tv-block">
-                        <div class="tv-block-header">
-                            <div class="tv-num-badge">2</div>
-                            <div class="tv-block-title">Second TV</div>
-                            <div class="tv-block-price">$100</div>
-                        </div>
-                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label>TV Size *</label>
-                                <select id="tvSize2" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select size</option>
-                                    <option value="up-to-42" data-price="100">Up to 42" — $100</option>
-                                    <option value="43-55" data-price="100">43"–55" — $100</option>
-                                    <option value="56-70" data-price="100">56"–70" — $100</option>
-                                    <option value="71-85" data-price="100">71"–85" — $100</option>
-                                    <option value="86-plus" data-price="100">86"+ — $100</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Mount Type *</label>
-                                <select id="mountType2" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select mount</option>
-                                    <option value="own" data-price="0">Own Mount — +$0</option>
-                                    <option value="fixed" data-price="50">Fixed — +$50</option>
-                                    <option value="tilt" data-price="50">Tilting — +$50</option>
-                                    <option value="full" data-price="65">Full Motion — +$65</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Wire Concealment *</label>
-                                <select id="wireConcealment2" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select option</option>
-                                    <option value="none" data-price="0">None — Included</option>
-                                    <option value="external" data-price="35">External Strip — +$35</option>
-                                    <option value="inwall" data-price="60">In-Wall — +$60</option>
-                                    <option value="outlet" data-price="250">Outlet Install — +$250</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Soundbar Mounting</label>
-                                <select id="soundbar2" onchange="calculateTotal()" class="field-input">
-                                    <option value="no" data-price="0">No soundbar</option>
-                                    <option value="yes" data-price="60">Yes — +$60</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TV 3 -->
-                    <div id="tv3-section" class="hidden tv-block">
-                        <div class="tv-block-header">
-                            <div class="tv-num-badge">3</div>
-                            <div class="tv-block-title">Third TV</div>
-                            <div class="tv-block-price">$100</div>
-                        </div>
-                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label>TV Size *</label>
-                                <select id="tvSize3" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select size</option>
-                                    <option value="up-to-42" data-price="100">Up to 42" — $100</option>
-                                    <option value="43-55" data-price="100">43"–55" — $100</option>
-                                    <option value="56-70" data-price="100">56"–70" — $100</option>
-                                    <option value="71-85" data-price="100">71"–85" — $100</option>
-                                    <option value="86-plus" data-price="100">86"+ — $100</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Mount Type *</label>
-                                <select id="mountType3" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select mount</option>
-                                    <option value="own" data-price="0">Own Mount — +$0</option>
-                                    <option value="fixed" data-price="50">Fixed — +$50</option>
-                                    <option value="tilt" data-price="50">Tilting — +$50</option>
-                                    <option value="full" data-price="65">Full Motion — +$65</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Wire Concealment *</label>
-                                <select id="wireConcealment3" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select option</option>
-                                    <option value="none" data-price="0">None — Included</option>
-                                    <option value="external" data-price="35">External Strip — +$35</option>
-                                    <option value="inwall" data-price="60">In-Wall — +$60</option>
-                                    <option value="outlet" data-price="250">Outlet Install — +$250</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Soundbar Mounting</label>
-                                <select id="soundbar3" onchange="calculateTotal()" class="field-input">
-                                    <option value="no" data-price="0">No soundbar</option>
-                                    <option value="yes" data-price="60">Yes — +$60</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TV 4 -->
-                    <div id="tv4-section" class="hidden tv-block">
-                        <div class="tv-block-header">
-                            <div class="tv-num-badge">4</div>
-                            <div class="tv-block-title">Fourth TV</div>
-                            <div class="tv-block-price">$100</div>
-                        </div>
-                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label>TV Size *</label>
-                                <select id="tvSize4" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select size</option>
-                                    <option value="up-to-42" data-price="100">Up to 42" — $100</option>
-                                    <option value="43-55" data-price="100">43"–55" — $100</option>
-                                    <option value="56-70" data-price="100">56"–70" — $100</option>
-                                    <option value="71-85" data-price="100">71"–85" — $100</option>
-                                    <option value="86-plus" data-price="100">86"+ — $100</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Mount Type *</label>
-                                <select id="mountType4" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select mount</option>
-                                    <option value="own" data-price="0">Own Mount — +$0</option>
-                                    <option value="fixed" data-price="50">Fixed — +$50</option>
-                                    <option value="tilt" data-price="50">Tilting — +$50</option>
-                                    <option value="full" data-price="65">Full Motion — +$65</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Wire Concealment *</label>
-                                <select id="wireConcealment4" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select option</option>
-                                    <option value="none" data-price="0">None — Included</option>
-                                    <option value="external" data-price="35">External Strip — +$35</option>
-                                    <option value="inwall" data-price="60">In-Wall — +$60</option>
-                                    <option value="outlet" data-price="250">Outlet Install — +$250</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Soundbar Mounting</label>
-                                <select id="soundbar4" onchange="calculateTotal()" class="field-input">
-                                    <option value="no" data-price="0">No soundbar</option>
-                                    <option value="yes" data-price="60">Yes — +$60</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TV 5 -->
-                    <div id="tv5-section" class="hidden tv-block">
-                        <div class="tv-block-header">
-                            <div class="tv-num-badge">5</div>
-                            <div class="tv-block-title">Additional TVs</div>
-                            <div class="tv-block-price">$100 ea.</div>
-                        </div>
-                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label>TV Size *</label>
-                                <select id="tvSize5" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select size</option>
-                                    <option value="up-to-42" data-price="100">Up to 42" — $100</option>
-                                    <option value="43-55" data-price="100">43"–55" — $100</option>
-                                    <option value="56-70" data-price="100">56"–70" — $100</option>
-                                    <option value="71-85" data-price="100">71"–85" — $100</option>
-                                    <option value="86-plus" data-price="100">86"+ — $100</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Mount Type *</label>
-                                <select id="mountType5" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select mount</option>
-                                    <option value="own" data-price="0">Own Mount — +$0</option>
-                                    <option value="fixed" data-price="50">Fixed — +$50</option>
-                                    <option value="tilt" data-price="50">Tilting — +$50</option>
-                                    <option value="full" data-price="65">Full Motion — +$65</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Wire Concealment *</label>
-                                <select id="wireConcealment5" onchange="calculateTotal()" class="field-input">
-                                    <option value="">Select option</option>
-                                    <option value="none" data-price="0">None — Included</option>
-                                    <option value="external" data-price="35">External Strip — +$35</option>
-                                    <option value="inwall" data-price="60">In-Wall — +$60</option>
-                                    <option value="outlet" data-price="250">Outlet Install — +$250</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Soundbar Mounting</label>
-                                <select id="soundbar5" onchange="calculateTotal()" class="field-input">
-                                    <option value="no" data-price="0">No soundbar</option>
-                                    <option value="yes" data-price="60">Yes — +$60</option>
-                                </select>
-                            </div>
-                        </div>
-                        <p class="px-5 pb-5 text-xs" style="color: var(--slate-light); letter-spacing:0.05em;">For more than 5 TVs, use the notes field below.</p>
-                    </div>
-
-                    <!-- TOTAL -->
-                    <div id="priceTotal" class="hidden total-bar">
-                        <div>
-                            <div class="label-text">Your Total</div>
-                            <div class="sub-text">All-inclusive · No hidden fees</div>
-                        </div>
-                        <div class="amount-text" id="totalAmount">$0</div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label>Preferred Date *</label>
-                            <input type="date" id="preferredDate" required class="field-input">
-                        </div>
-                        <div>
-                            <label>Preferred Time *</label>
-                            <select id="preferredTime" required class="field-input">
-                                <option value="">Select window</option>
-                                <option value="8:00 AM - 10:00 AM">8:00 AM – 10:00 AM</option>
-                                <option value="10:00 AM - 12:00 PM">10:00 AM – 12:00 PM</option>
-                                <option value="12:00 PM - 2:00 PM">12:00 PM – 2:00 PM</option>
-                                <option value="2:00 PM - 4:00 PM">2:00 PM – 4:00 PM</option>
-                                <option value="4:00 PM - 6:00 PM">4:00 PM – 6:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label>Additional Notes</label>
-                        <textarea id="additionalNotes" rows="3" class="field-input" placeholder="Anything we should know? Multiple rooms, complex walls, special requirements..."></textarea>
-                    </div>
-
-                    <!-- Lifting Agreement -->
-                    <div id="liftingAgreement" class="rounded-sm p-5" style="background: rgba(200,169,74,0.07); border: 1px solid rgba(200,169,74,0.3);">
-                        <label class="flex items-start gap-3 cursor-pointer" style="text-transform:none; letter-spacing:0; font-size:14px; color: var(--paper); font-weight: 400; margin:0;">
-                            <input type="checkbox" id="liftingConsent" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color: var(--gold); cursor:pointer;">
-                            <span style="line-height:1.6;">
-                                <strong style="color: var(--gold); display:block; font-size:12px; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Lifting Assistance Agreement *</strong>
-                                I understand that for larger TVs (56"+), the <strong style="color:var(--gold);">$100 flat rate</strong> applies when I agree to assist with lifting during installation. The installer handles all mounting, leveling, and hardware — I just provide an extra set of hands for the heavy lift when needed.
-                            </span>
-                        </label>
-                    </div>
-
-                    <button type="button" onclick="submitBooking()" class="cta-btn">
-                        <span>📺 Book My $100 Install →</span>
-                    </button>
                 </div>
-            </div>
 
-        </div>
+                <div><label>Additional Notes</label><textarea id="additionalNotes" rows="3" class="field-input" placeholder="Anything we should know? Multiple rooms, complex walls, special requirements..."></textarea></div>
 
-        <!-- FOOTER -->
-        <footer class="site-footer">
-            <div class="divider-line" style="max-width:400px; margin: 0 auto 28px;"></div>
-            <p class="bebas" style="font-size:32px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
-            <p class="text-xs uppercase tracking-widest mt-1" style="color: var(--slate-light);">$100 Flat Rate · Any TV · Any Size · Always</p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
-                <a href="tel:+13129317096" class="contact-pill">📞 (312) 931-7096</a>
-                <a href="/cdn-cgi/l/email-protection#fd898b94938e899c91919e95949e9c9a92bd9a909c9491d39e9290" class="contact-pill">✉ <span class="__cf_email__" data-cfemail="4733312e293433262b2b242f2e2426202807202a262e2b6924282a">[email&#160;protected]</span></a>
-            </div>
-            <p class="mt-8 text-xs" style="color: rgba(200,169,74,0.3); letter-spacing:0.05em;">© TV Install Chicago · The $100 Promise</p>
-        </footer>
+                <!-- LIFTING AGREEMENT -->
+                <div id="liftingBox" style="background: rgba(200,169,74,0.07); border: 1px solid rgba(200,169,74,0.3); border-radius: 3px; padding: 20px;">
+                    <div style="display:flex; align-items:flex-start; gap:12px;">
+                        <input type="checkbox" id="liftingConsent" style="width:18px; height:18px; flex-shrink:0; margin-top:3px; accent-color: var(--gold); cursor:pointer;">
+                        <div>
+                            <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color: var(--gold); margin-bottom:6px;">Lifting Assistance Agreement *</p>
+                            <p style="font-size:14px; color: var(--paper); line-height:1.6;">I understand that for larger TVs (56"+), the <strong style="color:var(--gold);">$100 flat rate</strong> applies when I agree to assist with lifting during installation. The installer handles all mounting, leveling, and hardware — I just provide an extra set of hands for the heavy lift when needed.</p>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
-
-    <!-- SUCCESS SCREEN -->
-    <div id="successScreen" class="hidden min-h-screen flex items-center justify-center p-4" style="background: var(--ink);">
-        <div class="success-card">
-            <div class="success-header">
-                <p class="bebas" style="font-size:14px; letter-spacing:0.15em; opacity:0.6;">TV Install Chicago</p>
-                <div class="bebas" style="font-size:64px; line-height:1; letter-spacing:-0.01em;">YOU'RE BOOKED</div>
-                <p style="font-size:13px; font-weight:600; letter-spacing:0.08em; opacity:0.7; margin-top:6px;">WE'LL SEE YOU SOON</p>
-            </div>
-            <div class="p-8">
-                <p class="text-sm" style="color: var(--slate-light); line-height:1.7;" id="successMessage"></p>
-                <div class="divider-line"></div>
-                <div id="bookingDetails" class="space-y-2"></div>
-                <div class="divider-line"></div>
-                <button onclick="downloadEstimate()" class="cta-btn">
-                    <span>📄 Download Estimate PDF →</span>
+                <button type="button" onclick="submitBooking()" class="cta-btn">
+                    📺 Book My $100 Install →
                 </button>
-                <p class="mt-4 text-center text-xs" style="color: rgba(200,169,74,0.45); letter-spacing:0.06em;">$100 FLAT RATE · NO HIDDEN FEES · TV INSTALL CHICAGO</p>
+
             </div>
         </div>
+
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+    <footer class="site-footer">
+        <div class="divider-line" style="max-width:400px; margin: 0 auto 28px;"></div>
+        <p class="bebas" style="font-size:32px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
+        <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">$100 Flat Rate · Any TV · Any Size · Always</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+            <a href="tel:+13129317096" class="contact-pill">📞 (312) 931-7096</a>
+            <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">✉ tvinstallchicago@gmail.com</a>
+        </div>
+        <p style="margin-top:32px; font-size:11px; color: rgba(200,169,74,0.3); letter-spacing:0.05em;">© TV Install Chicago · The $100 Promise</p>
+    </footer>
 
-        let estimateData = {};
+</div>
 
-        function generateEstimateNumber() {
-            const now = new Date();
-            return 'EST-' + now.getFullYear() + 
-                   String(now.getMonth() + 1).padStart(2, '0') + 
-                   String(now.getDate()).padStart(2, '0') + '-' +
-                   String(now.getHours()).padStart(2, '0') + 
-                   String(now.getMinutes()).padStart(2, '0') +
-                   String(now.getSeconds()).padStart(2, '0');
+<!-- SUCCESS SCREEN -->
+<div id="successScreen" class="hidden min-h-screen flex items-center justify-center p-4" style="background: var(--ink);">
+    <div class="success-card">
+        <div class="success-header">
+            <p class="bebas" style="font-size:14px; letter-spacing:0.15em; opacity:0.6;">TV Install Chicago</p>
+            <div class="bebas" style="font-size:64px; line-height:1; letter-spacing:-0.01em;">YOU'RE BOOKED</div>
+            <p style="font-size:13px; font-weight:600; letter-spacing:0.08em; opacity:0.7; margin-top:6px;">WE'LL SEE YOU SOON</p>
+        </div>
+        <div class="p-8">
+            <p id="successMessage" style="font-size:14px; color: var(--slate-light); line-height:1.7;"></p>
+            <div class="divider-line"></div>
+            <div id="bookingDetails"></div>
+            <div class="divider-line"></div>
+            <button type="button" onclick="downloadEstimate()" class="cta-btn">📄 Download Estimate PDF →</button>
+            <p style="margin-top:16px; text-align:center; font-size:11px; color: rgba(200,169,74,0.45); letter-spacing:0.06em;">$100 FLAT RATE · NO HIDDEN FEES · TV INSTALL CHICAGO</p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+var estimateData = {};
+
+function genEstNum() {
+    var n = new Date();
+    return 'EST-' + n.getFullYear() + pad(n.getMonth()+1) + pad(n.getDate()) + '-' + pad(n.getHours()) + pad(n.getMinutes()) + pad(n.getSeconds());
+}
+function pad(v) { return String(v).padStart(2,'0'); }
+
+function sizeLabel(v) { return {'up-to-42':'Up to 42"','43-55':'43"-55"','56-70':'56"-70"','71-85':'71"-85"','86-plus':'86"+'}[v]||v; }
+function mountLabel(v) { return {'own':"Customer's Own Mount",'fixed':'Fixed Mount','tilt':'Tilting Mount','full':'Full Motion Mount'}[v]||v; }
+function wireLabel(v) { return {'none':'No Wire Concealment','external':'External Strip','inwall':'In-Wall Concealment','outlet':'Electrical Outlet Installation'}[v]||v; }
+
+function updateTvForms() {
+    var num = parseInt(document.getElementById('numTvs').value);
+    for (var i = 2; i <= 5; i++) {
+        var sec = document.getElementById('tv'+i+'-section');
+        if (i <= num) {
+            sec.classList.remove('hidden');
+            sec.querySelectorAll('select').forEach(function(s){ s.required = true; });
+        } else {
+            sec.classList.add('hidden');
+            sec.querySelectorAll('select').forEach(function(s){ s.required = false; s.value = ''; });
         }
+    }
+}
 
-        function getTvSizeLabel(value) {
-            const labels = { 'up-to-42': 'Up to 42"', '43-55': '43"–55"', '56-70': '56"–70"', '71-85': '71"–85"', '86-plus': '86"+' };
-            return labels[value] || value;
+function calculateTotal() {
+    var num = parseInt(document.getElementById('numTvs').value);
+    var total = num * 100;
+    for (var i = 1; i <= num; i++) {
+        total += parseInt(document.getElementById('mountType'+i).selectedOptions[0].dataset.price||0);
+        total += parseInt(document.getElementById('wireConcealment'+i).selectedOptions[0].dataset.price||0);
+        total += parseInt(document.getElementById('soundbar'+i).selectedOptions[0].dataset.price||0);
+    }
+    var el = document.getElementById('priceTotal');
+    el.classList.remove('hidden');
+    document.getElementById('totalAmount').textContent = '$' + total;
+    return total;
+}
+
+function submitBooking() {
+    var name    = document.getElementById('name').value.trim();
+    var phone   = document.getElementById('phone').value.trim();
+    var email   = document.getElementById('email').value.trim();
+    var address = document.getElementById('address').value.trim();
+    var num     = parseInt(document.getElementById('numTvs').value);
+    var date    = document.getElementById('preferredDate').value;
+    var time    = document.getElementById('preferredTime').value;
+    var notes   = document.getElementById('additionalNotes').value.trim();
+
+    if (!name || !phone || !email || !address || !date || !time) {
+        alert('Please fill in all required fields marked with *');
+        return;
+    }
+    if (!document.getElementById('liftingConsent').checked) {
+        alert('Please confirm the lifting assistance agreement to proceed with the $100 flat rate.');
+        document.getElementById('liftingBox').scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+    }
+
+    var tvs = [];
+    for (var i = 1; i <= num; i++) {
+        var sz = document.getElementById('tvSize'+i).value;
+        var mt = document.getElementById('mountType'+i).value;
+        var wc = document.getElementById('wireConcealment'+i).value;
+        var sb = document.getElementById('soundbar'+i).value;
+        if (!sz || !mt || !wc) { alert('Please fill in all fields for TV ' + i); return; }
+        tvs.push({
+            size: sz, mount: mt, wire: wc, soundbar: sb,
+            sizePrice:     parseInt(document.getElementById('tvSize'+i).selectedOptions[0].dataset.price),
+            mountPrice:    parseInt(document.getElementById('mountType'+i).selectedOptions[0].dataset.price),
+            wirePrice:     parseInt(document.getElementById('wireConcealment'+i).selectedOptions[0].dataset.price),
+            soundbarPrice: parseInt(document.getElementById('soundbar'+i).selectedOptions[0].dataset.price)
+        });
+    }
+
+    var total = calculateTotal();
+    var estNum = genEstNum();
+    var today = new Date();
+    var created = today.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var valid   = new Date(today.getTime()+30*24*60*60*1000).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+    estimateData = { estimateNumber:estNum, createdDate:created, validUntil:valid, name:name, phone:phone, email:email, address:address, numTvs:num, tvs:tvs, preferredDate:date, preferredTime:time, notes:notes, total:total };
+
+    var tvDetails = '';
+    for (var j = 1; j <= num; j++) {
+        tvDetails += 'TV'+j+': Size='+document.getElementById('tvSize'+j).value+', Mount='+document.getElementById('mountType'+j).value+', Wire='+document.getElementById('wireConcealment'+j).value+', Soundbar='+document.getElementById('soundbar'+j).value+'; ';
+    }
+
+    var fd = new FormData();
+    fd.append('estimateNumber', estNum);
+    fd.append('name', name);
+    fd.append('phone', phone);
+    fd.append('email', email);
+    fd.append('address', address);
+    fd.append('numTvs', num);
+    fd.append('tvDetails', tvDetails);
+    fd.append('preferredDate', date);
+    fd.append('preferredTime', time);
+    fd.append('additionalNotes', notes);
+    fd.append('total', '$'+total);
+    fd.append('liftingAgreement', 'Confirmed — customer will assist with lifting on larger TVs');
+
+    fetch('https://formspree.io/f/xeoyyygd', {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+        if (res.ok) {
+            showSuccess(name, email, date, time, total, num, estNum);
+        } else {
+            alert('Submission error. Please try again or call us directly at (312) 931-7096.');
         }
-        function getMountLabel(value) {
-            const labels = { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount' };
-            return labels[value] || value;
-        }
-        function getWireLabel(value) {
-            const labels = { 'none': 'No Wire Concealment', 'external': 'External Strip', 'inwall': 'In-Wall Concealment', 'outlet': 'Electrical Outlet Installation' };
-            return labels[value] || value;
-        }
+    }).catch(function() {
+        alert('Network error. Please try again or call us directly at (312) 931-7096.');
+    });
+}
 
-        function downloadEstimate() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const pageWidth = doc.internal.pageSize.getWidth();
-            let y = 20;
+function showSuccess(name, email, date, time, total, num, estNum) {
+    document.getElementById('successMessage').textContent = 'Thank you, ' + name + '. Your booking request is in — we\'ll confirm within hours. Get ready for a perfect install.';
+    document.getElementById('bookingDetails').innerHTML =
+        '<p style="font-size:13px;color:#6B7E94;margin-bottom:8px;"><strong style="color:#F5F0E8;">Estimate #</strong> &nbsp;' + estNum + '</p>' +
+        '<p style="font-size:13px;color:#6B7E94;margin-bottom:8px;"><strong style="color:#F5F0E8;">TVs</strong> &nbsp;' + num + ' TV' + (num>1?'s':'') + '</p>' +
+        '<p style="font-size:13px;color:#6B7E94;margin-bottom:8px;"><strong style="color:#F5F0E8;">Date</strong> &nbsp;' + date + '</p>' +
+        '<p style="font-size:13px;color:#6B7E94;margin-bottom:8px;"><strong style="color:#F5F0E8;">Time</strong> &nbsp;' + time + '</p>' +
+        '<p style="font-size:13px;color:#6B7E94;margin-bottom:12px;"><strong style="color:#F5F0E8;">Email</strong> &nbsp;' + email + '</p>' +
+        '<p style="font-family:\'Bebas Neue\',sans-serif;font-size:36px;color:#C8A94A;letter-spacing:0.02em;border-top:1px solid rgba(200,169,74,0.2);padding-top:12px;">TOTAL: $' + total + '</p>';
+    document.getElementById('mainContent').classList.add('hidden');
+    document.getElementById('successScreen').classList.remove('hidden');
+}
 
-            doc.setFillColor(10, 10, 10);
-            doc.rect(0, 0, pageWidth, 50, 'F');
-            doc.setTextColor(200, 169, 74);
-            doc.setFontSize(28);
-            doc.setFont('helvetica', 'bold');
-            doc.text('TV INSTALL CHICAGO', pageWidth / 2, 20, { align: 'center' });
-            doc.setTextColor(200, 200, 200);
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'normal');
-            doc.text('$100 Flat Rate · Any TV · Any Size · Always', pageWidth / 2, 32, { align: 'center' });
-            doc.text('(312) 931-7096 · tvinstallchicago@gmail.com', pageWidth / 2, 42, { align: 'center' });
-            y = 65;
+function downloadEstimate() {
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF();
+    var pw = doc.internal.pageSize.getWidth();
+    var y = 20;
 
-            doc.setTextColor(10, 10, 10);
-            doc.setFontSize(20);
-            doc.setFont('helvetica', 'bold');
-            doc.text('SERVICE ESTIMATE', pageWidth / 2, y, { align: 'center' });
-            y += 15;
+    doc.setFillColor(10,10,10); doc.rect(0,0,pw,50,'F');
+    doc.setTextColor(200,169,74); doc.setFontSize(28); doc.setFont('helvetica','bold');
+    doc.text('TV INSTALL CHICAGO', pw/2, 20, {align:'center'});
+    doc.setTextColor(200,200,200); doc.setFontSize(11); doc.setFont('helvetica','normal');
+    doc.text('$100 Flat Rate  Any TV  Any Size  Always', pw/2, 32, {align:'center'});
+    doc.text('(312) 931-7096  tvinstallchicago@gmail.com', pw/2, 42, {align:'center'});
+    y = 65;
 
-            doc.setDrawColor(200, 169, 74);
-            doc.setLineWidth(0.5);
-            doc.rect(15, y, pageWidth - 30, 30);
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Estimate #:', 20, y + 8);
-            doc.text('Created:', 20, y + 16);
-            doc.text('Valid Until:', 20, y + 24);
-            doc.setFont('helvetica', 'normal');
-            doc.text(estimateData.estimateNumber, 55, y + 8);
-            doc.text(estimateData.createdDate, 55, y + 16);
-            doc.text(estimateData.validUntil, 55, y + 24);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Preferred Date:', 110, y + 8);
-            doc.text('Preferred Time:', 110, y + 16);
-            doc.setFont('helvetica', 'normal');
-            doc.text(estimateData.preferredDate, 152, y + 8);
-            doc.text(estimateData.preferredTime, 152, y + 16);
-            y += 40;
+    doc.setTextColor(10,10,10); doc.setFontSize(20); doc.setFont('helvetica','bold');
+    doc.text('SERVICE ESTIMATE', pw/2, y, {align:'center'}); y += 15;
 
-            doc.setFillColor(200, 169, 74);
-            doc.rect(15, y, pageWidth - 30, 9, 'F');
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(11);
-            doc.setTextColor(10, 10, 10);
-            doc.text('CUSTOMER INFORMATION', 20, y + 6.5);
-            y += 16;
+    doc.setDrawColor(200,169,74); doc.setLineWidth(0.5); doc.rect(15,y,pw-30,30);
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(0,0,0);
+    doc.text('Estimate #:', 20, y+8); doc.text('Created:', 20, y+16); doc.text('Valid Until:', 20, y+24);
+    doc.setFont('helvetica','normal');
+    doc.text(estimateData.estimateNumber, 55, y+8);
+    doc.text(estimateData.createdDate, 55, y+16);
+    doc.text(estimateData.validUntil, 55, y+24);
+    doc.setFont('helvetica','bold');
+    doc.text('Preferred Date:', 110, y+8); doc.text('Preferred Time:', 110, y+16);
+    doc.setFont('helvetica','normal');
+    doc.text(estimateData.preferredDate, 152, y+8);
+    doc.text(estimateData.preferredTime, 152, y+16);
+    y += 40;
 
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(10);
-            const infoItems = [['Name:', estimateData.name], ['Phone:', estimateData.phone], ['Email:', estimateData.email], ['Address:', estimateData.address]];
-            infoItems.forEach(([label, val]) => {
-                doc.setFont('helvetica', 'bold');
-                doc.text(label, 20, y);
-                doc.setFont('helvetica', 'normal');
-                const lines = doc.splitTextToSize(val, 130);
-                doc.text(lines, 50, y);
-                y += lines.length * 6 + 2;
-            });
-            y += 8;
+    doc.setFillColor(200,169,74); doc.rect(15,y,pw-30,9,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(10,10,10);
+    doc.text('CUSTOMER INFORMATION', 20, y+6.5); y += 16;
 
-            doc.setFillColor(10, 10, 10);
-            doc.rect(15, y, pageWidth - 30, 9, 'F');
-            doc.setTextColor(200, 169, 74);
-            doc.setFont('helvetica', 'bold');
-            doc.text('SERVICES', 20, y + 6.5);
-            doc.text('PRICE', pageWidth - 20, y + 6.5, { align: 'right' });
-            y += 16;
-            doc.setTextColor(0, 0, 0);
+    doc.setTextColor(0,0,0); doc.setFontSize(10);
+    [['Name:',estimateData.name],['Phone:',estimateData.phone],['Email:',estimateData.email],['Address:',estimateData.address]].forEach(function(p){
+        doc.setFont('helvetica','bold'); doc.text(p[0],20,y);
+        doc.setFont('helvetica','normal');
+        var lines = doc.splitTextToSize(p[1],130); doc.text(lines,50,y);
+        y += lines.length*6+2;
+    });
+    y += 8;
 
-            for (let i = 0; i < estimateData.tvs.length; i++) {
-                const tv = estimateData.tvs[i];
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(11);
-                doc.text(`TV ${i + 1}`, 20, y);
-                y += 7;
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(10);
-                const rows = [
-                    [`   TV Installation (${getTvSizeLabel(tv.size)})`, `$${tv.sizePrice}`],
-                    [`   Mount: ${getMountLabel(tv.mount)}`, `$${tv.mountPrice}`],
-                    [`   Wire: ${getWireLabel(tv.wire)}`, `$${tv.wirePrice}`],
-                    ...(tv.soundbar === 'yes' ? [[`   Soundbar Mounting`, `$${tv.soundbarPrice}`]] : [])
-                ];
-                rows.forEach(([label, price]) => {
-                    doc.text(label, 20, y);
-                    doc.text(price, pageWidth - 20, y, { align: 'right' });
-                    y += 6;
-                });
-                y += 4;
-                if (y > 250) { doc.addPage(); y = 20; }
-            }
+    doc.setFillColor(10,10,10); doc.rect(15,y,pw-30,9,'F');
+    doc.setTextColor(200,169,74); doc.setFont('helvetica','bold');
+    doc.text('SERVICES',20,y+6.5); doc.text('PRICE',pw-20,y+6.5,{align:'right'});
+    y += 16; doc.setTextColor(0,0,0);
 
-            y += 5;
-            doc.setDrawColor(200, 200, 200);
-            doc.line(15, y, pageWidth - 15, y);
-            y += 12;
-            doc.setFillColor(200, 169, 74);
-            doc.rect(100, y - 6, pageWidth - 115, 12, 'F');
-            doc.setTextColor(10, 10, 10);
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(14);
-            doc.text('TOTAL:', 105, y + 2);
-            doc.text(`$${estimateData.total}`, pageWidth - 20, y + 2, { align: 'right' });
-            y += 20;
+    for (var i = 0; i < estimateData.tvs.length; i++) {
+        var tv = estimateData.tvs[i];
+        doc.setFont('helvetica','bold'); doc.setFontSize(11);
+        doc.text('TV '+(i+1), 20, y); y += 7;
+        doc.setFont('helvetica','normal'); doc.setFontSize(10);
+        var rows = [
+            ['   TV Installation ('+sizeLabel(tv.size)+')', '$'+tv.sizePrice],
+            ['   Mount: '+mountLabel(tv.mount), '$'+tv.mountPrice],
+            ['   Wire: '+wireLabel(tv.wire), '$'+tv.wirePrice]
+        ];
+        if (tv.soundbar==='yes') rows.push(['   Soundbar Mounting','$'+tv.soundbarPrice]);
+        rows.forEach(function(r){ doc.text(r[0],20,y); doc.text(r[1],pw-20,y,{align:'right'}); y+=6; });
+        y += 4;
+        if (y > 250) { doc.addPage(); y = 20; }
+    }
 
-            if (estimateData.notes && estimateData.notes.trim()) {
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(10);
-                doc.setFont('helvetica', 'bold');
-                doc.text('Notes:', 20, y);
-                y += 6;
-                doc.setFont('helvetica', 'normal');
-                const nl = doc.splitTextToSize(estimateData.notes, pageWidth - 40);
-                doc.text(nl, 20, y);
-                y += nl.length * 5 + 10;
-            }
+    y += 5;
+    doc.setDrawColor(200,200,200); doc.line(15,y,pw-15,y); y += 12;
+    doc.setFillColor(200,169,74); doc.rect(100,y-6,pw-115,12,'F');
+    doc.setTextColor(10,10,10); doc.setFont('helvetica','bold'); doc.setFontSize(14);
+    doc.text('TOTAL:', 105, y+2); doc.text('$'+estimateData.total, pw-20, y+2, {align:'right'});
+    y += 20;
 
-            const footerY = 270;
-            doc.setDrawColor(200, 169, 74);
-            doc.line(15, footerY, pageWidth - 15, footerY);
-            doc.setTextColor(120, 120, 120);
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'italic');
-            doc.text('This is an estimate only. Final pricing may vary based on site conditions.', pageWidth / 2, footerY + 8, { align: 'center' });
-            doc.text('All installations include level mounting and debris cleanup.', pageWidth / 2, footerY + 14, { align: 'center' });
-            doc.text('Customer assists with lifting on larger displays. Thank you for choosing TV Install Chicago!', pageWidth / 2, footerY + 20, { align: 'center' });
+    if (estimateData.notes && estimateData.notes.trim()) {
+        doc.setTextColor(0,0,0); doc.setFontSize(10); doc.setFont('helvetica','bold');
+        doc.text('Notes:', 20, y); y += 6;
+        doc.setFont('helvetica','normal');
+        var nl = doc.splitTextToSize(estimateData.notes, pw-40);
+        doc.text(nl, 20, y);
+    }
 
-            doc.save(`TVInstallChicago_Estimate_${estimateData.estimateNumber}.pdf`);
-        }
+    var fy = 270;
+    doc.setDrawColor(200,169,74); doc.line(15,fy,pw-15,fy);
+    doc.setTextColor(120,120,120); doc.setFontSize(9); doc.setFont('helvetica','italic');
+    doc.text('This is an estimate only. Final pricing may vary based on site conditions.', pw/2, fy+8, {align:'center'});
+    doc.text('All installations include level mounting and debris cleanup.', pw/2, fy+14, {align:'center'});
+    doc.text('Customer assists with lifting on larger displays. Thank you for choosing TV Install Chicago!', pw/2, fy+20, {align:'center'});
 
-        function updateTvForms() {
-            const numTvs = parseInt(document.getElementById('numTvs').value);
-            for (let i = 2; i <= 5; i++) {
-                const section = document.getElementById(`tv${i}-section`);
-                if (i <= numTvs) {
-                    section.classList.remove('hidden');
-                    section.querySelectorAll('select').forEach(sel => sel.required = true);
-                } else {
-                    section.classList.add('hidden');
-                    section.querySelectorAll('select').forEach(sel => { sel.required = false; sel.value = ''; });
-                }
-            }
-        }
-
-        function calculateTotal() {
-            const numTvs = parseInt(document.getElementById('numTvs').value);
-            let total = numTvs * 100;
-            for (let i = 1; i <= numTvs; i++) {
-                const mountPrice = parseInt(document.getElementById(`mountType${i}`)?.selectedOptions[0]?.dataset.price || 0);
-                const wirePrice = parseInt(document.getElementById(`wireConcealment${i}`)?.selectedOptions[0]?.dataset.price || 0);
-                const soundbarPrice = parseInt(document.getElementById(`soundbar${i}`)?.selectedOptions[0]?.dataset.price || 0);
-                total += mountPrice + wirePrice + soundbarPrice;
-            }
-            if (total > 0) {
-                document.getElementById('priceTotal').classList.remove('hidden');
-                document.getElementById('totalAmount').textContent = '$' + total;
-            }
-            return { total };
-        }
-
-        function submitBooking() {
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const address = document.getElementById('address').value;
-            const numTvs = parseInt(document.getElementById('numTvs').value);
-            const preferredDate = document.getElementById('preferredDate').value;
-            const preferredTime = document.getElementById('preferredTime').value;
-            const additionalNotes = document.getElementById('additionalNotes').value;
-
-            if (!name || !phone || !email || !address || !preferredDate || !preferredTime) {
-                alert('Please fill in all required fields marked with *');
-                return;
-            }
-
-            const liftingConsent = document.getElementById('liftingConsent').checked;
-            if (!liftingConsent) {
-                alert('Please confirm the lifting assistance agreement to proceed with the $100 flat rate.');
-                document.getElementById('liftingAgreement').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
-            }
-
-            let tvs = [];
-            for (let i = 1; i <= numTvs; i++) {
-                const tvSize = document.getElementById(`tvSize${i}`).value;
-                const mountType = document.getElementById(`mountType${i}`).value;
-                const wireConcealment = document.getElementById(`wireConcealment${i}`).value;
-                const soundbar = document.getElementById(`soundbar${i}`).value;
-                if (!tvSize || !mountType || !wireConcealment) {
-                    alert(`Please fill in all fields for TV ${i}`);
-                    return;
-                }
-                tvs.push({
-                    size: tvSize, mount: mountType, wire: wireConcealment, soundbar: soundbar,
-                    sizePrice: parseInt(document.getElementById(`tvSize${i}`).selectedOptions[0].dataset.price),
-                    mountPrice: parseInt(document.getElementById(`mountType${i}`).selectedOptions[0].dataset.price),
-                    wirePrice: parseInt(document.getElementById(`wireConcealment${i}`).selectedOptions[0].dataset.price),
-                    soundbarPrice: parseInt(document.getElementById(`soundbar${i}`).selectedOptions[0].dataset.price)
-                });
-            }
-
-            const { total } = calculateTotal();
-            const estimateNumber = generateEstimateNumber();
-            const today = new Date();
-            const createdDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            const validDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
-            const validUntil = validDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-            estimateData = { estimateNumber, createdDate, validUntil, name, phone, email, address, numTvs, tvs, preferredDate, preferredTime, notes: additionalNotes, total };
-
-            let tvDetails = '';
-            for (let i = 1; i <= numTvs; i++) {
-                tvDetails += `TV${i}: Size=${document.getElementById(`tvSize${i}`).value}, Mount=${document.getElementById(`mountType${i}`).value}, Wire=${document.getElementById(`wireConcealment${i}`).value}, Soundbar=${document.getElementById(`soundbar${i}`).value}; `;
-            }
-
-            const formData = new FormData();
-            formData.append('estimateNumber', estimateNumber);
-            formData.append('name', name);
-            formData.append('phone', phone);
-            formData.append('email', email);
-            formData.append('address', address);
-            formData.append('numTvs', numTvs);
-            formData.append('tvDetails', tvDetails);
-            formData.append('preferredDate', preferredDate);
-            formData.append('preferredTime', preferredTime);
-            formData.append('additionalNotes', additionalNotes);
-            formData.append('total', '$' + total);
-            formData.append('liftingAgreement', 'Customer agreed to assist with lifting on larger TVs');
-
-            fetch('https://formspree.io/f/xeoyyygd', {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, estimateNumber);
-                } else {
-                    alert('There was an error submitting your booking. Please try again or call us directly.');
-                }
-            }).catch(() => {
-                alert('There was an error submitting your booking. Please try again or call us directly.');
-            });
-        }
-
-        function showSuccessScreen(name, email, preferredDate, preferredTime, total, numTvs, estimateNumber) {
-            document.getElementById('successMessage').innerHTML =
-                `Thank you, ${name}. We've received your booking request and will confirm shortly. Get ready for a perfect install.`;
-
-            document.getElementById('bookingDetails').innerHTML = `
-                <p class="text-sm" style="color:#6B7E94; margin-bottom:8px;"><strong style="color:#F5F0E8;">Estimate #</strong> &nbsp;${estimateNumber}</p>
-                <p class="text-sm" style="color:#6B7E94; margin-bottom:8px;"><strong style="color:#F5F0E8;">TVs</strong> &nbsp;${numTvs} TV${numTvs > 1 ? 's' : ''}</p>
-                <p class="text-sm" style="color:#6B7E94; margin-bottom:8px;"><strong style="color:#F5F0E8;">Date</strong> &nbsp;${preferredDate}</p>
-                <p class="text-sm" style="color:#6B7E94; margin-bottom:8px;"><strong style="color:#F5F0E8;">Time</strong> &nbsp;${preferredTime}</p>
-                <p class="text-sm" style="color:#6B7E94; margin-bottom:0;"><strong style="color:#F5F0E8;">Email</strong> &nbsp;${email}</p>
-                <div style="border-top:1px solid rgba(200,169,74,0.2); margin:16px 0; padding-top:16px;">
-                    <strong style="color:#C8A94A; font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:0.02em;">TOTAL
+    doc.save('TVInstallChicago_Estimate_'+estimateData.estimateNumber+'.pdf');
+}
+</script>
+</body>
+</html>
