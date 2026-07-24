@@ -189,7 +189,7 @@
             </div>
         </div>
 
-        <div class="form-card">
+        <div class="form-card" id="bookingForm">
             <div class="form-card-header">
                 <span class="bebas" style="font-size:24px;">Book Your $100 Install</span>
                 <p class="text-xs font-semibold uppercase tracking-widest mt-1" style="opacity:0.65;">Fill out below — we'll confirm within hours</p>
@@ -1264,6 +1264,36 @@ function downloadEstimate() {
 </script>
 
 <!-- ============================================================
+     CHALLENGE HANDOFF
+     If someone arrives from the challenge site with
+     ?neighborhood=Name in the URL, pre-fill the notes field
+     and scroll them straight to the booking form.
+     ============================================================ -->
+<script>
+(function () {
+    var params = new URLSearchParams(window.location.search);
+    var hood = params.get('neighborhood');
+    if (!hood) return;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var notes = document.getElementById('additionalNotes');
+        if (notes) {
+            var tag = '[77 Challenge — ' + hood + '] ';
+            if (notes.value.indexOf(tag) !== 0) {
+                notes.value = tag + notes.value;
+            }
+        }
+        var form = document.getElementById('bookingForm');
+        if (form) {
+            setTimeout(function () {
+                form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+    });
+})();
+</script>
+
+<!-- ============================================================
      CHALLENGE ANNOUNCEMENT POPUP
      Matches the --gold / --ink / --paper tokens and fonts already
      defined above. Swap CHALLENGE_URL for the real challenge site
@@ -1326,7 +1356,7 @@ function downloadEstimate() {
         We're racing to book a job in every Chicago neighborhood before summer ends.
         See where we've been — and where we need you next.
     </div>
-    <a href="CHALLENGE_URL" target="_blank" rel="noopener" class="challenge-popup-cta" onclick="dismissChallengePopup(true)">
+    <a href="/challenge.html" class="challenge-popup-cta" onclick="dismissChallengePopup(true)">
         See The Challenge →
     </a>
     <button class="challenge-popup-dismiss" onclick="dismissChallengePopup(true)">Maybe later</button>
