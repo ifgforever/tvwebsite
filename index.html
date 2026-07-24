@@ -435,6 +435,234 @@
 
     </div>
 
+<!-- ============================================================
+     NEW: FREE GUIDE DOWNLOAD SECTION
+     ============================================================ -->
+<div class="max-w-4xl mx-auto px-4 pb-4">
+    <div class="form-card">
+        <div class="form-card-header" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+            <span class="bebas" style="font-size:24px;">Free Guide: Mount Your Own TV</span>
+            <span class="board-number-badge" style="background:var(--ink); color:var(--gold);">NO CHARGE</span>
+        </div>
+        <div class="p-6 md:p-8">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-shrink-0" style="width:150px;">
+                    <div style="background:#0F0F0F; border:1px solid rgba(200,169,74,0.25); border-radius:4px; padding:10px;">
+                        <div style="background:var(--ink); border:1px solid rgba(200,169,74,0.3); border-radius:2px; aspect-ratio:2/3; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:10px;">
+                            <p class="bebas" style="color:var(--gold); font-size:15px; line-height:1.15;">THE COMPLETE GUIDE TO MOUNTING TVs</p>
+                            <p style="color:var(--slate-light); font-size:9px; margin-top:8px; letter-spacing:0.05em;">LANCE LEE</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-1 text-center md:text-left">
+                    <p style="color:var(--paper); font-size:15px; line-height:1.7;">
+                        Thinking about mounting it yourself first? Grab our free guide before you drill a single hole —
+                        written by a Chicago installer who's mounted hundreds of TVs on everything from century-old plaster to steel-stud high-rises.
+                    </p>
+
+                    <div class="mt-4 space-y-2 text-left inline-block">
+                        <div style="font-size:13px; color:var(--slate-light);"><span style="color:var(--gold);">✓</span>&nbsp; How to read your wall type — drywall, metal stud, plaster, brick</div>
+                        <div style="font-size:13px; color:var(--slate-light);"><span style="color:var(--gold);">✓</span>&nbsp; How to find a stud when your stud finder won't cooperate</div>
+                        <div style="font-size:13px; color:var(--slate-light);"><span style="color:var(--gold);">✓</span>&nbsp; Choosing the right mount and avoiding the common mistakes</div>
+                    </div>
+
+                    <div id="guideFormWrap" class="mt-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-md mx-auto md:mx-0">
+                            <input type="text" id="guideName" class="field-input" placeholder="First name">
+                            <input type="email" id="guideEmail" required class="field-input" placeholder="Email address">
+                        </div>
+                        <button type="button" onclick="submitGuideRequest()" class="mt-3" style="background:var(--gold); color:var(--ink); border:none; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.08em; padding:13px 26px; border-radius:3px; cursor:pointer;">
+                            GET THE FREE GUIDE →
+                        </button>
+                        <p style="font-size:11px; color:var(--slate-light); margin-top:10px;">We'll never spam you or sell your info.</p>
+                    </div>
+
+                    <div id="guideSuccess" class="hidden mt-6" style="background:rgba(200,169,74,0.08); border:1px solid rgba(200,169,74,0.3); border-radius:3px; padding:20px; max-width:420px; margin-left:auto; margin-right:auto;" >
+                        <p style="color:var(--gold); font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.04em; margin-bottom:8px;">You're in!</p>
+                        <a href="REPLACE-ME-WITH-PDF-URL.pdf" download style="display:inline-block; background:var(--gold); color:var(--ink); font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:0.06em; padding:12px 22px; border-radius:3px; text-decoration:none;">DOWNLOAD YOUR FREE GUIDE (PDF)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function submitGuideRequest() {
+        var name = document.getElementById('guideName').value.trim();
+        var email = document.getElementById('guideEmail').value.trim();
+
+        if (!email) {
+            alert('Please enter your email address.');
+            return;
+        }
+
+        var fd = new FormData();
+        fd.append('formType', 'Free Guide Download');
+        fd.append('name', name);
+        fd.append('email', email);
+
+        fetch('https://formspree.io/f/REPLACE-ME-WITH-YOUR-GUIDE-FORM-ID', {
+            method: 'POST',
+            body: fd,
+            headers: { 'Accept': 'application/json' }
+        }).then(function(res) {
+            if (res.ok) {
+                document.getElementById('guideFormWrap').classList.add('hidden');
+                document.getElementById('guideSuccess').classList.remove('hidden');
+            } else {
+                alert('Submission error. Please try again or call us at (312) 931-7096.');
+            }
+        }).catch(function() {
+            alert('Network error. Please try again or call us at (312) 931-7096.');
+        });
+    }
+</script>
+
+<!-- ============================================================
+     NEW: TV PURCHASE ADVISOR QUIZ SECTION
+     ============================================================ -->
+<div class="max-w-4xl mx-auto px-4 pb-12">
+    <div class="price-board">
+        <div class="board-header">
+            <span class="bebas" style="font-size:22px;">Need a TV Too? Let Us Point You Right</span>
+            <span class="board-number-badge">FREE DELIVERY TO YOUR INSTALL</span>
+        </div>
+
+        <div class="p-6 md:p-8" id="tvQuizWrap">
+
+            <div style="display:flex; gap:6px; margin-bottom:24px;" id="quizProgress">
+                <div class="quiz-dot" data-dot="1" style="height:4px; flex:1; background:rgba(200,169,74,0.2); border-radius:2px;"></div>
+                <div class="quiz-dot" data-dot="2" style="height:4px; flex:1; background:rgba(200,169,74,0.2); border-radius:2px;"></div>
+                <div class="quiz-dot" data-dot="3" style="height:4px; flex:1; background:rgba(200,169,74,0.2); border-radius:2px;"></div>
+            </div>
+
+            <div class="quiz-step" data-step="1">
+                <p class="bebas" style="font-size:20px; color:var(--paper); margin-bottom:16px;">What size TV are you looking for?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="quiz-opt" onclick="tvicQ('size','Under 55&quot;')">Under 55"</button>
+                    <button class="quiz-opt" onclick="tvicQ('size','55&quot;–65&quot;')">55" – 65"</button>
+                    <button class="quiz-opt" onclick="tvicQ('size','65&quot;–75&quot;')">65" – 75"</button>
+                    <button class="quiz-opt" onclick="tvicQ('size','75&quot;+')">75" and up</button>
+                </div>
+            </div>
+
+            <div class="quiz-step hidden" data-step="2">
+                <p class="bebas" style="font-size:20px; color:var(--paper); margin-bottom:16px;">Where will it be installed?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="quiz-opt" onclick="tvicQ('location','Indoor')">Indoor</button>
+                    <button class="quiz-opt" onclick="tvicQ('location','Outdoor')">Outdoor / patio</button>
+                    <button class="quiz-opt" onclick="tvicQ('location','Covered outdoor')">Covered outdoor space</button>
+                    <button class="quiz-opt" onclick="tvicQ('location','Indoor')">Not sure yet</button>
+                </div>
+                <button onclick="tvicBack()" style="margin-top:16px; background:none; border:none; color:var(--slate-light); font-size:12px; cursor:pointer;">← Back</button>
+            </div>
+
+            <div class="quiz-step hidden" data-step="3">
+                <p class="bebas" style="font-size:20px; color:var(--paper); margin-bottom:16px;">What's your budget range?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="quiz-opt" onclick="tvicQ('budget','Value ($400\u2013$800)')">Value ($400–$800)</button>
+                    <button class="quiz-opt" onclick="tvicQ('budget','Mid-range ($800\u2013$1,800)')">Mid-range ($800–$1,800)</button>
+                    <button class="quiz-opt" onclick="tvicQ('budget','Premium ($1,800+)')">Premium ($1,800+)</button>
+                    <button class="quiz-opt" onclick="tvicQ('budget','Not sure')">Not sure — recommend one</button>
+                </div>
+                <button onclick="tvicBack()" style="margin-top:16px; background:none; border:none; color:var(--slate-light); font-size:12px; cursor:pointer;">← Back</button>
+            </div>
+
+            <div class="quiz-step hidden" data-step="result" id="quizResult"></div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .quiz-opt { background:#161616; border:1px solid rgba(200,169,74,0.2); color:var(--paper); padding:14px 16px; border-radius:3px; font-size:14px; text-align:left; cursor:pointer; font-family:'DM Sans',sans-serif; transition:border-color 0.15s; }
+    .quiz-opt:hover { border-color:var(--gold); background:#1c1c1c; }
+</style>
+
+<script>
+    var tvicA = { size:null, location:null, budget:null };
+    var tvicStep = 1;
+
+    function tvicShowStep(step) {
+        document.querySelectorAll('#tvQuizWrap .quiz-step').forEach(function(el){ el.classList.add('hidden'); });
+        document.querySelector('#tvQuizWrap .quiz-step[data-step="' + step + '"]').classList.remove('hidden');
+        document.querySelectorAll('.quiz-dot').forEach(function(dot){
+            var n = parseInt(dot.getAttribute('data-dot'), 10);
+            dot.style.background = (typeof step === 'number' && n <= step) ? 'var(--gold)' : 'rgba(200,169,74,0.2)';
+        });
+        if (step === 'result') {
+            document.querySelectorAll('.quiz-dot').forEach(function(dot){ dot.style.background = 'var(--gold)'; });
+        }
+    }
+
+    function tvicQ(key, label) {
+        tvicA[key] = label;
+        if (tvicStep < 3) { tvicStep++; tvicShowStep(tvicStep); }
+        else { tvicResult(); }
+    }
+
+    function tvicBack() {
+        if (tvicStep > 1) { tvicStep--; tvicShowStep(tvicStep); }
+    }
+
+    function tvicResult() {
+        var a = tvicA;
+        var isOutdoor = (a.location === 'Outdoor' || a.location === 'Covered outdoor');
+        var isPremium = (a.size === '75"+' || a.budget === 'Premium ($1,800+)');
+        var isValue = (!isOutdoor && (a.budget === 'Value ($400–$800)' || a.budget === 'Not sure') && a.size !== '75"+');
+
+        var badge, title, text, brands;
+
+        if (isOutdoor) {
+            badge = 'OUTDOOR SETUP';
+            title = 'You need a weatherproof, outdoor-rated display.';
+            text = 'Standard indoor TVs aren\'t built for sun, humidity, or temperature swings. Costco doesn\'t carry outdoor-rated displays, so we\'ll source the right one for your space and deliver it free of charge to your install in most cases.';
+            brands = ['Outdoor-Rated Displays'];
+        } else if (isValue) {
+            badge = 'GREAT VALUE PICK';
+            title = 'Costco is probably your best bet.';
+            text = 'For this size and budget, Costco consistently offers some of the best value on the market, including an extended warranty most retailers don\'t match. If they don\'t have the right size or model, we can supply LG or Samsung instead and deliver it free of charge to your install in most cases.';
+            brands = ['Costco', 'LG', 'Samsung'];
+        } else if (isPremium) {
+            badge = 'PREMIUM PICK';
+            title = 'You\'ll likely want to go beyond Costco\'s lineup.';
+            text = 'For larger sizes or premium budgets, Costco\'s selection gets thinner. We can source and deliver a premium LG, Samsung, or Sony model matched to your space and budget, delivered free to your install in most cases.';
+            brands = ['LG', 'Samsung', 'Sony'];
+        } else {
+            badge = 'SOLID MID-RANGE PICK';
+            title = 'Costco first, with LG, Samsung, or Sony as backup.';
+            text = 'Check Costco first for this size and budget, it\'s usually the best value. If they don\'t have the exact size or features you want, we can supply LG, Samsung, or Sony instead and deliver it free of charge to your install in most cases.';
+            brands = ['Costco', 'LG', 'Samsung', 'Sony'];
+        }
+
+        var chips = brands.map(function(b){
+            return '<span style="background:#161616; border:1px solid rgba(200,169,74,0.25); color:var(--paper); padding:6px 14px; border-radius:16px; font-size:12.5px; margin-right:8px; display:inline-block; margin-bottom:8px;">' + b + '</span>';
+        }).join('');
+
+        var html = ''
+            + '<span class="board-number-badge" style="display:inline-block; margin-bottom:14px;">' + badge + '</span>'
+            + '<p class="bebas" style="font-size:26px; color:var(--paper);">' + title + '</p>'
+            + '<p style="color:var(--slate-light); font-size:14.5px; line-height:1.7; margin:12px 0 18px;">' + text + '</p>'
+            + '<div style="margin-bottom:22px;">' + chips + '</div>'
+            + '<div style="display:flex; gap:12px; flex-wrap:wrap;">'
+            +   '<a href="tel:+13129317096" style="display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--ink); padding:13px 24px; border-radius:3px; font-family:\'Bebas Neue\',sans-serif; font-size:16px; letter-spacing:0.06em; text-decoration:none;">📞 (312) 931-7096</a>'
+            +   '<button onclick="tvicRestart()" style="background:none; border:1px solid rgba(200,169,74,0.3); color:var(--slate-light); padding:13px 20px; border-radius:3px; font-size:13px; cursor:pointer;">↺ Start over</button>'
+            + '</div>';
+
+        document.getElementById('quizResult').innerHTML = html;
+        tvicShowStep('result');
+    }
+
+    function tvicRestart() {
+        tvicA = { size:null, location:null, budget:null };
+        tvicStep = 1;
+        tvicShowStep(1);
+    }
+</script>
+
+
     <footer class="site-footer">
         <!--
   ============================================================
