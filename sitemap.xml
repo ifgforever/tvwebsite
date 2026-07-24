@@ -4,4 +4,8 @@
     <loc>https://tvserviceschicago.com/</loc>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://tvserviceschicago.com/challenge.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>
