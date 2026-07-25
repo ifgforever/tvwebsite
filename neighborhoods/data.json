@@ -1,0 +1,130 @@
+{
+  "domain": "https://tvserviceschicago.com",
+  "phone": "+13129317096",
+  "phoneDisplay": "(312) 931-7096",
+  "email": "tvinstallchicago@gmail.com",
+  "groups": [
+    {
+      "region": "Far North Side",
+      "hoods": [
+        { "name": "Rogers Park", "blurb": "Home to Loyola University Chicago and some of the city's most diverse housing stock, from lakefront high-rises to courtyard apartment buildings. We mount TVs in dorm-style studios and vintage six-flats alike, all for the same flat rate." },
+        { "name": "West Ridge", "blurb": "West Ridge's Devon Avenue corridor is one of the most culturally rich strips in Chicago, and the housing behind it ranges from brick bungalows to larger single-family homes. We're used to older wiring and plaster walls throughout the neighborhood." },
+        { "name": "Uptown", "blurb": "From the historic Uptown Theatre to the Vietnamese storefronts along Argyle Street, this neighborhood mixes vintage courtyard buildings with modern high-rises near the lake. We bring the right hardware for both plaster and drywall." },
+        { "name": "Lincoln Square", "blurb": "Lincoln Square's German heritage lives on around Giddings Plaza, surrounded by classic bungalows, vintage two-flats, and walk-up apartments. It's a neighborhood full of character — and character walls — and we handle both well." },
+        { "name": "Edison Park", "blurb": "Chicago's northwesternmost neighborhood feels almost suburban, with tree-lined streets of brick bungalows and Cape Cods near the Metra line. Same $100 flat rate applies here as anywhere else in the city." },
+        { "name": "Norwood Park", "blurb": "One of Chicago's oldest and most residential community areas, with a historic district of century-old homes alongside newer construction. We're familiar with the wide variety of wall types you'll find on these established blocks." },
+        { "name": "Jefferson Park", "blurb": "A major transit hub where the Blue Line meets Metra, surrounded by classic Chicago bungalows and two-flats. Easy to reach, easy to schedule — we're in and out of Jefferson Park regularly." },
+        { "name": "Forest Glen", "blurb": "One of the city's most wooded and spacious community areas, including the Sauganash neighborhood's larger lots and newer construction. Bigger homes sometimes mean bigger TVs, and our flat rate doesn't change either way." },
+        { "name": "North Park", "blurb": "Home to North Park University and quiet residential streets along the North Branch of the Chicago River. A mix of bungalows and post-war homes means we come prepared for anything." },
+        { "name": "Albany Park", "blurb": "One of the most linguistically diverse neighborhoods in the country, packed with courtyard apartment buildings, two-flats, and bungalows along the river. We've mounted TVs in just about every building type Albany Park has to offer." },
+        { "name": "Edgewater", "blurb": "A lakefront community that includes Andersonville's Swedish-heritage business strip along Clark Street, alongside high-rises and vintage greystones closer to the water. Older buildings with tricky walls are our specialty here." },
+        { "name": "O'Hare", "blurb": "Best known for the airport that shares its name, but also home to quiet residential pockets like Schorsch Village and Belmont Heights. We service the whole area, no matter how close you are to the runways." }
+      ]
+    },
+    {
+      "region": "North Side",
+      "hoods": [
+        { "name": "North Center", "blurb": "A family-friendly neighborhood built on the former site of Riverview Park, now filled with rehabbed bungalows, new construction, and vintage two-flats near Welles Park. Clean installs on clean drywall — one of our easier stops." },
+        { "name": "Lake View", "blurb": "Home to Wrigley Field and the Northalsted/Boystown business strip, Lake View is dense with vintage courtyard buildings, graystones, and high-rises along Broadway. We install above fireplaces, in bay windows, and everywhere in between." },
+        { "name": "Lincoln Park", "blurb": "From classic greystone two-flats near DePaul to sleek high-rises along the lakefront, Lincoln Park has some of the most varied wall types in the city. Plaster, brick, drywall — we bring the right anchors for whatever your building throws at us." },
+        { "name": "Avondale", "blurb": "Historically the heart of Chicago's Polish community along Milwaukee Avenue, Avondale is filled with brick two-flats and bungalows that back up right against increasingly trendy Logan Square. We know the older wall construction well." },
+        { "name": "Logan Square", "blurb": "Logan Square's grand boulevard system and vintage greystones make it one of the city's most architecturally distinct neighborhoods. We mount above fireplaces, on plaster walls, and in the open-concept rehabs that have taken over the area." }
+      ]
+    },
+    {
+      "region": "Northwest Side",
+      "hoods": [
+        { "name": "Portage Park", "blurb": "Anchored by the Six Corners shopping district and the park it's named for, this neighborhood is deep in Chicago's bungalow belt. We've mounted more TVs on classic Chicago brick bungalows than we can count." },
+        { "name": "Irving Park", "blurb": "Home to the Old Irving Park Historic District, with grand vintage homes alongside more modest bungalows near the Kennedy Expressway. Whatever era your home is from, we've got hardware that fits it." },
+        { "name": "Dunning", "blurb": "A quiet residential area near Wilbur Wright College, filled with bungalows and post-war brick homes on wide lots. Easy access off the Kennedy makes scheduling in Dunning simple." },
+        { "name": "Montclare", "blurb": "One of the city's smallest community areas, tucked against the Elmwood Park border and full of tidy brick bungalows. We're in and out of Montclare fast — small neighborhood, same big-city service." },
+        { "name": "Belmont Cragin", "blurb": "A large, diverse working-class neighborhood of bungalows and brick two-flats along the Belmont and Central corridors. We show up on time and charge exactly what we quote, every time." },
+        { "name": "Hermosa", "blurb": "A compact neighborhood wedged between Logan Square and Belmont Cragin, known for brick two-flats and classic bungalows on tight, walkable blocks. Same flat rate, no matter how small the street." }
+      ]
+    },
+    {
+      "region": "West Side",
+      "hoods": [
+        { "name": "Humboldt Park", "blurb": "Home to Paseo Boricua and its landmark steel Puerto Rican flags along Division Street, Humboldt Park is full of greystones and vintage two-flats with real character. Great housing stock, and we treat every home like it." },
+        { "name": "West Town", "blurb": "One of the largest and most varied community areas in the city, taking in everything from converted lofts to vintage two-flats across its many pockets. Whatever corner of West Town you're in, we're not far away." },
+        { "name": "Austin", "blurb": "Chicago's largest community area by population, home to the Jens Jensen-designed Columbus Park and blocks of classic bungalows and greystones. We serve Austin regularly — reliable service, flat rate, no surprises." },
+        { "name": "West Garfield Park", "blurb": "A residential neighborhood of greystones and brick two- and three-flats just west of the historic Garfield Park Conservatory. We bring the same professional install here as anywhere else in the city." },
+        { "name": "East Garfield Park", "blurb": "Home to the landmark Garfield Park Conservatory, surrounded by classic greystones and courtyard buildings. We know the older plaster construction common throughout this part of the West Side." },
+        { "name": "Near West Side", "blurb": "Home to UIC, the United Center, and the Taylor Street Little Italy corridor, this neighborhood mixes student housing, rehabbed lofts, and new mid-rise construction. We're comfortable with all of it." },
+        { "name": "North Lawndale", "blurb": "A neighborhood with deep history around Douglas Park, filled with greystones, courtyard buildings, and ongoing redevelopment. We treat every install here with the same care and professionalism as our highest-end jobs." },
+        { "name": "South Lawndale", "blurb": "Also known as Little Village, home to the landmark arch on 26th Street and one of the busiest shopping corridors on the West Side. Brick two-flats and bungalows throughout — we know the terrain." },
+        { "name": "Lower West Side", "blurb": "Known to most as Pilsen, home to the National Museum of Mexican Art and blocks of colorful murals along 18th Street. Vintage two- and three-flats with plaster walls are the norm, and we come prepared for them." }
+      ]
+    },
+    {
+      "region": "Central",
+      "hoods": [
+        { "name": "Loop", "blurb": "Chicago's downtown core, home to Willis Tower, Millennium Park, and a skyline full of high-rise condos and converted office buildings. We work around doorman check-ins and freight elevator schedules without adding a dime to the price." },
+        { "name": "Near North Side", "blurb": "Covers the Magnificent Mile, River North, Gold Coast, Streeterville, and Old Town — some of the densest high-rise living in the city. Concrete walls, steel studs, elevator buildings — we bring the right anchors every time." },
+        { "name": "Near South Side", "blurb": "Home to the South Loop, Printers Row's converted lofts, and the Museum Campus along the lakefront. A mix of historic loft conversions and new-construction high-rises, all served at the same flat rate." }
+      ]
+    },
+    {
+      "region": "South Side",
+      "hoods": [
+        { "name": "Armour Square", "blurb": "Home to Chicago's Chinatown and the White Sox' home ballpark, with a tight mix of two-flats and newer construction near Wentworth Avenue. Compact neighborhood, same reliable $100 install." },
+        { "name": "Douglas", "blurb": "The heart of historic Bronzeville, home to the Motor Row Historic District and Illinois Tech's campus along State Street. Grand greystones and courtyard buildings throughout — we respect the history in every wall we touch." },
+        { "name": "Oakland", "blurb": "A small lakefront community area that's part of the historic Bronzeville area, currently in the middle of significant redevelopment. New construction and rehabbed vintage buildings both get the same careful install." },
+        { "name": "Fuller Park", "blurb": "A small, quiet residential pocket near the Dan Ryan Expressway with a mix of older homes and newer infill construction. We're glad to make the trip — same flat rate as the rest of the city." },
+        { "name": "Grand Boulevard", "blurb": "Home to the historic King Drive mansion district and the heart of Bronzeville's cultural legacy. We've mounted TVs in everything from grand vintage greystones to newer townhome developments here." },
+        { "name": "Kenwood", "blurb": "Known for its grand historic mansions and tree-lined streets — this is the neighborhood where the Obama family's Chicago home sits. Big, beautiful walls deserve a level, professional mount, and that's what we deliver." },
+        { "name": "Washington Park", "blurb": "Home to the Olmsted-designed Washington Park itself, right next to the University of Chicago campus. Classic greystones and courtyard buildings throughout, all handled with the same $100 flat rate." },
+        { "name": "Hyde Park", "blurb": "Home to the University of Chicago, the Museum of Science and Industry, and the Obama Presidential Center rising nearby in Jackson Park. Vintage courtyard buildings and grand old homes are the norm — we know how to mount cleanly on both." },
+        { "name": "Woodlawn", "blurb": "Sitting right next to Jackson Park and the Obama Presidential Center site, Woodlawn is full of classic greystones and courtyard buildings undergoing a wave of renewed investment. We're proud to be part of that with clean, professional installs." },
+        { "name": "Greater Grand Crossing", "blurb": "A historic South Side community with a strong stock of brick bungalows, two-flats, and greystones. We show up on time, quote one price, and stick to it — every job, every time." }
+      ]
+    },
+    {
+      "region": "Southwest Side",
+      "hoods": [
+        { "name": "Garfield Ridge", "blurb": "Home to Midway Airport, surrounded by classic Chicago bungalows on quiet residential streets. Close to the airport doesn't mean a premium — same $100 flat rate as everywhere else." },
+        { "name": "Archer Heights", "blurb": "A tight-knit residential pocket along Archer Avenue with a solid mix of bungalows and brick two-flats. Small neighborhood, same dependable service." },
+        { "name": "Brighton Park", "blurb": "A working-class neighborhood of brick bungalows and two-flats with a large Mexican-American and Southeast Asian community. We know these blocks well and treat every home the same, no matter the size." },
+        { "name": "McKinley Park", "blurb": "Named for the park at its center, near the site of the old Union Stockyards, and filled with classic Chicago bungalows. We've been mounting TVs on these walls for years." },
+        { "name": "Bridgeport", "blurb": "A historic Chicago neighborhood of brick bungalows and two-flats, home to generations of Chicago political history and just down the street from Rate Field. We bring the same flat-rate promise to every block." },
+        { "name": "New City", "blurb": "Also known as Back of the Yards, once home to the historic Union Stockyards and steeped in Chicago industrial history. Greystones and brick two-flats throughout — we know the older construction inside and out." },
+        { "name": "West Elsdon", "blurb": "A small, quiet bungalow-belt neighborhood on the Southwest Side with tidy residential blocks. We're happy to make the trip for a single TV or a whole house full of them." },
+        { "name": "Gage Park", "blurb": "Home to a large Mexican-American community and the bustling 63rd Street business corridor, surrounded by classic Chicago bungalows. Same $100 flat rate, no trip fee for the drive." },
+        { "name": "Clearing", "blurb": "An industrial and residential far Southwest Side neighborhood near Midway Airport and the historic Clearing rail yards. We serve Clearing regularly with the same flat, no-surprises pricing." },
+        { "name": "West Lawn", "blurb": "Deep in the bungalow belt near Midway Airport, with tidy brick homes lining every block. We know these walls and we know this neighborhood." },
+        { "name": "Chicago Lawn", "blurb": "Home to sprawling Marquette Park, a site with real civil rights history in Chicago. Bungalows and brick two-flats throughout, all served with the same professional install." },
+        { "name": "West Englewood", "blurb": "A South Side community of greystones, two-flats, and bungalows currently seeing real investment and revitalization. We're proud to bring reliable, honest home service to every block here." },
+        { "name": "Englewood", "blurb": "Once one of Chicago's largest retail hubs at 63rd and Halsted, now a neighborhood of greystones and bungalows on the rebound. We show up, do the job right, and charge exactly what we say." }
+      ]
+    },
+    {
+      "region": "Far Southwest Side",
+      "hoods": [
+        { "name": "Ashburn", "blurb": "A bungalow-belt neighborhood on the far Southwest Side with wide, quiet residential streets. Same $100 flat rate, no matter how far south you are." },
+        { "name": "Auburn Gresham", "blurb": "Home to St. Sabina Church, long known for its community activism, surrounded by brick bungalows and two-flats. We're glad to be part of the neighborhood's everyday life." },
+        { "name": "Beverly", "blurb": "Built along the hilly Blue Island Ridge with deep Irish-American roots and the famous South Side Irish Parade every March. Beverly's mix of vintage stone homes and larger single-family houses gets the same careful, level install every time." },
+        { "name": "Washington Heights", "blurb": "A quiet residential neighborhood next to Beverly and Morgan Park, with easy access to Metra service downtown. Classic brick homes throughout, and we know how to hang a TV on every kind of wall you'll find here." },
+        { "name": "Mount Greenwood", "blurb": "One of the city's most tight-knit communities, home to many Chicago police and fire families, with classic bungalows near the forest preserves. Reliable, on-time service — the kind of thing this neighborhood expects." },
+        { "name": "Morgan Park", "blurb": "Part of the historic Blue Island Ridge area, with tree-lined streets, century-old homes, and a strong sense of community. We bring the same $100 flat rate here as we do downtown." }
+      ]
+    },
+    {
+      "region": "Far Southeast Side",
+      "hoods": [
+        { "name": "Chatham", "blurb": "A historic African-American middle-class community known for its strong legacy of Black-owned businesses, lined with brick bungalows. We're proud to serve Chatham with the same honest, flat-rate pricing every time." },
+        { "name": "Avalon Park", "blurb": "A quiet bungalow-belt neighborhood on the far Southeast Side with tidy, tree-lined residential blocks. Same flat rate, same professional install, every visit." },
+        { "name": "South Shore", "blurb": "Home to the historic South Shore Cultural Center on the lakefront, surrounded by grand vintage courtyard buildings and greystones. We handle the older plaster and brick construction common throughout the neighborhood." },
+        { "name": "South Chicago", "blurb": "Built on the legacy of the old U.S. Steel South Works site, this lakefront neighborhood is full of classic working-class homes. We know the history here, and we treat every install with respect for it." },
+        { "name": "Burnside", "blurb": "One of the smallest and quietest community areas in the city, with a mix of residential and industrial blocks near the rail lines. Small neighborhood, same dependable $100 service." },
+        { "name": "Calumet Heights", "blurb": "A residential neighborhood of brick ranch homes and bungalows near the Chicago Skyway. We make the trip regularly — no premium for being on the far Southeast Side." },
+        { "name": "Roseland", "blurb": "Once home to a thriving business corridor along Michigan Avenue and deep rail history, Roseland is full of classic Chicago homes. We bring the same flat rate here as anywhere else." },
+        { "name": "Pullman", "blurb": "Home to the Pullman National Historical Park, the country's first planned industrial community, with landmark rowhouses dating back to the 1880s. We take extra care mounting TVs in these historic homes." },
+        { "name": "South Deering", "blurb": "Home to Big Marsh Park and a legacy of steel mill history along Lake Calumet. A mix of classic homes and newer construction — we're equipped for both." },
+        { "name": "East Side", "blurb": "Tucked in the far southeast corner near the Indiana border along the Calumet River, with a close-knit, working-class housing stock. We serve East Side regularly, flat rate, no exceptions." },
+        { "name": "West Pullman", "blurb": "A residential neighborhood next to historic Pullman, full of bungalows and brick two-flats on quiet streets. Same $100 rate, same professional install, every time." },
+        { "name": "Riverdale", "blurb": "Home to the historic Altgeld Gardens community, where a young Barack Obama once worked as a community organizer. We bring the same level of care and reliability to every home in Riverdale." },
+        { "name": "Hegewisch", "blurb": "A close-knit former railroad company town near Wolf Lake and the Indiana state line, with a strong small-town feel. We make the drive out to Hegewisch regularly — same flat rate, no trip charge." }
+      ]
+    }
+  ]
+}

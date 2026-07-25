@@ -179,6 +179,13 @@ const MAIN_SITE_URL = "/";
 // ---- rendering ----
 const ALL_HOODS = GROUPS.flatMap(g => g.hoods);
 
+// Must exactly match slugify() in scripts/generate_neighborhood_pages.py
+function slugify(name) {
+  return name.toLowerCase().replace(/'/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 function daysLeft() {
   return Math.max(0, Math.ceil((SEASON_END - new Date()) / 86400000));
 }
@@ -212,7 +219,7 @@ function renderBoard() {
                   : `<span class="hood-photo-empty">${booked ? 'Photo coming' : 'Not booked yet'}</span>`}
                 ${booked ? `<span class="hood-stamp">BOOKED</span>` : ''}
               </div>
-              <div class="hood-name">${name}</div>
+              <div class="hood-name"><a href="/neighborhoods/${slugify(name)}.html" style="color:inherit; text-decoration:none;">${name}</a></div>
               <div class="hood-caption">${entry && entry.caption ? entry.caption : ''}</div>
               ${booked
                 ? `<button class="claim-btn booked-label">Done — ${entry.date || ''}</button>`
