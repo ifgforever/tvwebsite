@@ -903,6 +903,56 @@
 
 
 <!-- ============================================================
+  REVIEWS SECTION
+  ============================================================
+  HOW TO ADD MORE REVIEWS:
+  Copy one <article class="review-card">...</article> block and
+  paste it as a new item inside the review-grid div below. Fill in
+  the stars, quote, name, and location. Keep quotes reasonably
+  close to what the customer actually wrote — these are real
+  reviews, not marketing copy.
+
+  Once you've got 3+ reviews in here with confirmed star ratings,
+  ask Claude to add Review + AggregateRating schema markup on top
+  of this section — that's what lets Google show star ratings
+  directly in search results, not just on the page itself.
+  ============================================================ -->
+<section style="background:#050505; border-top:1px solid rgba(200,169,74,0.15); border-bottom:1px solid rgba(200,169,74,0.15); padding:64px 0;">
+  <div style="max-width:900px; margin:0 auto; padding:0 24px;">
+
+    <div style="text-align:center; margin-bottom:36px;">
+      <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:#C8A94A; font-weight:700; font-family:'DM Sans',sans-serif;">What Customers Say</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,64px); color:#F5F0E8; letter-spacing:0.03em; line-height:1; margin:10px 0 0;">REAL REVIEWS</h2>
+    </div>
+
+    <div class="review-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px;">
+
+      <!-- REVIEW: Laura M. -->
+      <article class="review-card" style="background:#0F0F0F; border:1px solid rgba(200,169,74,0.2); border-radius:4px; padding:24px;">
+        <div style="color:#C8A94A; font-size:15px; letter-spacing:2px; margin-bottom:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:#F5F0E8; line-height:1.7; margin:0 0 16px;">&ldquo;Lance did a fantastic job installing my two TVs &mdash; they both look amazing. My TVs were originally installed by Samsung and were never level, which drove me nuts. Lance fixed the problem.&rdquo;</p>
+        <p style="font-family:'DM Sans',sans-serif; font-size:12px; color:#6B7E94; margin:0;">Laura M. &middot; via Yelp</p>
+      </article>
+
+      <!-- REVIEW: Mike M. -->
+      <article class="review-card" style="background:#0F0F0F; border:1px solid rgba(200,169,74,0.2); border-radius:4px; padding:24px;">
+        <div style="color:#C8A94A; font-size:15px; letter-spacing:2px; margin-bottom:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:#F5F0E8; line-height:1.7; margin:0 0 16px;">&ldquo;We live in a very old, quirky home and had an unexpectedly tricky installation. Lance did some troubleshooting, made a quick trip to the hardware store, and got it done &mdash; the TV looks great. Highly recommend.&rdquo;</p>
+        <p style="font-family:'DM Sans',sans-serif; font-size:12px; color:#6B7E94; margin:0;">Mike M. &middot; via Yelp</p>
+      </article>
+
+    </div>
+
+    <div style="text-align:center; margin-top:32px;">
+      <a href="https://www.yelp.com/biz/tv-install-chicago-chicago" target="_blank" rel="noopener noreferrer" style="color:#C8A94A; font-size:13px; font-family:'DM Sans',sans-serif; text-decoration:underline;">Read more reviews on Yelp &rarr;</a>
+    </div>
+
+  </div>
+</section>
+<!-- END REVIEWS SECTION -->
+
+
+<!-- ============================================================
   SCHEMA.ORG LOCAL BUSINESS MARKUP
   Place this anywhere in <head> or just before </body>
   This tells Google your exact service areas — critical for
