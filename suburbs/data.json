@@ -1,0 +1,54 @@
+{
+  "domain": "https://tvserviceschicago.com",
+  "phone": "+13129317096",
+  "phoneDisplay": "(312) 931-7096",
+  "email": "tvinstallchicago@gmail.com",
+  "groups": [
+    {
+      "band": "Closest to Us",
+      "hoods": [
+        { "name": "Norridge", "blurb": "Home to Harlem Irving Plaza, one of the busiest shopping centers on the Northwest Side, surrounded by tidy brick bungalows and ranch homes. We're in Norridge all the time \u2014 same $100 flat rate, zero trip fee." },
+        { "name": "Harwood Heights", "blurb": "One of the smallest, quietest suburbs on our list, tucked right against the city line. Close enough that a Harwood Heights install fits easily into the same day as a Chicago job." },
+        { "name": "Elmwood Park", "blurb": "Built around its distinctive traffic circle at the center of town, Elmwood Park is full of well-kept brick bungalows and two-flats. Same flat-rate install as anywhere else on this list, no suburban upcharge." }
+      ]
+    },
+    {
+      "band": "Near North & Northwest",
+      "hoods": [
+        { "name": "Park Ridge", "blurb": "A leafy, established suburb just west of O'Hare, full of classic brick homes and a walkable Uptown Park Ridge business district. We're out here often and know the housing stock well." },
+        { "name": "Niles", "blurb": "Home to the Leaning Tower of Niles, a genuine half-scale replica of the Leaning Tower of Pisa built in the 1930s \u2014 alongside plenty of solid brick ranch and split-level homes we mount TVs in regularly." },
+        { "name": "Rosemont", "blurb": "A small suburb built around the Donald E. Stephens Convention Center and Allstate Arena, with a mix of hotels, condos, and residential streets nearby. We handle hotel and high-rise logistics without adding to the price." },
+        { "name": "Schiller Park", "blurb": "Sitting right at the edge of O'Hare, Schiller Park mixes residential streets with light industrial areas. Close enough to fit easily alongside a Chicago Northwest Side route." },
+        { "name": "Lincolnwood", "blurb": "A small, well-kept suburb bordering West Ridge, home to the Lincolnwood Town Center and quiet residential blocks of brick ranch homes and newer construction alike." },
+        { "name": "Des Plaines", "blurb": "Home to the original McDonald's Museum \u2014 the site of Ray Kroc's first franchised restaurant \u2014 and a genuine mix of housing from vintage bungalows to newer subdivisions near the Metra line. We're regulars out here." },
+        { "name": "Skokie", "blurb": "A large, diverse suburb home to the Illinois Holocaust Museum and bordering Old Orchard, with everything from vintage brick homes to newer condo developments. Same $100 flat rate as the rest of our service area." }
+      ]
+    },
+    {
+      "band": "North Shore, Inner Ring",
+      "hoods": [
+        { "name": "Morton Grove", "blurb": "A quiet, established suburb next to Skokie, full of classic brick ranch homes and mature, tree-lined streets. We serve Morton Grove regularly with the same flat rate and no trip charge." },
+        { "name": "Golf", "blurb": "One of the smallest incorporated villages in Illinois \u2014 just a few streets built around the Golf Metra stop. Tiny suburb, same dependable $100 install." },
+        { "name": "Glenview", "blurb": "Home to The Glen, the mixed-use development built on the site of the former Glenview Naval Air Station, alongside plenty of established single-family neighborhoods. We know both the new construction and the older homes well." },
+        { "name": "Wilmette", "blurb": "A beautiful lakefront suburb home to the Baha'i House of Worship, one of only a handful of Baha'i temples in the world, and full of grand vintage homes near the lake. We bring the same careful, professional install here as anywhere." },
+        { "name": "Evanston", "blurb": "Home to Northwestern University, with everything from student housing and vintage courtyard buildings downtown to grand homes along the lakefront. One of the suburbs we serve most regularly." },
+        { "name": "Northfield", "blurb": "A small, quiet, affluent suburb between Winnetka and Glenview, mostly larger single-family homes on wooded lots. We're happy to make the trip \u2014 same flat rate, no exceptions." },
+        { "name": "Northbrook", "blurb": "A larger North Shore suburb with a strong mix of corporate offices and established residential neighborhoods, from ranch homes to larger newer builds. We serve Northbrook regularly at the same $100 rate." }
+      ]
+    },
+    {
+      "band": "North Shore, Outer Ring",
+      "hoods": [
+        { "name": "Winnetka", "blurb": "Home to New Trier High School and some of the most architecturally significant homes on the North Shore, from grand vintage estates to Hubbard Woods bungalows. We treat every home here with the care it deserves." },
+        { "name": "Kenilworth", "blurb": "One of the smallest and most affluent suburbs in Illinois, with a tight cluster of grand historic homes near the lake. A small, exceptional community \u2014 we're glad to serve it." },
+        { "name": "Glencoe", "blurb": "A lakefront suburb best known as home to the Chicago Botanic Garden, with beautiful, well-maintained homes throughout. We make the trip north for Glencoe regularly." },
+        { "name": "Deerfield", "blurb": "A North Shore suburb known for its mix of corporate campuses and quiet residential neighborhoods, from mid-century ranch homes to larger newer construction. Same $100 flat rate as our closest Chicago jobs." },
+        { "name": "Highland Park", "blurb": "Home to the Ravinia Festival, Chicago's iconic outdoor concert venue, and a lakefront community full of striking architecture. We bring the same professional, flat-rate install to every Highland Park home." },
+        { "name": "Highwood", "blurb": "A small, historically Italian-American suburb next to Highland Park, known for its concentrated restaurant row along Sheridan Road and close-knit residential streets. Small town, same dependable service." },
+        { "name": "Lake Bluff", "blurb": "A small, charming lakefront suburb just south of Lake Forest, with tree-lined streets and a walkable downtown. We're happy to make the drive \u2014 same flat rate as the rest of our service area." },
+        { "name": "Lake Forest", "blurb": "Home to Lake Forest College and Market Square, one of the first planned shopping districts built in the United States, surrounded by grand historic estates. The farthest edge of our service area, still just $100 flat." },
+        { "name": "Bannockburn", "blurb": "One of the smallest and most private suburbs on the North Shore, made up largely of large residential estates near the Tri-State Tollway. We're glad to make the trip for Bannockburn homeowners." }
+      ]
+    }
+  ]
+}
