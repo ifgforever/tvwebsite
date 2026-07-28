@@ -741,6 +741,20 @@
 
 
 <!-- ============================================================
+  MOUNTING GUIDE PROMO
+  ============================================================ -->
+<section style="background:#050505; border-bottom:1px solid rgba(200,169,74,0.15); padding:48px 0;">
+  <div style="max-width:820px; margin:0 auto; padding:0 24px; text-align:center;">
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:#C8A94A; font-weight:700; font-family:'DM Sans',sans-serif;">Free Resource</p>
+    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(30px,5vw,48px); color:#F5F0E8; letter-spacing:0.03em; line-height:1; margin:10px 0 14px;">THINKING ABOUT MOUNTING IT YOURSELF?</h2>
+    <p style="color:#6B7E94; font-size:15px; max-width:480px; margin:0 auto 24px; line-height:1.7; font-family:'DM Sans',sans-serif;">Free 19-page guide on reading the wall, picking a mount, and avoiding the mistakes that ruin a good TV. No signup, no catch.</p>
+    <a href="/tv-mounting-guide.html" style="display:inline-flex; align-items:center; gap:8px; background:transparent; border:2px solid #C8A94A; color:#C8A94A; padding:14px 32px; border-radius:3px; font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.06em; text-decoration:none;">READ THE FREE GUIDE &rarr;</a>
+  </div>
+</section>
+<!-- END MOUNTING GUIDE PROMO -->
+
+
+<!-- ============================================================
   REVIEWS SECTION
   ============================================================
   HOW TO ADD MORE REVIEWS:
@@ -1246,21 +1260,24 @@ function downloadEstimate() {
 </script>
 
 <!-- ============================================================
-     CHALLENGE HANDOFF
-     If someone arrives from the challenge site with
-     ?neighborhood=Name in the URL, pre-fill the notes field
-     and scroll them straight to the booking form.
+     CHALLENGE / SOURCE HANDOFF
+     If someone arrives with ?neighborhood=Name or ?source=Name in
+     the URL, pre-fill the notes field and scroll them straight to
+     the booking form. ?neighborhood= is used by the neighborhood
+     and suburb pages; ?source= is for anything else (like the
+     mounting guide page) that wants to tag where a lead came from.
      ============================================================ -->
 <script>
 (function () {
     var params = new URLSearchParams(window.location.search);
     var hood = params.get('neighborhood');
-    if (!hood) return;
+    var source = params.get('source');
+    if (!hood && !source) return;
 
     document.addEventListener('DOMContentLoaded', function () {
         var notes = document.getElementById('additionalNotes');
         if (notes) {
-            var tag = '[Neighborhood: ' + hood + '] ';
+            var tag = hood ? '[Neighborhood: ' + hood + '] ' : '[Source: ' + source + '] ';
             if (notes.value.indexOf(tag) !== 0) {
                 notes.value = tag + notes.value;
             }

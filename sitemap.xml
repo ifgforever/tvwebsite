@@ -428,4 +428,8 @@
     <loc>https://tvserviceschicago.com/suburbs/bannockburn.html</loc>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://tvserviceschicago.com/tv-mounting-guide.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>
