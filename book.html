@@ -63,7 +63,10 @@
   <!-- STEP 1: Address -->
   <section id="step1" class="panel rounded-xl p-6 mb-6">
     <h2 class="bebas text-2xl mb-3" style="color:var(--gold);">Where's the install?</h2>
-    <input id="addressInput" type="text" placeholder="123 Main St, Chicago, IL" class="w-full rounded-md px-4 py-3 text-sm mb-3">
+    <div class="relative mb-3">
+      <input id="addressInput" type="text" autocomplete="off" placeholder="Start typing your address…" class="w-full rounded-md px-4 py-3 text-sm">
+      <div id="addressSuggestions" class="hidden absolute left-0 right-0 z-30 mt-1 rounded-md overflow-hidden" style="background:#1A1A1A; border:1px solid rgba(245,240,232,0.15);"></div>
+    </div>
     <button id="findTimesBtn" class="btn-gold w-full rounded-md py-3 text-sm">Find Available Times</button>
     <p id="addressError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
   </section>
@@ -138,6 +141,66 @@ let daysData = [];
 
 const $ = (sel) => document.querySelector(sel);
 
+// ---------- Address autocomplete ----------
+let suggestDebounce = null;
+let suggestionPicked = false;
+
+$('#addressInput').addEventListener('input', () => {
+  suggestionPicked = false;
+  const query = $('#addressInput').value.trim();
+  clearTimeout(suggestDebounce);
+
+  if (query.length < 3) {
+    $('#addressSuggestions').classList.add('hidden');
+    return;
+  }
+
+  suggestDebounce = setTimeout(async () => {
+    try {
+      const res = await fetch(`${OPS_API}/suggest?q=${encodeURIComponent(query)}`);
+      const suggestions = await res.json();
+      renderSuggestions(suggestions);
+    } catch (err) {
+      $('#addressSuggestions').classList.add('hidden');
+    }
+  }, 300);
+});
+
+function renderSuggestions(suggestions) {
+  const box = $('#addressSuggestions');
+  if (!suggestions || !suggestions.length) {
+    box.classList.add('hidden');
+    return;
+  }
+
+  box.innerHTML = suggestions.map((s, i) => `
+    <div class="suggestion-row" data-idx="${i}" style="padding:10px 14px; font-size:13px; cursor:pointer; border-bottom:1px solid rgba(245,240,232,0.08);">
+      ${s.placeName}
+    </div>
+  `).join('');
+  box.classList.remove('hidden');
+
+  box.querySelectorAll('.suggestion-row').forEach((row) => {
+    row.addEventListener('mouseenter', () => { row.style.background = 'rgba(200,169,74,0.1)'; });
+    row.addEventListener('mouseleave', () => { row.style.background = ''; });
+    row.addEventListener('click', () => {
+      const s = suggestions[Number(row.dataset.idx)];
+      $('#addressInput').value = s.placeName;
+      selectedAddress = s.placeName;
+      selectedLat = s.lat;
+      selectedLng = s.lng;
+      suggestionPicked = true;
+      box.classList.add('hidden');
+    });
+  });
+}
+
+document.addEventListener('click', (e) => {
+  if (!$('#addressSuggestions').contains(e.target) && e.target !== $('#addressInput')) {
+    $('#addressSuggestions').classList.add('hidden');
+  }
+});
+
 // ---------- Step 1: Address ----------
 $('#findTimesBtn').addEventListener('click', async () => {
   const address = $('#addressInput').value.trim();
@@ -153,17 +216,21 @@ $('#findTimesBtn').addEventListener('click', async () => {
   $('#findTimesBtn').textContent = 'Looking…';
 
   try {
-    const geoRes = await fetch(`${OPS_API}/geocode`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ address }),
-    });
-    if (!geoRes.ok) throw new Error('geocode-failed');
-    const geo = await geoRes.json();
+    // If they picked a suggestion, we already have exact coordinates —
+    // no need to geocode again.
+    if (!suggestionPicked || selectedAddress !== address) {
+      const geoRes = await fetch(`${OPS_API}/geocode`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ address }),
+      });
+      if (!geoRes.ok) throw new Error('geocode-failed');
+      const geo = await geoRes.json();
 
-    selectedAddress = geo.formattedAddress || address;
-    selectedLat = geo.lat;
-    selectedLng = geo.lng;
+      selectedAddress = geo.formattedAddress || address;
+      selectedLat = geo.lat;
+      selectedLng = geo.lng;
+    }
 
     $('#step1').classList.add('hidden');
     $('#step2').classList.remove('hidden');
