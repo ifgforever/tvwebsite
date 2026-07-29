@@ -221,7 +221,7 @@ $('#findTimesBtn').addEventListener('click', async () => {
     if (!suggestionPicked || selectedAddress !== address) {
       const geoRes = await fetch(`${OPS_API}/geocode`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({ address }),
       });
       if (!geoRes.ok) throw new Error('geocode-failed');
@@ -368,7 +368,7 @@ $('#bookBtn').addEventListener('click', async () => {
   try {
     const res = await fetch(`${OPS_API}/book`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         customerName: name,
         phone,
