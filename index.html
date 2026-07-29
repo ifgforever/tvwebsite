@@ -1085,6 +1085,57 @@ function calculateTotal() {
     return total;
 }
 
+var TIME_WINDOW_START = {
+    '8:00 AM - 10:00 AM': '08:00',
+    '10:00 AM - 12:00 PM': '10:00',
+    '12:00 PM - 2:00 PM': '12:00',
+    '2:00 PM - 4:00 PM': '14:00',
+    '4:00 PM - 6:00 PM': '16:00'
+};
+
+function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs) {
+    var lineItems = [];
+    for (var i = 0; i < tvs.length; i++) {
+        var tv = tvs[i];
+        lineItems.push({ description: 'TV Mounting — ' + tv.size, price: tv.sizePrice || 0 });
+        if (tv.mount && tv.mount !== 'own' && tv.mountPrice) {
+            var mountLabel = tv.mount === 'fixed' ? 'Fixed Mount' : tv.mount === 'tilt' ? 'Tilting Mount' : tv.mount === 'full' ? 'Full Motion Mount' : tv.mount;
+            lineItems.push({ description: mountLabel, price: tv.mountPrice });
+        }
+        if (tv.wire && tv.wire !== 'none' && tv.wirePrice) {
+            var wireLabel = tv.wire === 'external' ? 'External Cable Strip' : tv.wire === 'inwall' ? 'In-Wall Concealment' : tv.wire === 'outlet' ? 'Electrical Outlet Install' : tv.wire;
+            lineItems.push({ description: wireLabel, price: tv.wirePrice });
+        }
+        if (tv.soundbar === 'yes' && tv.soundbarPrice) {
+            lineItems.push({ description: 'Soundbar Mounting', price: tv.soundbarPrice });
+        }
+    }
+
+    var startTime = TIME_WINDOW_START[timeWindow] || '';
+    var fullNotes = 'Preferred window: ' + timeWindow + (notes ? ' — ' + notes : '');
+
+    fetch('https://main.tv-ops.pages.dev/api/public/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            customerName: name,
+            phone: phone,
+            email: email,
+            address: address,
+            date: date,
+            time: startTime,
+            serviceType: 'Booked via website',
+            price: total,
+            lineItems: lineItems,
+            notes: fullNotes
+        })
+    }).catch(function() {
+        // Silent — this is a best-effort sync. The Formspree submission
+        // below is the guaranteed path, so a TV Ops hiccup here shouldn't
+        // block or alarm the customer.
+    });
+}
+
 function submitBooking() {
     var name    = document.getElementById('name').value.trim();
     var phone   = document.getElementById('phone').value.trim();
@@ -1133,6 +1184,10 @@ function submitBooking() {
     for (var j = 1; j <= num; j++) {
         tvDetails += 'TV'+j+': Size='+document.getElementById('tvSize'+j).value+', Mount='+document.getElementById('mountType'+j).value+', Wire='+document.getElementById('wireConcealment'+j).value+', Soundbar='+document.getElementById('soundbar'+j).value+'; ';
     }
+
+    // Sync this lead straight into TV Ops as a scheduled job — best effort,
+    // never blocks or breaks the existing Formspree submission below.
+    syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs);
 
     var fd = new FormData();
     fd.append('estimateNumber', estNum);
