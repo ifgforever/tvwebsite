@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your TV Mount — TV Install Chicago</title>
+<meta name="description" content="Book your TV mounting appointment online. Pick a time that works for you — TV Install Chicago, Chicagoland's flat-rate TV mounting service.">
+<link rel="canonical" href="https://tvserviceschicago.com/book.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --paper: #F5F0E8;
+    --paper-dark: #EAE4D4;
+    --gold: #C8A94A;
+    --gold-light: #E5C97A;
+    --rust: #C45C2E;
+    --slate: #3A4A5C;
+    --slate-light: #6B7E94;
+  }
+  * { box-sizing: border-box; font-family: 'DM Sans', sans-serif; }
+  .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+  body { background: var(--ink); color: var(--paper); }
+  .panel { background: #141414; border: 1px solid rgba(200,169,74,0.15); }
+  .btn-gold { background: var(--gold); color: var(--ink); font-weight: 700; }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-ghost { background: transparent; border: 1px solid rgba(245,240,232,0.2); color: var(--paper); }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  input, textarea {
+    background: #1D1D1D; border: 1px solid rgba(245,240,232,0.15); color: var(--paper);
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  ::placeholder { color: rgba(245,240,232,0.35); }
+  .day-card { background: #1A1A1A; border: 1px solid rgba(245,240,232,0.1); cursor: pointer; transition: border-color 0.15s ease; }
+  .day-card:hover { border-color: var(--gold); }
+  .day-card.selected { border-color: var(--gold); background: rgba(200,169,74,0.1); }
+  .day-card.suggested { border-color: rgba(200,169,74,0.4); }
+  .day-card.unavailable { opacity: 0.35; cursor: not-allowed; }
+  .slot-btn { background: #1D1D1D; border: 1px solid rgba(245,240,232,0.15); color: var(--paper); }
+  .slot-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .slot-btn.selected { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 600; }
+  .spinner {
+    border: 2px solid rgba(245,240,232,0.2); border-top-color: var(--gold); border-radius: 50%;
+    width: 18px; height: 18px; animation: spin 0.7s linear infinite; display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: rgba(245,240,232,0.15); border-radius: 4px; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="max-w-2xl mx-auto px-5 py-12">
+
+  <header class="text-center mb-10">
+    <p class="text-xs uppercase tracking-widest" style="color:var(--gold);">TV Install Chicago</p>
+    <h1 class="bebas text-5xl mt-1 mb-2">Book Your Install</h1>
+    <p class="text-sm" style="color:rgba(245,240,232,0.6);">$100 flat rate. Any TV, any wall. Pick a time that works for you.</p>
+  </header>
+
+  <!-- STEP 1: Address -->
+  <section id="step1" class="panel rounded-xl p-6 mb-6">
+    <h2 class="bebas text-2xl mb-3" style="color:var(--gold);">Where's the install?</h2>
+    <input id="addressInput" type="text" placeholder="123 Main St, Chicago, IL" class="w-full rounded-md px-4 py-3 text-sm mb-3">
+    <button id="findTimesBtn" class="btn-gold w-full rounded-md py-3 text-sm">Find Available Times</button>
+    <p id="addressError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
+  </section>
+
+  <!-- STEP 2: Day + time selection -->
+  <section id="step2" class="hidden">
+    <div id="loadingDays" class="flex items-center gap-2 justify-center py-8" style="color:rgba(245,240,232,0.6);">
+      <span class="spinner"></span> Checking availability…
+    </div>
+    <div id="daysResults" class="hidden">
+      <h2 class="bebas text-2xl mb-1" style="color:var(--gold);">Pick a day</h2>
+      <p class="text-xs mb-4" style="color:rgba(245,240,232,0.5);">Days marked <span style="color:var(--gold);">★ Suggested</span> already have another job nearby — helps us keep drive times short (and sometimes means faster service for you).</p>
+      <div id="daysList" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6"></div>
+
+      <div id="slotsSection" class="hidden">
+        <h2 class="bebas text-2xl mb-3" style="color:var(--gold);">Pick a time</h2>
+        <div id="slotsList" class="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: Contact details -->
+  <section id="step3" class="hidden panel rounded-xl p-6 mb-6">
+    <h2 class="bebas text-2xl mb-4" style="color:var(--gold);">Your details</h2>
+    <div class="space-y-3">
+      <input id="custName" type="text" placeholder="Full name *" class="w-full rounded-md px-4 py-3 text-sm">
+      <input id="custPhone" type="tel" placeholder="Phone *" class="w-full rounded-md px-4 py-3 text-sm">
+      <input id="custEmail" type="email" placeholder="Email (for confirmation & receipt)" class="w-full rounded-md px-4 py-3 text-sm">
+
+      <div>
+        <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">What are we mounting? (optional, helps us prep)</p>
+        <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
+        <input id="notesInput" type="text" placeholder="Anything else we should know?" class="w-full rounded-md px-4 py-3 text-sm">
+      </div>
+
+      <label class="flex items-start gap-2 text-xs" style="color:rgba(245,240,232,0.6);">
+        <input id="smsConsent" type="checkbox" class="mt-0.5" checked style="width:14px; height:14px;">
+        Text me a reminder the day before my appointment (msg &amp; data rates may apply, reply STOP to opt out)
+      </label>
+    </div>
+
+    <button id="bookBtn" class="btn-gold w-full rounded-md py-3 text-sm mt-5">Confirm Booking</button>
+    <button id="backBtn" class="btn-ghost w-full rounded-md py-2.5 text-sm mt-2">&larr; Back to times</button>
+    <p id="bookError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
+  </section>
+
+  <!-- STEP 4: Confirmation -->
+  <section id="step4" class="hidden panel rounded-xl p-8 text-center">
+    <div class="text-5xl mb-3">✓</div>
+    <h2 class="bebas text-3xl mb-2" style="color:var(--gold);">You're booked!</h2>
+    <p id="confirmSummary" class="text-sm" style="color:rgba(245,240,232,0.75);"></p>
+    <p class="text-xs mt-4" style="color:rgba(245,240,232,0.5);">Questions? Call or text us anytime.</p>
+  </section>
+
+</div>
+
+<script>
+const OPS_API = 'https://main.tv-ops.pages.dev/api/public';
+
+const SERVICES = [
+  'TV Mounting', 'Fixed Mount', 'Tilting Mount', 'Full Motion Mount',
+  'Cable Concealment', 'Soundbar Mounting',
+];
+
+let selectedAddress = '';
+let selectedLat = null;
+let selectedLng = null;
+let selectedDate = null;
+let selectedTime = null;
+let selectedServices = new Set();
+let daysData = [];
+
+const $ = (sel) => document.querySelector(sel);
+
+// ---------- Step 1: Address ----------
+$('#findTimesBtn').addEventListener('click', async () => {
+  const address = $('#addressInput').value.trim();
+  $('#addressError').classList.add('hidden');
+
+  if (!address) {
+    $('#addressError').textContent = 'Please enter your address.';
+    $('#addressError').classList.remove('hidden');
+    return;
+  }
+
+  $('#findTimesBtn').disabled = true;
+  $('#findTimesBtn').textContent = 'Looking…';
+
+  try {
+    const geoRes = await fetch(`${OPS_API}/geocode`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ address }),
+    });
+    if (!geoRes.ok) throw new Error('geocode-failed');
+    const geo = await geoRes.json();
+
+    selectedAddress = geo.formattedAddress || address;
+    selectedLat = geo.lat;
+    selectedLng = geo.lng;
+
+    $('#step1').classList.add('hidden');
+    $('#step2').classList.remove('hidden');
+    await loadAvailability();
+  } catch (err) {
+    $('#addressError').textContent = "Couldn't find that address — please check it and try again.";
+    $('#addressError').classList.remove('hidden');
+  } finally {
+    $('#findTimesBtn').disabled = false;
+    $('#findTimesBtn').textContent = 'Find Available Times';
+  }
+});
+
+// ---------- Step 2: Days + slots ----------
+async function loadAvailability() {
+  $('#loadingDays').classList.remove('hidden');
+  $('#daysResults').classList.add('hidden');
+
+  const res = await fetch(`${OPS_API}/availability?lat=${selectedLat}&lng=${selectedLng}`);
+  daysData = await res.json();
+
+  $('#loadingDays').classList.add('hidden');
+  $('#daysResults').classList.remove('hidden');
+  renderDays();
+}
+
+function renderDays() {
+  const sorted = [...daysData].sort((a, b) => {
+    if (a.suggested !== b.suggested) return a.suggested ? -1 : 1;
+    return a.date.localeCompare(b.date);
+  });
+
+  $('#daysList').innerHTML = sorted.map((day) => {
+    const d = new Date(day.date + 'T00:00:00');
+    const label = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const classes = ['day-card', 'rounded-lg', 'p-3', 'text-center'];
+    if (!day.available) classes.push('unavailable');
+    if (day.suggested && day.available) classes.push('suggested');
+    if (selectedDate === day.date) classes.push('selected');
+
+    return `
+      <div class="${classes.join(' ')}" data-date="${day.available ? day.date : ''}">
+        <div class="text-sm font-medium">${label}</div>
+        ${day.suggested && day.available ? '<div class="text-[10px] mt-1" style="color:var(--gold);">★ Suggested</div>' : ''}
+        ${!day.available ? '<div class="text-[10px] mt-1" style="color:rgba(245,240,232,0.4);">Unavailable</div>' : ''}
+      </div>
+    `;
+  }).join('');
+
+  $('#daysList').querySelectorAll('.day-card[data-date]:not([data-date=""])').forEach((card) => {
+    card.addEventListener('click', () => {
+      selectedDate = card.dataset.date;
+      selectedTime = null;
+      renderDays();
+      renderSlots();
+    });
+  });
+}
+
+function renderSlots() {
+  const day = daysData.find((d) => d.date === selectedDate);
+  if (!day) return;
+
+  $('#slotsSection').classList.remove('hidden');
+  $('#slotsList').innerHTML = day.openSlots.map((t) => {
+    const isSelected = t === selectedTime;
+    return `<button type="button" class="slot-btn rounded-md py-2 text-xs ${isSelected ? 'selected' : ''}" data-time="${t}">${formatTime(t)}</button>`;
+  }).join('');
+
+  $('#slotsList').querySelectorAll('.slot-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      selectedTime = btn.dataset.time;
+      renderSlots();
+      showStep3();
+    });
+  });
+
+  $('#slotsSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function formatTime(t) {
+  const [h, m] = t.split(':');
+  const hour = ((+h + 11) % 12) + 1;
+  const ampm = +h < 12 ? 'AM' : 'PM';
+  return `${hour}:${m} ${ampm}`;
+}
+
+// ---------- Step 3: Contact details ----------
+function showStep3() {
+  $('#step3').classList.remove('hidden');
+  $('#step3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+$('#serviceChips').innerHTML = SERVICES.map((s) => `
+  <button type="button" class="service-chip btn-ghost rounded-full px-3 py-1.5 text-xs" data-service="${s}">${s}</button>
+`).join('');
+
+$('#serviceChips').querySelectorAll('.service-chip').forEach((chip) => {
+  chip.addEventListener('click', () => {
+    const s = chip.dataset.service;
+    if (selectedServices.has(s)) {
+      selectedServices.delete(s);
+      chip.style.background = '';
+      chip.style.color = '';
+      chip.style.borderColor = '';
+    } else {
+      selectedServices.add(s);
+      chip.style.background = 'var(--gold)';
+      chip.style.color = 'var(--ink)';
+      chip.style.borderColor = 'var(--gold)';
+    }
+  });
+});
+
+$('#backBtn').addEventListener('click', () => {
+  $('#step3').classList.add('hidden');
+  $('#step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+$('#bookBtn').addEventListener('click', async () => {
+  const name = $('#custName').value.trim();
+  const phone = $('#custPhone').value.trim();
+  const email = $('#custEmail').value.trim();
+  $('#bookError').classList.add('hidden');
+
+  if (!name || !phone) {
+    $('#bookError').textContent = 'Name and phone are required.';
+    $('#bookError').classList.remove('hidden');
+    return;
+  }
+
+  $('#bookBtn').disabled = true;
+  $('#bookBtn').textContent = 'Booking…';
+
+  try {
+    const res = await fetch(`${OPS_API}/book`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customerName: name,
+        phone,
+        email,
+        address: selectedAddress,
+        date: selectedDate,
+        time: selectedTime,
+        serviceType: [...selectedServices].join(', '),
+        notes: $('#notesInput').value.trim(),
+      }),
+    });
+
+    if (!res.ok) throw new Error('booking-failed');
+
+    const d = new Date(selectedDate + 'T00:00:00');
+    $('#confirmSummary').textContent =
+      `${d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${formatTime(selectedTime)} — ${selectedAddress}`;
+
+    $('#step3').classList.add('hidden');
+    $('#step4').classList.remove('hidden');
+    $('#step4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    $('#bookError').textContent = "Something went wrong submitting your booking — please call or text us directly.";
+    $('#bookError').classList.remove('hidden');
+  } finally {
+    $('#bookBtn').disabled = false;
+    $('#bookBtn').textContent = 'Confirm Booking';
+  }
+});
+</script>
+</body>
+</html>
