@@ -197,6 +197,7 @@
 
             <div class="p-6 md:p-8 space-y-6">
 
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div><label>Full Name *</label><input type="text" id="name" required class="field-input" placeholder="Your full name"></div>
                     <div><label>Phone Number *</label><input type="tel" id="phone" required class="field-input" placeholder="(555) 123-4567"></div>
@@ -1093,7 +1094,7 @@ var TIME_WINDOW_START = {
     '4:00 PM - 6:00 PM': '16:00'
 };
 
-function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs) {
+function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs, website) {
     var lineItems = [];
     for (var i = 0; i < tvs.length; i++) {
         var tv = tvs[i];
@@ -1127,7 +1128,8 @@ function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes
             serviceType: 'Booked via website',
             price: total,
             lineItems: lineItems,
-            notes: fullNotes
+            notes: fullNotes,
+            website: website
         })
     }).catch(function() {
         // Silent — this is a best-effort sync. The Formspree submission
@@ -1187,7 +1189,8 @@ function submitBooking() {
 
     // Sync this lead straight into TV Ops as a scheduled job — best effort,
     // never blocks or breaks the existing Formspree submission below.
-    syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs);
+    var website = document.getElementById('website').value;
+    syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website);
 
     var fd = new FormData();
     fd.append('estimateNumber', estNum);

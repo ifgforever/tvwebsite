@@ -92,13 +92,15 @@
   <section id="step3" class="hidden panel rounded-xl p-6 mb-6">
     <h2 class="bebas text-2xl mb-4" style="color:var(--gold);">Your details</h2>
     <div class="space-y-3">
+      <input id="custWebsite" name="website" type="text" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true">
       <input id="custName" type="text" placeholder="Full name *" class="w-full rounded-md px-4 py-3 text-sm">
       <input id="custPhone" type="tel" placeholder="Phone *" class="w-full rounded-md px-4 py-3 text-sm">
       <input id="custEmail" type="email" placeholder="Email (for confirmation & receipt)" class="w-full rounded-md px-4 py-3 text-sm">
 
       <div>
-        <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">What are we mounting? (optional, helps us prep)</p>
+        <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Add-ons (optional) — the $100 flat mounting rate is always included</p>
         <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
+        <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
         <input id="notesInput" type="text" placeholder="Anything else we should know?" class="w-full rounded-md px-4 py-3 text-sm">
       </div>
 
@@ -126,10 +128,31 @@
 <script>
 const OPS_API = 'https://tv-ops-public-api.tvinstallchicago.workers.dev';
 
+const BASE_PRICE = 100; // flat TV mounting rate, always included
+
 const SERVICES = [
-  'TV Mounting', 'Fixed Mount', 'Tilting Mount', 'Full Motion Mount',
-  'Cable Concealment', 'Soundbar Mounting',
+  { label: 'Fixed Mount', price: 50 },
+  { label: 'Tilting Mount', price: 50 },
+  { label: 'Full Motion Mount', price: 65 },
+  { label: 'External Cable Strip', price: 35 },
+  { label: 'In-Wall Concealment', price: 60 },
+  { label: 'Electrical Outlet Install', price: 250 },
+  { label: 'Soundbar Mounting', price: 60 },
 ];
+
+function buildLineItems() {
+  const lineItems = [{ description: 'TV Mounting', price: BASE_PRICE }];
+  for (const label of selectedServices) {
+    const svc = SERVICES.find((s) => s.label === label);
+    if (svc) lineItems.push({ description: svc.label, price: svc.price });
+  }
+  return lineItems;
+}
+
+function updatePriceSummary() {
+  const total = buildLineItems().reduce((sum, li) => sum + li.price, 0);
+  $('#priceSummary').textContent = `Estimated total: $${total}`;
+}
 
 let selectedAddress = '';
 let selectedLat = null;
@@ -325,8 +348,9 @@ function showStep3() {
 }
 
 $('#serviceChips').innerHTML = SERVICES.map((s) => `
-  <button type="button" class="service-chip btn-ghost rounded-full px-3 py-1.5 text-xs" data-service="${s}">${s}</button>
+  <button type="button" class="service-chip btn-ghost rounded-full px-3 py-1.5 text-xs" data-service="${s.label}">${s.label} +$${s.price}</button>
 `).join('');
+updatePriceSummary();
 
 $('#serviceChips').querySelectorAll('.service-chip').forEach((chip) => {
   chip.addEventListener('click', () => {
@@ -342,6 +366,7 @@ $('#serviceChips').querySelectorAll('.service-chip').forEach((chip) => {
       chip.style.color = 'var(--ink)';
       chip.style.borderColor = 'var(--gold)';
     }
+    updatePriceSummary();
   });
 });
 
@@ -366,6 +391,9 @@ $('#bookBtn').addEventListener('click', async () => {
   $('#bookBtn').textContent = 'Booking…';
 
   try {
+    const lineItems = buildLineItems();
+    const total = lineItems.reduce((sum, li) => sum + li.price, 0);
+
     const res = await fetch(`${OPS_API}/book`, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
@@ -376,8 +404,11 @@ $('#bookBtn').addEventListener('click', async () => {
         address: selectedAddress,
         date: selectedDate,
         time: selectedTime,
-        serviceType: [...selectedServices].join(', '),
+        serviceType: ['TV Mounting', ...selectedServices].join(', '),
+        price: total,
+        lineItems,
         notes: $('#notesInput').value.trim(),
+        website: $('#custWebsite').value,
       }),
     });
 
