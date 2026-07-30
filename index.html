@@ -1114,9 +1114,9 @@ function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes
     var startTime = TIME_WINDOW_START[timeWindow] || '';
     var fullNotes = 'Preferred window: ' + timeWindow + (notes ? ' — ' + notes : '');
 
-    fetch('https://main.tv-ops.pages.dev/api/public/book', {
+    fetch('https://tv-ops-public-api.tvinstallchicago.workers.dev/book', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
             customerName: name,
             phone: phone,
