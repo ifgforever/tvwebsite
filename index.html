@@ -73,6 +73,8 @@
         .field-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,169,74,0.12); }
         .field-input::placeholder { color: rgba(200,169,74,0.25); }
         .field-input option { background: #161616; color: var(--paper); }
+        .field-input::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; opacity: 0.8; }
+        .field-input::-webkit-calendar-picker-indicator:hover { opacity: 1; }
 
         .tv-block { background: #0A0A0A; border: 1px solid rgba(200,169,74,0.15); border-radius: 4px; overflow: hidden; }
         .tv-block-header { background: #161616; border-bottom: 1px solid rgba(200,169,74,0.15); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
