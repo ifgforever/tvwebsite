@@ -441,6 +441,14 @@
                     </div>
                 </div>
 
+                <!-- SMS CONSENT -->
+                <div id="smsConsentBox" style="background: rgba(200,169,74,0.04); border: 1px solid rgba(200,169,74,0.15); border-radius: 3px; padding: 16px 20px;">
+                    <div style="display:flex; align-items:flex-start; gap:12px;">
+                        <input type="checkbox" id="smsConsent" style="width:18px; height:18px; flex-shrink:0; margin-top:3px; accent-color: var(--gold); cursor:pointer;">
+                        <p style="font-size:13px; color: var(--slate-light); line-height:1.6;">Text me a reminder the day before my appointment (msg &amp; data rates may apply, reply STOP to opt out). See our <a href="/privacy-policy.html" style="color:var(--gold);">Privacy Policy</a>. Optional — you'll still be booked either way.</p>
+                    </div>
+                </div>
+
                 <button type="button" onclick="submitBooking()" class="cta-btn">
                     📺 Book My $100 Install →
                 </button>
@@ -1096,7 +1104,7 @@ var TIME_WINDOW_START = {
     '4:00 PM - 6:00 PM': '16:00'
 };
 
-function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs, website) {
+function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs, website, smsConsent) {
     var lineItems = [];
     for (var i = 0; i < tvs.length; i++) {
         var tv = tvs[i];
@@ -1131,7 +1139,8 @@ function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes
             price: total,
             lineItems: lineItems,
             notes: fullNotes,
-            website: website
+            website: website,
+            smsConsent: smsConsent
         })
     }).catch(function() {
         // Silent — this is a best-effort sync. The Formspree submission
@@ -1192,7 +1201,8 @@ function submitBooking() {
     // Sync this lead straight into TV Ops as a scheduled job — best effort,
     // never blocks or breaks the existing Formspree submission below.
     var website = document.getElementById('website').value;
-    syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website);
+    var smsConsent = document.getElementById('smsConsent').checked;
+    syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website, smsConsent);
 
     var fd = new FormData();
     fd.append('estimateNumber', estNum);

@@ -105,7 +105,7 @@
       </div>
 
       <label class="flex items-start gap-2 text-xs" style="color:rgba(245,240,232,0.6);">
-        <input id="smsConsent" type="checkbox" class="mt-0.5" checked style="width:14px; height:14px;">
+        <input id="smsConsent" type="checkbox" class="mt-0.5" style="width:14px; height:14px;">
         Text me a reminder the day before my appointment (msg &amp; data rates may apply, reply STOP to opt out)
       </label>
     </div>
@@ -409,6 +409,7 @@ $('#bookBtn').addEventListener('click', async () => {
         lineItems,
         notes: $('#notesInput').value.trim(),
         website: $('#custWebsite').value,
+        smsConsent: $('#smsConsent').checked,
       }),
     });
 
