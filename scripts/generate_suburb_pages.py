@@ -111,7 +111,7 @@ STYLE_BLOCK = """
         .breadcrumb a:hover {{ color:var(--gold); }}
         .lang-switch a {{ color:var(--slate-light); text-decoration:none; font-weight:600; }}
         .lang-switch a.active {{ color:var(--gold); }}
-        .lang-switch span {{ color: rgba(200,169,74,0.3); margin:0 4px; }}
+        .lang-switch span {{ color: rgba(200,169,74,0.7); margin:0 4px; }}
         .hero-section {{ background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }}
         .hero-section::before {{ content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }}
         .hero-eyebrow {{ color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }}
@@ -351,7 +351,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <a href="tel:{phone}" class="contact-pill">&#128222; {phone_display}</a>
         <a href="mailto:{email}" class="contact-pill">&#9993; {email}</a>
     </div>
-    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.3); letter-spacing:0.05em;">{footer_copy}</p>
+    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.7); letter-spacing:0.05em;">{footer_copy}</p>
     <p style="margin-top:10px; font-size:11px;"><a href="{hub_href}" style="color:var(--slate-light);">{footer_link1}</a> &middot; <a href="{hoods_hub_href}" style="color:var(--slate-light);">{footer_link2}</a></p>
 </footer>
 
@@ -467,7 +467,7 @@ HUB_TEMPLATE = """<!DOCTYPE html>
         .lang-switch {{ text-align:center; padding:14px 24px 0; font-size:12px; }}
         .lang-switch a {{ color:var(--slate-light); text-decoration:none; font-weight:600; }}
         .lang-switch a.active {{ color:var(--gold); }}
-        .lang-switch span {{ color: rgba(200,169,74,0.3); margin:0 4px; }}
+        .lang-switch span {{ color: rgba(200,169,74,0.7); margin:0 4px; }}
         .hero {{ text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(200,169,74,0.2); }}
         .hero h1 {{ font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,7vw,72px); margin:8px 0; letter-spacing:0.03em; }}
         .hero p {{ color:var(--slate-light); font-size:15px; max-width:560px; margin:0 auto; line-height:1.7; }}

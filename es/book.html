@@ -35,7 +35,7 @@
   input, textarea {
     background: #1D1D1D; border: 1px solid rgba(245,240,232,0.15); color: var(--paper);
   }
-  input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,169,74,0.25); }
   ::placeholder { color: rgba(245,240,232,0.35); }
   .day-card { background: #1A1A1A; border: 1px solid rgba(245,240,232,0.1); cursor: pointer; transition: border-color 0.15s ease; }
   .day-card:hover { border-color: var(--gold); }
@@ -55,7 +55,8 @@
   .lang-switch { text-align:center; font-size:12px; margin-bottom:20px; }
   .lang-switch a { color:rgba(245,240,232,0.5); text-decoration:none; font-weight:600; }
   .lang-switch a.active { color:var(--gold); }
-  .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
+  .lang-switch span { color: rgba(200,169,74,0.7); margin:0 4px; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 </style>
 <script>
 (function(){
@@ -91,6 +92,7 @@
   <section id="step1" class="panel rounded-xl p-6 mb-6">
     <h2 class="bebas text-2xl mb-3" style="color:var(--gold);">¿Dónde es la instalación?</h2>
     <div class="relative mb-3">
+      <label for="addressInput" class="sr-only">Dirección</label>
       <input id="addressInput" type="text" autocomplete="off" placeholder="Empieza a escribir tu dirección…" class="w-full rounded-md px-4 py-3 text-sm">
       <div id="addressSuggestions" class="hidden absolute left-0 right-0 z-30 mt-1 rounded-md overflow-hidden" style="background:#1A1A1A; border:1px solid rgba(245,240,232,0.15);"></div>
     </div>
@@ -120,14 +122,18 @@
     <h2 class="bebas text-2xl mb-4" style="color:var(--gold);">Tus datos</h2>
     <div class="space-y-3">
       <input id="custWebsite" name="website" type="text" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true">
+      <label for="custName" class="sr-only">Nombre completo</label>
       <input id="custName" type="text" placeholder="Nombre completo *" class="w-full rounded-md px-4 py-3 text-sm">
+      <label for="custPhone" class="sr-only">Teléfono</label>
       <input id="custPhone" type="tel" placeholder="Teléfono *" class="w-full rounded-md px-4 py-3 text-sm">
+      <label for="custEmail" class="sr-only">Correo electrónico (para confirmación y recibo)</label>
       <input id="custEmail" type="email" placeholder="Correo electrónico (para confirmación y recibo)" class="w-full rounded-md px-4 py-3 text-sm">
 
       <div>
         <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Complementos (opcionales) — la tarifa fija de $100 para el montaje siempre está incluida</p>
         <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
         <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
+        <label for="notesInput" class="sr-only">Notas adicionales</label>
         <input id="notesInput" type="text" placeholder="¿Algo más que debamos saber?" class="w-full rounded-md px-4 py-3 text-sm">
       </div>
 
