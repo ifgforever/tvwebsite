@@ -6,11 +6,32 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
+    <script>
+    (function(){
+      var CURRENT_LANG = 'en';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Mounting South Lawndale — $100 Flat Rate | TV Install Chicago</title>
     <meta name="description" content="Professional TV mounting in South Lawndale, Chicago for a flat $100 — any size, any wall, no hidden fees. Same-day appointments available. Serving all of West Side.">
     <link rel="canonical" href="https://tvserviceschicago.com/neighborhoods/south-lawndale.html">
+    <link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/neighborhoods/south-lawndale.html">
+    <link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/neighborhoods/south-lawndale.html">
+    <link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/neighborhoods/south-lawndale.html">
+    <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/neighborhoods/south-lawndale.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="TV Mounting South Lawndale — $100 Flat Rate | TV Install Chicago">
     <meta property="og:description" content="Professional TV mounting in South Lawndale, Chicago for a flat $100 — any size, any wall, no hidden fees.">
@@ -34,9 +55,12 @@
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .ticker-item { display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
         .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
-        .breadcrumb { font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; }
+        .breadcrumb { font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
         .breadcrumb a { color:var(--slate-light); text-decoration:none; }
         .breadcrumb a:hover { color:var(--gold); }
+        .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+        .lang-switch a.active { color:var(--gold); }
+        .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
         .hero-section { background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }
         .hero-section::before { content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }
         .hero-eyebrow { color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
@@ -100,21 +124,9 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Do you install TVs in South Lawndale?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes — we install and mount TVs throughout South Lawndale and the rest of West Side, usually with same-day or next-day availability." }
-        },
-        {
-          "@type": "Question",
-          "name": "How much does TV mounting cost in South Lawndale?",
-          "acceptedAnswer": { "@type": "Answer", "text": "$100 flat, for any TV of any size, on any standard wall. Optional add-ons like a tilting or full-motion mount or in-wall wire concealment are priced separately." }
-        },
-        {
-          "@type": "Question",
-          "name": "Is there a trip fee for South Lawndale?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. The $100 flat rate applies everywhere we serve in Chicago, including South Lawndale — no trip charges, no hidden fees." }
-        }
+        { "@type": "Question", "name": "Do you install TVs in South Lawndale?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — we install and mount TVs throughout South Lawndale and the rest of West Side, usually with same-day or next-day availability." } },
+        { "@type": "Question", "name": "How much does TV mounting cost in South Lawndale?", "acceptedAnswer": { "@type": "Answer", "text": "$100 flat, for any TV of any size, on any standard wall. Optional add-ons like a tilting or full-motion mount or in-wall wire concealment are priced separately." } },
+        { "@type": "Question", "name": "Is there a trip fee for South Lawndale?", "acceptedAnswer": { "@type": "Answer", "text": "No. The $100 flat rate applies everywhere we serve in Chicago, including South Lawndale — no trip charges, no hidden fees." } }
       ]
     }
     </script>
@@ -123,23 +135,14 @@
 
 <div class="ticker-wrap">
     <div class="ticker-inner">
-        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
-        <span class="ticker-item">TV Mounting South Lawndale</span><span class="ticker-dot"></span>
-        <span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
-        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
-        <span class="ticker-item">TV Mounting South Lawndale</span><span class="ticker-dot"></span>
-        <span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span><span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span><span class="ticker-item">Professional Install</span><span class="ticker-dot"></span><span class="ticker-item">TV Mounting South Lawndale</span><span class="ticker-dot"></span><span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span><span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span><span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span><span class="ticker-item">Professional Install</span><span class="ticker-dot"></span><span class="ticker-item">TV Mounting South Lawndale</span><span class="ticker-dot"></span><span class="ticker-item">No Hidden Fees</span><span class="ticker-dot"></span><span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
     </div>
 </div>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a> &rsaquo; <a href="/neighborhoods/index.html">Neighborhoods</a> &rsaquo; South Lawndale
+    <span><a href="/">Home</a> &rsaquo; <a href="/neighborhoods/index.html">Neighborhoods</a> &rsaquo; South Lawndale</span>
+    <span class="lang-switch"><a class="active" href="/neighborhoods/south-lawndale.html">EN</a><span>|</span><a href="/es/neighborhoods/south-lawndale.html">ES</a><span>|</span><a href="/pl/neighborhoods/south-lawndale.html">PL</a></span>
 </nav>
 
 <section class="hero-section">

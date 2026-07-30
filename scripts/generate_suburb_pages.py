@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """
-Generates /suburbs/<slug>.html for each suburb in suburbs/data.json,
-plus /suburbs/index.html (hub page), and rebuilds sitemap.xml to
-include neighborhoods + suburbs + core pages together.
+Generates /suburbs/<slug>.html (English), /es/suburbs/<slug>.html (Spanish),
+and /pl/suburbs/<slug>.html (Polish) for each suburb in suburbs/data.json,
+plus hub pages for all three languages, and rebuilds sitemap.xml to include
+neighborhoods + suburbs + core pages, in all three languages, together.
+
+This script owns the final sitemap.xml (it runs after
+generate_neighborhood_pages.py and merges both).
 
 Usage:
-    python3 scripts/generate_suburb_pages.py
+    python3 scripts/generate_neighborhood_pages.py   # run first
+    python3 scripts/generate_suburb_pages.py          # then this
 
 Safe to re-run any time you edit suburbs/data.json.
 """
@@ -16,8 +21,15 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SUBURB_DATA_PATH = os.path.join(ROOT, "suburbs", "data.json")
 HOOD_DATA_PATH = os.path.join(ROOT, "neighborhoods", "data.json")
-OUT_DIR = os.path.join(ROOT, "suburbs")
+OUT_DIRS = {
+    "en": os.path.join(ROOT, "suburbs"),
+    "es": os.path.join(ROOT, "es", "suburbs"),
+    "pl": os.path.join(ROOT, "pl", "suburbs"),
+}
+URL_PREFIX = {"en": "/suburbs/", "es": "/es/suburbs/", "pl": "/pl/suburbs/"}
+HOOD_URL_PREFIX = {"en": "/neighborhoods/", "es": "/es/neighborhoods/", "pl": "/pl/neighborhoods/"}
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
+LANGS = ["en", "es", "pl"]
 
 
 def slugify(name: str) -> str:
@@ -34,36 +46,53 @@ def load_suburb_data():
         for h in g["hoods"]:
             flat.append({
                 "name": h["name"],
-                "blurb": h["blurb"],
-                "band": g["band"],
+                "blurb": {"en": h["blurb"], "es": h.get("blurb_es", h["blurb"]), "pl": h.get("blurb_pl", h["blurb"])},
+                "band": {"en": g["band"], "es": g.get("band_es", g["band"]), "pl": g.get("band_pl", g["band"])},
                 "slug": slugify(h["name"]),
             })
     return data, flat
 
 
-PAGE_TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
-    <link rel="shortcut icon" href="/public/favicon.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Mounting {name}, IL — $100 Flat Rate | TV Install Chicago</title>
-    <meta name="description" content="Professional TV mounting in {name}, IL for a flat $100 — any size, any wall, no hidden fees, no suburban upcharge. Same-day appointments available.">
-    <link rel="canonical" href="{domain}/suburbs/{slug}.html">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="TV Mounting {name}, IL — $100 Flat Rate | TV Install Chicago">
-    <meta property="og:description" content="Professional TV mounting in {name}, IL for a flat $100 — any size, any wall, no hidden fees.">
-    <meta property="og:url" content="{domain}/suburbs/{slug}.html">
-    <meta property="og:image" content="{domain}/goldtvlogo.webp">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
+def lang_switch_link(current_lang, slug, kind="page"):
+    parts = []
+    for lang in LANGS:
+        href = URL_PREFIX[lang] + (f"{slug}.html" if kind == "page" else "index.html")
+        cls = ' class="active"' if lang == current_lang else ""
+        parts.append(f'<a{cls} href="{href}">{lang.upper()}</a>')
+    return '<span class="lang-switch">' + '<span>|</span>'.join(parts) + '</span>'
+
+
+def persistence_script(current_lang):
+    return f"""    <script>
+    (function(){{
+      var CURRENT_LANG = '{current_lang}';
+      try {{
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {{
+          var path = location.pathname.replace(/^\\/(es|pl)\\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {{
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }}
+        }}
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      }} catch (e) {{}}
+    }})();
+    </script>
+"""
+
+
+def hreflang_block(domain, path):
+    return (
+        f'    <link rel="alternate" hreflang="en" href="{domain}/{path}">\n'
+        f'    <link rel="alternate" hreflang="es" href="{domain}/es/{path}">\n'
+        f'    <link rel="alternate" hreflang="pl" href="{domain}/pl/{path}">\n'
+        f'    <link rel="alternate" hreflang="x-default" href="{domain}/{path}">'
+    )
+
+
+STYLE_BLOCK = """
         :root {{
             --ink: #0A0A0A; --paper: #F5F0E8; --paper-dark: #EAE4D4;
             --gold: #C8A94A; --gold-light: #E5C97A; --rust: #C45C2E;
@@ -77,9 +106,12 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         @keyframes ticker {{ 0% {{ transform: translateX(0); }} 100% {{ transform: translateX(-50%); }} }}
         .ticker-item {{ display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }}
         .ticker-dot {{ display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }}
-        .breadcrumb {{ font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; }}
+        .breadcrumb {{ font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }}
         .breadcrumb a {{ color:var(--slate-light); text-decoration:none; }}
         .breadcrumb a:hover {{ color:var(--gold); }}
+        .lang-switch a {{ color:var(--slate-light); text-decoration:none; font-weight:600; }}
+        .lang-switch a.active {{ color:var(--gold); }}
+        .lang-switch span {{ color: rgba(200,169,74,0.3); margin:0 4px; }}
         .hero-section {{ background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }}
         .hero-section::before {{ content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }}
         .hero-eyebrow {{ color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }}
@@ -108,12 +140,110 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         .site-footer {{ background: #050505; border-top: 1px solid rgba(200,169,74,0.15); padding: 40px 24px; text-align: center; }}
         .contact-pill {{ display: inline-flex; align-items: center; gap: 8px; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }}
         .contact-pill:hover {{ border-color: var(--gold); color: var(--gold); }}
-    </style>
+"""
+
+HEAD_ICONS = """    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
+    <link rel="shortcut icon" href="/public/favicon.ico">"""
+
+
+S = {
+    "en": {
+        "title": "TV Mounting {name}, IL — $100 Flat Rate | TV Install Chicago",
+        "meta_desc": "Professional TV mounting in {name}, IL for a flat $100 — any size, any wall, no hidden fees, no suburban upcharge. Same-day appointments available.",
+        "og_desc": "Professional TV mounting in {name}, IL for a flat $100 — any size, any wall, no hidden fees.",
+        "home": "Home", "suburbs_label": "Suburbs",
+        "hero_head": "TV MOUNTING", "hero_sub": "{name}, IL",
+        "hero_lead": "Flat rate. Any TV, any size, any wall. Same-day appointments available in {name} &mdash; no suburban upcharge.",
+        "promise1": "Every TV, Every Time", "promise2": "Hidden Fees, Ever", "promise3": "Level. Guaranteed.",
+        "section1_h": "TV Mounting in {name}",
+        "section1_p2": "Same $100 flat rate as everywhere else we serve — mounting hardware included, no size upcharges, no suburban premium for {name}. Optional add-ons like a tilting or full-motion mount, in-wall wire concealment, or soundbar mounting are available if you want them, but the base install is always $100.",
+        "faq_h": "Frequently Asked",
+        "faq_q1": "Do you install TVs in {name}?", "faq_a1": "Yes — we install and mount TVs throughout {name} and the surrounding area, usually with same-day or next-day availability.",
+        "faq_q2": "How much does TV mounting cost in {name}?", "faq_a2": "$100 flat, for any TV of any size, on any standard wall — no suburban upcharge. Optional add-ons like a tilting or full-motion mount or in-wall wire concealment are priced separately.",
+        "faq_q3": "Is there a trip fee to come to {name}?", "faq_a3": "No. The $100 flat rate applies everywhere we serve, including {name} — no trip charges, no hidden fees.",
+        "nearby_h": "Nearby Areas",
+        "cta": "BOOK YOUR $100 INSTALL &mdash; {name}",
+        "footer_tag": "$100 Flat Rate &middot; Any TV &middot; Any Size &middot; Always",
+        "footer_copy": "&copy; TV Install Chicago &middot; The $100 Promise",
+        "footer_link1": "All Suburbs We Serve &rarr;", "footer_link2": "All 77 Chicago Neighborhoods &rarr;",
+        "home_href": "/", "service_type": "TV Mounting and Wall Installation",
+        "ticker": ["$100 Flat Rate", "Any TV. Any Size.", "Professional Install", "TV Mounting {name}", "No Suburban Upcharge", "Same Day Available"],
+    },
+    "es": {
+        "title": "Montaje de TV en {name}, IL — Tarifa Fija de $100 | TV Install Chicago",
+        "meta_desc": "Montaje profesional de TV en {name}, IL por una tarifa fija de $100 — cualquier tamaño, cualquier pared, sin cargos ocultos, sin recargo suburbano. Citas el mismo día disponibles.",
+        "og_desc": "Montaje profesional de TV en {name}, IL por una tarifa fija de $100 — cualquier tamaño, cualquier pared, sin cargos ocultos.",
+        "home": "Inicio", "suburbs_label": "Suburbios",
+        "hero_head": "MONTAJE DE TV", "hero_sub": "{name}, IL",
+        "hero_lead": "Tarifa fija. Cualquier TV, cualquier tamaño, cualquier pared. Citas el mismo día disponibles en {name} &mdash; sin recargo suburbano.",
+        "promise1": "Cada TV, Siempre", "promise2": "Cargos Ocultos, Jamás", "promise3": "Nivelado. Garantizado.",
+        "section1_h": "Montaje de TV en {name}",
+        "section1_p2": "La misma tarifa fija de $100 que en cualquier otra zona donde damos servicio — herrajes de montaje incluidos, sin recargos por tamaño, sin recargo suburbano en {name}. Los complementos opcionales, como un soporte inclinable o de movimiento completo, la ocultación de cables en la pared o el montaje de una barra de sonido, están disponibles si los deseas, pero la instalación básica siempre es de $100.",
+        "faq_h": "Preguntas Frecuentes",
+        "faq_q1": "¿Instalan televisores en {name}?", "faq_a1": "Sí — instalamos y montamos televisores en todo {name} y sus alrededores, generalmente con disponibilidad el mismo día o al día siguiente.",
+        "faq_q2": "¿Cuánto cuesta montar un televisor en {name}?", "faq_a2": "$100 fijos, para cualquier televisor de cualquier tamaño, en cualquier pared estándar — sin recargo suburbano. Los complementos opcionales, como un soporte inclinable o de movimiento completo, o la ocultación de cables en la pared, tienen precio por separado.",
+        "faq_q3": "¿Hay cargo por el viaje a {name}?", "faq_a3": "No. La tarifa fija de $100 aplica en todas las zonas donde damos servicio, incluyendo {name} — sin cargos por viaje, sin cargos ocultos.",
+        "nearby_h": "Áreas Cercanas",
+        "cta": "RESERVA TU INSTALACIÓN DE $100 &mdash; {name}",
+        "footer_tag": "Tarifa Fija de $100 &middot; Cualquier TV &middot; Cualquier Tamaño &middot; Siempre",
+        "footer_copy": "&copy; TV Install Chicago &middot; La Promesa de $100",
+        "footer_link1": "Todos los Suburbios que Atendemos &rarr;", "footer_link2": "Los 77 Vecindarios de Chicago &rarr;",
+        "home_href": "/es/", "service_type": "Montaje de TV e Instalación en Pared",
+        "ticker": ["Tarifa Fija de $100", "Cualquier TV. Cualquier Tamaño.", "Instalación Profesional", "Montaje de TV en {name}", "Sin Recargo Suburbano", "Mismo Día Disponible"],
+    },
+    "pl": {
+        "title": "Montaż TV w {name}, IL — Stała Cena $100 | TV Install Chicago",
+        "meta_desc": "Profesjonalny montaż telewizorów w {name}, IL za stałą cenę $100 — dowolny rozmiar, dowolna ściana, bez ukrytych opłat, bez dopłaty za przedmieście. Dostępne terminy tego samego dnia.",
+        "og_desc": "Profesjonalny montaż telewizorów w {name}, IL za stałą cenę $100 — dowolny rozmiar, dowolna ściana, bez ukrytych opłat.",
+        "home": "Strona Główna", "suburbs_label": "Przedmieścia",
+        "hero_head": "MONTAŻ TV", "hero_sub": "{name}, IL",
+        "hero_lead": "Stała cena. Dowolny telewizor, dowolny rozmiar, dowolna ściana. Dostępne terminy tego samego dnia w {name} &mdash; bez dopłaty za przedmieście.",
+        "promise1": "Każdy TV, Zawsze", "promise2": "Ukryte Opłaty, Nigdy", "promise3": "Poziomo. Gwarantowane.",
+        "section1_h": "Montaż TV w {name}",
+        "section1_p2": "Ta sama stała cena $100, co w każdej innej obsługiwanej przez nas okolicy — uchwyt montażowy w cenie, bez dopłat za rozmiar, bez dopłaty za przedmieście {name}. Opcjonalne dodatki, takie jak uchwyt uchylny lub w pełni ruchomy, ukrycie kabli w ścianie czy montaż soundbara, są dostępne na życzenie, ale podstawowa instalacja zawsze kosztuje $100.",
+        "faq_h": "Najczęściej Zadawane Pytania",
+        "faq_q1": "Czy montujecie telewizory w {name}?", "faq_a1": "Tak — instalujemy i montujemy telewizory w całym {name} i okolicy, zwykle z dostępnością tego samego dnia lub następnego dnia.",
+        "faq_q2": "Ile kosztuje montaż telewizora w {name}?", "faq_a2": "Stałe $100 za dowolny telewizor dowolnego rozmiaru, na dowolnej standardowej ścianie — bez dopłaty za przedmieście. Opcjonalne dodatki, takie jak uchwyt uchylny lub w pełni ruchomy albo ukrycie kabli w ścianie, są wyceniane osobno.",
+        "faq_q3": "Czy jest opłata za dojazd do {name}?", "faq_a3": "Nie. Stała cena $100 obowiązuje wszędzie tam, gdzie świadczymy usługi, w tym w {name} — bez opłat za dojazd, bez ukrytych kosztów.",
+        "nearby_h": "Pobliskie Okolice",
+        "cta": "ZAREZERWUJ INSTALACJĘ ZA $100 &mdash; {name}",
+        "footer_tag": "Stała Cena $100 &middot; Dowolny TV &middot; Dowolny Rozmiar &middot; Zawsze",
+        "footer_copy": "&copy; TV Install Chicago &middot; Obietnica $100",
+        "footer_link1": "Wszystkie Obsługiwane Przedmieścia &rarr;", "footer_link2": "Wszystkie 77 Dzielnic Chicago &rarr;",
+        "home_href": "/pl/", "service_type": "Montaż TV i Instalacja Naścienna",
+        "ticker": ["Stała Cena $100", "Dowolny TV. Dowolny Rozmiar.", "Profesjonalny Montaż", "Montaż TV w {name}", "Bez Dopłaty za Przedmieście", "Dostępne Tego Samego Dnia"],
+    },
+}
+
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="{html_lang}">
+<head>
+""" + HEAD_ICONS + """
+{persistence_script}    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content="{meta_desc}">
+    <link rel="canonical" href="{canonical}">
+{hreflang}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{og_desc}">
+    <meta property="og:url" content="{canonical}">
+    <meta property="og:image" content="{domain}/goldtvlogo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>""" + STYLE_BLOCK + """    </style>
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
       "@type": "Service",
-      "serviceType": "TV Mounting and Wall Installation",
+      "serviceType": "{service_type}",
       "provider": {{
         "@type": "LocalBusiness",
         "name": "TV Install Chicago",
@@ -132,9 +262,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {{ "@type": "ListItem", "position": 1, "name": "Home", "item": "{domain}/" }},
-        {{ "@type": "ListItem", "position": 2, "name": "Suburbs", "item": "{domain}/suburbs/index.html" }},
-        {{ "@type": "ListItem", "position": 3, "name": "{name}", "item": "{domain}/suburbs/{slug}.html" }}
+        {{ "@type": "ListItem", "position": 1, "name": "{home}", "item": "{domain}{home_href}" }},
+        {{ "@type": "ListItem", "position": 2, "name": "{suburbs_label}", "item": "{domain}{hub_href}" }},
+        {{ "@type": "ListItem", "position": 3, "name": "{name}", "item": "{canonical}" }}
       ]
     }}
     </script>
@@ -143,21 +273,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {{
-          "@type": "Question",
-          "name": "Do you install TVs in {name}?",
-          "acceptedAnswer": {{ "@type": "Answer", "text": "Yes — we install and mount TVs throughout {name} and the surrounding area, usually with same-day or next-day availability." }}
-        }},
-        {{
-          "@type": "Question",
-          "name": "How much does TV mounting cost in {name}?",
-          "acceptedAnswer": {{ "@type": "Answer", "text": "$100 flat, for any TV of any size, on any standard wall — no suburban upcharge. Optional add-ons like a tilting or full-motion mount or in-wall wire concealment are priced separately." }}
-        }},
-        {{
-          "@type": "Question",
-          "name": "Is there a trip fee to come to {name}?",
-          "acceptedAnswer": {{ "@type": "Answer", "text": "No. The $100 flat rate applies everywhere we serve, including {name} — no trip charges, no hidden fees." }}
-        }}
+        {{ "@type": "Question", "name": "{faq_q1}", "acceptedAnswer": {{ "@type": "Answer", "text": "{faq_a1}" }} }},
+        {{ "@type": "Question", "name": "{faq_q2}", "acceptedAnswer": {{ "@type": "Answer", "text": "{faq_a2}" }} }},
+        {{ "@type": "Question", "name": "{faq_q3}", "acceptedAnswer": {{ "@type": "Answer", "text": "{faq_a3}" }} }}
       ]
     }}
     </script>
@@ -166,84 +284,75 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <div class="ticker-wrap">
     <div class="ticker-inner">
-        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
-        <span class="ticker-item">TV Mounting {name}</span><span class="ticker-dot"></span>
-        <span class="ticker-item">No Suburban Upcharge</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
-        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Any TV. Any Size.</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Professional Install</span><span class="ticker-dot"></span>
-        <span class="ticker-item">TV Mounting {name}</span><span class="ticker-dot"></span>
-        <span class="ticker-item">No Suburban Upcharge</span><span class="ticker-dot"></span>
-        <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+        {ticker_html}
+        {ticker_html}
     </div>
 </div>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a> &rsaquo; <a href="/suburbs/index.html">Suburbs</a> &rsaquo; {name}
+    <span><a href="{home_href}">{home}</a> &rsaquo; <a href="{hub_href}">{suburbs_label}</a> &rsaquo; {name}</span>
+    {lang_switch}
 </nav>
 
 <section class="hero-section">
     <div style="max-width:900px; margin:0 auto; position:relative; z-index:1;">
         <p class="hero-eyebrow">{band} &middot; Chicago Suburbs</p>
-        <h1 class="hero-title">TV MOUNTING<br><span>{name}, IL</span></h1>
+        <h1 class="hero-title">{hero_head}<br><span>{hero_sub}</span></h1>
         <div class="hero-price">$100</div>
-        <p style="color:var(--slate-light); font-size:15px; max-width:480px; line-height:1.7; margin-top:10px;">Flat rate. Any TV, any size, any wall. Same-day appointments available in {name} &mdash; no suburban upcharge.</p>
+        <p style="color:var(--slate-light); font-size:15px; max-width:480px; line-height:1.7; margin-top:10px;">{hero_lead}</p>
     </div>
 </section>
 
 <div class="content-wrap">
 
     <div class="promise-strip">
-        <div class="promise-item"><div class="promise-number">$100</div><div class="promise-label">Every TV, Every Time</div></div>
-        <div class="promise-item"><div class="promise-number">0</div><div class="promise-label">Hidden Fees, Ever</div></div>
-        <div class="promise-item"><div class="promise-number">100%</div><div class="promise-label">Level. Guaranteed.</div></div>
+        <div class="promise-item"><div class="promise-number">$100</div><div class="promise-label">{promise1}</div></div>
+        <div class="promise-item"><div class="promise-number">0</div><div class="promise-label">{promise2}</div></div>
+        <div class="promise-item"><div class="promise-number">100%</div><div class="promise-label">{promise3}</div></div>
     </div>
 
     <div class="content-card">
-        <h2>TV Mounting in {name}</h2>
+        <h2>{section1_h}</h2>
         <p>{blurb}</p>
-        <p>Same $100 flat rate as everywhere else we serve — mounting hardware included, no size upcharges, no suburban premium for {name}. Optional add-ons like a tilting or full-motion mount, in-wall wire concealment, or soundbar mounting are available if you want them, but the base install is always $100.</p>
+        <p>{section1_p2}</p>
     </div>
 
     <div class="content-card">
-        <h2>Frequently Asked</h2>
+        <h2>{faq_h}</h2>
         <div class="faq-item">
-            <div class="faq-q">Do you install TVs in {name}?</div>
-            <div class="faq-a">Yes — we install and mount TVs throughout {name} and the surrounding area, usually with same-day or next-day availability.</div>
+            <div class="faq-q">{faq_q1}</div>
+            <div class="faq-a">{faq_a1}</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">How much does TV mounting cost in {name}?</div>
-            <div class="faq-a">$100 flat, for any TV of any size, on any standard wall — no suburban upcharge. Optional add-ons like a tilting or full-motion mount or in-wall wire concealment are priced separately.</div>
+            <div class="faq-q">{faq_q2}</div>
+            <div class="faq-a">{faq_a2}</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">Is there a trip fee to come to {name}?</div>
-            <div class="faq-a">No. The $100 flat rate applies everywhere we serve, including {name} — no trip charges, no hidden fees.</div>
+            <div class="faq-q">{faq_q3}</div>
+            <div class="faq-a">{faq_a3}</div>
         </div>
     </div>
 
     <div class="content-card">
-        <h2>Nearby Areas</h2>
+        <h2>{nearby_h}</h2>
         <div class="nearby-list">
             {nearby_links}
         </div>
     </div>
 
-    <a href="/?neighborhood={name_url}#bookingForm" class="cta-btn">BOOK YOUR $100 INSTALL &mdash; {name}</a>
+    <a href="{home_href}?neighborhood={name_url}#bookingForm" class="cta-btn">{cta}</a>
 
 </div>
 
 <footer class="site-footer">
     <p class="bebas" style="font-size:28px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
-    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">$100 Flat Rate &middot; Any TV &middot; Any Size &middot; Always</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">{footer_tag}</p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
         <a href="tel:{phone}" class="contact-pill">&#128222; {phone_display}</a>
         <a href="mailto:{email}" class="contact-pill">&#9993; {email}</a>
     </div>
-    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.3); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; The $100 Promise</p>
-    <p style="margin-top:10px; font-size:11px;"><a href="/suburbs/index.html" style="color:var(--slate-light);">All Suburbs We Serve &rarr;</a> &middot; <a href="/neighborhoods/index.html" style="color:var(--slate-light);">All 77 Chicago Neighborhoods &rarr;</a></p>
+    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.3); letter-spacing:0.05em;">{footer_copy}</p>
+    <p style="margin-top:10px; font-size:11px;"><a href="{hub_href}" style="color:var(--slate-light);">{footer_link1}</a> &middot; <a href="{hoods_hub_href}" style="color:var(--slate-light);">{footer_link2}</a></p>
 </footer>
 
 </body>
@@ -251,36 +360,97 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 """
 
 
-def render_page(hood, flat_by_band, data):
-    same_band = [h for h in flat_by_band[hood["band"]] if h["slug"] != hood["slug"]]
+def render_page(hood, flat_by_band, data, lang):
+    strings = S[lang]
+    band_label = hood["band"][lang]
+    same_band = [h for h in flat_by_band[hood["band"]["en"]] if h["slug"] != hood["slug"]]
     nearby = same_band[:6]
+    prefix = URL_PREFIX[lang]
     nearby_links = "\n            ".join(
-        f'<a href="/suburbs/{n["slug"]}.html" class="nearby-pill">{n["name"]}</a>' for n in nearby
+        f'<a href="{prefix}{n["slug"]}.html" class="nearby-pill">{n["name"]}</a>' for n in nearby
+    )
+    rel_path = f'suburbs/{hood["slug"]}.html'
+    canonical = f'{data["domain"]}{prefix}{hood["slug"]}.html'
+    ticker_html = "".join(
+        f'<span class="ticker-item">{t.format(name=hood["name"])}</span><span class="ticker-dot"></span>'
+        for t in strings["ticker"]
     )
     return PAGE_TEMPLATE.format(
-        name=hood["name"],
-        name_url=hood["name"].replace(" ", "%20").replace("'", "%27"),
-        band=hood["band"],
-        slug=hood["slug"],
-        blurb=hood["blurb"],
-        nearby_links=nearby_links,
+        html_lang=lang,
+        persistence_script=persistence_script(lang),
+        title=strings["title"].format(name=hood["name"]),
+        meta_desc=strings["meta_desc"].format(name=hood["name"]),
+        canonical=canonical,
+        hreflang=hreflang_block(data["domain"], rel_path),
+        og_desc=strings["og_desc"].format(name=hood["name"]),
         domain=data["domain"],
-        phone=data["phone"],
-        email=data["email"],
-        phone_display=data["phoneDisplay"],
+        service_type=strings["service_type"],
+        phone=data["phone"], email=data["email"], phone_display=data["phoneDisplay"],
+        name=hood["name"], name_url=hood["name"].replace(" ", "%20").replace("'", "%27"),
+        band=band_label,
+        home=strings["home"], home_href=strings["home_href"],
+        suburbs_label=strings["suburbs_label"], hub_href=prefix + "index.html",
+        hoods_hub_href=HOOD_URL_PREFIX[lang] + "index.html",
+        lang_switch=lang_switch_link(lang, hood["slug"], "page"),
+        hero_head=strings["hero_head"], hero_sub=strings["hero_sub"].format(name=hood["name"]),
+        hero_lead=strings["hero_lead"].format(name=hood["name"]),
+        promise1=strings["promise1"], promise2=strings["promise2"], promise3=strings["promise3"],
+        section1_h=strings["section1_h"].format(name=hood["name"]),
+        blurb=hood["blurb"][lang],
+        section1_p2=strings["section1_p2"].format(name=hood["name"]),
+        faq_h=strings["faq_h"],
+        faq_q1=strings["faq_q1"].format(name=hood["name"]), faq_a1=strings["faq_a1"].format(name=hood["name"]),
+        faq_q2=strings["faq_q2"].format(name=hood["name"]), faq_a2=strings["faq_a2"],
+        faq_q3=strings["faq_q3"].format(name=hood["name"]), faq_a3=strings["faq_a3"].format(name=hood["name"]),
+        nearby_h=strings["nearby_h"], nearby_links=nearby_links,
+        cta=strings["cta"].format(name=hood["name"]),
+        footer_tag=strings["footer_tag"], footer_copy=strings["footer_copy"],
+        footer_link1=strings["footer_link1"], footer_link2=strings["footer_link2"],
+        ticker_html=ticker_html,
     )
 
 
+HUB_S = {
+    "en": {
+        "title": "TV Mounting in the Chicago Suburbs — $100 Flat Rate | TV Install Chicago",
+        "meta_desc": "TV Install Chicago serves the northern Chicago suburbs, from Norridge through Lake Forest, with a flat $100 TV mounting rate. Find your suburb and book same-day service.",
+        "eyebrow": "North Of The City", "h1": "SUBURBS WE SERVE",
+        "lead": "One flat $100 rate from the city line all the way up through the North Shore &mdash; find your suburb below.",
+        "home_href": "/", "hoods_href": "/neighborhoods/index.html",
+        "hoods_link": "All 77 Chicago Neighborhoods &rarr;", "back": "&larr; Back to Home",
+        "ticker": ["$100 Flat Rate", "Chicago & The Suburbs", "Same Day Available"],
+    },
+    "es": {
+        "title": "Montaje de TV en los Suburbios de Chicago — Tarifa Fija de $100 | TV Install Chicago",
+        "meta_desc": "TV Install Chicago da servicio a los suburbios al norte de Chicago, desde Norridge hasta Lake Forest, con una tarifa fija de $100 para montaje de TV. Encuentra tu suburbio y reserva servicio el mismo día.",
+        "eyebrow": "Al Norte de la Ciudad", "h1": "SUBURBIOS QUE ATENDEMOS",
+        "lead": "Una tarifa fija de $100 desde el límite de la ciudad hasta North Shore &mdash; encuentra tu suburbio abajo.",
+        "home_href": "/es/", "hoods_href": "/es/neighborhoods/index.html",
+        "hoods_link": "Los 77 Vecindarios de Chicago &rarr;", "back": "&larr; Volver al Inicio",
+        "ticker": ["Tarifa Fija de $100", "Chicago y Sus Suburbios", "Mismo Día Disponible"],
+    },
+    "pl": {
+        "title": "Montaż TV na Przedmieściach Chicago — Stała Cena $100 | TV Install Chicago",
+        "meta_desc": "TV Install Chicago obsługuje północne przedmieścia Chicago, od Norridge po Lake Forest, w stałej cenie $100 za montaż TV. Znajdź swoje przedmieście i zarezerwuj usługę tego samego dnia.",
+        "eyebrow": "Na Północ od Miasta", "h1": "OBSŁUGIWANE PRZEDMIEŚCIA",
+        "lead": "Jedna stała cena $100 od granicy miasta aż po North Shore &mdash; znajdź swoje przedmieście poniżej.",
+        "home_href": "/pl/", "hoods_href": "/pl/neighborhoods/index.html",
+        "hoods_link": "Wszystkie 77 Dzielnic Chicago &rarr;", "back": "&larr; Powrót do Strony Głównej",
+        "ticker": ["Stała Cena $100", "Chicago i Przedmieścia", "Dostępne Tego Samego Dnia"],
+    },
+}
+
 HUB_TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
+<html lang="{html_lang}">
 <head>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
-    <meta charset="UTF-8">
+{persistence_script}    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Mounting in the Chicago Suburbs — $100 Flat Rate | TV Install Chicago</title>
-    <meta name="description" content="TV Install Chicago serves the northern Chicago suburbs, from Norridge through Lake Forest, with a flat $100 TV mounting rate. Find your suburb and book same-day service.">
-    <link rel="canonical" href="{domain}/suburbs/index.html">
+    <title>{title}</title>
+    <meta name="description" content="{meta_desc}">
+    <link rel="canonical" href="{canonical}">
+{hreflang}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -294,6 +464,10 @@ HUB_TEMPLATE = """<!DOCTYPE html>
         @keyframes ticker {{ 0% {{ transform: translateX(0); }} 100% {{ transform: translateX(-50%); }} }}
         .ticker-item {{ display:inline-block; color:var(--ink); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:0 40px; }}
         .ticker-dot {{ display:inline-block; width:6px; height:6px; background:var(--ink); border-radius:50%; vertical-align:middle; margin-right:40px; }}
+        .lang-switch {{ text-align:center; padding:14px 24px 0; font-size:12px; }}
+        .lang-switch a {{ color:var(--slate-light); text-decoration:none; font-weight:600; }}
+        .lang-switch a.active {{ color:var(--gold); }}
+        .lang-switch span {{ color: rgba(200,169,74,0.3); margin:0 4px; }}
         .hero {{ text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(200,169,74,0.2); }}
         .hero h1 {{ font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,7vw,72px); margin:8px 0; letter-spacing:0.03em; }}
         .hero p {{ color:var(--slate-light); font-size:15px; max-width:560px; margin:0 auto; line-height:1.7; }}
@@ -308,18 +482,16 @@ HUB_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
 <div class="ticker-wrap"><div class="ticker-inner">
-    <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Chicago &amp; The Suburbs</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
-    <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Chicago &amp; The Suburbs</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+    {ticker_html}
+    {ticker_html}
 </div></div>
 
+{lang_switch}
+
 <div class="hero">
-    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:700;">North Of The City</p>
-    <h1>SUBURBS WE SERVE</h1>
-    <p>One flat $100 rate from the city line all the way up through the North Shore &mdash; find your suburb below.</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:700;">{eyebrow}</p>
+    <h1>{h1}</h1>
+    <p>{lead}</p>
 </div>
 
 <div class="wrap">
@@ -331,8 +503,8 @@ HUB_TEMPLATE = """<!DOCTYPE html>
     <div class="flex" style="margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
         <a href="tel:{phone}" class="contact-pill">&#128222; {phone_display}</a>
         <a href="mailto:{email}" class="contact-pill">&#9993; {email}</a>
-        <a href="/neighborhoods/index.html" class="contact-pill">All 77 Chicago Neighborhoods &rarr;</a>
-        <a href="/" class="contact-pill">&larr; Back to Home</a>
+        <a href="{hoods_href}" class="contact-pill">{hoods_link}</a>
+        <a href="{home_href}" class="contact-pill">{back}</a>
     </div>
 </footer>
 </body>
@@ -340,23 +512,35 @@ HUB_TEMPLATE = """<!DOCTYPE html>
 """
 
 
-def render_hub(data):
+def render_hub(data, lang):
+    strings = HUB_S[lang]
+    prefix = URL_PREFIX[lang]
     regions_html = []
     for g in data["groups"]:
+        band_label = g["band"] if lang == "en" else g.get(f"band_{lang}", g["band"])
         links = "\n            ".join(
-            f'<a href="/suburbs/{slugify(h["name"])}.html" class="hood-link">{h["name"]}</a>'
+            f'<a href="{prefix}{slugify(h["name"])}.html" class="hood-link">{h["name"]}</a>'
             for h in g["hoods"]
         )
         regions_html.append(
-            f'    <div class="region-title">{g["band"]}</div>\n'
+            f'    <div class="region-title">{band_label}</div>\n'
             f'    <div class="hood-grid">\n            {links}\n    </div>'
         )
+    ticker_html = "".join(f'<span class="ticker-item">{t}</span><span class="ticker-dot"></span>' for t in strings["ticker"])
+    rel_path = "suburbs/index.html"
     return HUB_TEMPLATE.format(
-        domain=data["domain"],
-        phone=data["phone"],
-        phone_display=data["phoneDisplay"],
-        email=data["email"],
+        html_lang=lang,
+        persistence_script=persistence_script(lang),
+        title=strings["title"], meta_desc=strings["meta_desc"],
+        canonical=f'{data["domain"]}{prefix}index.html',
+        hreflang=hreflang_block(data["domain"], rel_path),
+        domain=data["domain"], phone=data["phone"], phone_display=data["phoneDisplay"], email=data["email"],
         regions="\n".join(regions_html),
+        lang_switch=lang_switch_link(lang, None, "hub"),
+        eyebrow=strings["eyebrow"], h1=strings["h1"], lead=strings["lead"],
+        home_href=strings["home_href"], hoods_href=strings["hoods_href"],
+        hoods_link=strings["hoods_link"], back=strings["back"],
+        ticker_html=ticker_html,
     )
 
 
@@ -366,16 +550,40 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     hood_flat = [h for g in hood_data["groups"] for h in g["hoods"]]
 
     domain = suburb_data["domain"]
-    urls = [
-        (domain + "/", "1.0"),
-        (domain + "/challenge.html", "0.8"),
-        (domain + "/neighborhoods/index.html", "0.9"),
-        (domain + "/suburbs/index.html", "0.9"),
+    # Core pages that exist as real static files in en/es/pl (not
+    # generated by these scripts) - kept in sync by hand whenever a
+    # core page is added, removed, or renamed.
+    CORE_PAGES = [
+        ("index.html", "1.0"),
+        ("book.html", "0.9"),
+        ("tv-mounting-guide.html", "0.7"),
+        ("challenge.html", "0.6"),
+        ("blog/index.html", "0.6"),
+        ("blog/new-tvs-2026.html", "0.5"),
+        ("terms-and-conditions.html", "0.3"),
+        ("privacy-policy.html", "0.3"),
     ]
+    LANG_ROOT = {"en": "/", "es": "/es/", "pl": "/pl/"}
+    urls = []
+    for lang in LANGS:
+        for page, priority in CORE_PAGES:
+            root = LANG_ROOT[lang]
+            path = "" if page == "index.html" else page
+            urls.append((f'{domain}{root}{path}', priority))
+    for lang in LANGS:
+        urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}index.html', "0.9"))
+        urls.append((f'{domain}{URL_PREFIX[lang]}index.html', "0.9"))
+
     for h in hood_flat:
-        urls.append((f'{domain}/neighborhoods/{slugify(h["name"])}.html', "0.7"))
+        slug = slugify(h["name"])
+        for lang in LANGS:
+            priority = "0.7" if lang == "en" else "0.6"
+            urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}{slug}.html', priority))
+
     for h in suburb_flat:
-        urls.append((f'{domain}/suburbs/{h["slug"]}.html', "0.6"))
+        for lang in LANGS:
+            priority = "0.6" if lang == "en" else "0.5"
+            urls.append((f'{domain}{URL_PREFIX[lang]}{h["slug"]}.html', priority))
 
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -391,24 +599,25 @@ def main():
     data, flat = load_suburb_data()
     flat_by_band = {}
     for h in flat:
-        flat_by_band.setdefault(h["band"], []).append(h)
+        flat_by_band.setdefault(h["band"]["en"], []).append(h)
 
-    os.makedirs(OUT_DIR, exist_ok=True)
+    for d in OUT_DIRS.values():
+        os.makedirs(d, exist_ok=True)
 
     for hood in flat:
-        html = render_page(hood, flat_by_band, data)
-        out_path = os.path.join(OUT_DIR, f'{hood["slug"]}.html')
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(html)
+        for lang in LANGS:
+            html = render_page(hood, flat_by_band, data, lang)
+            with open(os.path.join(OUT_DIRS[lang], f'{hood["slug"]}.html'), "w", encoding="utf-8") as f:
+                f.write(html)
 
-    hub_html = render_hub(data)
-    with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(hub_html)
+    for lang in LANGS:
+        with open(os.path.join(OUT_DIRS[lang], "index.html"), "w", encoding="utf-8") as f:
+            f.write(render_hub(data, lang))
 
     url_count = rebuild_sitemap(data, flat)
 
-    print(f"Generated {len(flat)} suburb pages + hub page.")
-    print(f"Sitemap rebuilt with {url_count} URLs (neighborhoods + suburbs + core pages).")
+    print(f"Generated {len(flat)} suburb pages x {len(LANGS)} languages + {len(LANGS)} hub pages.")
+    print(f"Sitemap rebuilt with {url_count} URLs (neighborhoods + suburbs, EN/ES/PL).")
 
 
 if __name__ == "__main__":

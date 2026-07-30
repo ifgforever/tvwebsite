@@ -8,6 +8,10 @@
     <title>Blog — TV Buying &amp; Mounting Advice | TV Install Chicago</title>
     <meta name="description" content="TV buying guides, mounting advice, and what's new in TVs — from TV Install Chicago.">
     <link rel="canonical" href="https://tvserviceschicago.com/blog/index.html">
+    <link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/blog/index.html">
+    <link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/blog/index.html">
+    <link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/blog/index.html">
+    <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/blog/index.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -32,7 +36,28 @@
         .post-excerpt { color:var(--slate-light); font-size:14px; line-height:1.6; margin:0; }
         .site-footer { background:#050505; border-top:1px solid rgba(200,169,74,0.15); padding:36px 24px; text-align:center; }
         .contact-pill { display:inline-flex; align-items:center; gap:8px; background:#161616; border:1px solid rgba(200,169,74,0.2); color:var(--paper); padding:12px 24px; border-radius:3px; font-size:14px; text-decoration:none; }
+        .lang-switch { text-align:center; padding:14px 24px 0; font-size:12px; }
+        .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+        .lang-switch a.active { color:var(--gold); }
+        .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
     </style>
+    <script>
+    (function(){
+      var CURRENT_LANG = 'en';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
 </head>
 <body>
 <div class="ticker-wrap"><div class="ticker-inner">
@@ -41,6 +66,8 @@
     <span class="ticker-item">TV Buying &amp; Mounting Advice</span><span class="ticker-dot"></span>
     <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
 </div></div>
+
+<nav class="lang-switch"><a class="active" href="/blog/index.html">EN</a><span>|</span><a href="/es/blog/index.html">ES</a><span>|</span><a href="/pl/blog/index.html">PL</a></nav>
 
 <div class="hero">
     <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:700;">From TV Install Chicago</p>

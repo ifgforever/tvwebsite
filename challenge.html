@@ -6,6 +6,10 @@
 <title>The 77 Challenge — TV Install Chicago</title>
 <meta name="description" content="We're on a mission to book a job in every one of Chicago's 77 neighborhoods before summer ends. Follow along and see who's next.">
 <link rel="canonical" href="https://tvserviceschicago.com/challenge.html">
+<link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/challenge.html">
+<link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/challenge.html">
+<link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/challenge.html">
+<link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/challenge.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -77,9 +81,32 @@
     .field-input::placeholder { color: rgba(200,169,74,0.25); }
     .cta-btn { background: var(--ink); color: var(--gold); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.08em; padding: 14px 28px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; }
     .cta-btn:hover { background: var(--gold); color: var(--ink); }
+    .lang-switch { text-align:center; padding:14px 24px 0; font-size:12px; }
+    .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+    .lang-switch a.active { color:var(--gold); }
+    .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
 </style>
+<script>
+(function(){
+  var CURRENT_LANG = 'en';
+  try {
+    var stored = localStorage.getItem('tvic_lang');
+    if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+      var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+      var newPath = stored === 'en' ? path : ('/' + stored + path);
+      if (newPath !== location.pathname) {
+        location.replace(newPath + location.search + location.hash);
+        return;
+      }
+    }
+    localStorage.setItem('tvic_lang', CURRENT_LANG);
+  } catch (e) {}
+})();
+</script>
 </head>
 <body>
+
+<nav class="lang-switch"><a class="active" href="/challenge.html">EN</a><span>|</span><a href="/es/challenge.html">ES</a><span>|</span><a href="/pl/challenge.html">PL</a></nav>
 
 <div class="hero-section px-6 py-14 md:py-20">
     <div class="max-w-3xl mx-auto text-center">

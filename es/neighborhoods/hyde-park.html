@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
+    <link rel="shortcut icon" href="/public/favicon.ico">
+    <script>
+    (function(){
+      var CURRENT_LANG = 'es';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montaje de TV en Hyde Park — Tarifa Fija de $100 | TV Install Chicago</title>
+    <meta name="description" content="Montaje profesional de TV en Hyde Park, Chicago por una tarifa fija de $100 — cualquier tamaño, cualquier pared, sin cargos ocultos. Citas el mismo día disponibles. Servimos toda la zona de Zona Sur.">
+    <link rel="canonical" href="https://tvserviceschicago.com/es/neighborhoods/hyde-park.html">
+    <link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/neighborhoods/hyde-park.html">
+    <link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/neighborhoods/hyde-park.html">
+    <link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/neighborhoods/hyde-park.html">
+    <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/neighborhoods/hyde-park.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Montaje de TV en Hyde Park — Tarifa Fija de $100 | TV Install Chicago">
+    <meta property="og:description" content="Montaje profesional de TV en Hyde Park, Chicago por una tarifa fija de $100 — cualquier tamaño, cualquier pared, sin cargos ocultos.">
+    <meta property="og:url" content="https://tvserviceschicago.com/es/neighborhoods/hyde-park.html">
+    <meta property="og:image" content="https://tvserviceschicago.com/goldtvlogo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --ink: #0A0A0A; --paper: #F5F0E8; --paper-dark: #EAE4D4;
+            --gold: #C8A94A; --gold-light: #E5C97A; --rust: #C45C2E;
+            --slate: #3A4A5C; --slate-light: #6B7E94;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--ink); color: var(--paper); overflow-x: hidden; margin:0; }
+        .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+        .ticker-wrap { background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+        .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item { display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
+        .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
+        .breadcrumb { font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+        .breadcrumb a { color:var(--slate-light); text-decoration:none; }
+        .breadcrumb a:hover { color:var(--gold); }
+        .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+        .lang-switch a.active { color:var(--gold); }
+        .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
+        .hero-section { background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }
+        .hero-section::before { content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }
+        .hero-eyebrow { color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+        .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 7vw, 76px); color: var(--paper); letter-spacing: 0.02em; line-height: 1.02; margin: 10px 0 6px; }
+        .hero-title span { color: var(--gold); }
+        .hero-price { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 12vw, 120px); line-height: 0.9; background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 40%, #F0D890 70%, #C8A94A 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-top:8px; }
+        .content-wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px; position:relative; z-index:1; }
+        .content-card { background:#0F0F0F; border:1px solid rgba(200,169,74,0.2); border-radius:4px; padding:32px; margin-bottom:28px; }
+        .content-card h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold); letter-spacing:0.03em; margin:0 0 14px; }
+        .content-card p { color:var(--slate-light); font-size:15px; line-height:1.75; margin:0 0 12px; }
+        .content-card p:last-child { margin-bottom:0; }
+        .promise-strip { background: var(--paper); color: var(--ink); display: grid; grid-template-columns: repeat(3, 1fr); border-radius:4px; overflow:hidden; margin-bottom:28px; }
+        .promise-item { padding: 24px 20px; border-right: 1px solid var(--paper-dark); text-align: center; }
+        .promise-item:last-child { border-right: none; }
+        .promise-number { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--rust); line-height: 1; }
+        .promise-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate); font-weight: 600; margin-top: 4px; }
+        .faq-item { border-bottom:1px solid rgba(200,169,74,0.12); padding:16px 0; }
+        .faq-item:last-child { border-bottom:none; padding-bottom:0; }
+        .faq-q { font-weight:600; color:var(--paper); font-size:14px; margin-bottom:6px; }
+        .faq-a { color:var(--slate-light); font-size:14px; line-height:1.65; }
+        .nearby-list { display:flex; flex-wrap:wrap; gap:8px; }
+        .nearby-pill { display:inline-block; background:#161616; border:1px solid rgba(200,169,74,0.25); color:var(--paper); padding:8px 16px; border-radius:20px; font-size:13px; text-decoration:none; transition:border-color 0.2s, color 0.2s; }
+        .nearby-pill:hover { border-color:var(--gold); color:var(--gold); }
+        .cta-btn { background: var(--gold); color: var(--ink); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }
+        .cta-btn:hover { background: transparent; color: var(--gold); }
+        .site-footer { background: #050505; border-top: 1px solid rgba(200,169,74,0.15); padding: 40px 24px; text-align: center; }
+        .contact-pill { display: inline-flex; align-items: center; gap: 8px; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+        .contact-pill:hover { border-color: var(--gold); color: var(--gold); }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Montaje de TV e Instalación en Pared",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "TV Install Chicago",
+        "telephone": "+13129317096",
+        "email": "tvinstallchicago@gmail.com",
+        "image": "https://tvserviceschicago.com/goldtvlogo.webp",
+        "priceRange": "$100",
+        "address": { "@type": "PostalAddress", "addressLocality": "Chicago", "addressRegion": "IL", "addressCountry": "US" }
+      },
+      "areaServed": { "@type": "Place", "name": "Hyde Park, Chicago, IL" },
+      "offers": { "@type": "Offer", "price": "100", "priceCurrency": "USD" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://tvserviceschicago.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Vecindarios", "item": "https://tvserviceschicago.com/es/neighborhoods/index.html" },
+        { "@type": "ListItem", "position": 3, "name": "Hyde Park", "item": "https://tvserviceschicago.com/es/neighborhoods/hyde-park.html" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Instalan televisores en Hyde Park?", "acceptedAnswer": { "@type": "Answer", "text": "Sí — instalamos y montamos televisores en todo Hyde Park y el resto de Zona Sur, generalmente con disponibilidad el mismo día o al día siguiente." } },
+        { "@type": "Question", "name": "¿Cuánto cuesta montar un televisor en Hyde Park?", "acceptedAnswer": { "@type": "Answer", "text": "$100 fijos, para cualquier televisor de cualquier tamaño, en cualquier pared estándar. Los complementos opcionales, como un soporte inclinable o de movimiento completo, o la ocultación de cables en la pared, tienen precio por separado." } },
+        { "@type": "Question", "name": "¿Hay cargo por el viaje a Hyde Park?", "acceptedAnswer": { "@type": "Answer", "text": "No. La tarifa fija de $100 aplica en todas las zonas donde damos servicio en Chicago, incluyendo Hyde Park — sin cargos por viaje, sin cargos ocultos." } }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<div class="ticker-wrap">
+    <div class="ticker-inner">
+        <span class="ticker-item">Tarifa Fija de $100</span><span class="ticker-dot"></span><span class="ticker-item">Cualquier TV. Cualquier Tamaño.</span><span class="ticker-dot"></span><span class="ticker-item">Instalación Profesional</span><span class="ticker-dot"></span><span class="ticker-item">Montaje de TV en Hyde Park</span><span class="ticker-dot"></span><span class="ticker-item">Sin Cargos Ocultos</span><span class="ticker-dot"></span><span class="ticker-item">Mismo Día Disponible</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Tarifa Fija de $100</span><span class="ticker-dot"></span><span class="ticker-item">Cualquier TV. Cualquier Tamaño.</span><span class="ticker-dot"></span><span class="ticker-item">Instalación Profesional</span><span class="ticker-dot"></span><span class="ticker-item">Montaje de TV en Hyde Park</span><span class="ticker-dot"></span><span class="ticker-item">Sin Cargos Ocultos</span><span class="ticker-dot"></span><span class="ticker-item">Mismo Día Disponible</span><span class="ticker-dot"></span>
+    </div>
+</div>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    <span><a href="/es/">Inicio</a> &rsaquo; <a href="/es/neighborhoods/index.html">Vecindarios</a> &rsaquo; Hyde Park</span>
+    <span class="lang-switch"><a href="/neighborhoods/hyde-park.html">EN</a><span>|</span><a class="active" href="/es/neighborhoods/hyde-park.html">ES</a><span>|</span><a href="/pl/neighborhoods/hyde-park.html">PL</a></span>
+</nav>
+
+<section class="hero-section">
+    <div style="max-width:900px; margin:0 auto; position:relative; z-index:1;">
+        <p class="hero-eyebrow">Zona Sur &middot; Chicago</p>
+        <h1 class="hero-title">MONTAJE DE TV<br><span>Hyde Park</span></h1>
+        <div class="hero-price">$100</div>
+        <p style="color:var(--slate-light); font-size:15px; max-width:480px; line-height:1.7; margin-top:10px;">Tarifa fija. Cualquier TV, cualquier tamaño, cualquier pared. Citas el mismo día disponibles en Hyde Park.</p>
+    </div>
+</section>
+
+<div class="content-wrap">
+
+    <div class="promise-strip">
+        <div class="promise-item"><div class="promise-number">$100</div><div class="promise-label">Cada TV, Siempre</div></div>
+        <div class="promise-item"><div class="promise-number">0</div><div class="promise-label">Cargos Ocultos, Jamás</div></div>
+        <div class="promise-item"><div class="promise-number">100%</div><div class="promise-label">Nivelado. Garantizado.</div></div>
+    </div>
+
+    <div class="content-card">
+        <h2>Montaje de TV en Hyde Park</h2>
+        <p>Hogar de la Universidad de Chicago, el Museo de Ciencia e Industria, y el Obama Presidential Center que se levanta cerca en Jackson Park. Los edificios antiguos con patio interior y las grandes casas viejas son la norma; sabemos cómo instalar limpiamente en ambos.</p>
+        <p>La misma tarifa fija de $100 que en cualquier otra zona donde damos servicio — herrajes de montaje incluidos, sin recargos por tamaño, sin cargos por viaje en Hyde Park. Los complementos opcionales, como un soporte inclinable o de movimiento completo, la ocultación de cables en la pared o el montaje de una barra de sonido, están disponibles si los deseas, pero la instalación básica siempre es de $100.</p>
+    </div>
+
+    <div class="content-card">
+        <h2>Preguntas Frecuentes</h2>
+        <div class="faq-item">
+            <div class="faq-q">¿Instalan televisores en Hyde Park?</div>
+            <div class="faq-a">Sí — instalamos y montamos televisores en todo Hyde Park y el resto de Zona Sur, generalmente con disponibilidad el mismo día o al día siguiente.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Cuánto cuesta montar un televisor en Hyde Park?</div>
+            <div class="faq-a">$100 fijos, para cualquier televisor de cualquier tamaño, en cualquier pared estándar. Los complementos opcionales, como un soporte inclinable o de movimiento completo, o la ocultación de cables en la pared, tienen precio por separado.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Hay cargo por el viaje a Hyde Park?</div>
+            <div class="faq-a">No. La tarifa fija de $100 aplica en todas las zonas donde damos servicio en Chicago, incluyendo Hyde Park — sin cargos por viaje, sin cargos ocultos.</div>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <h2>Vecindarios Cercanos</h2>
+        <div class="nearby-list">
+            <a href="/es/neighborhoods/armour-square.html" class="nearby-pill">Armour Square</a>
+            <a href="/es/neighborhoods/douglas.html" class="nearby-pill">Douglas</a>
+            <a href="/es/neighborhoods/oakland.html" class="nearby-pill">Oakland</a>
+            <a href="/es/neighborhoods/fuller-park.html" class="nearby-pill">Fuller Park</a>
+            <a href="/es/neighborhoods/grand-boulevard.html" class="nearby-pill">Grand Boulevard</a>
+            <a href="/es/neighborhoods/kenwood.html" class="nearby-pill">Kenwood</a>
+        </div>
+    </div>
+
+    <a href="/es/?neighborhood=Hyde%20Park#bookingForm" class="cta-btn">RESERVA TU INSTALACIÓN DE $100 &mdash; Hyde Park</a>
+
+</div>
+
+<footer class="site-footer">
+    <p class="bebas" style="font-size:28px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">Tarifa Fija de $100 &middot; Cualquier TV &middot; Cualquier Tamaño &middot; Siempre</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+        <a href="tel:+13129317096" class="contact-pill">&#128222; (312) 931-7096</a>
+        <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a>
+    </div>
+    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.3); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; La Promesa de $100</p>
+    <p style="margin-top:10px; font-size:11px;"><a href="/es/neighborhoods/index.html" style="color:var(--slate-light);">Los 77 Vecindarios de Chicago que Atendemos &rarr;</a></p>
+</footer>
+
+</body>
+</html>

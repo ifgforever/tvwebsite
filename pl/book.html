@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zarezerwuj Montaż TV — TV Install Chicago</title>
+<meta name="description" content="Zarezerwuj wizytę montażu TV online. Wybierz dogodny termin — TV Install Chicago, usługa montażu telewizorów w stałej cenie na terenie Chicagoland.">
+<link rel="canonical" href="https://tvserviceschicago.com/pl/book.html">
+<link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/book.html">
+<link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/book.html">
+<link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/book.html">
+<link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/book.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --paper: #F5F0E8;
+    --paper-dark: #EAE4D4;
+    --gold: #C8A94A;
+    --gold-light: #E5C97A;
+    --rust: #C45C2E;
+    --slate: #3A4A5C;
+    --slate-light: #6B7E94;
+  }
+  * { box-sizing: border-box; font-family: 'DM Sans', sans-serif; }
+  .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+  body { background: var(--ink); color: var(--paper); }
+  .panel { background: #141414; border: 1px solid rgba(200,169,74,0.15); }
+  .btn-gold { background: var(--gold); color: var(--ink); font-weight: 700; }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-ghost { background: transparent; border: 1px solid rgba(245,240,232,0.2); color: var(--paper); }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  input, textarea {
+    background: #1D1D1D; border: 1px solid rgba(245,240,232,0.15); color: var(--paper);
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  ::placeholder { color: rgba(245,240,232,0.35); }
+  .day-card { background: #1A1A1A; border: 1px solid rgba(245,240,232,0.1); cursor: pointer; transition: border-color 0.15s ease; }
+  .day-card:hover { border-color: var(--gold); }
+  .day-card.selected { border-color: var(--gold); background: rgba(200,169,74,0.1); }
+  .day-card.suggested { border-color: rgba(200,169,74,0.4); }
+  .day-card.unavailable { opacity: 0.35; cursor: not-allowed; }
+  .slot-btn { background: #1D1D1D; border: 1px solid rgba(245,240,232,0.15); color: var(--paper); }
+  .slot-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .slot-btn.selected { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 600; }
+  .spinner {
+    border: 2px solid rgba(245,240,232,0.2); border-top-color: var(--gold); border-radius: 50%;
+    width: 18px; height: 18px; animation: spin 0.7s linear infinite; display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: rgba(245,240,232,0.15); border-radius: 4px; }
+  .lang-switch { text-align:center; font-size:12px; margin-bottom:20px; }
+  .lang-switch a { color:rgba(245,240,232,0.5); text-decoration:none; font-weight:600; }
+  .lang-switch a.active { color:var(--gold); }
+  .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
+</style>
+<script>
+(function(){
+  var CURRENT_LANG = 'pl';
+  try {
+    var stored = localStorage.getItem('tvic_lang');
+    if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+      var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+      var newPath = stored === 'en' ? path : ('/' + stored + path);
+      if (newPath !== location.pathname) {
+        location.replace(newPath + location.search + location.hash);
+        return;
+      }
+    }
+    localStorage.setItem('tvic_lang', CURRENT_LANG);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body class="min-h-screen">
+
+<div class="max-w-2xl mx-auto px-5 py-12">
+
+  <nav class="lang-switch"><a href="/book.html">EN</a><span>|</span><a href="/es/book.html">ES</a><span>|</span><a class="active" href="/pl/book.html">PL</a></nav>
+
+  <header class="text-center mb-10">
+    <p class="text-xs uppercase tracking-widest" style="color:var(--gold);">TV Install Chicago</p>
+    <h1 class="bebas text-5xl mt-1 mb-2">Zarezerwuj Instalację</h1>
+    <p class="text-sm" style="color:rgba(245,240,232,0.6);">Stała cena $100. Dowolny TV, dowolna ściana. Wybierz dogodny termin.</p>
+  </header>
+
+  <!-- STEP 1: Address -->
+  <section id="step1" class="panel rounded-xl p-6 mb-6">
+    <h2 class="bebas text-2xl mb-3" style="color:var(--gold);">Gdzie odbędzie się instalacja?</h2>
+    <div class="relative mb-3">
+      <input id="addressInput" type="text" autocomplete="off" placeholder="Zacznij wpisywać swój adres…" class="w-full rounded-md px-4 py-3 text-sm">
+      <div id="addressSuggestions" class="hidden absolute left-0 right-0 z-30 mt-1 rounded-md overflow-hidden" style="background:#1A1A1A; border:1px solid rgba(245,240,232,0.15);"></div>
+    </div>
+    <button id="findTimesBtn" class="btn-gold w-full rounded-md py-3 text-sm">Znajdź Dostępne Terminy</button>
+    <p id="addressError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
+  </section>
+
+  <!-- STEP 2: Day + time selection -->
+  <section id="step2" class="hidden">
+    <div id="loadingDays" class="flex items-center gap-2 justify-center py-8" style="color:rgba(245,240,232,0.6);">
+      <span class="spinner"></span> Sprawdzanie dostępności…
+    </div>
+    <div id="daysResults" class="hidden">
+      <h2 class="bebas text-2xl mb-1" style="color:var(--gold);">Wybierz dzień</h2>
+      <p class="text-xs mb-4" style="color:rgba(245,240,232,0.5);">Dni oznaczone <span style="color:var(--gold);">★ Sugerowane</span> mają już zaplanowane inne zlecenie w pobliżu — pomaga to skrócić czas dojazdu (a czasem oznacza szybszą obsługę dla Ciebie).</p>
+      <div id="daysList" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6"></div>
+
+      <div id="slotsSection" class="hidden">
+        <h2 class="bebas text-2xl mb-3" style="color:var(--gold);">Wybierz godzinę</h2>
+        <div id="slotsList" class="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: Contact details -->
+  <section id="step3" class="hidden panel rounded-xl p-6 mb-6">
+    <h2 class="bebas text-2xl mb-4" style="color:var(--gold);">Twoje dane</h2>
+    <div class="space-y-3">
+      <input id="custWebsite" name="website" type="text" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true">
+      <input id="custName" type="text" placeholder="Imię i nazwisko *" class="w-full rounded-md px-4 py-3 text-sm">
+      <input id="custPhone" type="tel" placeholder="Telefon *" class="w-full rounded-md px-4 py-3 text-sm">
+      <input id="custEmail" type="email" placeholder="E-mail (do potwierdzenia i paragonu)" class="w-full rounded-md px-4 py-3 text-sm">
+
+      <div>
+        <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Dodatki (opcjonalne) — stała cena montażu $100 zawsze jest w cenie</p>
+        <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
+        <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
+        <input id="notesInput" type="text" placeholder="Coś jeszcze, co powinniśmy wiedzieć?" class="w-full rounded-md px-4 py-3 text-sm">
+      </div>
+
+      <label class="flex items-start gap-2 text-xs" style="color:rgba(245,240,232,0.6);">
+        <input id="smsConsent" type="checkbox" class="mt-0.5" style="width:14px; height:14px;">
+        Wyślij mi SMS przypominający dzień przed moją wizytą (mogą obowiązywać opłaty za wiadomości i dane, odpowiedz STOP, aby zrezygnować)
+      </label>
+    </div>
+
+    <button id="bookBtn" class="btn-gold w-full rounded-md py-3 text-sm mt-5">Potwierdź Rezerwację</button>
+    <button id="backBtn" class="btn-ghost w-full rounded-md py-2.5 text-sm mt-2">&larr; Powrót do terminów</button>
+    <p id="bookError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
+  </section>
+
+  <!-- STEP 4: Confirmation -->
+  <section id="step4" class="hidden panel rounded-xl p-8 text-center">
+    <div class="text-5xl mb-3">✓</div>
+    <h2 class="bebas text-3xl mb-2" style="color:var(--gold);">Zarezerwowane!</h2>
+    <p id="confirmSummary" class="text-sm" style="color:rgba(245,240,232,0.75);"></p>
+    <p class="text-xs mt-4" style="color:rgba(245,240,232,0.5);">Masz pytania? Zadzwoń lub napisz do nas w dowolnym momencie.</p>
+  </section>
+
+</div>
+
+<script>window.TVIC_LANG = 'pl';</script>
+<script src="/js/book.js"></script>
+
+</body>
+</html>

@@ -3,11 +3,32 @@
 <head>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
+    <script>
+    (function(){
+      var CURRENT_LANG = 'en';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Mounting in Every Chicago Neighborhood — $100 Flat Rate | TV Install Chicago</title>
     <meta name="description" content="TV Install Chicago serves all 77 official Chicago community areas with a flat $100 TV mounting rate. Find your neighborhood and book same-day service.">
     <link rel="canonical" href="https://tvserviceschicago.com/neighborhoods/index.html">
+    <link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/neighborhoods/index.html">
+    <link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/neighborhoods/index.html">
+    <link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/neighborhoods/index.html">
+    <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/neighborhoods/index.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -21,6 +42,10 @@
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .ticker-item { display:inline-block; color:var(--ink); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:0 40px; }
         .ticker-dot { display:inline-block; width:6px; height:6px; background:var(--ink); border-radius:50%; vertical-align:middle; margin-right:40px; }
+        .lang-switch { text-align:center; padding:14px 24px 0; font-size:12px; }
+        .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+        .lang-switch a.active { color:var(--gold); }
+        .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
         .hero { text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(200,169,74,0.2); }
         .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,7vw,72px); margin:8px 0; letter-spacing:0.03em; }
         .hero p { color:var(--slate-light); font-size:15px; max-width:560px; margin:0 auto; line-height:1.7; }
@@ -35,13 +60,11 @@
 </head>
 <body>
 <div class="ticker-wrap"><div class="ticker-inner">
-    <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-    <span class="ticker-item">All 77 Chicago Neighborhoods</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
-    <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
-    <span class="ticker-item">All 77 Chicago Neighborhoods</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+    <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span><span class="ticker-item">All 77 Chicago Neighborhoods</span><span class="ticker-dot"></span><span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
+    <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span><span class="ticker-item">All 77 Chicago Neighborhoods</span><span class="ticker-dot"></span><span class="ticker-item">Same Day Available</span><span class="ticker-dot"></span>
 </div></div>
+
+<span class="lang-switch"><a class="active" href="/neighborhoods/index.html">EN</a><span>|</span><a href="/es/neighborhoods/index.html">ES</a><span>|</span><a href="/pl/neighborhoods/index.html">PL</a></span>
 
 <div class="hero">
     <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:700;">Every Corner Of The City</p>

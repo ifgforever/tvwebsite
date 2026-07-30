@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy | TV Install Chicago</title>
 <meta name="description" content="Privacy Policy for TV Install Chicago, Chicagoland's flat-rate TV mounting service.">
+<link rel="canonical" href="https://tvserviceschicago.com/privacy-policy.html">
+<link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/privacy-policy.html">
+<link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/privacy-policy.html">
+<link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/privacy-policy.html">
+<link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/privacy-policy.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -25,11 +30,34 @@
   .section-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; color: var(--ink); border-bottom: 2px solid var(--gold); padding-bottom: 0.25rem; }
   .toc a { text-decoration: none; color: var(--ink); }
   .toc a:hover { color: var(--gold-dim); }
+  .lang-switch { font-size:12px; text-align:right; margin-bottom:1rem; }
+  .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+  .lang-switch a.active { color:var(--gold-dim); }
+  .lang-switch span { color: rgba(200,169,74,0.4); margin:0 4px; }
 </style>
+<script>
+(function(){
+  var CURRENT_LANG = 'en';
+  try {
+    var stored = localStorage.getItem('tvic_lang');
+    if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+      var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+      var newPath = stored === 'en' ? path : ('/' + stored + path);
+      if (newPath !== location.pathname) {
+        location.replace(newPath + location.search + location.hash);
+        return;
+      }
+    }
+    localStorage.setItem('tvic_lang', CURRENT_LANG);
+  } catch (e) {}
+})();
+</script>
 </head>
 <body class="min-h-screen">
 
 <div class="max-w-3xl mx-auto px-6 py-16">
+
+  <nav class="lang-switch"><a class="active" href="/privacy-policy.html">EN</a><span>|</span><a href="/es/privacy-policy.html">ES</a><span>|</span><a href="/pl/privacy-policy.html">PL</a></nav>
 
   <header class="mb-10 pb-8 border-b-2 border-[var(--ink)]">
     <p class="text-xs uppercase tracking-widest text-[var(--slate-light)] mb-2">TV Install Chicago</p>

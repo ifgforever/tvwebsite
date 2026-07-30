@@ -7,124 +7,527 @@
     {
       "region": "Far North Side",
       "hoods": [
-        { "name": "Rogers Park", "blurb": "Home to Loyola University Chicago and some of the city's most diverse housing stock, from lakefront high-rises to courtyard apartment buildings. We mount TVs in dorm-style studios and vintage six-flats alike, all for the same flat rate." },
-        { "name": "West Ridge", "blurb": "West Ridge's Devon Avenue corridor is one of the most culturally rich strips in Chicago, and the housing behind it ranges from brick bungalows to larger single-family homes. We're used to older wiring and plaster walls throughout the neighborhood." },
-        { "name": "Uptown", "blurb": "From the historic Uptown Theatre to the Vietnamese storefronts along Argyle Street, this neighborhood mixes vintage courtyard buildings with modern high-rises near the lake. We bring the right hardware for both plaster and drywall." },
-        { "name": "Lincoln Square", "blurb": "Lincoln Square's German heritage lives on around Giddings Plaza, surrounded by classic bungalows, vintage two-flats, and walk-up apartments. It's a neighborhood full of character — and character walls — and we handle both well." },
-        { "name": "Edison Park", "blurb": "Chicago's northwesternmost neighborhood feels almost suburban, with tree-lined streets of brick bungalows and Cape Cods near the Metra line. Same $100 flat rate applies here as anywhere else in the city." },
-        { "name": "Norwood Park", "blurb": "One of Chicago's oldest and most residential community areas, with a historic district of century-old homes alongside newer construction. We're familiar with the wide variety of wall types you'll find on these established blocks." },
-        { "name": "Jefferson Park", "blurb": "A major transit hub where the Blue Line meets Metra, surrounded by classic Chicago bungalows and two-flats. Easy to reach, easy to schedule — we're in and out of Jefferson Park regularly." },
-        { "name": "Forest Glen", "blurb": "One of the city's most wooded and spacious community areas, including the Sauganash neighborhood's larger lots and newer construction. Bigger homes sometimes mean bigger TVs, and our flat rate doesn't change either way." },
-        { "name": "North Park", "blurb": "Home to North Park University and quiet residential streets along the North Branch of the Chicago River. A mix of bungalows and post-war homes means we come prepared for anything." },
-        { "name": "Albany Park", "blurb": "One of the most linguistically diverse neighborhoods in the country, packed with courtyard apartment buildings, two-flats, and bungalows along the river. We've mounted TVs in just about every building type Albany Park has to offer." },
-        { "name": "Edgewater", "blurb": "A lakefront community that includes Andersonville's Swedish-heritage business strip along Clark Street, alongside high-rises and vintage greystones closer to the water. Older buildings with tricky walls are our specialty here." },
-        { "name": "O'Hare", "blurb": "Best known for the airport that shares its name, but also home to quiet residential pockets like Schorsch Village and Belmont Heights. We service the whole area, no matter how close you are to the runways." }
-      ]
+        {
+          "name": "Rogers Park",
+          "blurb": "Home to Loyola University Chicago and some of the city's most diverse housing stock, from lakefront high-rises to courtyard apartment buildings. We mount TVs in dorm-style studios and vintage six-flats alike, all for the same flat rate.",
+          "blurb_es": "Aquí está Loyola University Chicago y una de las mezclas de vivienda más diversas de la ciudad, desde torres frente al lago hasta edificios de apartamentos con patio interior. Instalamos televisores tanto en estudios estilo dormitorio universitario como en clásicos edificios de seis unidades, siempre a la misma tarifa fija.",
+          "blurb_pl": "Siedziba Loyola University Chicago i jedna z najbardziej zróżnicowanych zabudów mieszkaniowych w mieście — od wieżowców nad jeziorem po kamienice z wewnętrznym dziedzińcem. Montujemy telewizory zarówno w akademikach, jak i w zabytkowych budynkach sześciolokalowych — zawsze w tej samej stałej cenie."
+        },
+        {
+          "name": "West Ridge",
+          "blurb": "West Ridge's Devon Avenue corridor is one of the most culturally rich strips in Chicago, and the housing behind it ranges from brick bungalows to larger single-family homes. We're used to older wiring and plaster walls throughout the neighborhood.",
+          "blurb_es": "El corredor de Devon Avenue en West Ridge es una de las zonas con más riqueza cultural de Chicago, y las viviendas detrás van desde bungalows de ladrillo hasta casas unifamiliares más grandes. Estamos acostumbrados al cableado antiguo y a las paredes de yeso en todo el vecindario.",
+          "blurb_pl": "Korytarz Devon Avenue w West Ridge to jedna z najbogatszych kulturowo ulic Chicago, a zabudowa wokół niej sięga od ceglanych bungalowów po większe domy jednorodzinne. Znamy się na starszej instalacji elektrycznej i tynkowanych ścianach w całej dzielnicy."
+        },
+        {
+          "name": "Uptown",
+          "blurb": "From the historic Uptown Theatre to the Vietnamese storefronts along Argyle Street, this neighborhood mixes vintage courtyard buildings with modern high-rises near the lake. We bring the right hardware for both plaster and drywall.",
+          "blurb_es": "Desde el histórico Uptown Theatre hasta los negocios vietnamitas de Argyle Street, este vecindario mezcla edificios clásicos con patio interior y torres modernas cerca del lago. Llevamos el equipo adecuado tanto para paredes de yeso como de tabla de yeso (drywall).",
+          "blurb_pl": "Od zabytkowego Uptown Theatre po wietnamskie sklepy przy Argyle Street — ta dzielnica łączy zabytkowe kamienice z dziedzińcem z nowoczesnymi wieżowcami blisko jeziora. Mamy odpowiedni sprzęt zarówno do tynku, jak i płyt gipsowo-kartonowych."
+        },
+        {
+          "name": "Lincoln Square",
+          "blurb": "Lincoln Square's German heritage lives on around Giddings Plaza, surrounded by classic bungalows, vintage two-flats, and walk-up apartments. It's a neighborhood full of character — and character walls — and we handle both well.",
+          "blurb_es": "La herencia alemana de Lincoln Square sigue viva alrededor de Giddings Plaza, rodeada de bungalows clásicos, dúplex antiguos y edificios de apartamentos sin ascensor. Es un vecindario lleno de carácter —y paredes con carácter—, y sabemos manejar ambos muy bien.",
+          "blurb_pl": "Niemieckie dziedzictwo Lincoln Square wciąż żyje wokół Giddings Plaza, otoczonego klasycznymi bungalowami, zabytkowymi dwupiętrowymi domami i kamienicami bez windy. To dzielnica pełna charakteru — i charakterystycznych ścian — a my dobrze radzimy sobie z obydwoma."
+        },
+        {
+          "name": "Edison Park",
+          "blurb": "Chicago's northwesternmost neighborhood feels almost suburban, with tree-lined streets of brick bungalows and Cape Cods near the Metra line. Same $100 flat rate applies here as anywhere else in the city.",
+          "blurb_es": "El vecindario más al noroeste de Chicago se siente casi como un suburbio, con calles arboladas de bungalows de ladrillo y casas estilo Cape Cod cerca de la línea Metra. Aquí aplica la misma tarifa fija de $100 que en cualquier otra parte de la ciudad.",
+          "blurb_pl": "Najbardziej wysunięta na północny zachód dzielnica Chicago wygląda niemal jak przedmieście, z zadrzewionymi ulicami ceglanych bungalowów i domów w stylu Cape Cod blisko linii Metra. Ta sama stała stawka $100 obowiązuje tu, jak i w każdej innej części miasta."
+        },
+        {
+          "name": "Norwood Park",
+          "blurb": "One of Chicago's oldest and most residential community areas, with a historic district of century-old homes alongside newer construction. We're familiar with the wide variety of wall types you'll find on these established blocks.",
+          "blurb_es": "Una de las áreas comunitarias más antiguas y residenciales de Chicago, con un distrito histórico de casas centenarias junto a construcciones más nuevas. Estamos familiarizados con la gran variedad de tipos de pared que se encuentran en estas cuadras ya establecidas.",
+          "blurb_pl": "Jedna z najstarszych i najbardziej mieszkalnych dzielnic Chicago, z zabytkową częścią stuletnich domów obok nowszej zabudowy. Znamy różnorodne typy ścian spotykane na tych ugruntowanych ulicach."
+        },
+        {
+          "name": "Jefferson Park",
+          "blurb": "A major transit hub where the Blue Line meets Metra, surrounded by classic Chicago bungalows and two-flats. Easy to reach, easy to schedule — we're in and out of Jefferson Park regularly.",
+          "blurb_es": "Un importante centro de transporte donde se encuentran la línea Blue Line y Metra, rodeado de clásicos bungalows y dúplex de Chicago. Fácil de llegar, fácil de agendar —estamos en Jefferson Park con regularidad.",
+          "blurb_pl": "Ważny węzeł komunikacyjny, gdzie linia Blue Line spotyka się z Metra, otoczony klasycznymi chicagowskimi bungalowami i domami dwupiętrowymi. Łatwy dojazd, łatwe umówienie terminu — regularnie bywamy w Jefferson Park."
+        },
+        {
+          "name": "Forest Glen",
+          "blurb": "One of the city's most wooded and spacious community areas, including the Sauganash neighborhood's larger lots and newer construction. Bigger homes sometimes mean bigger TVs, and our flat rate doesn't change either way.",
+          "blurb_es": "Una de las áreas comunitarias más arboladas y espaciosas de la ciudad, incluyendo los lotes más grandes y construcciones más nuevas del vecindario Sauganash. Casas más grandes a veces significan televisores más grandes, y nuestra tarifa fija no cambia en ningún caso.",
+          "blurb_pl": "Jedna z najbardziej zalesionych i przestronnych dzielnic miasta, obejmująca większe działki i nowszą zabudowę w Sauganash. Większe domy czasem oznaczają większe telewizory, a nasza stała stawka i tak się nie zmienia."
+        },
+        {
+          "name": "North Park",
+          "blurb": "Home to North Park University and quiet residential streets along the North Branch of the Chicago River. A mix of bungalows and post-war homes means we come prepared for anything.",
+          "blurb_es": "Aquí está North Park University y tranquilas calles residenciales a lo largo de la rama norte del río Chicago. Una mezcla de bungalows y casas de posguerra significa que llegamos preparados para cualquier cosa.",
+          "blurb_pl": "Siedziba North Park University i spokojnych ulic mieszkalnych wzdłuż północnej odnogi rzeki Chicago. Mieszanka bungalowów i domów powojennych oznacza, że jesteśmy przygotowani na wszystko."
+        },
+        {
+          "name": "Albany Park",
+          "blurb": "One of the most linguistically diverse neighborhoods in the country, packed with courtyard apartment buildings, two-flats, and bungalows along the river. We've mounted TVs in just about every building type Albany Park has to offer.",
+          "blurb_es": "Uno de los vecindarios lingüísticamente más diversos del país, lleno de edificios con patio interior, dúplex y bungalows a lo largo del río. Hemos instalado televisores en prácticamente todo tipo de edificio que ofrece Albany Park.",
+          "blurb_pl": "Jedna z najbardziej zróżnicowanych językowo dzielnic w kraju, pełna kamienic z dziedzińcem, domów dwupiętrowych i bungalowów wzdłuż rzeki. Montowaliśmy telewizory niemal w każdym typie budynku, jaki oferuje Albany Park."
+        },
+        {
+          "name": "Edgewater",
+          "blurb": "A lakefront community that includes Andersonville's Swedish-heritage business strip along Clark Street, alongside high-rises and vintage greystones closer to the water. Older buildings with tricky walls are our specialty here.",
+          "blurb_es": "Una comunidad frente al lago que incluye la zona comercial de herencia sueca de Andersonville a lo largo de Clark Street, junto con torres y greystones antiguos más cerca del agua. Los edificios antiguos con paredes complicadas son nuestra especialidad aquí.",
+          "blurb_pl": "Nadjeziorna dzielnica obejmująca szwedzką dzielnicę handlową Andersonville wzdłuż Clark Street, obok wieżowców i zabytkowych szarych kamienic (greystone) bliżej wody. Starsze budynki z trudnymi ścianami to nasza specjalność."
+        },
+        {
+          "name": "O'Hare",
+          "blurb": "Best known for the airport that shares its name, but also home to quiet residential pockets like Schorsch Village and Belmont Heights. We service the whole area, no matter how close you are to the runways.",
+          "blurb_es": "Conocido principalmente por el aeropuerto que lleva su nombre, pero también hogar de tranquilos rincones residenciales como Schorsch Village y Belmont Heights. Damos servicio a toda la zona, sin importar qué tan cerca estés de las pistas.",
+          "blurb_pl": "Znane głównie z lotniska, które nosi tę samą nazwę, ale też siedziba spokojnych zakątków mieszkalnych, takich jak Schorsch Village i Belmont Heights. Obsługujemy całą okolicę, bez względu na to, jak blisko pasów startowych mieszkasz."
+        }
+      ],
+      "region_es": "Extremo Norte",
+      "region_pl": "Daleka Północ"
     },
     {
       "region": "North Side",
       "hoods": [
-        { "name": "North Center", "blurb": "A family-friendly neighborhood built on the former site of Riverview Park, now filled with rehabbed bungalows, new construction, and vintage two-flats near Welles Park. Clean installs on clean drywall — one of our easier stops." },
-        { "name": "Lake View", "blurb": "Home to Wrigley Field and the Northalsted/Boystown business strip, Lake View is dense with vintage courtyard buildings, graystones, and high-rises along Broadway. We install above fireplaces, in bay windows, and everywhere in between." },
-        { "name": "Lincoln Park", "blurb": "From classic greystone two-flats near DePaul to sleek high-rises along the lakefront, Lincoln Park has some of the most varied wall types in the city. Plaster, brick, drywall — we bring the right anchors for whatever your building throws at us." },
-        { "name": "Avondale", "blurb": "Historically the heart of Chicago's Polish community along Milwaukee Avenue, Avondale is filled with brick two-flats and bungalows that back up right against increasingly trendy Logan Square. We know the older wall construction well." },
-        { "name": "Logan Square", "blurb": "Logan Square's grand boulevard system and vintage greystones make it one of the city's most architecturally distinct neighborhoods. We mount above fireplaces, on plaster walls, and in the open-concept rehabs that have taken over the area." }
-      ]
+        {
+          "name": "North Center",
+          "blurb": "A family-friendly neighborhood built on the former site of Riverview Park, now filled with rehabbed bungalows, new construction, and vintage two-flats near Welles Park. Clean installs on clean drywall — one of our easier stops.",
+          "blurb_es": "Un vecindario familiar construido sobre el antiguo sitio de Riverview Park, ahora lleno de bungalows renovados, construcción nueva y dúplex antiguos cerca de Welles Park. Instalaciones limpias sobre tabla de yeso limpia —una de nuestras paradas más fáciles.",
+          "blurb_pl": "Przyjazna rodzinom dzielnica zbudowana na dawnym terenie Riverview Park, dziś pełna odnowionych bungalowów, nowej zabudowy i zabytkowych domów dwupiętrowych blisko Welles Park. Czysty montaż na czystej płycie gipsowo-kartonowej — jeden z naszych łatwiejszych przystanków."
+        },
+        {
+          "name": "Lake View",
+          "blurb": "Home to Wrigley Field and the Northalsted/Boystown business strip, Lake View is dense with vintage courtyard buildings, graystones, and high-rises along Broadway. We install above fireplaces, in bay windows, and everywhere in between.",
+          "blurb_es": "Aquí está Wrigley Field y la zona comercial de Northalsted/Boystown; Lake View está lleno de edificios clásicos con patio interior, greystones y torres a lo largo de Broadway. Instalamos sobre chimeneas, en miradores (bay windows) y en todo lo demás.",
+          "blurb_pl": "Siedziba Wrigley Field i dzielnicy handlowej Northalsted/Boystown — Lake View jest gęsto zabudowane zabytkowymi kamienicami z dziedzińcem, szarymi kamienicami i wieżowcami wzdłuż Broadway. Montujemy nad kominkami, we wnękach okiennych i wszędzie pomiędzy."
+        },
+        {
+          "name": "Lincoln Park",
+          "blurb": "From classic greystone two-flats near DePaul to sleek high-rises along the lakefront, Lincoln Park has some of the most varied wall types in the city. Plaster, brick, drywall — we bring the right anchors for whatever your building throws at us.",
+          "blurb_es": "Desde clásicos dúplex greystone cerca de DePaul hasta elegantes torres junto al lago, Lincoln Park tiene algunos de los tipos de pared más variados de la ciudad. Yeso, ladrillo, tabla de yeso: llevamos los anclajes correctos para lo que sea que nos presente tu edificio.",
+          "blurb_pl": "Od klasycznych szarych domów dwupiętrowych blisko DePaul po eleganckie wieżowce nad jeziorem — Lincoln Park ma jedne z najbardziej zróżnicowanych typów ścian w mieście. Tynk, cegła, płyta gipsowo-kartonowa — mamy odpowiednie kołki do wszystkiego, co zaoferuje nam Twój budynek."
+        },
+        {
+          "name": "Avondale",
+          "blurb": "Historically the heart of Chicago's Polish community along Milwaukee Avenue, Avondale is filled with brick two-flats and bungalows that back up right against increasingly trendy Logan Square. We know the older wall construction well.",
+          "blurb_es": "Históricamente el corazón de la comunidad polaca de Chicago a lo largo de Milwaukee Avenue, Avondale está lleno de dúplex de ladrillo y bungalows que colindan justo con el cada vez más de moda Logan Square. Conocemos bien la construcción de paredes más antigua.",
+          "blurb_pl": "Historycznie serce polskiej społeczności Chicago wzdłuż Milwaukee Avenue, Avondale pełne jest ceglanych domów dwupiętrowych i bungalowów, graniczących z coraz bardziej modnym Logan Square. Dobrze znamy starszą konstrukcję ścian."
+        },
+        {
+          "name": "Logan Square",
+          "blurb": "Logan Square's grand boulevard system and vintage greystones make it one of the city's most architecturally distinct neighborhoods. We mount above fireplaces, on plaster walls, and in the open-concept rehabs that have taken over the area.",
+          "blurb_es": "El sistema de grandes bulevares y los greystones antiguos hacen de Logan Square uno de los vecindarios arquitectónicamente más distintivos de la ciudad. Instalamos sobre chimeneas, en paredes de yeso y en las renovaciones de planta abierta que dominan la zona.",
+          "blurb_pl": "System wielkich bulwarów i zabytkowe szare kamienice sprawiają, że Logan Square to jedna z architektonicznie najbardziej charakterystycznych dzielnic miasta. Montujemy nad kominkami, na tynkowanych ścianach i w otwartych metrażach po remontach, które zdominowały tę okolicę."
+        }
+      ],
+      "region_es": "Zona Norte",
+      "region_pl": "Północna Strona"
     },
     {
       "region": "Northwest Side",
       "hoods": [
-        { "name": "Portage Park", "blurb": "Anchored by the Six Corners shopping district and the park it's named for, this neighborhood is deep in Chicago's bungalow belt. We've mounted more TVs on classic Chicago brick bungalows than we can count." },
-        { "name": "Irving Park", "blurb": "Home to the Old Irving Park Historic District, with grand vintage homes alongside more modest bungalows near the Kennedy Expressway. Whatever era your home is from, we've got hardware that fits it." },
-        { "name": "Dunning", "blurb": "A quiet residential area near Wilbur Wright College, filled with bungalows and post-war brick homes on wide lots. Easy access off the Kennedy makes scheduling in Dunning simple." },
-        { "name": "Montclare", "blurb": "One of the city's smallest community areas, tucked against the Elmwood Park border and full of tidy brick bungalows. We're in and out of Montclare fast — small neighborhood, same big-city service." },
-        { "name": "Belmont Cragin", "blurb": "A large, diverse working-class neighborhood of bungalows and brick two-flats along the Belmont and Central corridors. We show up on time and charge exactly what we quote, every time." },
-        { "name": "Hermosa", "blurb": "A compact neighborhood wedged between Logan Square and Belmont Cragin, known for brick two-flats and classic bungalows on tight, walkable blocks. Same flat rate, no matter how small the street." }
-      ]
+        {
+          "name": "Portage Park",
+          "blurb": "Anchored by the Six Corners shopping district and the park it's named for, this neighborhood is deep in Chicago's bungalow belt. We've mounted more TVs on classic Chicago brick bungalows than we can count.",
+          "blurb_es": "Anclado por el distrito comercial Six Corners y el parque que le da su nombre, este vecindario está en pleno corazón del área de bungalows de Chicago. Hemos instalado más televisores en clásicos bungalows de ladrillo de los que podemos contar.",
+          "blurb_pl": "Zakotwiczona przez centrum handlowe Six Corners i park, od którego wzięła nazwę, ta dzielnica leży w samym sercu chicagowskiego pasa bungalowów. Zamontowaliśmy więcej telewizorów w klasycznych chicagowskich ceglanych bungalowach, niż jesteśmy w stanie zliczyć."
+        },
+        {
+          "name": "Irving Park",
+          "blurb": "Home to the Old Irving Park Historic District, with grand vintage homes alongside more modest bungalows near the Kennedy Expressway. Whatever era your home is from, we've got hardware that fits it.",
+          "blurb_es": "Hogar del histórico distrito Old Irving Park, con grandes casas antiguas junto a bungalows más modestos cerca de la autopista Kennedy. Sea cual sea la época de tu casa, tenemos el equipo que se ajusta a ella.",
+          "blurb_pl": "Siedziba zabytkowej dzielnicy Old Irving Park, z wielkimi zabytkowymi domami obok skromniejszych bungalowów blisko autostrady Kennedy. Niezależnie od wieku Twojego domu, mamy sprzęt, który do niego pasuje."
+        },
+        {
+          "name": "Dunning",
+          "blurb": "A quiet residential area near Wilbur Wright College, filled with bungalows and post-war brick homes on wide lots. Easy access off the Kennedy makes scheduling in Dunning simple.",
+          "blurb_es": "Una tranquila zona residencial cerca de Wilbur Wright College, llena de bungalows y casas de ladrillo de posguerra en lotes amplios. El fácil acceso desde la Kennedy hace que agendar en Dunning sea sencillo.",
+          "blurb_pl": "Spokojna okolica mieszkalna blisko Wilbur Wright College, pełna bungalowów i powojennych ceglanych domów na szerokich działkach. Łatwy dojazd z autostrady Kennedy sprawia, że umawianie terminów w Dunning jest proste."
+        },
+        {
+          "name": "Montclare",
+          "blurb": "One of the city's smallest community areas, tucked against the Elmwood Park border and full of tidy brick bungalows. We're in and out of Montclare fast — small neighborhood, same big-city service.",
+          "blurb_es": "Una de las áreas comunitarias más pequeñas de la ciudad, junto a la frontera con Elmwood Park y llena de pulcros bungalows de ladrillo. Entramos y salimos de Montclare rápido: vecindario pequeño, mismo servicio de gran ciudad.",
+          "blurb_pl": "Jedna z najmniejszych dzielnic miasta, przylegająca do granicy z Elmwood Park, pełna schludnych ceglanych bungalowów. Szybko wchodzimy i wychodzimy z Montclare — mała dzielnica, ta sama wielkomiejska obsługa."
+        },
+        {
+          "name": "Belmont Cragin",
+          "blurb": "A large, diverse working-class neighborhood of bungalows and brick two-flats along the Belmont and Central corridors. We show up on time and charge exactly what we quote, every time.",
+          "blurb_es": "Un vecindario grande, diverso y de clase trabajadora con bungalows y dúplex de ladrillo a lo largo de los corredores Belmont y Central. Llegamos a tiempo y cobramos exactamente lo que cotizamos, siempre.",
+          "blurb_pl": "Duża, zróżnicowana dzielnica klasy robotniczej z bungalowami i ceglanymi domami dwupiętrowymi wzdłuż korytarzy Belmont i Central. Pojawiamy się na czas i pobieramy dokładnie tyle, ile wyceniliśmy — za każdym razem."
+        },
+        {
+          "name": "Hermosa",
+          "blurb": "A compact neighborhood wedged between Logan Square and Belmont Cragin, known for brick two-flats and classic bungalows on tight, walkable blocks. Same flat rate, no matter how small the street.",
+          "blurb_es": "Un vecindario compacto ubicado entre Logan Square y Belmont Cragin, conocido por sus dúplex de ladrillo y bungalows clásicos en cuadras angostas y caminables. Misma tarifa fija, sin importar qué tan pequeña sea la calle.",
+          "blurb_pl": "Kompaktowa dzielnica wciśnięta między Logan Square a Belmont Cragin, znana z ceglanych domów dwupiętrowych i klasycznych bungalowów na ciasnych, spacerowych uliczkach. Ta sama stała stawka, bez względu na to, jak mała jest ulica."
+        }
+      ],
+      "region_es": "Noroeste",
+      "region_pl": "Północny Zachód"
     },
     {
       "region": "West Side",
       "hoods": [
-        { "name": "Humboldt Park", "blurb": "Home to Paseo Boricua and its landmark steel Puerto Rican flags along Division Street, Humboldt Park is full of greystones and vintage two-flats with real character. Great housing stock, and we treat every home like it." },
-        { "name": "West Town", "blurb": "One of the largest and most varied community areas in the city, taking in everything from converted lofts to vintage two-flats across its many pockets. Whatever corner of West Town you're in, we're not far away." },
-        { "name": "Austin", "blurb": "Chicago's largest community area by population, home to the Jens Jensen-designed Columbus Park and blocks of classic bungalows and greystones. We serve Austin regularly — reliable service, flat rate, no surprises." },
-        { "name": "West Garfield Park", "blurb": "A residential neighborhood of greystones and brick two- and three-flats just west of the historic Garfield Park Conservatory. We bring the same professional install here as anywhere else in the city." },
-        { "name": "East Garfield Park", "blurb": "Home to the landmark Garfield Park Conservatory, surrounded by classic greystones and courtyard buildings. We know the older plaster construction common throughout this part of the West Side." },
-        { "name": "Near West Side", "blurb": "Home to UIC, the United Center, and the Taylor Street Little Italy corridor, this neighborhood mixes student housing, rehabbed lofts, and new mid-rise construction. We're comfortable with all of it." },
-        { "name": "North Lawndale", "blurb": "A neighborhood with deep history around Douglas Park, filled with greystones, courtyard buildings, and ongoing redevelopment. We treat every install here with the same care and professionalism as our highest-end jobs." },
-        { "name": "South Lawndale", "blurb": "Also known as Little Village, home to the landmark arch on 26th Street and one of the busiest shopping corridors on the West Side. Brick two-flats and bungalows throughout — we know the terrain." },
-        { "name": "Lower West Side", "blurb": "Known to most as Pilsen, home to the National Museum of Mexican Art and blocks of colorful murals along 18th Street. Vintage two- and three-flats with plaster walls are the norm, and we come prepared for them." }
-      ]
+        {
+          "name": "Humboldt Park",
+          "blurb": "Home to Paseo Boricua and its landmark steel Puerto Rican flags along Division Street, Humboldt Park is full of greystones and vintage two-flats with real character. Great housing stock, and we treat every home like it.",
+          "blurb_es": "Hogar del Paseo Boricua y sus emblemáticas banderas puertorriqueñas de acero a lo largo de Division Street, Humboldt Park está lleno de greystones y dúplex antiguos con verdadero carácter. Excelente parque de viviendas, y tratamos cada casa como tal.",
+          "blurb_pl": "Siedziba Paseo Boricua i jego charakterystycznych stalowych portorykańskich flag wzdłuż Division Street — Humboldt Park pełne jest szarych kamienic i zabytkowych domów dwupiętrowych o prawdziwym charakterze. Świetna zabudowa mieszkaniowa, a my traktujemy każdy dom odpowiednio."
+        },
+        {
+          "name": "West Town",
+          "blurb": "One of the largest and most varied community areas in the city, taking in everything from converted lofts to vintage two-flats across its many pockets. Whatever corner of West Town you're in, we're not far away.",
+          "blurb_es": "Una de las áreas comunitarias más grandes y variadas de la ciudad, que abarca desde lofts convertidos hasta dúplex antiguos en sus muchos rincones. Estés donde estés en West Town, no estamos lejos.",
+          "blurb_pl": "Jedna z największych i najbardziej zróżnicowanych dzielnic miasta, obejmująca wszystko od przekształconych loftów po zabytkowe domy dwupiętrowe w wielu zakątkach. Niezależnie od tego, w którym rogu West Town jesteś, nie jesteśmy daleko."
+        },
+        {
+          "name": "Austin",
+          "blurb": "Chicago's largest community area by population, home to the Jens Jensen-designed Columbus Park and blocks of classic bungalows and greystones. We serve Austin regularly — reliable service, flat rate, no surprises.",
+          "blurb_es": "El área comunitaria más grande de Chicago por población, hogar del Columbus Park diseñado por Jens Jensen y cuadras enteras de bungalows y greystones clásicos. Damos servicio a Austin con regularidad: servicio confiable, tarifa fija, sin sorpresas.",
+          "blurb_pl": "Największa dzielnica Chicago pod względem liczby ludności, siedziba zaprojektowanego przez Jensa Jensena Columbus Park oraz całych ulic klasycznych bungalowów i szarych kamienic. Regularnie obsługujemy Austin — niezawodna usługa, stała stawka, bez niespodzianek."
+        },
+        {
+          "name": "West Garfield Park",
+          "blurb": "A residential neighborhood of greystones and brick two- and three-flats just west of the historic Garfield Park Conservatory. We bring the same professional install here as anywhere else in the city.",
+          "blurb_es": "Un vecindario residencial de greystones y dúplex y tripléx de ladrillo justo al oeste del histórico invernadero Garfield Park Conservatory. Ofrecemos la misma instalación profesional aquí que en cualquier otra parte de la ciudad.",
+          "blurb_pl": "Dzielnica mieszkalna z szarymi kamienicami oraz ceglanymi domami dwu- i trzypiętrowymi, tuż na zachód od zabytkowej oranżerii Garfield Park Conservatory. Oferujemy tu tę samą profesjonalną instalację, co w każdej innej części miasta."
+        },
+        {
+          "name": "East Garfield Park",
+          "blurb": "Home to the landmark Garfield Park Conservatory, surrounded by classic greystones and courtyard buildings. We know the older plaster construction common throughout this part of the West Side.",
+          "blurb_es": "Hogar del emblemático Garfield Park Conservatory, rodeado de greystones clásicos y edificios con patio interior. Conocemos bien la construcción de yeso antigua común en esta parte del West Side.",
+          "blurb_pl": "Siedziba zabytkowej oranżerii Garfield Park Conservatory, otoczonej klasycznymi szarymi kamienicami i budynkami z dziedzińcem. Znamy starszą konstrukcję tynkową, powszechną w tej części West Side."
+        },
+        {
+          "name": "Near West Side",
+          "blurb": "Home to UIC, the United Center, and the Taylor Street Little Italy corridor, this neighborhood mixes student housing, rehabbed lofts, and new mid-rise construction. We're comfortable with all of it.",
+          "blurb_es": "Hogar de UIC, el United Center y el corredor de la Pequeña Italia en Taylor Street, este vecindario mezcla vivienda estudiantil, lofts renovados y nueva construcción de media altura. Nos sentimos cómodos con todo eso.",
+          "blurb_pl": "Siedziba UIC, United Center i korytarza Taylor Street znanego jako Mała Italia — ta dzielnica łączy mieszkania studenckie, przekształcone lofty i nową zabudowę średniej wysokości. Czujemy się dobrze ze wszystkimi tymi typami."
+        },
+        {
+          "name": "North Lawndale",
+          "blurb": "A neighborhood with deep history around Douglas Park, filled with greystones, courtyard buildings, and ongoing redevelopment. We treat every install here with the same care and professionalism as our highest-end jobs.",
+          "blurb_es": "Un vecindario con profunda historia alrededor de Douglas Park, lleno de greystones, edificios con patio interior y un continuo redesarrollo. Tratamos cada instalación aquí con el mismo cuidado y profesionalismo que nuestros trabajos más exclusivos.",
+          "blurb_pl": "Dzielnica o głębokiej historii wokół Douglas Park, pełna szarych kamienic, budynków z dziedzińcem i trwającej rewitalizacji. Traktujemy każdy montaż tutaj z taką samą starannością i profesjonalizmem, jak nasze najbardziej ekskluzywne zlecenia."
+        },
+        {
+          "name": "South Lawndale",
+          "blurb": "Also known as Little Village, home to the landmark arch on 26th Street and one of the busiest shopping corridors on the West Side. Brick two-flats and bungalows throughout — we know the terrain.",
+          "blurb_es": "También conocido como Little Village, hogar del emblemático arco en la calle 26 y uno de los corredores comerciales más concurridos del West Side. Dúplex de ladrillo y bungalows por todas partes: conocemos el terreno.",
+          "blurb_pl": "Znane też jako Little Village, siedziba charakterystycznego łuku na 26. ulicy i jednego z najruchliwszych korytarzy handlowych na West Side. Wszędzie ceglane domy dwupiętrowe i bungalowy — znamy ten teren."
+        },
+        {
+          "name": "Lower West Side",
+          "blurb": "Known to most as Pilsen, home to the National Museum of Mexican Art and blocks of colorful murals along 18th Street. Vintage two- and three-flats with plaster walls are the norm, and we come prepared for them.",
+          "blurb_es": "Conocido por la mayoría como Pilsen, hogar del National Museum of Mexican Art y cuadras enteras de coloridos murales a lo largo de la calle 18. Dúplex y tripléx antiguos con paredes de yeso son la norma, y llegamos preparados para ellos.",
+          "blurb_pl": "Znane większości jako Pilsen, siedziba National Museum of Mexican Art i całych ulic kolorowych murali wzdłuż 18. ulicy. Zabytkowe domy dwu- i trzypiętrowe z tynkowanymi ścianami to norma, i jesteśmy na nie przygotowani."
+        }
+      ],
+      "region_es": "Zona Oeste",
+      "region_pl": "Zachodnia Strona"
     },
     {
       "region": "Central",
       "hoods": [
-        { "name": "Loop", "blurb": "Chicago's downtown core, home to Willis Tower, Millennium Park, and a skyline full of high-rise condos and converted office buildings. We work around doorman check-ins and freight elevator schedules without adding a dime to the price." },
-        { "name": "Near North Side", "blurb": "Covers the Magnificent Mile, River North, Gold Coast, Streeterville, and Old Town — some of the densest high-rise living in the city. Concrete walls, steel studs, elevator buildings — we bring the right anchors every time." },
-        { "name": "Near South Side", "blurb": "Home to the South Loop, Printers Row's converted lofts, and the Museum Campus along the lakefront. A mix of historic loft conversions and new-construction high-rises, all served at the same flat rate." }
-      ]
+        {
+          "name": "Loop",
+          "blurb": "Chicago's downtown core, home to Willis Tower, Millennium Park, and a skyline full of high-rise condos and converted office buildings. We work around doorman check-ins and freight elevator schedules without adding a dime to the price.",
+          "blurb_es": "El corazón del centro de Chicago, hogar de la Willis Tower, Millennium Park y un horizonte lleno de condominios de gran altura y oficinas convertidas. Trabajamos alrededor de los registros con el portero y los horarios del elevador de carga sin agregar ni un centavo al precio.",
+          "blurb_pl": "Centrum Chicago, siedziba Willis Tower, Millennium Park i panoramy pełnej wieżowców z apartamentami i przekształconych budynków biurowych. Radzimy sobie z odprawami u portiera i harmonogramami wind towarowych bez podnoszenia ceny nawet o grosz."
+        },
+        {
+          "name": "Near North Side",
+          "blurb": "Covers the Magnificent Mile, River North, Gold Coast, Streeterville, and Old Town — some of the densest high-rise living in the city. Concrete walls, steel studs, elevator buildings — we bring the right anchors every time.",
+          "blurb_es": "Abarca la Magnificent Mile, River North, Gold Coast, Streeterville y Old Town: algunas de las zonas de vida en torres más densas de la ciudad. Paredes de concreto, postes de acero, edificios con elevador: llevamos los anclajes correctos siempre.",
+          "blurb_pl": "Obejmuje Magnificent Mile, River North, Gold Coast, Streeterville i Old Town — jedne z najgęściej zabudowanych wieżowcami części miasta. Betonowe ściany, stalowe słupki, budynki z windą — zawsze mamy odpowiednie kołki montażowe."
+        },
+        {
+          "name": "Near South Side",
+          "blurb": "Home to the South Loop, Printers Row's converted lofts, and the Museum Campus along the lakefront. A mix of historic loft conversions and new-construction high-rises, all served at the same flat rate.",
+          "blurb_es": "Hogar del South Loop, los lofts convertidos de Printers Row y el Museum Campus junto al lago. Una mezcla de conversiones de lofts históricos y torres de construcción nueva, todos con la misma tarifa fija.",
+          "blurb_pl": "Siedziba South Loop, przekształconych loftów Printers Row i Museum Campus nad jeziorem. Mieszanka historycznych przekształceń loftów i nowej zabudowy wieżowców, wszystko w tej samej stałej cenie."
+        }
+      ],
+      "region_es": "Centro",
+      "region_pl": "Centrum"
     },
     {
       "region": "South Side",
       "hoods": [
-        { "name": "Armour Square", "blurb": "Home to Chicago's Chinatown and the White Sox' home ballpark, with a tight mix of two-flats and newer construction near Wentworth Avenue. Compact neighborhood, same reliable $100 install." },
-        { "name": "Douglas", "blurb": "The heart of historic Bronzeville, home to the Motor Row Historic District and Illinois Tech's campus along State Street. Grand greystones and courtyard buildings throughout — we respect the history in every wall we touch." },
-        { "name": "Oakland", "blurb": "A small lakefront community area that's part of the historic Bronzeville area, currently in the middle of significant redevelopment. New construction and rehabbed vintage buildings both get the same careful install." },
-        { "name": "Fuller Park", "blurb": "A small, quiet residential pocket near the Dan Ryan Expressway with a mix of older homes and newer infill construction. We're glad to make the trip — same flat rate as the rest of the city." },
-        { "name": "Grand Boulevard", "blurb": "Home to the historic King Drive mansion district and the heart of Bronzeville's cultural legacy. We've mounted TVs in everything from grand vintage greystones to newer townhome developments here." },
-        { "name": "Kenwood", "blurb": "Known for its grand historic mansions and tree-lined streets — this is the neighborhood where the Obama family's Chicago home sits. Big, beautiful walls deserve a level, professional mount, and that's what we deliver." },
-        { "name": "Washington Park", "blurb": "Home to the Olmsted-designed Washington Park itself, right next to the University of Chicago campus. Classic greystones and courtyard buildings throughout, all handled with the same $100 flat rate." },
-        { "name": "Hyde Park", "blurb": "Home to the University of Chicago, the Museum of Science and Industry, and the Obama Presidential Center rising nearby in Jackson Park. Vintage courtyard buildings and grand old homes are the norm — we know how to mount cleanly on both." },
-        { "name": "Woodlawn", "blurb": "Sitting right next to Jackson Park and the Obama Presidential Center site, Woodlawn is full of classic greystones and courtyard buildings undergoing a wave of renewed investment. We're proud to be part of that with clean, professional installs." },
-        { "name": "Greater Grand Crossing", "blurb": "A historic South Side community with a strong stock of brick bungalows, two-flats, and greystones. We show up on time, quote one price, and stick to it — every job, every time." }
-      ]
+        {
+          "name": "Armour Square",
+          "blurb": "Home to Chicago's Chinatown and the White Sox' home ballpark, with a tight mix of two-flats and newer construction near Wentworth Avenue. Compact neighborhood, same reliable $100 install.",
+          "blurb_es": "Hogar del Chinatown de Chicago y el estadio local de los White Sox, con una mezcla compacta de dúplex y construcción más nueva cerca de Wentworth Avenue. Vecindario compacto, misma instalación confiable de $100.",
+          "blurb_pl": "Siedziba chicagowskiego Chinatown i stadionu domowego White Sox, z gęstą mieszanką domów dwupiętrowych i nowszej zabudowy blisko Wentworth Avenue. Kompaktowa dzielnica, ta sama niezawodna instalacja za $100."
+        },
+        {
+          "name": "Douglas",
+          "blurb": "The heart of historic Bronzeville, home to the Motor Row Historic District and Illinois Tech's campus along State Street. Grand greystones and courtyard buildings throughout — we respect the history in every wall we touch.",
+          "blurb_es": "El corazón del histórico Bronzeville, hogar del Motor Row Historic District y el campus de Illinois Tech a lo largo de State Street. Grandes greystones y edificios con patio interior por todas partes: respetamos la historia en cada pared que tocamos.",
+          "blurb_pl": "Serce historycznego Bronzeville, siedziba dzielnicy historycznej Motor Row i kampusu Illinois Tech wzdłuż State Street. Wielkie szare kamienice i budynki z dziedzińcem wszędzie — szanujemy historię w każdej ścianie, której dotykamy."
+        },
+        {
+          "name": "Oakland",
+          "blurb": "A small lakefront community area that's part of the historic Bronzeville area, currently in the middle of significant redevelopment. New construction and rehabbed vintage buildings both get the same careful install.",
+          "blurb_es": "Una pequeña área comunitaria frente al lago que forma parte del histórico Bronzeville, actualmente en medio de un redesarrollo importante. Tanto la construcción nueva como los edificios antiguos renovados reciben la misma instalación cuidadosa.",
+          "blurb_pl": "Mała nadjeziorna dzielnica będąca częścią historycznego Bronzeville, obecnie w trakcie znaczącej rewitalizacji. Zarówno nowa zabudowa, jak i odnowione zabytkowe budynki otrzymują tę samą staranną instalację."
+        },
+        {
+          "name": "Fuller Park",
+          "blurb": "A small, quiet residential pocket near the Dan Ryan Expressway with a mix of older homes and newer infill construction. We're glad to make the trip — same flat rate as the rest of the city.",
+          "blurb_es": "Un pequeño y tranquilo rincón residencial cerca de la autopista Dan Ryan, con una mezcla de casas antiguas y nueva construcción intermedia. Con gusto hacemos el viaje: misma tarifa fija que el resto de la ciudad.",
+          "blurb_pl": "Mały, spokojny zakątek mieszkalny blisko autostrady Dan Ryan, z mieszanką starszych domów i nowszej zabudowy uzupełniającej. Chętnie przyjeżdżamy — ta sama stała stawka, co w reszcie miasta."
+        },
+        {
+          "name": "Grand Boulevard",
+          "blurb": "Home to the historic King Drive mansion district and the heart of Bronzeville's cultural legacy. We've mounted TVs in everything from grand vintage greystones to newer townhome developments here.",
+          "blurb_es": "Hogar del histórico distrito de mansiones de King Drive y el corazón del legado cultural de Bronzeville. Aquí hemos instalado televisores en todo, desde grandiosos greystones antiguos hasta nuevos desarrollos de casas adosadas.",
+          "blurb_pl": "Siedziba historycznej dzielnicy rezydencji przy King Drive i serca kulturowego dziedzictwa Bronzeville. Montowaliśmy tu telewizory zarówno w wielkich zabytkowych szarych kamienicach, jak i nowszych osiedlach domów szeregowych."
+        },
+        {
+          "name": "Kenwood",
+          "blurb": "Known for its grand historic mansions and tree-lined streets — this is the neighborhood where the Obama family's Chicago home sits. Big, beautiful walls deserve a level, professional mount, and that's what we deliver.",
+          "blurb_es": "Conocido por sus grandiosas mansiones históricas y calles arboladas: este es el vecindario donde se encuentra la casa de la familia Obama en Chicago. Las paredes grandes y hermosas merecen una instalación nivelada y profesional, y eso es lo que ofrecemos.",
+          "blurb_pl": "Znane z wielkich historycznych rezydencji i zadrzewionych ulic — to dzielnica, w której znajduje się chicagowski dom rodziny Obamów. Wielkie, piękne ściany zasługują na równy, profesjonalny montaż, i to właśnie dostarczamy."
+        },
+        {
+          "name": "Washington Park",
+          "blurb": "Home to the Olmsted-designed Washington Park itself, right next to the University of Chicago campus. Classic greystones and courtyard buildings throughout, all handled with the same $100 flat rate.",
+          "blurb_es": "Hogar del propio Washington Park, diseñado por Olmsted, justo al lado del campus de la Universidad de Chicago. Greystones clásicos y edificios con patio interior por todas partes, todos atendidos con la misma tarifa fija de $100.",
+          "blurb_pl": "Siedziba samego Washington Park, zaprojektowanego przez Olmsteda, tuż obok kampusu University of Chicago. Klasyczne szare kamienice i budynki z dziedzińcem wszędzie, wszystkie obsługiwane w tej samej stałej cenie $100."
+        },
+        {
+          "name": "Hyde Park",
+          "blurb": "Home to the University of Chicago, the Museum of Science and Industry, and the Obama Presidential Center rising nearby in Jackson Park. Vintage courtyard buildings and grand old homes are the norm — we know how to mount cleanly on both.",
+          "blurb_es": "Hogar de la Universidad de Chicago, el Museo de Ciencia e Industria, y el Obama Presidential Center que se levanta cerca en Jackson Park. Los edificios antiguos con patio interior y las grandes casas viejas son la norma; sabemos cómo instalar limpiamente en ambos.",
+          "blurb_pl": "Siedziba University of Chicago, Museum of Science and Industry oraz powstającego w pobliżu w Jackson Park Obama Presidential Center. Zabytkowe budynki z dziedzińcem i wielkie stare domy to norma — wiemy, jak montować czysto na obu."
+        },
+        {
+          "name": "Woodlawn",
+          "blurb": "Sitting right next to Jackson Park and the Obama Presidential Center site, Woodlawn is full of classic greystones and courtyard buildings undergoing a wave of renewed investment. We're proud to be part of that with clean, professional installs.",
+          "blurb_es": "Justo al lado de Jackson Park y el sitio del Obama Presidential Center, Woodlawn está lleno de clásicos greystones y edificios con patio interior que atraviesan una ola de nueva inversión. Nos enorgullece ser parte de eso con instalaciones limpias y profesionales.",
+          "blurb_pl": "Tuż obok Jackson Park i miejsca budowy Obama Presidential Center, Woodlawn pełne jest klasycznych szarych kamienic i budynków z dziedzińcem przechodzących falę nowych inwestycji. Jesteśmy dumni, że możemy być częścią tego dzięki czystym, profesjonalnym instalacjom."
+        },
+        {
+          "name": "Greater Grand Crossing",
+          "blurb": "A historic South Side community with a strong stock of brick bungalows, two-flats, and greystones. We show up on time, quote one price, and stick to it — every job, every time.",
+          "blurb_es": "Una histórica comunidad del South Side con un sólido parque de bungalows de ladrillo, dúplex y greystones. Llegamos a tiempo, cotizamos un precio y lo respetamos: en cada trabajo, siempre.",
+          "blurb_pl": "Historyczna społeczność South Side z solidną zabudową ceglanych bungalowów, domów dwupiętrowych i szarych kamienic. Pojawiamy się na czas, wyceniamy jedną cenę i jej się trzymamy — przy każdym zleceniu, za każdym razem."
+        }
+      ],
+      "region_es": "Zona Sur",
+      "region_pl": "Południowa Strona"
     },
     {
       "region": "Southwest Side",
       "hoods": [
-        { "name": "Garfield Ridge", "blurb": "Home to Midway Airport, surrounded by classic Chicago bungalows on quiet residential streets. Close to the airport doesn't mean a premium — same $100 flat rate as everywhere else." },
-        { "name": "Archer Heights", "blurb": "A tight-knit residential pocket along Archer Avenue with a solid mix of bungalows and brick two-flats. Small neighborhood, same dependable service." },
-        { "name": "Brighton Park", "blurb": "A working-class neighborhood of brick bungalows and two-flats with a large Mexican-American and Southeast Asian community. We know these blocks well and treat every home the same, no matter the size." },
-        { "name": "McKinley Park", "blurb": "Named for the park at its center, near the site of the old Union Stockyards, and filled with classic Chicago bungalows. We've been mounting TVs on these walls for years." },
-        { "name": "Bridgeport", "blurb": "A historic Chicago neighborhood of brick bungalows and two-flats, home to generations of Chicago political history and just down the street from Rate Field. We bring the same flat-rate promise to every block." },
-        { "name": "New City", "blurb": "Also known as Back of the Yards, once home to the historic Union Stockyards and steeped in Chicago industrial history. Greystones and brick two-flats throughout — we know the older construction inside and out." },
-        { "name": "West Elsdon", "blurb": "A small, quiet bungalow-belt neighborhood on the Southwest Side with tidy residential blocks. We're happy to make the trip for a single TV or a whole house full of them." },
-        { "name": "Gage Park", "blurb": "Home to a large Mexican-American community and the bustling 63rd Street business corridor, surrounded by classic Chicago bungalows. Same $100 flat rate, no trip fee for the drive." },
-        { "name": "Clearing", "blurb": "An industrial and residential far Southwest Side neighborhood near Midway Airport and the historic Clearing rail yards. We serve Clearing regularly with the same flat, no-surprises pricing." },
-        { "name": "West Lawn", "blurb": "Deep in the bungalow belt near Midway Airport, with tidy brick homes lining every block. We know these walls and we know this neighborhood." },
-        { "name": "Chicago Lawn", "blurb": "Home to sprawling Marquette Park, a site with real civil rights history in Chicago. Bungalows and brick two-flats throughout, all served with the same professional install." },
-        { "name": "West Englewood", "blurb": "A South Side community of greystones, two-flats, and bungalows currently seeing real investment and revitalization. We're proud to bring reliable, honest home service to every block here." },
-        { "name": "Englewood", "blurb": "Once one of Chicago's largest retail hubs at 63rd and Halsted, now a neighborhood of greystones and bungalows on the rebound. We show up, do the job right, and charge exactly what we say." }
-      ]
+        {
+          "name": "Garfield Ridge",
+          "blurb": "Home to Midway Airport, surrounded by classic Chicago bungalows on quiet residential streets. Close to the airport doesn't mean a premium — same $100 flat rate as everywhere else.",
+          "blurb_es": "Hogar del aeropuerto Midway, rodeado de clásicos bungalows de Chicago en tranquilas calles residenciales. Estar cerca del aeropuerto no significa un recargo: misma tarifa fija de $100 que en cualquier otro lugar.",
+          "blurb_pl": "Siedziba lotniska Midway, otoczona klasycznymi chicagowskimi bungalowami na spokojnych ulicach mieszkalnych. Bliskość lotniska nie oznacza dopłaty — ta sama stała stawka $100, co wszędzie indziej."
+        },
+        {
+          "name": "Archer Heights",
+          "blurb": "A tight-knit residential pocket along Archer Avenue with a solid mix of bungalows and brick two-flats. Small neighborhood, same dependable service.",
+          "blurb_es": "Un rincón residencial muy unido a lo largo de Archer Avenue con una sólida mezcla de bungalows y dúplex de ladrillo. Vecindario pequeño, mismo servicio confiable.",
+          "blurb_pl": "Zżyta ze sobą okolica mieszkalna wzdłuż Archer Avenue z solidną mieszanką bungalowów i ceglanych domów dwupiętrowych. Mała dzielnica, ta sama niezawodna usługa."
+        },
+        {
+          "name": "Brighton Park",
+          "blurb": "A working-class neighborhood of brick bungalows and two-flats with a large Mexican-American and Southeast Asian community. We know these blocks well and treat every home the same, no matter the size.",
+          "blurb_es": "Un vecindario de clase trabajadora de bungalows y dúplex de ladrillo con una gran comunidad méxico-americana y del sureste asiático. Conocemos bien estas cuadras y tratamos cada casa igual, sin importar el tamaño.",
+          "blurb_pl": "Dzielnica klasy robotniczej z ceglanymi bungalowami i domami dwupiętrowymi, z dużą społecznością meksykańsko-amerykańską i południowoazjatycką. Dobrze znamy te ulice i traktujemy każdy dom tak samo, bez względu na rozmiar."
+        },
+        {
+          "name": "McKinley Park",
+          "blurb": "Named for the park at its center, near the site of the old Union Stockyards, and filled with classic Chicago bungalows. We've been mounting TVs on these walls for years.",
+          "blurb_es": "Nombrado por el parque en su centro, cerca del sitio de los antiguos Union Stockyards, y lleno de clásicos bungalows de Chicago. Llevamos años instalando televisores en estas paredes.",
+          "blurb_pl": "Nazwana od parku w jej centrum, blisko dawnego miejsca Union Stockyards, pełna klasycznych chicagowskich bungalowów. Od lat montujemy telewizory na tych ścianach."
+        },
+        {
+          "name": "Bridgeport",
+          "blurb": "A historic Chicago neighborhood of brick bungalows and two-flats, home to generations of Chicago political history and just down the street from Rate Field. We bring the same flat-rate promise to every block.",
+          "blurb_es": "Un histórico vecindario de Chicago con bungalows y dúplex de ladrillo, hogar de generaciones de historia política de la ciudad y a pocas cuadras de Rate Field. Ofrecemos la misma promesa de tarifa fija en cada cuadra.",
+          "blurb_pl": "Historyczna chicagowska dzielnica ceglanych bungalowów i domów dwupiętrowych, siedziba pokoleń chicagowskiej historii politycznej i kilka ulic od Rate Field. Tę samą obietnicę stałej stawki dostarczamy na każdej ulicy."
+        },
+        {
+          "name": "New City",
+          "blurb": "Also known as Back of the Yards, once home to the historic Union Stockyards and steeped in Chicago industrial history. Greystones and brick two-flats throughout — we know the older construction inside and out.",
+          "blurb_es": "También conocido como Back of the Yards, alguna vez hogar de los históricos Union Stockyards y lleno de historia industrial de Chicago. Greystones y dúplex de ladrillo por todas partes: conocemos la construcción antigua de pies a cabeza.",
+          "blurb_pl": "Znane też jako Back of the Yards, niegdyś siedziba historycznych Union Stockyards, przesiąknięte chicagowską historią przemysłową. Szare kamienice i ceglane domy dwupiętrowe wszędzie — znamy starszą konstrukcję na wylot."
+        },
+        {
+          "name": "West Elsdon",
+          "blurb": "A small, quiet bungalow-belt neighborhood on the Southwest Side with tidy residential blocks. We're happy to make the trip for a single TV or a whole house full of them.",
+          "blurb_es": "Un pequeño y tranquilo vecindario del área de bungalows en el Southwest Side, con pulcras cuadras residenciales. Con gusto hacemos el viaje, ya sea por un solo televisor o por una casa llena de ellos.",
+          "blurb_pl": "Mała, spokojna dzielnica pasa bungalowów na Southwest Side ze schludnymi ulicami mieszkalnymi. Chętnie przyjeżdżamy — czy to dla jednego telewizora, czy dla całego domu."
+        },
+        {
+          "name": "Gage Park",
+          "blurb": "Home to a large Mexican-American community and the bustling 63rd Street business corridor, surrounded by classic Chicago bungalows. Same $100 flat rate, no trip fee for the drive.",
+          "blurb_es": "Hogar de una gran comunidad méxico-americana y el bullicioso corredor comercial de la calle 63, rodeado de clásicos bungalows de Chicago. Misma tarifa fija de $100, sin cargo por el viaje.",
+          "blurb_pl": "Siedziba dużej społeczności meksykańsko-amerykańskiej i tętniącego życiem korytarza handlowego 63. ulicy, otoczona klasycznymi chicagowskimi bungalowami. Ta sama stała stawka $100, bez dopłaty za dojazd."
+        },
+        {
+          "name": "Clearing",
+          "blurb": "An industrial and residential far Southwest Side neighborhood near Midway Airport and the historic Clearing rail yards. We serve Clearing regularly with the same flat, no-surprises pricing.",
+          "blurb_es": "Un vecindario industrial y residencial en el extremo Southwest Side cerca del aeropuerto Midway y los históricos patios ferroviarios de Clearing. Damos servicio a Clearing con regularidad, con el mismo precio fijo y sin sorpresas.",
+          "blurb_pl": "Przemysłowo-mieszkalna dzielnica na dalekim Southwest Side, blisko lotniska Midway i historycznych bocznic kolejowych Clearing. Regularnie obsługujemy Clearing z tą samą stałą ceną bez niespodzianek."
+        },
+        {
+          "name": "West Lawn",
+          "blurb": "Deep in the bungalow belt near Midway Airport, with tidy brick homes lining every block. We know these walls and we know this neighborhood.",
+          "blurb_es": "En pleno corazón del área de bungalows cerca del aeropuerto Midway, con pulcras casas de ladrillo a lo largo de cada cuadra. Conocemos estas paredes y conocemos este vecindario.",
+          "blurb_pl": "W samym sercu pasa bungalowów blisko lotniska Midway, z schludnymi ceglanymi domami wzdłuż każdej ulicy. Znamy te ściany i znamy tę dzielnicę."
+        },
+        {
+          "name": "Chicago Lawn",
+          "blurb": "Home to sprawling Marquette Park, a site with real civil rights history in Chicago. Bungalows and brick two-flats throughout, all served with the same professional install.",
+          "blurb_es": "Hogar del extenso Marquette Park, un sitio con verdadera historia de derechos civiles en Chicago. Bungalows y dúplex de ladrillo por todas partes, todos atendidos con la misma instalación profesional.",
+          "blurb_pl": "Siedziba rozległego Marquette Park, miejsca z prawdziwą historią praw obywatelskich w Chicago. Bungalowy i ceglane domy dwupiętrowe wszędzie, wszystkie obsługiwane w tej samej profesjonalnej instalacji."
+        },
+        {
+          "name": "West Englewood",
+          "blurb": "A South Side community of greystones, two-flats, and bungalows currently seeing real investment and revitalization. We're proud to bring reliable, honest home service to every block here.",
+          "blurb_es": "Una comunidad del South Side de greystones, dúplex y bungalows que actualmente vive una verdadera inversión y revitalización. Nos enorgullece llevar un servicio a domicilio confiable y honesto a cada cuadra aquí.",
+          "blurb_pl": "Społeczność South Side z szarymi kamienicami, domami dwupiętrowymi i bungalowami, obecnie przechodząca prawdziwe inwestycje i rewitalizację. Jesteśmy dumni, że dostarczamy niezawodną, uczciwą usługę domową na każdej ulicy tutaj."
+        },
+        {
+          "name": "Englewood",
+          "blurb": "Once one of Chicago's largest retail hubs at 63rd and Halsted, now a neighborhood of greystones and bungalows on the rebound. We show up, do the job right, and charge exactly what we say.",
+          "blurb_es": "Alguna vez uno de los centros comerciales más grandes de Chicago en la calle 63 y Halsted, ahora un vecindario de greystones y bungalows en recuperación. Llegamos, hacemos bien el trabajo y cobramos exactamente lo que decimos.",
+          "blurb_pl": "Niegdyś jedno z największych centrów handlowych Chicago przy 63. ulicy i Halsted, dziś dzielnica szarych kamienic i bungalowów w trakcie odbudowy. Przyjeżdżamy, wykonujemy pracę dobrze i pobieramy dokładnie to, co obiecaliśmy."
+        }
+      ],
+      "region_es": "Suroeste",
+      "region_pl": "Południowy Zachód"
     },
     {
       "region": "Far Southwest Side",
       "hoods": [
-        { "name": "Ashburn", "blurb": "A bungalow-belt neighborhood on the far Southwest Side with wide, quiet residential streets. Same $100 flat rate, no matter how far south you are." },
-        { "name": "Auburn Gresham", "blurb": "Home to St. Sabina Church, long known for its community activism, surrounded by brick bungalows and two-flats. We're glad to be part of the neighborhood's everyday life." },
-        { "name": "Beverly", "blurb": "Built along the hilly Blue Island Ridge with deep Irish-American roots and the famous South Side Irish Parade every March. Beverly's mix of vintage stone homes and larger single-family houses gets the same careful, level install every time." },
-        { "name": "Washington Heights", "blurb": "A quiet residential neighborhood next to Beverly and Morgan Park, with easy access to Metra service downtown. Classic brick homes throughout, and we know how to hang a TV on every kind of wall you'll find here." },
-        { "name": "Mount Greenwood", "blurb": "One of the city's most tight-knit communities, home to many Chicago police and fire families, with classic bungalows near the forest preserves. Reliable, on-time service — the kind of thing this neighborhood expects." },
-        { "name": "Morgan Park", "blurb": "Part of the historic Blue Island Ridge area, with tree-lined streets, century-old homes, and a strong sense of community. We bring the same $100 flat rate here as we do downtown." }
-      ]
+        {
+          "name": "Ashburn",
+          "blurb": "A bungalow-belt neighborhood on the far Southwest Side with wide, quiet residential streets. Same $100 flat rate, no matter how far south you are.",
+          "blurb_es": "Un vecindario del área de bungalows en el extremo Southwest Side con calles residenciales amplias y tranquilas. Misma tarifa fija de $100, sin importar qué tan al sur estés.",
+          "blurb_pl": "Dzielnica pasa bungalowów na dalekim Southwest Side z szerokimi, spokojnymi ulicami mieszkalnymi. Ta sama stała stawka $100, bez względu na to, jak daleko na południe jesteś."
+        },
+        {
+          "name": "Auburn Gresham",
+          "blurb": "Home to St. Sabina Church, long known for its community activism, surrounded by brick bungalows and two-flats. We're glad to be part of the neighborhood's everyday life.",
+          "blurb_es": "Hogar de la iglesia St. Sabina, reconocida desde hace tiempo por su activismo comunitario, rodeada de bungalows y dúplex de ladrillo. Nos alegra ser parte de la vida cotidiana del vecindario.",
+          "blurb_pl": "Siedziba kościoła St. Sabina, od dawna znanego z działalności społecznej, otoczonego ceglanymi bungalowami i domami dwupiętrowymi. Cieszymy się, że możemy być częścią codziennego życia tej dzielnicy."
+        },
+        {
+          "name": "Beverly",
+          "blurb": "Built along the hilly Blue Island Ridge with deep Irish-American roots and the famous South Side Irish Parade every March. Beverly's mix of vintage stone homes and larger single-family houses gets the same careful, level install every time.",
+          "blurb_es": "Construido sobre la elevada cresta Blue Island Ridge, con profundas raíces irlandesas-americanas y el famoso desfile South Side Irish cada marzo. La mezcla de Beverly de casas de piedra antiguas y casas unifamiliares más grandes recibe la misma instalación cuidadosa y nivelada en cada visita.",
+          "blurb_pl": "Zbudowane na wzniesieniu Blue Island Ridge, z głębokimi irlandzko-amerykańskimi korzeniami i słynną paradą South Side Irish Parade każdego marca. Mieszanka zabytkowych kamiennych domów i większych domów jednorodzinnych w Beverly otrzymuje tę samą staranną, równą instalację za każdym razem."
+        },
+        {
+          "name": "Washington Heights",
+          "blurb": "A quiet residential neighborhood next to Beverly and Morgan Park, with easy access to Metra service downtown. Classic brick homes throughout, and we know how to hang a TV on every kind of wall you'll find here.",
+          "blurb_es": "Un tranquilo vecindario residencial junto a Beverly y Morgan Park, con fácil acceso al servicio de Metra hacia el centro. Clásicas casas de ladrillo por todas partes, y sabemos cómo colgar un televisor en cualquier tipo de pared que encuentres aquí.",
+          "blurb_pl": "Spokojna dzielnica mieszkalna obok Beverly i Morgan Park, z łatwym dostępem do Metra do centrum. Klasyczne ceglane domy wszędzie, a my wiemy, jak zawiesić telewizor na każdym rodzaju ściany, jaki tu znajdziesz."
+        },
+        {
+          "name": "Mount Greenwood",
+          "blurb": "One of the city's most tight-knit communities, home to many Chicago police and fire families, with classic bungalows near the forest preserves. Reliable, on-time service — the kind of thing this neighborhood expects.",
+          "blurb_es": "Una de las comunidades más unidas de la ciudad, hogar de muchas familias de policías y bomberos de Chicago, con bungalows clásicos cerca de las reservas forestales. Servicio confiable y puntual: justo lo que este vecindario espera.",
+          "blurb_pl": "Jedna z najbardziej zżytych społeczności miasta, siedziba wielu rodzin chicagowskiej policji i straży pożarnej, z klasycznymi bungalowami blisko rezerwatów leśnych. Niezawodna, punktualna usługa — tego właśnie oczekuje ta dzielnica."
+        },
+        {
+          "name": "Morgan Park",
+          "blurb": "Part of the historic Blue Island Ridge area, with tree-lined streets, century-old homes, and a strong sense of community. We bring the same $100 flat rate here as we do downtown.",
+          "blurb_es": "Parte de la histórica área Blue Island Ridge, con calles arboladas, casas centenarias y un fuerte sentido de comunidad. Ofrecemos la misma tarifa fija de $100 aquí que en el centro de la ciudad.",
+          "blurb_pl": "Część historycznego obszaru Blue Island Ridge, z zadrzewionymi ulicami, stuletnimi domami i silnym poczuciem wspólnoty. Oferujemy tu tę samą stałą stawkę $100, co w centrum miasta."
+        }
+      ],
+      "region_es": "Extremo Suroeste",
+      "region_pl": "Daleki Południowy Zachód"
     },
     {
       "region": "Far Southeast Side",
       "hoods": [
-        { "name": "Chatham", "blurb": "A historic African-American middle-class community known for its strong legacy of Black-owned businesses, lined with brick bungalows. We're proud to serve Chatham with the same honest, flat-rate pricing every time." },
-        { "name": "Avalon Park", "blurb": "A quiet bungalow-belt neighborhood on the far Southeast Side with tidy, tree-lined residential blocks. Same flat rate, same professional install, every visit." },
-        { "name": "South Shore", "blurb": "Home to the historic South Shore Cultural Center on the lakefront, surrounded by grand vintage courtyard buildings and greystones. We handle the older plaster and brick construction common throughout the neighborhood." },
-        { "name": "South Chicago", "blurb": "Built on the legacy of the old U.S. Steel South Works site, this lakefront neighborhood is full of classic working-class homes. We know the history here, and we treat every install with respect for it." },
-        { "name": "Burnside", "blurb": "One of the smallest and quietest community areas in the city, with a mix of residential and industrial blocks near the rail lines. Small neighborhood, same dependable $100 service." },
-        { "name": "Calumet Heights", "blurb": "A residential neighborhood of brick ranch homes and bungalows near the Chicago Skyway. We make the trip regularly — no premium for being on the far Southeast Side." },
-        { "name": "Roseland", "blurb": "Once home to a thriving business corridor along Michigan Avenue and deep rail history, Roseland is full of classic Chicago homes. We bring the same flat rate here as anywhere else." },
-        { "name": "Pullman", "blurb": "Home to the Pullman National Historical Park, the country's first planned industrial community, with landmark rowhouses dating back to the 1880s. We take extra care mounting TVs in these historic homes." },
-        { "name": "South Deering", "blurb": "Home to Big Marsh Park and a legacy of steel mill history along Lake Calumet. A mix of classic homes and newer construction — we're equipped for both." },
-        { "name": "East Side", "blurb": "Tucked in the far southeast corner near the Indiana border along the Calumet River, with a close-knit, working-class housing stock. We serve East Side regularly, flat rate, no exceptions." },
-        { "name": "West Pullman", "blurb": "A residential neighborhood next to historic Pullman, full of bungalows and brick two-flats on quiet streets. Same $100 rate, same professional install, every time." },
-        { "name": "Riverdale", "blurb": "Home to the historic Altgeld Gardens community, where a young Barack Obama once worked as a community organizer. We bring the same level of care and reliability to every home in Riverdale." },
-        { "name": "Hegewisch", "blurb": "A close-knit former railroad company town near Wolf Lake and the Indiana state line, with a strong small-town feel. We make the drive out to Hegewisch regularly — same flat rate, no trip charge." }
-      ]
+        {
+          "name": "Chatham",
+          "blurb": "A historic African-American middle-class community known for its strong legacy of Black-owned businesses, lined with brick bungalows. We're proud to serve Chatham with the same honest, flat-rate pricing every time.",
+          "blurb_es": "Una histórica comunidad afroamericana de clase media conocida por su sólido legado de negocios propiedad de afroamericanos, bordeada de bungalows de ladrillo. Nos enorgullece servir a Chatham con el mismo precio honesto y fijo en cada visita.",
+          "blurb_pl": "Historyczna afroamerykańska społeczność klasy średniej, znana z silnego dziedzictwa firm należących do Afroamerykanów, wzdłuż ulic ceglanych bungalowów. Jesteśmy dumni, że możemy obsługiwać Chatham z tą samą uczciwą, stałą ceną za każdym razem."
+        },
+        {
+          "name": "Avalon Park",
+          "blurb": "A quiet bungalow-belt neighborhood on the far Southeast Side with tidy, tree-lined residential blocks. Same flat rate, same professional install, every visit.",
+          "blurb_es": "Un tranquilo vecindario del área de bungalows en el extremo Southeast Side con pulcras cuadras residenciales arboladas. Misma tarifa fija, misma instalación profesional, en cada visita.",
+          "blurb_pl": "Spokojna dzielnica pasa bungalowów na dalekim Southeast Side ze schludnymi, zadrzewionymi ulicami mieszkalnymi. Ta sama stała stawka, ta sama profesjonalna instalacja, przy każdej wizycie."
+        },
+        {
+          "name": "South Shore",
+          "blurb": "Home to the historic South Shore Cultural Center on the lakefront, surrounded by grand vintage courtyard buildings and greystones. We handle the older plaster and brick construction common throughout the neighborhood.",
+          "blurb_es": "Hogar del histórico South Shore Cultural Center frente al lago, rodeado de grandiosos edificios con patio interior y greystones antiguos. Manejamos la construcción de yeso y ladrillo antigua común en todo el vecindario.",
+          "blurb_pl": "Siedziba historycznego South Shore Cultural Center nad jeziorem, otoczonego wielkimi zabytkowymi budynkami z dziedzińcem i szarymi kamienicami. Radzimy sobie ze starszą konstrukcją tynkową i ceglaną powszechną w całej dzielnicy."
+        },
+        {
+          "name": "South Chicago",
+          "blurb": "Built on the legacy of the old U.S. Steel South Works site, this lakefront neighborhood is full of classic working-class homes. We know the history here, and we treat every install with respect for it.",
+          "blurb_es": "Construido sobre el legado del antiguo sitio U.S. Steel South Works, este vecindario frente al lago está lleno de clásicas casas de clase trabajadora. Conocemos la historia aquí, y tratamos cada instalación con el respeto que merece.",
+          "blurb_pl": "Zbudowane na dziedzictwie dawnego zakładu U.S. Steel South Works, ta nadjeziorna dzielnica pełna jest klasycznych domów klasy robotniczej. Znamy tu historię i traktujemy każdą instalację z należytym szacunkiem."
+        },
+        {
+          "name": "Burnside",
+          "blurb": "One of the smallest and quietest community areas in the city, with a mix of residential and industrial blocks near the rail lines. Small neighborhood, same dependable $100 service.",
+          "blurb_es": "Una de las áreas comunitarias más pequeñas y tranquilas de la ciudad, con una mezcla de cuadras residenciales e industriales cerca de las líneas ferroviarias. Vecindario pequeño, mismo servicio confiable de $100.",
+          "blurb_pl": "Jedna z najmniejszych i najspokojniejszych dzielnic miasta, z mieszanką ulic mieszkalnych i przemysłowych blisko linii kolejowych. Mała dzielnica, ta sama niezawodna usługa za $100."
+        },
+        {
+          "name": "Calumet Heights",
+          "blurb": "A residential neighborhood of brick ranch homes and bungalows near the Chicago Skyway. We make the trip regularly — no premium for being on the far Southeast Side.",
+          "blurb_es": "Un vecindario residencial de casas de rancho y bungalows de ladrillo cerca del Chicago Skyway. Hacemos el viaje con regularidad: sin recargo por estar en el extremo Southeast Side.",
+          "blurb_pl": "Dzielnica mieszkalna z ceglanymi domami rancho i bungalowami blisko Chicago Skyway. Regularnie przyjeżdżamy — bez dopłaty za bycie na dalekim Southeast Side."
+        },
+        {
+          "name": "Roseland",
+          "blurb": "Once home to a thriving business corridor along Michigan Avenue and deep rail history, Roseland is full of classic Chicago homes. We bring the same flat rate here as anywhere else.",
+          "blurb_es": "Alguna vez hogar de un próspero corredor comercial a lo largo de Michigan Avenue y de una profunda historia ferroviaria, Roseland está lleno de clásicas casas de Chicago. Ofrecemos la misma tarifa fija aquí que en cualquier otro lugar.",
+          "blurb_pl": "Niegdyś siedziba prężnego korytarza handlowego wzdłuż Michigan Avenue i głębokiej historii kolejowej, Roseland pełne jest klasycznych chicagowskich domów. Oferujemy tu tę samą stałą stawkę, co wszędzie indziej."
+        },
+        {
+          "name": "Pullman",
+          "blurb": "Home to the Pullman National Historical Park, the country's first planned industrial community, with landmark rowhouses dating back to the 1880s. We take extra care mounting TVs in these historic homes.",
+          "blurb_es": "Hogar del Pullman National Historical Park, la primera comunidad industrial planificada del país, con emblemáticas casas adosadas que datan de la década de 1880. Tomamos precauciones adicionales al instalar televisores en estas casas históricas.",
+          "blurb_pl": "Siedziba Pullman National Historical Park, pierwszej w kraju planowanej społeczności przemysłowej, z charakterystycznymi domami szeregowymi z lat 80. XIX wieku. Zachowujemy dodatkową ostrożność przy montażu telewizorów w tych zabytkowych domach."
+        },
+        {
+          "name": "South Deering",
+          "blurb": "Home to Big Marsh Park and a legacy of steel mill history along Lake Calumet. A mix of classic homes and newer construction — we're equipped for both.",
+          "blurb_es": "Hogar de Big Marsh Park y un legado de historia de acerías a lo largo del lago Calumet. Una mezcla de casas clásicas y nueva construcción: estamos equipados para ambas.",
+          "blurb_pl": "Siedziba Big Marsh Park i dziedzictwa historii hut stali wzdłuż jeziora Calumet. Mieszanka klasycznych domów i nowej zabudowy — jesteśmy przygotowani na obie."
+        },
+        {
+          "name": "East Side",
+          "blurb": "Tucked in the far southeast corner near the Indiana border along the Calumet River, with a close-knit, working-class housing stock. We serve East Side regularly, flat rate, no exceptions.",
+          "blurb_es": "Ubicado en el extremo sureste cerca de la frontera con Indiana a lo largo del río Calumet, con un parque de viviendas unido y de clase trabajadora. Damos servicio a East Side con regularidad, tarifa fija, sin excepciones.",
+          "blurb_pl": "Ukryta na dalekim południowym wschodzie blisko granicy z Indianą wzdłuż rzeki Calumet, ze zżytą, robotniczą zabudową mieszkaniową. Regularnie obsługujemy East Side, stała stawka, bez wyjątków."
+        },
+        {
+          "name": "West Pullman",
+          "blurb": "A residential neighborhood next to historic Pullman, full of bungalows and brick two-flats on quiet streets. Same $100 rate, same professional install, every time.",
+          "blurb_es": "Un vecindario residencial junto al histórico Pullman, lleno de bungalows y dúplex de ladrillo en calles tranquilas. Misma tarifa de $100, misma instalación profesional, siempre.",
+          "blurb_pl": "Dzielnica mieszkalna obok historycznego Pullman, pełna bungalowów i ceglanych domów dwupiętrowych na spokojnych ulicach. Ta sama stawka $100, ta sama profesjonalna instalacja, za każdym razem."
+        },
+        {
+          "name": "Riverdale",
+          "blurb": "Home to the historic Altgeld Gardens community, where a young Barack Obama once worked as a community organizer. We bring the same level of care and reliability to every home in Riverdale.",
+          "blurb_es": "Hogar de la histórica comunidad Altgeld Gardens, donde un joven Barack Obama trabajó alguna vez como organizador comunitario. Ofrecemos el mismo nivel de cuidado y confiabilidad en cada casa de Riverdale.",
+          "blurb_pl": "Siedziba historycznej społeczności Altgeld Gardens, gdzie młody Barack Obama pracował kiedyś jako organizator społeczny. Oferujemy ten sam poziom staranności i niezawodności w każdym domu w Riverdale."
+        },
+        {
+          "name": "Hegewisch",
+          "blurb": "A close-knit former railroad company town near Wolf Lake and the Indiana state line, with a strong small-town feel. We make the drive out to Hegewisch regularly — same flat rate, no trip charge.",
+          "blurb_es": "Un antiguo pueblo ferroviario muy unido cerca de Wolf Lake y la línea estatal de Indiana, con un fuerte ambiente de pueblo pequeño. Hacemos el viaje hasta Hegewisch con regularidad: misma tarifa fija, sin cargo por el trayecto.",
+          "blurb_pl": "Zżyte, dawne miasteczko kolejowe blisko Wolf Lake i granicy stanu Indiana, z silnym klimatem małego miasteczka. Regularnie przyjeżdżamy do Hegewisch — ta sama stała stawka, bez opłaty za dojazd."
+        }
+      ],
+      "region_es": "Extremo Sureste",
+      "region_pl": "Daleki Południowy Wschód"
     }
   ]
 }

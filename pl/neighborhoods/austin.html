@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
+    <link rel="shortcut icon" href="/public/favicon.ico">
+    <script>
+    (function(){
+      var CURRENT_LANG = 'pl';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montaż TV w Austin — Stała Cena $100 | TV Install Chicago</title>
+    <meta name="description" content="Profesjonalny montaż telewizorów w Austin, Chicago za stałą cenę $100 — dowolny rozmiar, dowolna ściana, bez ukrytych opłat. Dostępne terminy tego samego dnia. Obsługujemy cały obszar Zachodnia Strona.">
+    <link rel="canonical" href="https://tvserviceschicago.com/pl/neighborhoods/austin.html">
+    <link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/neighborhoods/austin.html">
+    <link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/neighborhoods/austin.html">
+    <link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/neighborhoods/austin.html">
+    <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/neighborhoods/austin.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Montaż TV w Austin — Stała Cena $100 | TV Install Chicago">
+    <meta property="og:description" content="Profesjonalny montaż telewizorów w Austin, Chicago za stałą cenę $100 — dowolny rozmiar, dowolna ściana, bez ukrytych opłat.">
+    <meta property="og:url" content="https://tvserviceschicago.com/pl/neighborhoods/austin.html">
+    <meta property="og:image" content="https://tvserviceschicago.com/goldtvlogo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --ink: #0A0A0A; --paper: #F5F0E8; --paper-dark: #EAE4D4;
+            --gold: #C8A94A; --gold-light: #E5C97A; --rust: #C45C2E;
+            --slate: #3A4A5C; --slate-light: #6B7E94;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--ink); color: var(--paper); overflow-x: hidden; margin:0; }
+        .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+        .ticker-wrap { background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+        .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item { display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
+        .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
+        .breadcrumb { font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+        .breadcrumb a { color:var(--slate-light); text-decoration:none; }
+        .breadcrumb a:hover { color:var(--gold); }
+        .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
+        .lang-switch a.active { color:var(--gold); }
+        .lang-switch span { color: rgba(200,169,74,0.3); margin:0 4px; }
+        .hero-section { background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }
+        .hero-section::before { content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }
+        .hero-eyebrow { color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+        .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 7vw, 76px); color: var(--paper); letter-spacing: 0.02em; line-height: 1.02; margin: 10px 0 6px; }
+        .hero-title span { color: var(--gold); }
+        .hero-price { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 12vw, 120px); line-height: 0.9; background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 40%, #F0D890 70%, #C8A94A 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-top:8px; }
+        .content-wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px; position:relative; z-index:1; }
+        .content-card { background:#0F0F0F; border:1px solid rgba(200,169,74,0.2); border-radius:4px; padding:32px; margin-bottom:28px; }
+        .content-card h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold); letter-spacing:0.03em; margin:0 0 14px; }
+        .content-card p { color:var(--slate-light); font-size:15px; line-height:1.75; margin:0 0 12px; }
+        .content-card p:last-child { margin-bottom:0; }
+        .promise-strip { background: var(--paper); color: var(--ink); display: grid; grid-template-columns: repeat(3, 1fr); border-radius:4px; overflow:hidden; margin-bottom:28px; }
+        .promise-item { padding: 24px 20px; border-right: 1px solid var(--paper-dark); text-align: center; }
+        .promise-item:last-child { border-right: none; }
+        .promise-number { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--rust); line-height: 1; }
+        .promise-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate); font-weight: 600; margin-top: 4px; }
+        .faq-item { border-bottom:1px solid rgba(200,169,74,0.12); padding:16px 0; }
+        .faq-item:last-child { border-bottom:none; padding-bottom:0; }
+        .faq-q { font-weight:600; color:var(--paper); font-size:14px; margin-bottom:6px; }
+        .faq-a { color:var(--slate-light); font-size:14px; line-height:1.65; }
+        .nearby-list { display:flex; flex-wrap:wrap; gap:8px; }
+        .nearby-pill { display:inline-block; background:#161616; border:1px solid rgba(200,169,74,0.25); color:var(--paper); padding:8px 16px; border-radius:20px; font-size:13px; text-decoration:none; transition:border-color 0.2s, color 0.2s; }
+        .nearby-pill:hover { border-color:var(--gold); color:var(--gold); }
+        .cta-btn { background: var(--gold); color: var(--ink); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }
+        .cta-btn:hover { background: transparent; color: var(--gold); }
+        .site-footer { background: #050505; border-top: 1px solid rgba(200,169,74,0.15); padding: 40px 24px; text-align: center; }
+        .contact-pill { display: inline-flex; align-items: center; gap: 8px; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+        .contact-pill:hover { border-color: var(--gold); color: var(--gold); }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Montaż TV i Instalacja Naścienna",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "TV Install Chicago",
+        "telephone": "+13129317096",
+        "email": "tvinstallchicago@gmail.com",
+        "image": "https://tvserviceschicago.com/goldtvlogo.webp",
+        "priceRange": "$100",
+        "address": { "@type": "PostalAddress", "addressLocality": "Chicago", "addressRegion": "IL", "addressCountry": "US" }
+      },
+      "areaServed": { "@type": "Place", "name": "Austin, Chicago, IL" },
+      "offers": { "@type": "Offer", "price": "100", "priceCurrency": "USD" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Strona Główna", "item": "https://tvserviceschicago.com/pl/" },
+        { "@type": "ListItem", "position": 2, "name": "Dzielnice", "item": "https://tvserviceschicago.com/pl/neighborhoods/index.html" },
+        { "@type": "ListItem", "position": 3, "name": "Austin", "item": "https://tvserviceschicago.com/pl/neighborhoods/austin.html" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Czy montujecie telewizory w Austin?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — instalujemy i montujemy telewizory w całym Austin i pozostałej części Zachodnia Strona, zwykle z dostępnością tego samego dnia lub następnego dnia." } },
+        { "@type": "Question", "name": "Ile kosztuje montaż telewizora w Austin?", "acceptedAnswer": { "@type": "Answer", "text": "Stałe $100 za dowolny telewizor dowolnego rozmiaru, na dowolnej standardowej ścianie. Opcjonalne dodatki, takie jak uchwyt uchylny lub w pełni ruchomy albo ukrycie kabli w ścianie, są wyceniane osobno." } },
+        { "@type": "Question", "name": "Czy jest opłata za dojazd do Austin?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. Stała cena $100 obowiązuje wszędzie tam, gdzie świadczymy usługi w Chicago, w tym w Austin — bez opłat za dojazd, bez ukrytych kosztów." } }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<div class="ticker-wrap">
+    <div class="ticker-inner">
+        <span class="ticker-item">Stała Cena $100</span><span class="ticker-dot"></span><span class="ticker-item">Dowolny TV. Dowolny Rozmiar.</span><span class="ticker-dot"></span><span class="ticker-item">Profesjonalny Montaż</span><span class="ticker-dot"></span><span class="ticker-item">Montaż TV w Austin</span><span class="ticker-dot"></span><span class="ticker-item">Bez Ukrytych Opłat</span><span class="ticker-dot"></span><span class="ticker-item">Dostępne Tego Samego Dnia</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Stała Cena $100</span><span class="ticker-dot"></span><span class="ticker-item">Dowolny TV. Dowolny Rozmiar.</span><span class="ticker-dot"></span><span class="ticker-item">Profesjonalny Montaż</span><span class="ticker-dot"></span><span class="ticker-item">Montaż TV w Austin</span><span class="ticker-dot"></span><span class="ticker-item">Bez Ukrytych Opłat</span><span class="ticker-dot"></span><span class="ticker-item">Dostępne Tego Samego Dnia</span><span class="ticker-dot"></span>
+    </div>
+</div>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    <span><a href="/pl/">Strona Główna</a> &rsaquo; <a href="/pl/neighborhoods/index.html">Dzielnice</a> &rsaquo; Austin</span>
+    <span class="lang-switch"><a href="/neighborhoods/austin.html">EN</a><span>|</span><a href="/es/neighborhoods/austin.html">ES</a><span>|</span><a class="active" href="/pl/neighborhoods/austin.html">PL</a></span>
+</nav>
+
+<section class="hero-section">
+    <div style="max-width:900px; margin:0 auto; position:relative; z-index:1;">
+        <p class="hero-eyebrow">Zachodnia Strona &middot; Chicago</p>
+        <h1 class="hero-title">MONTAŻ TV<br><span>Austin</span></h1>
+        <div class="hero-price">$100</div>
+        <p style="color:var(--slate-light); font-size:15px; max-width:480px; line-height:1.7; margin-top:10px;">Stała cena. Dowolny telewizor, dowolny rozmiar, dowolna ściana. Dostępne terminy tego samego dnia w Austin.</p>
+    </div>
+</section>
+
+<div class="content-wrap">
+
+    <div class="promise-strip">
+        <div class="promise-item"><div class="promise-number">$100</div><div class="promise-label">Każdy TV, Zawsze</div></div>
+        <div class="promise-item"><div class="promise-number">0</div><div class="promise-label">Ukryte Opłaty, Nigdy</div></div>
+        <div class="promise-item"><div class="promise-number">100%</div><div class="promise-label">Poziomo. Gwarantowane.</div></div>
+    </div>
+
+    <div class="content-card">
+        <h2>Montaż TV w Austin</h2>
+        <p>Największa dzielnica Chicago pod względem liczby ludności, siedziba zaprojektowanego przez Jensa Jensena Columbus Park oraz całych ulic klasycznych bungalowów i szarych kamienic. Regularnie obsługujemy Austin — niezawodna usługa, stała stawka, bez niespodzianek.</p>
+        <p>Ta sama stała cena $100, co w każdej innej obsługiwanej przez nas okolicy — uchwyt montażowy w cenie, bez dopłat za rozmiar, bez opłat za dojazd do Austin. Opcjonalne dodatki, takie jak uchwyt uchylny lub w pełni ruchomy, ukrycie kabli w ścianie czy montaż soundbara, są dostępne na życzenie, ale podstawowa instalacja zawsze kosztuje $100.</p>
+    </div>
+
+    <div class="content-card">
+        <h2>Najczęściej Zadawane Pytania</h2>
+        <div class="faq-item">
+            <div class="faq-q">Czy montujecie telewizory w Austin?</div>
+            <div class="faq-a">Tak — instalujemy i montujemy telewizory w całym Austin i pozostałej części Zachodnia Strona, zwykle z dostępnością tego samego dnia lub następnego dnia.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Ile kosztuje montaż telewizora w Austin?</div>
+            <div class="faq-a">Stałe $100 za dowolny telewizor dowolnego rozmiaru, na dowolnej standardowej ścianie. Opcjonalne dodatki, takie jak uchwyt uchylny lub w pełni ruchomy albo ukrycie kabli w ścianie, są wyceniane osobno.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Czy jest opłata za dojazd do Austin?</div>
+            <div class="faq-a">Nie. Stała cena $100 obowiązuje wszędzie tam, gdzie świadczymy usługi w Chicago, w tym w Austin — bez opłat za dojazd, bez ukrytych kosztów.</div>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <h2>Pobliskie Dzielnice</h2>
+        <div class="nearby-list">
+            <a href="/pl/neighborhoods/humboldt-park.html" class="nearby-pill">Humboldt Park</a>
+            <a href="/pl/neighborhoods/west-town.html" class="nearby-pill">West Town</a>
+            <a href="/pl/neighborhoods/west-garfield-park.html" class="nearby-pill">West Garfield Park</a>
+            <a href="/pl/neighborhoods/east-garfield-park.html" class="nearby-pill">East Garfield Park</a>
+            <a href="/pl/neighborhoods/near-west-side.html" class="nearby-pill">Near West Side</a>
+            <a href="/pl/neighborhoods/north-lawndale.html" class="nearby-pill">North Lawndale</a>
+        </div>
+    </div>
+
+    <a href="/pl/?neighborhood=Austin#bookingForm" class="cta-btn">ZAREZERWUJ INSTALACJĘ ZA $100 &mdash; Austin</a>
+
+</div>
+
+<footer class="site-footer">
+    <p class="bebas" style="font-size:28px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">Stała Cena $100 &middot; Dowolny TV &middot; Dowolny Rozmiar &middot; Zawsze</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+        <a href="tel:+13129317096" class="contact-pill">&#128222; (312) 931-7096</a>
+        <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a>
+    </div>
+    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.3); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; Obietnica $100</p>
+    <p style="margin-top:10px; font-size:11px;"><a href="/pl/neighborhoods/index.html" style="color:var(--slate-light);">Wszystkie 77 Dzielnic Chicago, które Obsługujemy &rarr;</a></p>
+</footer>
+
+</body>
+</html>
