@@ -116,23 +116,6 @@
         body::after { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 0; opacity: 0.3; }
         .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     </style>
-    <script>
-    (function(){
-      var CURRENT_LANG = 'es';
-      try {
-        var stored = localStorage.getItem('tvic_lang');
-        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
-          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
-          var newPath = stored === 'en' ? path : ('/' + stored + path);
-          if (newPath !== location.pathname) {
-            location.replace(newPath + location.search + location.hash);
-            return;
-          }
-        }
-        localStorage.setItem('tvic_lang', CURRENT_LANG);
-      } catch (e) {}
-    })();
-    </script>
 </head>
 <body>
 

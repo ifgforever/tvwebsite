@@ -35,23 +35,6 @@
   .lang-switch a.active { color:var(--gold-dim); }
   .lang-switch span { color: rgba(200,169,74,0.4); margin:0 4px; }
 </style>
-<script>
-(function(){
-  var CURRENT_LANG = 'en';
-  try {
-    var stored = localStorage.getItem('tvic_lang');
-    if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
-      var path = location.pathname.replace(/^\/(es|pl)\//, '/');
-      var newPath = stored === 'en' ? path : ('/' + stored + path);
-      if (newPath !== location.pathname) {
-        location.replace(newPath + location.search + location.hash);
-        return;
-      }
-    }
-    localStorage.setItem('tvic_lang', CURRENT_LANG);
-  } catch (e) {}
-})();
-</script>
 </head>
 <body class="min-h-screen">
 

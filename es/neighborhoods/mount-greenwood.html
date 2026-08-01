@@ -6,23 +6,6 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
-    <script>
-    (function(){
-      var CURRENT_LANG = 'es';
-      try {
-        var stored = localStorage.getItem('tvic_lang');
-        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
-          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
-          var newPath = stored === 'en' ? path : ('/' + stored + path);
-          if (newPath !== location.pathname) {
-            location.replace(newPath + location.search + location.hash);
-            return;
-          }
-        }
-        localStorage.setItem('tvic_lang', CURRENT_LANG);
-      } catch (e) {}
-    })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montaje de TV en Mount Greenwood — Tarifa Fija de $100 | TV Install Chicago</title>
