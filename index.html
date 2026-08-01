@@ -522,6 +522,66 @@
 </div>
 
 
+<!-- ============================================================
+     NEW: TV PURCHASE ADVISOR QUIZ SECTION
+     ============================================================ -->
+<div class="max-w-4xl mx-auto px-4 pb-12">
+    <div class="price-board">
+        <div class="board-header">
+            <span class="bebas" style="font-size:22px;">Need a TV Too? Let Us Point You Right</span>
+            <span class="board-number-badge">FREE DELIVERY TO YOUR INSTALL</span>
+        </div>
+
+        <div class="p-6 md:p-8" id="tvQuizWrap">
+
+            <div style="display:flex; gap:6px; margin-bottom:24px;" id="quizProgress">
+                <div class="quiz-dot" data-dot="1" style="height:4px; flex:1; background:rgba(200,169,74,0.2); border-radius:2px;"></div>
+                <div class="quiz-dot" data-dot="2" style="height:4px; flex:1; background:rgba(200,169,74,0.2); border-radius:2px;"></div>
+                <div class="quiz-dot" data-dot="3" style="height:4px; flex:1; background:rgba(200,169,74,0.2); border-radius:2px;"></div>
+            </div>
+
+            <div class="quiz-step" data-step="1">
+                <p class="bebas" style="font-size:20px; color:var(--paper); margin-bottom:16px;">What size TV are you looking for?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="quiz-opt" onclick="tvicQ('size','under55')">Under 55"</button>
+                    <button class="quiz-opt" onclick="tvicQ('size','55to65')">55" – 65"</button>
+                    <button class="quiz-opt" onclick="tvicQ('size','65to75')">65" – 75"</button>
+                    <button class="quiz-opt" onclick="tvicQ('size','75plus')">75" and up</button>
+                </div>
+            </div>
+
+            <div class="quiz-step hidden" data-step="2">
+                <p class="bebas" style="font-size:20px; color:var(--paper); margin-bottom:16px;">Where will it be installed?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="quiz-opt" onclick="tvicQ('location','indoor')">Indoor</button>
+                    <button class="quiz-opt" onclick="tvicQ('location','outdoor')">Outdoor / patio</button>
+                    <button class="quiz-opt" onclick="tvicQ('location','covered')">Covered outdoor space</button>
+                    <button class="quiz-opt" onclick="tvicQ('location','indoor')">Not sure yet</button>
+                </div>
+                <button onclick="tvicBack()" style="margin-top:16px; background:none; border:none; color:var(--slate-light); font-size:12px; cursor:pointer;">← Back</button>
+            </div>
+
+            <div class="quiz-step hidden" data-step="3">
+                <p class="bebas" style="font-size:20px; color:var(--paper); margin-bottom:16px;">What's your budget range?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="quiz-opt" onclick="tvicQ('budget','value')">Value ($400–$800)</button>
+                    <button class="quiz-opt" onclick="tvicQ('budget','mid')">Mid-range ($800–$1,800)</button>
+                    <button class="quiz-opt" onclick="tvicQ('budget','premium')">Premium ($1,800+)</button>
+                    <button class="quiz-opt" onclick="tvicQ('budget','unsure')">Not sure — recommend one</button>
+                </div>
+                <button onclick="tvicBack()" style="margin-top:16px; background:none; border:none; color:var(--slate-light); font-size:12px; cursor:pointer;">← Back</button>
+            </div>
+
+            <div class="quiz-step hidden" data-step="result" id="quizResult"></div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .quiz-opt { background:#161616; border:1px solid rgba(200,169,74,0.2); color:var(--paper); padding:14px 16px; border-radius:3px; font-size:14px; text-align:left; cursor:pointer; font-family:'DM Sans',sans-serif; transition:border-color 0.15s; }
+    .quiz-opt:hover { border-color:var(--gold); background:#1c1c1c; }
+</style>
 
 
 
