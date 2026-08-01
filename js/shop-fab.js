@@ -29,24 +29,40 @@
   var copy = COPY[LANG];
   var SHOP_URL = 'https://shop.tvserviceschicago.com';
 
+  // A classic red/orange/yellow hot air balloon, sticker-style with a
+  // white outline so it reads as an illustration, not a UI button --
+  // both the blue icon-in-pill and the blue CSS-shape versions still
+  // just looked like a plain blue button from a distance.
+  var BALLOON_SVG =
+    '<svg width="76" height="100" viewBox="0 0 80 104" xmlns="http://www.w3.org/2000/svg">' +
+      '<defs>' +
+        '<linearGradient id="stvsBalloonGrad" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0%" stop-color="#E0332B"/>' +
+          '<stop offset="45%" stop-color="#F0592B"/>' +
+          '<stop offset="70%" stop-color="#F7941D"/>' +
+          '<stop offset="100%" stop-color="#FBB522"/>' +
+        '</linearGradient>' +
+      '</defs>' +
+      '<path d="M40,2 C65,2 74,26 74,38 C74,54 60,66 44,68 L36,68 C20,66 6,54 6,38 C6,26 15,2 40,2 Z" ' +
+        'fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>' +
+      '<path d="M40,2 C65,2 74,26 74,38 C74,54 60,66 44,68 L36,68 C20,66 6,54 6,38 C6,26 15,2 40,2 Z" ' +
+        'fill="url(#stvsBalloonGrad)" stroke="#B8241E" stroke-width="1.5"/>' +
+      '<path d="M40,3 C40,22 40,50 40,67" stroke="#B8241E" stroke-width="1.5" fill="none" opacity="0.6"/>' +
+      '<path d="M25,5 C18,24 22,54 34,67" stroke="#B8241E" stroke-width="1.5" fill="none" opacity="0.6"/>' +
+      '<path d="M55,5 C62,24 58,54 46,67" stroke="#B8241E" stroke-width="1.5" fill="none" opacity="0.6"/>' +
+      '<path d="M36,68 L31,82 M44,68 L49,82" stroke="#3A2A1E" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
+      '<rect x="24" y="80" width="32" height="4" rx="1" fill="#3B82F6" stroke="#fff" stroke-width="2"/>' +
+      '<rect x="26" y="83" width="28" height="16" rx="2.5" fill="#8B5E34" stroke="#5C3A1E" stroke-width="1"/>' +
+    '</svg>';
+
   function inject() {
     var style = document.createElement('style');
     style.textContent = [
-      '.shop-tvs-fab { position: fixed; top: 16px; right: 20px; z-index: 9999; text-align: center; }',
+      '.shop-tvs-fab { position: fixed; top: 16px; right: 16px; z-index: 9999; text-align: center; }',
       '.shop-tvs-caption { display: inline-block; margin-bottom: 8px; background: #111; color: #fff;',
       '  font-size: 11.5px; line-height: 1.5; padding: 8px 12px; border-radius: 8px;',
       '  box-shadow: 0 6px 18px rgba(0,0,0,0.25); max-width: 190px; }',
-      '.shop-tvs-balloon-link { display: block; text-decoration: none; }',
-      '.shop-tvs-balloon { width: 72px; height: 80px; margin: 0 auto;',
-      '  background: repeating-linear-gradient(100deg, #3B82F6 0 9px, #2563EB 9px 18px);',
-      '  border-radius: 50% 50% 46% 46% / 60% 60% 40% 40%;',
-      '  box-shadow: 0 8px 20px rgba(59,130,246,0.55);',
-      '  display: flex; align-items: center; justify-content: center; padding: 4px; }',
-      '.shop-tvs-balloon-label { color: #fff; font-weight: 800; font-size: 11px; line-height: 1.15;',
-      '  text-align: center; letter-spacing: 0.02em; font-family: sans-serif; }',
-      '.shop-tvs-balloon-cords { width: 2px; height: 12px; background: rgba(0,0,0,0.3); margin: 0 auto; }',
-      '.shop-tvs-balloon-basket { width: 30px; height: 18px; margin: 0 auto; background: #8B5E34;',
-      '  border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2); }',
+      '.shop-tvs-balloon-link { display: block; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.35)); }',
     ].join('\n');
     document.head.appendChild(style);
 
@@ -55,10 +71,8 @@
     fab.id = 'shopTvsFab';
     fab.innerHTML =
       '<div class="shop-tvs-caption">' + copy.caption + '</div>' +
-      '<a href="' + SHOP_URL + '" target="_blank" rel="noopener" class="shop-tvs-balloon-link">' +
-        '<div class="shop-tvs-balloon"><span class="shop-tvs-balloon-label">' + copy.label + '</span></div>' +
-        '<div class="shop-tvs-balloon-cords"></div>' +
-        '<div class="shop-tvs-balloon-basket"></div>' +
+      '<a href="' + SHOP_URL + '" target="_blank" rel="noopener" class="shop-tvs-balloon-link" aria-label="' + copy.label + '">' +
+        BALLOON_SVG +
       '</a>';
     document.body.appendChild(fab);
 
