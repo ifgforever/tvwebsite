@@ -129,20 +129,43 @@
 
 <div id="mainContent">
 
-    <div class="shop-tvs-fab" style="position:fixed; bottom:20px; right:20px; z-index:50; text-align:right;">
+    <div id="shopTvsFab" class="shop-tvs-fab" style="position:fixed; top:16px; right:20px; z-index:50; text-align:right;">
         <div class="shop-tvs-caption" style="display:inline-block; margin-bottom:8px; background:#111; color:#fff; font-size:11.5px; line-height:1.5; padding:8px 12px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.25); max-width:200px;">
             Buy TVs online — free delivery. Opens in a new tab, this page stays open.
         </div>
-        <a href="https://shop.tvserviceschicago.com" target="_blank" rel="noopener" class="shop-tvs-btn" style="display:inline-flex; align-items:center; gap:8px; padding:14px 22px; background:#3B82F6; color:#fff; font-weight:700; border-radius:999px; text-decoration:none; letter-spacing:0.02em; font-size:14px;">Shop TVs</a>
+        <a href="https://shop.tvserviceschicago.com" target="_blank" rel="noopener" class="shop-tvs-btn" style="display:inline-flex; align-items:center; gap:8px; padding:14px 22px; background:#3B82F6; color:#fff; font-weight:700; border-radius:999px; text-decoration:none; letter-spacing:0.02em; font-size:14px; box-shadow:0 6px 20px rgba(59,130,246,0.5);">Shop TVs</a>
     </div>
-    <style>
-        @keyframes shopTvsBounce {
-            0%, 100% { transform: translateY(0); box-shadow: 0 6px 20px rgba(59,130,246,0.5); }
-            50% { transform: translateY(-6px); box-shadow: 0 12px 26px rgba(59,130,246,0.65); }
+    <script>
+    (function () {
+        // Starts near the top of the page and chases a target position
+        // that moves down as you scroll, with a trailing lag -- so it
+        // visibly descends the page rather than snapping straight to
+        // the corner or just bouncing in place.
+        var fab = document.getElementById('shopTvsFab');
+        if (!fab) return;
+        var TOP_START = 16;
+        var BOTTOM_MARGIN = 20;
+        var currentTop = TOP_START;
+        var targetTop = TOP_START;
+
+        function computeTarget() {
+            var maxTop = Math.max(TOP_START, window.innerHeight - fab.offsetHeight - BOTTOM_MARGIN);
+            var scrollFraction = Math.min(window.scrollY / 500, 1);
+            targetTop = TOP_START + (maxTop - TOP_START) * scrollFraction;
         }
-        .shop-tvs-btn { animation: shopTvsBounce 2.2s ease-in-out infinite; }
-        .shop-tvs-fab:hover .shop-tvs-btn { animation-play-state: paused; }
-    </style>
+
+        function tick() {
+            computeTarget();
+            currentTop += (targetTop - currentTop) * 0.06;
+            fab.style.top = currentTop + 'px';
+            requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('resize', computeTarget, { passive: true });
+        computeTarget();
+        requestAnimationFrame(tick);
+    })();
+    </script>
 
     <section class="hero-section px-6 py-16 md:py-24">
         <div class="max-w-5xl mx-auto">
