@@ -129,15 +129,19 @@
 
 <div id="mainContent">
 
-    <div class="shop-tvs-fab" style="position:fixed; bottom:20px; right:20px; z-index:50;">
-        <div class="shop-tvs-tooltip" style="position:absolute; bottom:calc(100% + 10px); right:0; width:220px; background:#111; color:#fff; font-size:12.5px; line-height:1.5; padding:10px 14px; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.3); opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity 0.15s ease, transform 0.15s ease;">
-            Opens our online TV shop in a new tab — this page stays open. Chat with our AI to find a TV, buy it, and get free delivery. Installation available separately.
-            <div style="position:absolute; top:100%; right:22px; width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid #111;"></div>
+    <div class="shop-tvs-fab" style="position:fixed; bottom:20px; right:20px; z-index:50; text-align:right;">
+        <div class="shop-tvs-caption" style="display:inline-block; margin-bottom:8px; background:#111; color:#fff; font-size:11.5px; line-height:1.5; padding:8px 12px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.25); max-width:200px;">
+            Buy TVs online — free delivery. Opens in a new tab, this page stays open.
         </div>
-        <a href="https://shop.tvserviceschicago.com" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; padding:14px 22px; background:#3B82F6; color:#fff; font-weight:700; border-radius:999px; text-decoration:none; letter-spacing:0.02em; font-size:14px; box-shadow: 0 6px 20px rgba(59,130,246,0.5);">Shop TVs</a>
+        <a href="https://shop.tvserviceschicago.com" target="_blank" rel="noopener" class="shop-tvs-btn" style="display:inline-flex; align-items:center; gap:8px; padding:14px 22px; background:#3B82F6; color:#fff; font-weight:700; border-radius:999px; text-decoration:none; letter-spacing:0.02em; font-size:14px;">Shop TVs</a>
     </div>
     <style>
-        .shop-tvs-fab:hover .shop-tvs-tooltip { opacity:1; visibility:visible; transform:translateY(0); }
+        @keyframes shopTvsBounce {
+            0%, 100% { transform: translateY(0); box-shadow: 0 6px 20px rgba(59,130,246,0.5); }
+            50% { transform: translateY(-6px); box-shadow: 0 12px 26px rgba(59,130,246,0.65); }
+        }
+        .shop-tvs-btn { animation: shopTvsBounce 2.2s ease-in-out infinite; }
+        .shop-tvs-fab:hover .shop-tvs-btn { animation-play-state: paused; }
     </style>
 
     <section class="hero-section px-6 py-16 md:py-24">
