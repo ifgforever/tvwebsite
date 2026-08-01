@@ -150,7 +150,8 @@
 
         function computeTarget() {
             var maxTop = Math.max(TOP_START, window.innerHeight - fab.offsetHeight - BOTTOM_MARGIN);
-            var scrollFraction = Math.min(window.scrollY / 500, 1);
+            var scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+            var scrollFraction = scrollRange > 0 ? Math.min(window.scrollY / scrollRange, 1) : 1;
             targetTop = TOP_START + (maxTop - TOP_START) * scrollFraction;
         }
 
