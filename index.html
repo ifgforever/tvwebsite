@@ -129,6 +129,17 @@
 
 <div id="mainContent">
 
+    <div class="shop-tvs-fab" style="position:fixed; bottom:20px; right:20px; z-index:50;">
+        <div class="shop-tvs-tooltip" style="position:absolute; bottom:calc(100% + 10px); right:0; width:220px; background:#111; color:#fff; font-size:12.5px; line-height:1.5; padding:10px 14px; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.3); opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity 0.15s ease, transform 0.15s ease;">
+            Browse our TV catalog and buy online — free delivery, install available separately. Opens our TV shop in a new page.
+            <div style="position:absolute; top:100%; right:22px; width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid #111;"></div>
+        </div>
+        <a href="https://shop.tvserviceschicago.com" style="display:inline-flex; align-items:center; gap:8px; padding:14px 22px; background:#3B82F6; color:#fff; font-weight:700; border-radius:999px; text-decoration:none; letter-spacing:0.02em; font-size:14px; box-shadow: 0 6px 20px rgba(59,130,246,0.5);">Shop TVs</a>
+    </div>
+    <style>
+        .shop-tvs-fab:hover .shop-tvs-tooltip { opacity:1; visibility:visible; transform:translateY(0); }
+    </style>
+
     <section class="hero-section px-6 py-16 md:py-24">
         <div class="max-w-5xl mx-auto">
             <div class="flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-12">
@@ -141,7 +152,7 @@
                     <p class="mt-6 max-w-sm mx-auto md:mx-0" style="font-size:15px; line-height:1.7; color: var(--slate-light);">
                         One flat rate. No surprises. Whether it's a 32" bedroom set or an 85" living room beast — the price never changes.
                     </p>
-                    <a href="https://shop.tvserviceschicago.com" style="display:inline-block; margin-top:20px; padding:12px 28px; background:var(--gold); color:var(--ink); font-weight:700; border-radius:6px; text-decoration:none; letter-spacing:0.03em;">Shop TVs — Free Delivery</a>
+                    <a href="https://shop.tvserviceschicago.com" style="display:inline-block; margin-top:20px; padding:12px 28px; background:#3B82F6; color:#fff; font-weight:700; border-radius:6px; text-decoration:none; letter-spacing:0.03em; box-shadow: 0 4px 14px rgba(59,130,246,0.4);">Shop TVs — Free Delivery</a>
                 </div>
                 <div class="flex-shrink-0 text-center">
                     <img src="goldtvlogo.webp" alt="TV Install Chicago" class="h-40 w-auto mx-auto" style="mix-blend-mode: lighten;">
