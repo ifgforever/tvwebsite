@@ -78,16 +78,20 @@
 
     var TOP_START = 16;
     var IDLE_DELAY_MS = 500;
+    var RISE_DURATION_MS = 2200;
     var currentTop = TOP_START;
     var targetTop = TOP_START;
     var idleTimer = null;
     var isScrolling = false;
+    var isRising = false;
+    var riseStartTop = TOP_START;
+    var riseStartTime = 0;
+
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
 
     function computeTarget() {
-      if (!isScrolling) {
-        targetTop = TOP_START;
-        return;
-      }
       var halfwayTop = window.innerHeight / 2 - fab.offsetHeight / 2;
       var scrollRange = document.documentElement.scrollHeight - window.innerHeight;
       var scrollFraction = scrollRange > 0 ? Math.min(window.scrollY / scrollRange, 1) : 1;
@@ -96,17 +100,30 @@
 
     function onScroll() {
       isScrolling = true;
+      isRising = false;
       computeTarget();
       clearTimeout(idleTimer);
       idleTimer = setTimeout(function () {
         isScrolling = false;
-        computeTarget();
+        isRising = true;
+        riseStartTop = currentTop;
+        riseStartTime = Date.now();
       }, IDLE_DELAY_MS);
     }
 
     function tick() {
-      var speed = targetTop < currentTop ? 0.035 : 0.08;
-      currentTop += (targetTop - currentTop) * speed;
+      if (isScrolling) {
+        // Descending: follow the scroll position directly, lerped for
+        // a light trailing lag rather than a hard snap.
+        currentTop += (targetTop - currentTop) * 0.08;
+      } else if (isRising) {
+        // Rising: a steady, gentle ease over a fixed duration --
+        // floats up smoothly rather than snapping fast and decaying,
+        // which read as a bounce.
+        var progress = Math.min((Date.now() - riseStartTime) / RISE_DURATION_MS, 1);
+        currentTop = riseStartTop + (TOP_START - riseStartTop) * easeInOutQuad(progress);
+        if (progress >= 1) isRising = false;
+      }
       var sway = Math.sin(Date.now() / 1100) * 6;
       fab.style.top = currentTop + 'px';
       fab.style.transform = 'translateX(' + sway + 'px)';
