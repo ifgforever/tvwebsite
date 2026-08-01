@@ -137,33 +137,47 @@
     </div>
     <script>
     (function () {
-        // Starts near the top of the page and chases a target position
-        // that moves down as you scroll, with a trailing lag -- so it
-        // visibly descends the page rather than snapping straight to
-        // the corner or just bouncing in place.
+        // While actively scrolling, the button descends toward the
+        // middle of the viewport (never past halfway). Once scrolling
+        // stops for a moment, it rises back to the top and waits there.
         var fab = document.getElementById('shopTvsFab');
         if (!fab) return;
         var TOP_START = 16;
-        var BOTTOM_MARGIN = 20;
+        var IDLE_DELAY_MS = 500;
         var currentTop = TOP_START;
         var targetTop = TOP_START;
+        var idleTimer = null;
+        var isScrolling = false;
 
         function computeTarget() {
-            var maxTop = Math.max(TOP_START, window.innerHeight - fab.offsetHeight - BOTTOM_MARGIN);
+            if (!isScrolling) {
+                targetTop = TOP_START;
+                return;
+            }
+            var halfwayTop = window.innerHeight / 2 - fab.offsetHeight / 2;
             var scrollRange = document.documentElement.scrollHeight - window.innerHeight;
             var scrollFraction = scrollRange > 0 ? Math.min(window.scrollY / scrollRange, 1) : 1;
-            targetTop = TOP_START + (maxTop - TOP_START) * scrollFraction;
+            targetTop = TOP_START + (halfwayTop - TOP_START) * scrollFraction;
+        }
+
+        function onScroll() {
+            isScrolling = true;
+            computeTarget();
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(function () {
+                isScrolling = false;
+                computeTarget();
+            }, IDLE_DELAY_MS);
         }
 
         function tick() {
-            computeTarget();
-            currentTop += (targetTop - currentTop) * 0.06;
+            currentTop += (targetTop - currentTop) * 0.08;
             fab.style.top = currentTop + 'px';
             requestAnimationFrame(tick);
         }
 
+        window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', computeTarget, { passive: true });
-        computeTarget();
         requestAnimationFrame(tick);
     })();
     </script>
