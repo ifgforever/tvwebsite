@@ -25,15 +25,15 @@
         en: {
             guide: {
                 emailRequired: 'Please enter your email address.',
-                submissionError: 'Submission error. Please try again or call us at (312) 931-7096.',
-                networkError: 'Network error. Please try again or call us at (312) 931-7096.'
+                submissionError: 'Submission error. Please try again or call us at (630) 592-2982.',
+                networkError: 'Network error. Please try again or call us at (630) 592-2982.'
             },
             booking: {
                 fillRequired: 'Please fill in all required fields marked with *',
                 liftingRequired: 'Please confirm the lifting assistance agreement to proceed with the $100 flat rate.',
                 fillTvFields: function (i) { return 'Please fill in all fields for TV ' + i; },
-                submissionError: 'Submission error. Please try again or call us directly at (312) 931-7096.',
-                networkError: 'Network error. Please try again or call us directly at (312) 931-7096.'
+                submissionError: 'Submission error. Please try again or call us directly at (630) 592-2982.',
+                networkError: 'Network error. Please try again or call us directly at (630) 592-2982.'
             },
             success: {
                 thankYou: function (name) { return 'Thank you, ' + name + '. Your booking request is in — we\'ll confirm within hours. Get ready for a perfect install.'; },
@@ -65,15 +65,15 @@
         es: {
             guide: {
                 emailRequired: 'Por favor ingresa tu correo electrónico.',
-                submissionError: 'Error de envío. Por favor intenta de nuevo o llámanos al (312) 931-7096.',
-                networkError: 'Error de red. Por favor intenta de nuevo o llámanos al (312) 931-7096.'
+                submissionError: 'Error de envío. Por favor intenta de nuevo o llámanos al (630) 592-2982.',
+                networkError: 'Error de red. Por favor intenta de nuevo o llámanos al (630) 592-2982.'
             },
             booking: {
                 fillRequired: 'Por favor completa todos los campos requeridos marcados con *',
                 liftingRequired: 'Por favor confirma el acuerdo de asistencia de levantamiento para continuar con la tarifa fija de $100.',
                 fillTvFields: function (i) { return 'Por favor completa todos los campos para el TV ' + i; },
-                submissionError: 'Error de envío. Por favor intenta de nuevo o llámanos directamente al (312) 931-7096.',
-                networkError: 'Error de red. Por favor intenta de nuevo o llámanos directamente al (312) 931-7096.'
+                submissionError: 'Error de envío. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.',
+                networkError: 'Error de red. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.'
             },
             success: {
                 thankYou: function (name) { return 'Gracias, ' + name + '. Tu solicitud de reserva está en camino — confirmaremos en unas horas. Prepárate para una instalación perfecta.'; },
@@ -105,15 +105,15 @@
         pl: {
             guide: {
                 emailRequired: 'Podaj proszę swój adres e-mail.',
-                submissionError: 'Błąd wysyłania. Spróbuj ponownie lub zadzwoń do nas pod (312) 931-7096.',
-                networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń do nas pod (312) 931-7096.'
+                submissionError: 'Błąd wysyłania. Spróbuj ponownie lub zadzwoń do nas pod (630) 592-2982.',
+                networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń do nas pod (630) 592-2982.'
             },
             booking: {
                 fillRequired: 'Proszę wypełnić wszystkie wymagane pola oznaczone *',
                 liftingRequired: 'Proszę potwierdzić zgodę na pomoc przy podnoszeniu, aby skorzystać ze stałej ceny $100.',
                 fillTvFields: function (i) { return 'Proszę wypełnić wszystkie pola dla TV ' + i; },
-                submissionError: 'Błąd wysyłania. Spróbuj ponownie lub zadzwoń bezpośrednio pod (312) 931-7096.',
-                networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń bezpośrednio pod (312) 931-7096.'
+                submissionError: 'Błąd wysyłania. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.',
+                networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.'
             },
             success: {
                 thankYou: function (name) { return 'Dziękujemy, ' + name + '. Twoja prośba o rezerwację została przyjęta — potwierdzimy w ciągu kilku godzin. Przygotuj się na idealny montaż.'; },
@@ -232,7 +232,7 @@
             + '<p style="color:var(--slate-light); font-size:14.5px; line-height:1.7; margin:12px 0 18px;">' + text + '</p>'
             + '<div style="margin-bottom:22px;">' + chips + '</div>'
             + '<div style="display:flex; gap:12px; flex-wrap:wrap;">'
-            + '<a href="tel:+13129317096" style="display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--ink); padding:13px 24px; border-radius:3px; font-family:\'Bebas Neue\',sans-serif; font-size:16px; letter-spacing:0.06em; text-decoration:none;">📞 (312) 931-7096</a>'
+            + '<a href="tel:+16305922982" style="display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--ink); padding:13px 24px; border-radius:3px; font-family:\'Bebas Neue\',sans-serif; font-size:16px; letter-spacing:0.06em; text-decoration:none;">📞 (630) 592-2982</a>'
             + '<button onclick="tvicRestart()" style="background:none; border:1px solid rgba(200,169,74,0.3); color:var(--slate-light); padding:13px 20px; border-radius:3px; font-size:13px; cursor:pointer;">' + S.quiz.startOver + '</button>'
             + '</div>';
 
@@ -459,7 +459,7 @@
         doc.text('TV INSTALL CHICAGO', pw / 2, 20, { align: 'center' });
         doc.setTextColor(200, 200, 200); doc.setFontSize(11); doc.setFont('helvetica', 'normal');
         doc.text('$100 Flat Rate  Any TV  Any Size  Always', pw / 2, 32, { align: 'center' });
-        doc.text('(312) 931-7096  tvinstallchicago@gmail.com', pw / 2, 42, { align: 'center' });
+        doc.text('(630) 592-2982  tvinstallchicago@gmail.com', pw / 2, 42, { align: 'center' });
         y = 65;
 
         doc.setTextColor(10, 10, 10); doc.setFontSize(20); doc.setFont('helvetica', 'bold');
