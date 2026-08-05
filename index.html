@@ -22,7 +22,7 @@
             --paper-dark: #EAE4D4;
             --gold: #C8A94A;
             --gold-light: #E5C97A;
-            --rust: #C45C2E;
+            --rust: #A8471F;
             --slate: #3A4A5C;
             --slate-light: #6B7E94;
         }
@@ -62,8 +62,8 @@
         .line-item-name { font-weight: 500; font-size: 14px; color: var(--ink); }
         .line-item-desc { font-size: 12px; color: var(--slate); margin-top: 2px; }
         .line-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.02em; color: var(--rust); }
-        .line-price.included { color: #5a9a5a; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-        .section-head { padding: 12px 20px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--slate); font-weight: 700; background: rgba(200,169,74,0.08); border-bottom: 1px solid rgba(10,10,10,0.08); }
+        .line-price.included { color: #2E6E2E; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .section-head { padding: 12px 20px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #8C9BAC; font-weight: 700; background: rgba(200,169,74,0.08); border-bottom: 1px solid rgba(10,10,10,0.08); }
 
         .form-card { background: #0F0F0F; border: 1px solid rgba(200,169,74,0.2); border-radius: 4px; }
         .form-card-header { background: var(--gold); color: var(--ink); padding: 18px 28px; border-radius: 3px 3px 0 0; }
@@ -112,6 +112,7 @@
     </style>
 </head>
 <body>
+<main>
 <script src="js/deals-ticker.js" defer></script>
 
 <div class="ticker-wrap">
@@ -147,7 +148,7 @@
                     <p class="mt-6 max-w-sm mx-auto md:mx-0" style="font-size:15px; line-height:1.7; color: var(--slate-light);">
                         One flat rate. No surprises. Whether it's a 32" bedroom set or an 85" living room beast — the price never changes.
                     </p>
-                    <a href="https://shop.tvserviceschicago.com" target="_blank" rel="noopener" style="display:inline-block; margin-top:20px; padding:12px 28px; background:#3B82F6; color:#fff; font-weight:700; border-radius:6px; text-decoration:none; letter-spacing:0.03em; box-shadow: 0 4px 14px rgba(59,130,246,0.4);">Shop TVs — Free Delivery</a>
+                    <a href="https://shop.tvserviceschicago.com" target="_blank" rel="noopener" style="display:inline-block; margin-top:20px; padding:12px 28px; background:#2563EB; color:#fff; font-weight:700; border-radius:6px; text-decoration:none; letter-spacing:0.03em; box-shadow: 0 4px 14px rgba(37,99,235,0.4);">Shop TVs — Free Delivery</a>
                 </div>
                 <div class="flex-shrink-0 text-center">
                     <img src="goldtvlogo.webp" alt="TV Install Chicago" width="1536" height="1024" class="h-40 w-auto mx-auto" style="mix-blend-mode: lighten;">
@@ -209,14 +210,14 @@
 
                 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div><label>Full Name *</label><input type="text" id="name" required class="field-input" placeholder="Your full name"></div>
-                    <div><label>Phone Number *</label><input type="tel" id="phone" required class="field-input" placeholder="(555) 123-4567"></div>
+                    <div><label for="name">Full Name *</label><input type="text" id="name" required class="field-input" placeholder="Your full name"></div>
+                    <div><label for="phone">Phone Number *</label><input type="tel" id="phone" required class="field-input" placeholder="(555) 123-4567"></div>
                 </div>
-                <div><label>Email Address *</label><input type="email" id="email" required class="field-input" placeholder="your@email.com"></div>
-                <div><label>Service Address *</label><input type="text" id="address" required class="field-input" placeholder="123 Main St, City, State ZIP"></div>
+                <div><label for="email">Email Address *</label><input type="email" id="email" required class="field-input" placeholder="your@email.com"></div>
+                <div><label for="address">Service Address *</label><input type="text" id="address" required class="field-input" placeholder="123 Main St, City, State ZIP"></div>
 
                 <div>
-                    <label>Number of TVs *</label>
+                    <label for="numTvs">Number of TVs *</label>
                     <select id="numTvs" required onchange="updateTvForms(); calculateTotal()" class="field-input">
                         <option value="1">1 TV — $100</option>
                         <option value="2">2 TVs — $200 Total</option>
@@ -230,7 +231,7 @@
                 <div id="tv1-section" class="tv-block">
                     <div class="tv-block-header"><div class="tv-num-badge">1</div><div class="tv-block-title">First TV</div><div class="tv-block-price">$100</div></div>
                     <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><label>TV Size *</label>
+                        <div><label for="tvSize1">TV Size *</label>
                             <select id="tvSize1" required onchange="calculateTotal()" class="field-input">
                                 <option value="">Select size</option>
                                 <option value="up-to-42" data-price="100">Up to 42" — $100</option>
@@ -239,7 +240,7 @@
                                 <option value="71-85" data-price="100">71"–85" — $100</option>
                                 <option value="86-plus" data-price="100">86"+ — $100</option>
                             </select></div>
-                        <div><label>Mount Type *</label>
+                        <div><label for="mountType1">Mount Type *</label>
                             <select id="mountType1" required onchange="calculateTotal()" class="field-input">
                                 <option value="">Select mount</option>
                                 <option value="own" data-price="0">Own Mount — +$0</option>
@@ -247,7 +248,7 @@
                                 <option value="tilt" data-price="50">Tilting — +$50</option>
                                 <option value="full" data-price="100">Full Motion — +$100 (37"–80")</option>
                             </select></div>
-                        <div><label>Wire Concealment *</label>
+                        <div><label for="wireConcealment1">Wire Concealment *</label>
                             <select id="wireConcealment1" required onchange="calculateTotal()" class="field-input">
                                 <option value="">Select option</option>
                                 <option value="none" data-price="0">None — Included</option>
@@ -255,7 +256,7 @@
                                 <option value="inwall" data-price="60">In-Wall — +$60</option>
                                 <option value="outlet" data-price="250">Outlet Install — +$250</option>
                             </select></div>
-                        <div><label>Soundbar Mounting</label>
+                        <div><label for="soundbar1">Soundbar Mounting</label>
                             <select id="soundbar1" onchange="calculateTotal()" class="field-input">
                                 <option value="no" data-price="0">No soundbar</option>
                                 <option value="yes" data-price="60">Yes — +$60</option>
@@ -267,7 +268,7 @@
                 <div id="tv2-section" class="hidden tv-block">
                     <div class="tv-block-header"><div class="tv-num-badge">2</div><div class="tv-block-title">Second TV</div><div class="tv-block-price">$100</div></div>
                     <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><label>TV Size *</label>
+                        <div><label for="tvSize2">TV Size *</label>
                             <select id="tvSize2" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select size</option>
                                 <option value="up-to-42" data-price="100">Up to 42" — $100</option>
@@ -276,7 +277,7 @@
                                 <option value="71-85" data-price="100">71"–85" — $100</option>
                                 <option value="86-plus" data-price="100">86"+ — $100</option>
                             </select></div>
-                        <div><label>Mount Type *</label>
+                        <div><label for="mountType2">Mount Type *</label>
                             <select id="mountType2" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select mount</option>
                                 <option value="own" data-price="0">Own Mount — +$0</option>
@@ -284,7 +285,7 @@
                                 <option value="tilt" data-price="50">Tilting — +$50</option>
                                 <option value="full" data-price="100">Full Motion — +$100 (37"–80")</option>
                             </select></div>
-                        <div><label>Wire Concealment *</label>
+                        <div><label for="wireConcealment2">Wire Concealment *</label>
                             <select id="wireConcealment2" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select option</option>
                                 <option value="none" data-price="0">None — Included</option>
@@ -292,7 +293,7 @@
                                 <option value="inwall" data-price="60">In-Wall — +$60</option>
                                 <option value="outlet" data-price="250">Outlet Install — +$250</option>
                             </select></div>
-                        <div><label>Soundbar Mounting</label>
+                        <div><label for="soundbar2">Soundbar Mounting</label>
                             <select id="soundbar2" onchange="calculateTotal()" class="field-input">
                                 <option value="no" data-price="0">No soundbar</option>
                                 <option value="yes" data-price="60">Yes — +$60</option>
@@ -304,7 +305,7 @@
                 <div id="tv3-section" class="hidden tv-block">
                     <div class="tv-block-header"><div class="tv-num-badge">3</div><div class="tv-block-title">Third TV</div><div class="tv-block-price">$100</div></div>
                     <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><label>TV Size *</label>
+                        <div><label for="tvSize3">TV Size *</label>
                             <select id="tvSize3" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select size</option>
                                 <option value="up-to-42" data-price="100">Up to 42" — $100</option>
@@ -313,7 +314,7 @@
                                 <option value="71-85" data-price="100">71"–85" — $100</option>
                                 <option value="86-plus" data-price="100">86"+ — $100</option>
                             </select></div>
-                        <div><label>Mount Type *</label>
+                        <div><label for="mountType3">Mount Type *</label>
                             <select id="mountType3" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select mount</option>
                                 <option value="own" data-price="0">Own Mount — +$0</option>
@@ -321,7 +322,7 @@
                                 <option value="tilt" data-price="50">Tilting — +$50</option>
                                 <option value="full" data-price="100">Full Motion — +$100 (37"–80")</option>
                             </select></div>
-                        <div><label>Wire Concealment *</label>
+                        <div><label for="wireConcealment3">Wire Concealment *</label>
                             <select id="wireConcealment3" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select option</option>
                                 <option value="none" data-price="0">None — Included</option>
@@ -329,7 +330,7 @@
                                 <option value="inwall" data-price="60">In-Wall — +$60</option>
                                 <option value="outlet" data-price="250">Outlet Install — +$250</option>
                             </select></div>
-                        <div><label>Soundbar Mounting</label>
+                        <div><label for="soundbar3">Soundbar Mounting</label>
                             <select id="soundbar3" onchange="calculateTotal()" class="field-input">
                                 <option value="no" data-price="0">No soundbar</option>
                                 <option value="yes" data-price="60">Yes — +$60</option>
@@ -341,7 +342,7 @@
                 <div id="tv4-section" class="hidden tv-block">
                     <div class="tv-block-header"><div class="tv-num-badge">4</div><div class="tv-block-title">Fourth TV</div><div class="tv-block-price">$100</div></div>
                     <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><label>TV Size *</label>
+                        <div><label for="tvSize4">TV Size *</label>
                             <select id="tvSize4" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select size</option>
                                 <option value="up-to-42" data-price="100">Up to 42" — $100</option>
@@ -350,7 +351,7 @@
                                 <option value="71-85" data-price="100">71"–85" — $100</option>
                                 <option value="86-plus" data-price="100">86"+ — $100</option>
                             </select></div>
-                        <div><label>Mount Type *</label>
+                        <div><label for="mountType4">Mount Type *</label>
                             <select id="mountType4" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select mount</option>
                                 <option value="own" data-price="0">Own Mount — +$0</option>
@@ -358,7 +359,7 @@
                                 <option value="tilt" data-price="50">Tilting — +$50</option>
                                 <option value="full" data-price="100">Full Motion — +$100 (37"–80")</option>
                             </select></div>
-                        <div><label>Wire Concealment *</label>
+                        <div><label for="wireConcealment4">Wire Concealment *</label>
                             <select id="wireConcealment4" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select option</option>
                                 <option value="none" data-price="0">None — Included</option>
@@ -366,7 +367,7 @@
                                 <option value="inwall" data-price="60">In-Wall — +$60</option>
                                 <option value="outlet" data-price="250">Outlet Install — +$250</option>
                             </select></div>
-                        <div><label>Soundbar Mounting</label>
+                        <div><label for="soundbar4">Soundbar Mounting</label>
                             <select id="soundbar4" onchange="calculateTotal()" class="field-input">
                                 <option value="no" data-price="0">No soundbar</option>
                                 <option value="yes" data-price="60">Yes — +$60</option>
@@ -378,7 +379,7 @@
                 <div id="tv5-section" class="hidden tv-block">
                     <div class="tv-block-header"><div class="tv-num-badge">5</div><div class="tv-block-title">Additional TVs</div><div class="tv-block-price">$100 ea.</div></div>
                     <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><label>TV Size *</label>
+                        <div><label for="tvSize5">TV Size *</label>
                             <select id="tvSize5" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select size</option>
                                 <option value="up-to-42" data-price="100">Up to 42" — $100</option>
@@ -387,7 +388,7 @@
                                 <option value="71-85" data-price="100">71"–85" — $100</option>
                                 <option value="86-plus" data-price="100">86"+ — $100</option>
                             </select></div>
-                        <div><label>Mount Type *</label>
+                        <div><label for="mountType5">Mount Type *</label>
                             <select id="mountType5" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select mount</option>
                                 <option value="own" data-price="0">Own Mount — +$0</option>
@@ -395,7 +396,7 @@
                                 <option value="tilt" data-price="50">Tilting — +$50</option>
                                 <option value="full" data-price="100">Full Motion — +$100 (37"–80")</option>
                             </select></div>
-                        <div><label>Wire Concealment *</label>
+                        <div><label for="wireConcealment5">Wire Concealment *</label>
                             <select id="wireConcealment5" onchange="calculateTotal()" class="field-input">
                                 <option value="">Select option</option>
                                 <option value="none" data-price="0">None — Included</option>
@@ -403,7 +404,7 @@
                                 <option value="inwall" data-price="60">In-Wall — +$60</option>
                                 <option value="outlet" data-price="250">Outlet Install — +$250</option>
                             </select></div>
-                        <div><label>Soundbar Mounting</label>
+                        <div><label for="soundbar5">Soundbar Mounting</label>
                             <select id="soundbar5" onchange="calculateTotal()" class="field-input">
                                 <option value="no" data-price="0">No soundbar</option>
                                 <option value="yes" data-price="60">Yes — +$60</option>
@@ -422,9 +423,9 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div><label>Preferred Date *</label><input type="date" id="preferredDate" required class="field-input"></div>
+                    <div><label for="preferredDate">Preferred Date *</label><input type="date" id="preferredDate" required class="field-input"></div>
                     <div>
-                        <label>Preferred Time *</label>
+                        <label for="preferredTime">Preferred Time *</label>
                         <select id="preferredTime" required class="field-input">
                             <option value="">Select window</option>
                             <option value="8:00 AM - 10:00 AM">8:00 AM – 10:00 AM</option>
@@ -436,7 +437,7 @@
                     </div>
                 </div>
 
-                <div><label>Additional Notes</label><textarea id="additionalNotes" rows="3" class="field-input" placeholder="Anything we should know? Multiple rooms, complex walls, special requirements..."></textarea></div>
+                <div><label for="additionalNotes">Additional Notes</label><textarea id="additionalNotes" rows="3" class="field-input" placeholder="Anything we should know? Multiple rooms, complex walls, special requirements..."></textarea></div>
 
                 <!-- LIFTING AGREEMENT -->
                 <div id="liftingBox" style="background: rgba(200,169,74,0.07); border: 1px solid rgba(200,169,74,0.3); border-radius: 3px; padding: 20px;">
@@ -905,5 +906,6 @@
      before this line on the es/pl homepages to localize it. -->
 <script src="/js/site.js"></script>
 
+</main>
 </body>
 </html>

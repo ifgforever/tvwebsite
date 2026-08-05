@@ -95,7 +95,7 @@ def hreflang_block(domain, path):
 STYLE_BLOCK = """
         :root {{
             --ink: #0A0A0A; --paper: #F5F0E8; --paper-dark: #EAE4D4;
-            --gold: #C8A94A; --gold-light: #E5C97A; --rust: #C45C2E;
+            --gold: #C8A94A; --gold-light: #E5C97A; --rust: #A8471F;
             --slate: #3A4A5C; --slate-light: #6B7E94;
         }}
         * {{ box-sizing: border-box; }}
@@ -282,6 +282,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     </script>
 </head>
 <body>
+<main>
 
 <div class="ticker-wrap">
     <div class="ticker-inner">
@@ -356,6 +357,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <p style="margin-top:10px; font-size:11px;"><a href="{hub_href}" style="color:var(--slate-light);">{footer_link1}</a> &middot; <a href="{hoods_hub_href}" style="color:var(--slate-light);">{footer_link2}</a></p>
 </footer>
 
+</main>
 </body>
 </html>
 """
@@ -483,6 +485,7 @@ HUB_TEMPLATE = """<!DOCTYPE html>
     </style>
 </head>
 <body>
+<main>
 <div class="ticker-wrap"><div class="ticker-inner">
     {ticker_html}
     {ticker_html}
@@ -509,6 +512,7 @@ HUB_TEMPLATE = """<!DOCTYPE html>
         <a href="{home_href}" class="contact-pill">{back}</a>
     </div>
 </footer>
+</main>
 </body>
 </html>
 """
