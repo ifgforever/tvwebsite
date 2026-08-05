@@ -3,6 +3,23 @@
 <head>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
+    <script>
+    (function(){
+      var CURRENT_LANG = 'es';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montaje de TV en Cada Vecindario de Chicago — Tarifa Fija de $100 | TV Install Chicago</title>
@@ -14,7 +31,8 @@
     <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/neighborhoods/index.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"></noscript>
     <style>
         :root { --ink:#0A0A0A; --paper:#F5F0E8; --gold:#C8A94A; --slate-light:#6B7E94; }
         * { box-sizing:border-box; }
@@ -165,10 +183,10 @@
 <footer class="site-footer">
     <p class="bebas" style="font-size:26px; color:var(--gold);">TV Install Chicago</p>
     <div class="flex" style="margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <a href="tel:+16305922982" class="contact-pill">&#128222; (630) 592-2982</a>
+        <a href="tel:+13129317096" class="contact-pill">&#128222; (312) 931-7096</a>
         <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a>
         <a href="/es/" class="contact-pill">&larr; Volver al Inicio</a>
     </div>
 </footer>
-<script src="/js/report-problem.js"></script></body>
+</body>
 </html>

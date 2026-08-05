@@ -448,7 +448,18 @@
     }
 
     // English-only PDF — see file header note on jsPDF font encoding.
+    // jsPDF (~2.5MB) is only needed by this one feature, so it's loaded on
+    // first use here instead of unconditionally on every page load.
     window.downloadEstimate = function () {
+        if (window.jspdf) { buildAndDownloadEstimate(); return; }
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+        script.onload = buildAndDownloadEstimate;
+        script.onerror = function () { alert('Could not load the PDF generator. Please check your connection and try again.'); };
+        document.head.appendChild(script);
+    };
+
+    function buildAndDownloadEstimate() {
         var jsPDF = window.jspdf.jsPDF;
         var doc = new jsPDF();
         var pw = doc.internal.pageSize.getWidth();
@@ -536,7 +547,7 @@
         doc.text('Customer assists with lifting on larger displays. Thank you for choosing TV Install Chicago!', pw / 2, fy + 20, { align: 'center' });
 
         doc.save('TVInstallChicago_Estimate_' + estimateData.estimateNumber + '.pdf');
-    };
+    }
 
     // ============================================================
     // Neighborhood/source query-param handoff

@@ -6,6 +6,23 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
+    <script>
+    (function(){
+      var CURRENT_LANG = 'es';
+      try {
+        var stored = localStorage.getItem('tvic_lang');
+        if (stored && stored !== CURRENT_LANG && (stored === 'en' || stored === 'es' || stored === 'pl')) {
+          var path = location.pathname.replace(/^\/(es|pl)\//, '/');
+          var newPath = stored === 'en' ? path : ('/' + stored + path);
+          if (newPath !== location.pathname) {
+            location.replace(newPath + location.search + location.hash);
+            return;
+          }
+        }
+        localStorage.setItem('tvic_lang', CURRENT_LANG);
+      } catch (e) {}
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montaje de TV en Albany Park — Tarifa Fija de $100 | TV Install Chicago</title>
@@ -22,8 +39,9 @@
     <meta property="og:image" content="https://tvserviceschicago.com/goldtvlogo.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/tailwind.min.css">
     <style>
         :root {
             --ink: #0A0A0A; --paper: #F5F0E8; --paper-dark: #EAE4D4;
@@ -81,7 +99,7 @@
       "provider": {
         "@type": "LocalBusiness",
         "name": "TV Install Chicago",
-        "telephone": "+16305922982",
+        "telephone": "+13129317096",
         "email": "tvinstallchicago@gmail.com",
         "image": "https://tvserviceschicago.com/goldtvlogo.webp",
         "priceRange": "$100",
@@ -187,11 +205,12 @@
     <p class="bebas" style="font-size:28px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
     <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">Tarifa Fija de $100 &middot; Cualquier TV &middot; Cualquier Tamaño &middot; Siempre</p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
-        <a href="tel:+16305922982" class="contact-pill">&#128222; (630) 592-2982</a>
+        <a href="tel:+13129317096" class="contact-pill">&#128222; (312) 931-7096</a>
         <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a>
     </div>
     <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.7); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; La Promesa de $100</p>
     <p style="margin-top:10px; font-size:11px;"><a href="/es/neighborhoods/index.html" style="color:var(--slate-light);">Los 77 Vecindarios de Chicago que Atendemos &rarr;</a></p>
 </footer>
-<script src="/js/report-problem.js"></script></body>
+
+</body>
 </html>
