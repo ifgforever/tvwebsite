@@ -24,6 +24,7 @@
             unavailableTag: 'Unavailable',
             addonsTotal: function (total) { return 'Estimated total: $' + total; },
             nameAndPhoneRequired: 'Name and phone are required.',
+            pillarLeadNotice: 'Pillar mounts are hand-made and need at least a week of lead time — please go back and pick a date at least 7 days out.',
             booking: 'Booking…',
             confirmBooking: 'Confirm Booking',
             bookingFailed: 'Something went wrong submitting your booking — please call or text us directly.',
@@ -32,6 +33,8 @@
                 'Fixed Mount': 'Fixed Mount',
                 'Tilting Mount': 'Tilting Mount',
                 'Full Motion Mount (37"–80")': 'Full Motion Mount (37"–80")',
+                'Mantle Mount': 'Mantle Mount (from $350)',
+                'Pillar Mount': 'Pillar Mount (hand-made, 1 week lead time)',
                 'External Cable Strip': 'External Cable Strip',
                 'In-Wall Concealment': 'In-Wall Concealment',
                 'Electrical Outlet Install': 'Electrical Outlet Install',
@@ -49,6 +52,7 @@
             unavailableTag: 'No disponible',
             addonsTotal: function (total) { return 'Total estimado: $' + total; },
             nameAndPhoneRequired: 'El nombre y el teléfono son obligatorios.',
+            pillarLeadNotice: 'Los montajes en columna son hechos a mano y necesitan al menos una semana de anticipación — por favor regresa y elige una fecha con al menos 7 días de anticipación.',
             booking: 'Reservando…',
             confirmBooking: 'Confirmar Reserva',
             bookingFailed: 'Algo salió mal al enviar tu reserva — por favor llámanos o envíanos un mensaje directamente.',
@@ -57,6 +61,8 @@
                 'Fixed Mount': 'Soporte Fijo',
                 'Tilting Mount': 'Soporte Inclinable',
                 'Full Motion Mount (37"–80")': 'Soporte de Movimiento Completo (37"–80")',
+                'Mantle Mount': 'Montaje en Repisa (desde $350)',
+                'Pillar Mount': 'Montaje en Columna (hecho a mano, 1 semana de espera)',
                 'External Cable Strip': 'Canaleta Externa',
                 'In-Wall Concealment': 'Ocultación en la Pared',
                 'Electrical Outlet Install': 'Instalación de Toma Eléctrica',
@@ -74,6 +80,7 @@
             unavailableTag: 'Niedostępne',
             addonsTotal: function (total) { return 'Szacowana suma: $' + total; },
             nameAndPhoneRequired: 'Imię i numer telefonu są wymagane.',
+            pillarLeadNotice: 'Montaże kolumnowe są wykonywane ręcznie i wymagają co najmniej tygodnia wyprzedzenia — wróć i wybierz datę co najmniej 7 dni od teraz.',
             booking: 'Rezerwowanie…',
             confirmBooking: 'Potwierdź Rezerwację',
             bookingFailed: 'Coś poszło nie tak podczas wysyłania rezerwacji — zadzwoń lub napisz do nas bezpośrednio.',
@@ -82,6 +89,8 @@
                 'Fixed Mount': 'Uchwyt Stały',
                 'Tilting Mount': 'Uchwyt Uchylny',
                 'Full Motion Mount (37"–80")': 'Uchwyt w Pełni Ruchomy (37"–80")',
+                'Mantle Mount': 'Montaż Kominkowy (od $350)',
+                'Pillar Mount': 'Montaż Kolumnowy (ręcznie wykonany, 1 tydzień oczekiwania)',
                 'External Cable Strip': 'Zewnętrzna Listwa',
                 'In-Wall Concealment': 'Ukrycie w Ścianie',
                 'Electrical Outlet Install': 'Instalacja Gniazdka Elektrycznego',
@@ -102,11 +111,21 @@
         { label: 'Fixed Mount', price: 50 },
         { label: 'Tilting Mount', price: 50 },
         { label: 'Full Motion Mount (37"–80")', price: 100 },
+        { label: 'Mantle Mount', price: 350 },
+        { label: 'Pillar Mount', price: 200 },
         { label: 'External Cable Strip', price: 35 },
         { label: 'In-Wall Concealment', price: 60 },
         { label: 'Electrical Outlet Install', price: 250 },
         { label: 'Soundbar Mounting', price: 60 },
     ];
+
+    // Pillar mounts are hand-made by Lance -- earliest bookable date shifts
+    // out a week whenever one is selected, enforced purely client-side by
+    // filtering the date picker (no backend availability change needed).
+    const PILLAR_MOUNT_LEAD_DAYS = 7;
+    function hasPillarMount() {
+        return selectedServices.has('Pillar Mount');
+    }
 
     function buildLineItems() {
         const lineItems = [{ description: 'TV Mounting', price: BASE_PRICE }];
@@ -355,6 +374,15 @@
             return;
         }
 
+        if (hasPillarMount()) {
+            const daysOut = Math.round((new Date(selectedDate + 'T00:00:00') - new Date(new Date().toDateString())) / 86400000);
+            if (daysOut < PILLAR_MOUNT_LEAD_DAYS) {
+                $('#bookError').textContent = S.pillarLeadNotice;
+                $('#bookError').classList.remove('hidden');
+                return;
+            }
+        }
+
         $('#bookBtn').disabled = true;
         $('#bookBtn').textContent = S.booking;
 
@@ -378,6 +406,7 @@
                     notes: $('#notesInput').value.trim(),
                     website: $('#custWebsite').value,
                     smsConsent: $('#smsConsent').checked,
+                    language: LANG,
                 }),
             });
 

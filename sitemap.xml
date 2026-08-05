@@ -33,6 +33,10 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://tvserviceschicago.com/whats-new.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tvserviceschicago.com/es/</loc>
     <priority>1.0</priority>
   </url>
@@ -65,6 +69,10 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://tvserviceschicago.com/es/whats-new.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tvserviceschicago.com/pl/</loc>
     <priority>1.0</priority>
   </url>
@@ -95,6 +103,10 @@
   <url>
     <loc>https://tvserviceschicago.com/pl/privacy-policy.html</loc>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://tvserviceschicago.com/pl/whats-new.html</loc>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tvserviceschicago.com/neighborhoods/index.html</loc>

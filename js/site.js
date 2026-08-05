@@ -261,7 +261,7 @@
     // English-only: feeds the PDF estimate (see file header note) and
     // has no bearing on what the customer sees on the page itself.
     function sizeLabel(v) { return { 'up-to-42': 'Up to 42"', '43-55': '43"-55"', '56-70': '56"-70"', '71-85': '71"-85"', '86-plus': '86"+' }[v] || v; }
-    function mountLabel(v) { return { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount' }[v] || v; }
+    function mountLabel(v) { return { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount', 'mantle': 'Mantle Mount', 'pillar': 'Pillar Mount' }[v] || v; }
     function wireLabel(v) { return { 'none': 'No Wire Concealment', 'external': 'External Strip', 'inwall': 'In-Wall Concealment', 'outlet': 'Electrical Outlet Installation' }[v] || v; }
 
     window.updateTvForms = function () {
@@ -311,8 +311,7 @@
             var tv = tvs[i];
             lineItems.push({ description: 'TV Mounting — ' + tv.size, price: tv.sizePrice || 0 });
             if (tv.mount && tv.mount !== 'own' && tv.mountPrice) {
-                var mLabel = tv.mount === 'fixed' ? 'Fixed Mount' : tv.mount === 'tilt' ? 'Tilting Mount' : tv.mount === 'full' ? 'Full Motion Mount' : tv.mount;
-                lineItems.push({ description: mLabel, price: tv.mountPrice });
+                lineItems.push({ description: mountLabel(tv.mount), price: tv.mountPrice });
             }
             if (tv.wire && tv.wire !== 'none' && tv.wirePrice) {
                 var wLabel = tv.wire === 'external' ? 'External Cable Strip' : tv.wire === 'inwall' ? 'In-Wall Concealment' : tv.wire === 'outlet' ? 'Electrical Outlet Install' : tv.wire;
@@ -341,7 +340,8 @@
                 lineItems: lineItems,
                 notes: fullNotes,
                 website: website,
-                smsConsent: smsConsent
+                smsConsent: smsConsent,
+                language: LANG
             })
         }).catch(function () {
             // Silent — this is a best-effort sync. The Formspree submission
@@ -418,6 +418,7 @@
         fd.append('additionalNotes', notes);
         fd.append('total', '$' + total);
         fd.append('liftingAgreement', 'Confirmed — customer will assist with lifting on larger TVs');
+        fd.append('language', LANG);
 
         fetch('https://formspree.io/f/xeoyyygd', {
             method: 'POST',
