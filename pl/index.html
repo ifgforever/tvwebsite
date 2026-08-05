@@ -72,7 +72,7 @@
         .line-item-desc { font-size: 12px; color: var(--slate); margin-top: 2px; }
         .line-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.02em; color: var(--rust); }
         .line-price.included { color: #2E6E2E; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-        .section-head { padding: 12px 20px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #8C9BAC; font-weight: 700; background: rgba(200,169,74,0.08); border-bottom: 1px solid rgba(10,10,10,0.08); }
+        .section-head { padding: 12px 20px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--slate); font-weight: 700; background: rgba(200,169,74,0.08); border-bottom: 1px solid rgba(10,10,10,0.08); }
 
         .form-card { background: #0F0F0F; border: 1px solid rgba(200,169,74,0.2); border-radius: 4px; }
         .form-card-header { background: var(--gold); color: var(--ink); padding: 18px 28px; border-radius: 3px 3px 0 0; }
@@ -199,7 +199,7 @@
             <div class="section-head">Soundbar — Opcjonalny Dodatek</div>
             <div class="line-item" style="border-bottom:none;"><div><div class="line-item-name">Montaż Soundbara</div><div class="line-item-desc">Zamontowany idealnie pod ekranem.</div></div><div class="line-price">+$60</div></div>
 
-            <div class="m-6 mt-2 rounded-sm p-4 text-sm" style="background: rgba(200,169,74,0.07); border-left: 3px solid var(--gold); color: var(--slate-light);">
+            <div class="m-6 mt-2 rounded-sm p-4 text-sm" style="background: rgba(200,169,74,0.07); border-left: 3px solid var(--gold); color: var(--slate);">
                 ✓ Każda instalacja obejmuje wypoziomowany montaż i pełne sprzątanie po pracy.
             </div>
         </div>
@@ -446,7 +446,7 @@
                 <!-- LIFTING AGREEMENT -->
                 <div id="liftingBox" style="background: rgba(200,169,74,0.07); border: 1px solid rgba(200,169,74,0.3); border-radius: 3px; padding: 20px;">
                     <div style="display:flex; align-items:flex-start; gap:12px;">
-                        <input type="checkbox" id="liftingConsent" style="width:18px; height:18px; flex-shrink:0; margin-top:3px; accent-color: var(--gold); cursor:pointer;">
+                        <input type="checkbox" id="liftingConsent" aria-label="Zgadzam się pomóc przy podnoszeniu większych telewizorów" style="width:18px; height:18px; flex-shrink:0; margin-top:3px; accent-color: var(--gold); cursor:pointer;">
                         <div>
                             <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color: var(--gold); margin-bottom:6px;">Zgoda na Pomoc przy Podnoszeniu *</p>
                             <p style="font-size:14px; color: var(--paper); line-height:1.6;">Rozumiem, że w przypadku większych telewizorów (56"+), stała cena <strong style="color:var(--gold);">$100</strong> obowiązuje, gdy zgadzam się pomóc przy podnoszeniu podczas instalacji. Instalator zajmuje się całym montażem, wypoziomowaniem i osprzętem — ja zapewniam jedynie dodatkową parę rąk do ciężkiego podnoszenia, gdy jest to potrzebne.</p>
@@ -457,7 +457,7 @@
                 <!-- SMS CONSENT -->
                 <div id="smsConsentBox" style="background: rgba(200,169,74,0.04); border: 1px solid rgba(200,169,74,0.15); border-radius: 3px; padding: 16px 20px;">
                     <div style="display:flex; align-items:flex-start; gap:12px;">
-                        <input type="checkbox" id="smsConsent" style="width:18px; height:18px; flex-shrink:0; margin-top:3px; accent-color: var(--gold); cursor:pointer;">
+                        <input type="checkbox" id="smsConsent" aria-label="Wyślij mi przypomnienie o wizycie SMS-em" style="width:18px; height:18px; flex-shrink:0; margin-top:3px; accent-color: var(--gold); cursor:pointer;">
                         <p style="font-size:13px; color: var(--slate-light); line-height:1.6;">Wyślij mi SMS przypominający dzień przed moją wizytą (mogą obowiązywać opłaty za wiadomości i dane, odpowiedz STOP, aby zrezygnować). Zobacz naszą <a href="/pl/privacy-policy.html" style="color:var(--gold);">Politykę Prywatności</a>. Opcjonalne — rezerwacja i tak zostanie potwierdzona.</p>
                     </div>
                 </div>
