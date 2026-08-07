@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tap/
 Sitemap: https://tvserviceschicago.com/sitemap.xml
 
