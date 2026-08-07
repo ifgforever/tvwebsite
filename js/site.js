@@ -261,7 +261,7 @@
     // English-only: feeds the PDF estimate (see file header note) and
     // has no bearing on what the customer sees on the page itself.
     function sizeLabel(v) { return { 'up-to-42': 'Up to 42"', '43-55': '43"-55"', '56-70': '56"-70"', '71-85': '71"-85"', '86-plus': '86"+' }[v] || v; }
-    function mountLabel(v) { return { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount', 'mantle': 'Mantle Mount', 'pillar': 'Pillar Mount' }[v] || v; }
+    function mountLabel(v) { return { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount', 'mantle': 'Mantle Mount', 'pillar': 'Pillar Mount', 'mantle-mm340': 'MantelMount MM340 Standard', 'mantle-mm540': 'MantelMount MM540 Enhanced', 'mantle-mm700': 'MantelMount MM700 Premier', 'mantle-mmmax1': 'MantelMount MM-MAX1 Full Motion', 'mantle-mm815': 'MantelMount MM815 Motorized' }[v] || v; }
     function wireLabel(v) { return { 'none': 'No Wire Concealment', 'external': 'External Strip', 'inwall': 'In-Wall Concealment', 'outlet': 'Electrical Outlet Installation', 'framebox': 'Frame TV Recessed Box (box supplied by us)', 'frameboxdiy': 'Frame TV Recessed Box (box supplied by customer)' }[v] || v; }
 
     window.updateTvForms = function () {
@@ -278,17 +278,57 @@
         }
     };
 
+    // Size buckets that are entirely above 65". MantelMount labor jumps
+    // from $350 to $500 there, and we don't do pillar mounts that big at
+    // all -- so the 56"-70" bucket was split into 56"-65"/66"-70" to make
+    // this line unambiguous.
+    var OVER_65_SIZES = ['66-70', '71-85', '86-plus'];
+    function isOver65(sizeValue) { return OVER_65_SIZES.indexOf(sizeValue) !== -1; }
+    function isMantelMount(mountValue) { return String(mountValue || '').indexOf('mantle-') === 0; }
+    window.isOver65 = isOver65;
+    window.isMantelMount = isMantelMount;
+
+    // MantelMount option prices are the mount hardware only; our install
+    // labor is added here because it depends on the TV's size, not on
+    // which mount they picked.
+    var MANTELMOUNT_LABOR_UNDER_65 = 350;
+    var MANTELMOUNT_LABOR_OVER_65 = 500;
+    window.mantelMountLabor = function (sizeValue) {
+        return isOver65(sizeValue) ? MANTELMOUNT_LABOR_OVER_65 : MANTELMOUNT_LABOR_UNDER_65;
+    };
+
+    // Pillar mounts are hand-made and we don't build them for TVs over
+    // 65". Greys the option out rather than letting someone quote and
+    // book something we'd have to turn down.
+    window.syncMountOptionsToSize = function (i) {
+        var sizeSel = document.getElementById('tvSize' + i);
+        var mountSel = document.getElementById('mountType' + i);
+        if (!sizeSel || !mountSel) return;
+        var over65 = isOver65(sizeSel.value);
+        var pillar = mountSel.querySelector('option[value="pillar"]');
+        if (pillar) {
+            pillar.disabled = over65;
+            if (over65 && mountSel.value === 'pillar') mountSel.value = 'own';
+        }
+    };
+
     window.calculateTotal = function () {
         var num = parseInt(document.getElementById('numTvs').value);
         var total = num * 100;
         for (var i = 1; i <= num; i++) {
-            total += parseInt(document.getElementById('mountType' + i).selectedOptions[0].dataset.price || 0);
-            total += parseInt(document.getElementById('wireConcealment' + i).selectedOptions[0].dataset.price || 0);
-            total += parseInt(document.getElementById('soundbar' + i).selectedOptions[0].dataset.price || 0);
+            syncMountOptionsToSize(i);
+            var sizeVal = document.getElementById('tvSize' + i).value;
+            var mountSel = document.getElementById('mountType' + i);
+            var mountVal = mountSel.value;
+            total += parseFloat(mountSel.selectedOptions[0].dataset.price || 0);
+            if (isMantelMount(mountVal)) total += mantelMountLabor(sizeVal);
+            total += parseFloat(document.getElementById('wireConcealment' + i).selectedOptions[0].dataset.price || 0);
+            total += parseFloat(document.getElementById('soundbar' + i).selectedOptions[0].dataset.price || 0);
         }
+        total = Math.round(total * 100) / 100;
         var el = document.getElementById('priceTotal');
         el.classList.remove('hidden');
-        document.getElementById('totalAmount').textContent = '$' + total;
+        document.getElementById('totalAmount').textContent = '$' + (total % 1 === 0 ? total : total.toFixed(2));
         return total;
     };
 
@@ -311,6 +351,17 @@
             var tv = tvs[i];
             lineItems.push({ description: 'TV Mounting — ' + tv.size, price: tv.sizePrice || 0 });
             if (tv.mount && tv.mount !== 'own' && tv.mountPrice) {
+                // MantelMount is billed as two things: our install labor
+                // (which depends on TV size) and the mount hardware we
+                // supply. Send both so the job shows exactly which mount
+                // to bring and what the labor tier was.
+                if (isMantelMount(tv.mount)) {
+                    var labor = mantelMountLabor(tv.size);
+                    lineItems.push({
+                        description: 'MantelMount Installation (' + (isOver65(tv.size) ? 'over 65"' : '65" and under') + ')',
+                        price: labor
+                    });
+                }
                 lineItems.push({ description: mountLabel(tv.mount), price: tv.mountPrice });
             }
             if (tv.wire && tv.wire !== 'none' && tv.wirePrice) {
