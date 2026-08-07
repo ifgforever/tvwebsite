@@ -561,13 +561,19 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     # core page is added, removed, or renamed.
     CORE_PAGES = [
         ("index.html", "1.0"),
-        ("book.html", "0.9"),
         ("tv-mounting-guide.html", "0.7"),
         ("challenge.html", "0.6"),
+        ("whats-new.html", "0.6"),
         ("blog/index.html", "0.6"),
         ("blog/new-tvs-2026.html", "0.5"),
         ("terms-and-conditions.html", "0.3"),
         ("privacy-policy.html", "0.3"),
+    ]
+    # EN-only pages (no es/pl translations exist yet) -- appended after the
+    # per-language loop below via EN_ONLY_PAGES.
+    EN_ONLY_PAGES = [
+        ("blog/tv-release-calendar.html", "0.5"),
+        ("blog/tv-mounting-home-theater-chicago.html", "0.5"),
     ]
     LANG_ROOT = {"en": "/", "es": "/es/", "pl": "/pl/"}
     urls = []
@@ -576,6 +582,8 @@ def rebuild_sitemap(suburb_data, suburb_flat):
             root = LANG_ROOT[lang]
             path = "" if page == "index.html" else page
             urls.append((f'{domain}{root}{path}', priority))
+    for page, priority in EN_ONLY_PAGES:
+        urls.append((f'{domain}/{page}', priority))
     for lang in LANGS:
         urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}index.html', "0.9"))
         urls.append((f'{domain}{URL_PREFIX[lang]}index.html', "0.9"))

@@ -33,7 +33,8 @@
                 liftingRequired: 'Please confirm the lifting assistance agreement to proceed with the $100 flat rate.',
                 fillTvFields: function (i) { return 'Please fill in all fields for TV ' + i; },
                 submissionError: 'Submission error. Please try again or call us directly at (630) 592-2982.',
-                networkError: 'Network error. Please try again or call us directly at (630) 592-2982.'
+                networkError: 'Network error. Please try again or call us directly at (630) 592-2982.',
+                pillarOver65: 'Pillar mounts are hand-made for TVs 65" and under, so that TV was switched to "Customer\'s Own Mount" — please pick a different mount type.'
             },
             success: {
                 thankYou: function (name) { return 'Thank you, ' + name + '. Your booking request is in — we\'ll confirm within hours. Get ready for a perfect install.'; },
@@ -73,7 +74,8 @@
                 liftingRequired: 'Por favor confirma el acuerdo de asistencia de levantamiento para continuar con la tarifa fija de $100.',
                 fillTvFields: function (i) { return 'Por favor completa todos los campos para el TV ' + i; },
                 submissionError: 'Error de envío. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.',
-                networkError: 'Error de red. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.'
+                networkError: 'Error de red. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.',
+                pillarOver65: 'Los montajes en columna se hacen a mano para TVs de 65" o menos, así que ese TV se cambió a "Soporte Propio del Cliente" — por favor elige otro tipo de soporte.'
             },
             success: {
                 thankYou: function (name) { return 'Gracias, ' + name + '. Tu solicitud de reserva está en camino — confirmaremos en unas horas. Prepárate para una instalación perfecta.'; },
@@ -113,7 +115,8 @@
                 liftingRequired: 'Proszę potwierdzić zgodę na pomoc przy podnoszeniu, aby skorzystać ze stałej ceny $100.',
                 fillTvFields: function (i) { return 'Proszę wypełnić wszystkie pola dla TV ' + i; },
                 submissionError: 'Błąd wysyłania. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.',
-                networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.'
+                networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.',
+                pillarOver65: 'Montaże kolumnowe są wykonywane ręcznie dla telewizorów do 65", więc dla tego telewizora wybrano "Własny Uchwyt Klienta" — wybierz proszę inny typ uchwytu.'
             },
             success: {
                 thankYou: function (name) { return 'Dziękujemy, ' + name + '. Twoja prośba o rezerwację została przyjęta — potwierdzimy w ciągu kilku godzin. Przygotuj się na idealny montaż.'; },
@@ -249,7 +252,11 @@
     // ============================================================
     // Booking form / pricing calculator
     // ============================================================
-    document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+    // Local calendar date, not toISOString() -- that's UTC, which after
+    // ~7pm Chicago rolls to tomorrow and blocks same-day requests. Same
+    // bug class already fixed on the tv-ops availability endpoint.
+    var _now = new Date();
+    document.getElementById('preferredDate').min = _now.getFullYear() + '-' + pad(_now.getMonth() + 1) + '-' + pad(_now.getDate());
     var estimateData = {};
 
     function genEstNum() {
@@ -260,7 +267,7 @@
 
     // English-only: feeds the PDF estimate (see file header note) and
     // has no bearing on what the customer sees on the page itself.
-    function sizeLabel(v) { return { 'up-to-42': 'Up to 42"', '43-55': '43"-55"', '56-70': '56"-70"', '71-85': '71"-85"', '86-plus': '86"+' }[v] || v; }
+    function sizeLabel(v) { return { 'up-to-42': 'Up to 42"', '43-55': '43"-55"', '56-65': '56"-65"', '66-70': '66"-70"', '56-70': '56"-70"', '71-85': '71"-85"', '86-plus': '86"+' }[v] || v; }
     function mountLabel(v) { return { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount', 'mantle': 'Mantle Mount', 'pillar': 'Pillar Mount', 'mantle-mm340': 'MantelMount MM340 Standard', 'mantle-mm540': 'MantelMount MM540 Enhanced', 'mantle-mm700': 'MantelMount MM700 Premier', 'mantle-mmmax1': 'MantelMount MM-MAX1 Full Motion', 'mantle-mm815': 'MantelMount MM815 Motorized' }[v] || v; }
     function wireLabel(v) { return { 'none': 'No Wire Concealment', 'external': 'External Strip', 'inwall': 'In-Wall Concealment', 'outlet': 'Electrical Outlet Installation', 'framebox': 'Frame TV Recessed Box (box supplied by us)', 'frameboxdiy': 'Frame TV Recessed Box (box supplied by customer)' }[v] || v; }
 
@@ -308,7 +315,13 @@
         var pillar = mountSel.querySelector('option[value="pillar"]');
         if (pillar) {
             pillar.disabled = over65;
-            if (over65 && mountSel.value === 'pillar') mountSel.value = 'own';
+            if (over65 && mountSel.value === 'pillar') {
+                // Tell the customer, don't just silently drop $200 off
+                // their quote -- a total that changes with no explanation
+                // reads as a glitch.
+                mountSel.value = 'own';
+                alert(S.booking.pillarOver65);
+            }
         }
     };
 
@@ -385,6 +398,10 @@
             if (tvs[d].wire === 'inwall') durationMinutes += 30;
             if (tvs[d].wire === 'outlet') durationMinutes += 60;
             if (tvs[d].wire === 'framebox' || tvs[d].wire === 'frameboxdiy') durationMinutes += 60;
+            // Fireplace pull-down installs are the biggest jobs we book --
+            // without this, a $600+ MantelMount job blocked the same 90
+            // minutes as a basic drywall mount.
+            if (isMantelMount(tvs[d].mount)) durationMinutes += 60;
         }
 
         fetch('https://tv-ops-public-api.tvinstallchicago.workers.dev/book', {
