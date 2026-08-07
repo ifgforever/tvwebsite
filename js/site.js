@@ -376,6 +376,17 @@
         var startTime = TIME_WINDOW_START[timeWindow] || '';
         var fullNotes = 'Preferred window: ' + timeWindow + (notes ? ' — ' + notes : '');
 
+        // Same duration formula the chat assistant uses, so a multi-TV or
+        // wiring-heavy booking blocks a realistic stretch of the calendar
+        // instead of the 90-minute default (which invited double-booking).
+        var durationMinutes = 90 * tvs.length;
+        for (var d = 0; d < tvs.length; d++) {
+            if (tvs[d].soundbar === 'yes') durationMinutes += 30;
+            if (tvs[d].wire === 'inwall') durationMinutes += 30;
+            if (tvs[d].wire === 'outlet') durationMinutes += 60;
+            if (tvs[d].wire === 'framebox' || tvs[d].wire === 'frameboxdiy') durationMinutes += 60;
+        }
+
         fetch('https://tv-ops-public-api.tvinstallchicago.workers.dev/book', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
@@ -389,6 +400,7 @@
                 serviceType: 'Booked via website',
                 price: total,
                 lineItems: lineItems,
+                estimatedDurationMinutes: durationMinutes,
                 notes: fullNotes,
                 website: website,
                 smsConsent: smsConsent,
@@ -430,10 +442,13 @@
             if (!sz || !mt || !wc) { alert(S.booking.fillTvFields(i)); return; }
             tvs.push({
                 size: sz, mount: mt, wire: wc, soundbar: sb,
-                sizePrice: parseInt(document.getElementById('tvSize' + i).selectedOptions[0].dataset.price),
-                mountPrice: parseInt(document.getElementById('mountType' + i).selectedOptions[0].dataset.price),
-                wirePrice: parseInt(document.getElementById('wireConcealment' + i).selectedOptions[0].dataset.price),
-                soundbarPrice: parseInt(document.getElementById('soundbar' + i).selectedOptions[0].dataset.price)
+                // parseFloat, not parseInt -- MantelMount hardware prices
+                // carry cents (e.g. 249.95) and parseInt silently truncated
+                // them, making the itemized lines disagree with the total.
+                sizePrice: parseFloat(document.getElementById('tvSize' + i).selectedOptions[0].dataset.price),
+                mountPrice: parseFloat(document.getElementById('mountType' + i).selectedOptions[0].dataset.price),
+                wirePrice: parseFloat(document.getElementById('wireConcealment' + i).selectedOptions[0].dataset.price),
+                soundbarPrice: parseFloat(document.getElementById('soundbar' + i).selectedOptions[0].dataset.price)
             });
         }
 
@@ -566,10 +581,16 @@
             doc.text('TV ' + (i + 1), 20, y); y += 7;
             doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
             var rows = [
-                ['   TV Installation (' + sizeLabel(tv.size) + ')', '$' + tv.sizePrice],
-                ['   Mount: ' + mountLabel(tv.mount), '$' + tv.mountPrice],
-                ['   Wire: ' + wireLabel(tv.wire), '$' + tv.wirePrice]
+                ['   TV Installation (' + sizeLabel(tv.size) + ')', '$' + tv.sizePrice]
             ];
+            // MantelMount jobs bill labor and hardware separately -- both
+            // are inside estimateData.total, so both must be itemized here
+            // or the rows won't add up to the TOTAL box below.
+            if (isMantelMount(tv.mount)) {
+                rows.push(['   MantelMount Installation (' + (isOver65(tv.size) ? 'over 65")' : '65" and under)'), '$' + mantelMountLabor(tv.size)]);
+            }
+            rows.push(['   Mount: ' + mountLabel(tv.mount), '$' + tv.mountPrice]);
+            rows.push(['   Wire: ' + wireLabel(tv.wire), '$' + tv.wirePrice]);
             if (tv.soundbar === 'yes') rows.push(['   Soundbar Mounting', '$' + tv.soundbarPrice]);
             rows.forEach(function (r) { doc.text(r[0], 20, y); doc.text(r[1], pw - 20, y, { align: 'right' }); y += 6; });
             y += 4;
