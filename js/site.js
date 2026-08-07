@@ -262,7 +262,7 @@
     // has no bearing on what the customer sees on the page itself.
     function sizeLabel(v) { return { 'up-to-42': 'Up to 42"', '43-55': '43"-55"', '56-70': '56"-70"', '71-85': '71"-85"', '86-plus': '86"+' }[v] || v; }
     function mountLabel(v) { return { 'own': "Customer's Own Mount", 'fixed': 'Fixed Mount', 'tilt': 'Tilting Mount', 'full': 'Full Motion Mount', 'mantle': 'Mantle Mount', 'pillar': 'Pillar Mount' }[v] || v; }
-    function wireLabel(v) { return { 'none': 'No Wire Concealment', 'external': 'External Strip', 'inwall': 'In-Wall Concealment', 'outlet': 'Electrical Outlet Installation' }[v] || v; }
+    function wireLabel(v) { return { 'none': 'No Wire Concealment', 'external': 'External Strip', 'inwall': 'In-Wall Concealment', 'outlet': 'Electrical Outlet Installation', 'framebox': 'Frame TV Recessed Box (box supplied by us)', 'frameboxdiy': 'Frame TV Recessed Box (box supplied by customer)' }[v] || v; }
 
     window.updateTvForms = function () {
         var num = parseInt(document.getElementById('numTvs').value);
@@ -314,7 +314,7 @@
                 lineItems.push({ description: mountLabel(tv.mount), price: tv.mountPrice });
             }
             if (tv.wire && tv.wire !== 'none' && tv.wirePrice) {
-                var wLabel = tv.wire === 'external' ? 'External Cable Strip' : tv.wire === 'inwall' ? 'In-Wall Concealment' : tv.wire === 'outlet' ? 'Electrical Outlet Install' : tv.wire;
+                var wLabel = tv.wire === 'external' ? 'External Cable Strip' : tv.wire === 'inwall' ? 'In-Wall Concealment' : tv.wire === 'outlet' ? 'Electrical Outlet Install' : tv.wire === 'framebox' ? 'Frame TV Recessed Box — box supplied by us' : tv.wire === 'frameboxdiy' ? 'Frame TV Recessed Box — box supplied by customer' : tv.wire;
                 lineItems.push({ description: wLabel, price: tv.wirePrice });
             }
             if (tv.soundbar === 'yes' && tv.soundbarPrice) {
