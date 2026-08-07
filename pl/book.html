@@ -80,6 +80,11 @@
       <input id="addressInput" type="text" autocomplete="off" placeholder="Zacznij wpisywać swój adres…" class="w-full rounded-md px-4 py-3 text-sm">
       <div id="addressSuggestions" class="hidden absolute left-0 right-0 z-30 mt-1 rounded-md overflow-hidden" style="background:#1A1A1A; border:1px solid rgba(245,240,232,0.15);"></div>
     </div>
+    <div class="mb-3">
+      <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Dodatki (opcjonalne) — stała cena montażu $100 zawsze jest w cenie</p>
+        <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
+        <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
+    </div>
     <button id="findTimesBtn" class="btn-gold w-full rounded-md py-3 text-sm">Znajdź Dostępne Terminy</button>
     <p id="addressError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
   </section>
@@ -89,9 +94,14 @@
     <div id="loadingDays" class="flex items-center gap-2 justify-center py-8" style="color:rgba(245,240,232,0.6);">
       <span class="spinner"></span> Sprawdzanie dostępności…
     </div>
+    <div id="daysError" class="hidden panel rounded-xl p-6 mb-6">
+      <p class="text-sm mb-3" style="color:var(--rust);">Coś poszło nie tak podczas wczytywania dostępnych terminów. Spróbuj ponownie.</p>
+      <button id="daysErrorBackBtn" class="btn-ghost rounded-md py-2 px-4 text-sm">&larr; Wypróbuj inny adres</button>
+    </div>
     <div id="daysResults" class="hidden">
       <h2 class="bebas text-2xl mb-1" style="color:var(--gold);">Wybierz dzień</h2>
       <p class="text-xs mb-4" style="color:rgba(245,240,232,0.5);">Dni oznaczone <span style="color:var(--gold);">★ Sugerowane</span> mają już zaplanowane inne zlecenie w pobliżu — pomaga to skrócić czas dojazdu (a czasem oznacza szybszą obsługę dla Ciebie).</p>
+      <p id="noDaysMsg" class="hidden text-xs mb-4" style="color:rgba(245,240,232,0.6);">Nie widzimy wolnych terminów w najbliższych tygodniach. Zadzwoń lub napisz do nas, a coś znajdziemy.</p>
       <div id="daysList" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6"></div>
 
       <div id="slotsSection" class="hidden">
@@ -113,13 +123,8 @@
       <label for="custEmail" class="sr-only">E-mail (do potwierdzenia i paragonu)</label>
       <input id="custEmail" type="email" placeholder="E-mail (do potwierdzenia i paragonu)" class="w-full rounded-md px-4 py-3 text-sm">
 
-      <div>
-        <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Dodatki (opcjonalne) — stała cena montażu $100 zawsze jest w cenie</p>
-        <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
-        <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
-        <label for="notesInput" class="sr-only">Dodatkowe uwagi</label>
-        <input id="notesInput" type="text" placeholder="Coś jeszcze, co powinniśmy wiedzieć?" class="w-full rounded-md px-4 py-3 text-sm">
-      </div>
+      <label for="notesInput" class="sr-only">Dodatkowe uwagi</label>
+      <input id="notesInput" type="text" placeholder="Coś jeszcze, co powinniśmy wiedzieć?" class="w-full rounded-md px-4 py-3 text-sm">
 
       <label class="flex items-start gap-2 text-xs" style="color:rgba(245,240,232,0.6);">
         <input id="smsConsent" type="checkbox" class="mt-0.5" style="width:14px; height:14px;">

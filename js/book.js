@@ -24,10 +24,13 @@
             unavailableTag: 'Unavailable',
             addonsTotal: function (total) { return 'Estimated total: $' + total; },
             nameAndPhoneRequired: 'Name and phone are required.',
+            invalidPhone: 'Please enter a valid phone number.',
+            invalidEmail: 'Please enter a valid email address, or leave it blank.',
             pillarLeadNotice: 'Pillar mounts are hand-made and need at least a week of lead time — please go back and pick a date at least 7 days out.',
             booking: 'Booking…',
             confirmBooking: 'Confirm Booking',
             bookingFailed: 'Something went wrong submitting your booking — please call or text us directly.',
+            bookingConflict: 'That time was just booked by someone else — please pick another.',
             confirmSummary: function (dateStr, timeStr, address) { return dateStr + ' at ' + timeStr + ' — ' + address; },
             services: {
                 'Fixed Mount': 'Fixed Mount',
@@ -52,10 +55,13 @@
             unavailableTag: 'No disponible',
             addonsTotal: function (total) { return 'Total estimado: $' + total; },
             nameAndPhoneRequired: 'El nombre y el teléfono son obligatorios.',
+            invalidPhone: 'Por favor ingresa un número de teléfono válido.',
+            invalidEmail: 'Por favor ingresa un correo electrónico válido, o déjalo en blanco.',
             pillarLeadNotice: 'Los montajes en columna son hechos a mano y necesitan al menos una semana de anticipación — por favor regresa y elige una fecha con al menos 7 días de anticipación.',
             booking: 'Reservando…',
             confirmBooking: 'Confirmar Reserva',
             bookingFailed: 'Algo salió mal al enviar tu reserva — por favor llámanos o envíanos un mensaje directamente.',
+            bookingConflict: 'Ese horario acaba de ser reservado por alguien más — por favor elige otro.',
             confirmSummary: function (dateStr, timeStr, address) { return dateStr + ' a las ' + timeStr + ' — ' + address; },
             services: {
                 'Fixed Mount': 'Soporte Fijo',
@@ -80,10 +86,13 @@
             unavailableTag: 'Niedostępne',
             addonsTotal: function (total) { return 'Szacowana suma: $' + total; },
             nameAndPhoneRequired: 'Imię i numer telefonu są wymagane.',
+            invalidPhone: 'Podaj proszę prawidłowy numer telefonu.',
+            invalidEmail: 'Podaj prawidłowy adres e-mail lub zostaw to pole puste.',
             pillarLeadNotice: 'Montaże kolumnowe są wykonywane ręcznie i wymagają co najmniej tygodnia wyprzedzenia — wróć i wybierz datę co najmniej 7 dni od teraz.',
             booking: 'Rezerwowanie…',
             confirmBooking: 'Potwierdź Rezerwację',
             bookingFailed: 'Coś poszło nie tak podczas wysyłania rezerwacji — zadzwoń lub napisz do nas bezpośrednio.',
+            bookingConflict: 'Ten termin został właśnie zarezerwowany przez kogoś innego — wybierz inny.',
             confirmSummary: function (dateStr, timeStr, address) { return dateStr + ' o ' + timeStr + ' — ' + address; },
             services: {
                 'Fixed Mount': 'Uchwyt Stały',
@@ -134,6 +143,18 @@
             if (svc) lineItems.push({ description: svc.label, price: svc.price });
         }
         return lineItems;
+    }
+
+    // A couple of specific add-ons genuinely add real time on site; the
+    // base TV mount is always 90 minutes since this page only ever books
+    // one TV at a time. Sent to /availability so a job that actually needs
+    // more room doesn't get squeezed into a slot too short for it.
+    function estimateDurationMinutes() {
+        let minutes = 90;
+        if (selectedServices.has('Soundbar Mounting')) minutes += 30;
+        if (selectedServices.has('In-Wall Concealment')) minutes += 30;
+        if (selectedServices.has('Electrical Outlet Install')) minutes += 60;
+        return minutes;
     }
 
     function updatePriceSummary() {
@@ -256,22 +277,52 @@
 
     // ---------- Step 2: Days + slots ----------
     async function loadAvailability() {
+        $('#daysError').classList.add('hidden');
         $('#loadingDays').classList.remove('hidden');
         $('#daysResults').classList.add('hidden');
 
-        const res = await fetch(`${OPS_API}/availability?lat=${selectedLat}&lng=${selectedLng}`);
-        daysData = await res.json();
+        try {
+            const duration = estimateDurationMinutes();
+            const res = await fetch(`${OPS_API}/availability?lat=${selectedLat}&lng=${selectedLng}&duration=${duration}`);
+            if (!res.ok) throw new Error('availability-failed');
+            let data = await res.json();
 
-        $('#loadingDays').classList.add('hidden');
-        $('#daysResults').classList.remove('hidden');
-        renderDays();
+            // Pillar mounts are hand-made and need a week of lead time --
+            // filter those days out entirely here (not just at final
+            // submit) so the date picker itself never offers a day that
+            // can't actually be booked with the add-ons already chosen.
+            if (hasPillarMount()) {
+                const todayMidnight = new Date(new Date().toDateString());
+                data = data.map((day) => {
+                    const daysOut = Math.round((new Date(day.date + 'T00:00:00') - todayMidnight) / 86400000);
+                    return daysOut < PILLAR_MOUNT_LEAD_DAYS ? { ...day, available: false } : day;
+                });
+            }
+
+            daysData = data;
+            $('#loadingDays').classList.add('hidden');
+            $('#daysResults').classList.remove('hidden');
+            renderDays();
+        } catch (err) {
+            $('#loadingDays').classList.add('hidden');
+            $('#daysError').classList.remove('hidden');
+        }
     }
+
+    $('#daysErrorBackBtn').addEventListener('click', () => {
+        $('#daysError').classList.add('hidden');
+        $('#step2').classList.add('hidden');
+        $('#step1').classList.remove('hidden');
+    });
 
     function renderDays() {
         const sorted = [...daysData].sort((a, b) => {
             if (a.suggested !== b.suggested) return a.suggested ? -1 : 1;
             return a.date.localeCompare(b.date);
         });
+
+        const anyAvailable = sorted.some((d) => d.available);
+        $('#noDaysMsg').classList.toggle('hidden', anyAvailable);
 
         $('#daysList').innerHTML = sorted.map((day) => {
             const d = new Date(day.date + 'T00:00:00');
@@ -374,6 +425,19 @@
             return;
         }
 
+        const phoneDigits = phone.replace(/\D/g, '');
+        if (phoneDigits.length < 10) {
+            $('#bookError').textContent = S.invalidPhone;
+            $('#bookError').classList.remove('hidden');
+            return;
+        }
+
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            $('#bookError').textContent = S.invalidEmail;
+            $('#bookError').classList.remove('hidden');
+            return;
+        }
+
         if (hasPillarMount()) {
             const daysOut = Math.round((new Date(selectedDate + 'T00:00:00') - new Date(new Date().toDateString())) / 86400000);
             if (daysOut < PILLAR_MOUNT_LEAD_DAYS) {
@@ -403,6 +467,7 @@
                     serviceType: ['TV Mounting', ...selectedServices].join(', '),
                     price: total,
                     lineItems,
+                    estimatedDurationMinutes: estimateDurationMinutes(),
                     notes: $('#notesInput').value.trim(),
                     website: $('#custWebsite').value,
                     smsConsent: $('#smsConsent').checked,
@@ -410,7 +475,19 @@
                 }),
             });
 
-            if (!res.ok) throw new Error('booking-failed');
+            if (!res.ok) {
+                if (res.status === 409) {
+                    // Someone grabbed this exact slot between viewing and
+                    // confirming. Refresh availability in the background
+                    // (step3 stays open so this message stays visible) so
+                    // the list is current once they go back to pick again.
+                    $('#bookError').textContent = S.bookingConflict;
+                    $('#bookError').classList.remove('hidden');
+                    loadAvailability();
+                    return;
+                }
+                throw new Error('booking-failed');
+            }
 
             const d = new Date(selectedDate + 'T00:00:00');
             $('#confirmSummary').textContent = S.confirmSummary(

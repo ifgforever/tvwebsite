@@ -80,6 +80,11 @@
       <input id="addressInput" type="text" autocomplete="off" placeholder="Start typing your address…" class="w-full rounded-md px-4 py-3 text-sm">
       <div id="addressSuggestions" class="hidden absolute left-0 right-0 z-30 mt-1 rounded-md overflow-hidden" style="background:#1A1A1A; border:1px solid rgba(245,240,232,0.15);"></div>
     </div>
+    <div class="mb-3">
+      <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Add-ons (optional) — the $100 flat mounting rate is always included</p>
+        <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
+        <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
+    </div>
     <button id="findTimesBtn" class="btn-gold w-full rounded-md py-3 text-sm">Find Available Times</button>
     <p id="addressError" class="hidden text-xs mt-2" style="color:var(--rust);"></p>
   </section>
@@ -89,9 +94,14 @@
     <div id="loadingDays" class="flex items-center gap-2 justify-center py-8" style="color:rgba(245,240,232,0.6);">
       <span class="spinner"></span> Checking availability…
     </div>
+    <div id="daysError" class="hidden panel rounded-xl p-6 mb-6">
+      <p class="text-sm mb-3" style="color:var(--rust);">Something went wrong loading available times. Please try again.</p>
+      <button id="daysErrorBackBtn" class="btn-ghost rounded-md py-2 px-4 text-sm">&larr; Try a different address</button>
+    </div>
     <div id="daysResults" class="hidden">
       <h2 class="bebas text-2xl mb-1" style="color:var(--gold);">Pick a day</h2>
       <p class="text-xs mb-4" style="color:rgba(245,240,232,0.5);">Days marked <span style="color:var(--gold);">★ Suggested</span> already have another job nearby — helps us keep drive times short (and sometimes means faster service for you).</p>
+      <p id="noDaysMsg" class="hidden text-xs mb-4" style="color:rgba(245,240,232,0.6);">We don't see any open times in the next few weeks. Please call or text us and we'll find something.</p>
       <div id="daysList" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6"></div>
 
       <div id="slotsSection" class="hidden">
@@ -113,13 +123,8 @@
       <label for="custEmail" class="sr-only">Email (for confirmation and receipt)</label>
       <input id="custEmail" type="email" placeholder="Email (for confirmation & receipt)" class="w-full rounded-md px-4 py-3 text-sm">
 
-      <div>
-        <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Add-ons (optional) — the $100 flat mounting rate is always included</p>
-        <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
-        <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
-        <label for="notesInput" class="sr-only">Additional notes</label>
-        <input id="notesInput" type="text" placeholder="Anything else we should know?" class="w-full rounded-md px-4 py-3 text-sm">
-      </div>
+      <label for="notesInput" class="sr-only">Additional notes</label>
+      <input id="notesInput" type="text" placeholder="Anything else we should know?" class="w-full rounded-md px-4 py-3 text-sm">
 
       <label class="flex items-start gap-2 text-xs" style="color:rgba(245,240,232,0.6);">
         <input id="smsConsent" type="checkbox" class="mt-0.5" style="width:14px; height:14px;">
