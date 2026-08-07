@@ -2,11 +2,10 @@
 // identically by the EN, ES, and PL homepages.
 //
 // Set `window.TVIC_LANG = 'es'` or `'pl'` in an inline <script> BEFORE
-// this file loads to localize alerts, the success message, and the TV
-// purchase quiz result panel. Defaults to 'en' if unset.
+// this file loads to localize alerts and the success message.
+// Defaults to 'en' if unset.
 //
 // NOT localized here (by design):
-//   - Quiz question prompts/button labels: live as static HTML per page.
 //   - The downloadable PDF estimate: stays in English on every language
 //     page. jsPDF's built-in fonts use WinAnsi/CP1252 encoding, which
 //     does not include Polish diacritics (ą ć ę ł ń ó ś ź ż) - rendering
@@ -39,28 +38,6 @@
             success: {
                 thankYou: function (name) { return 'Thank you, ' + name + '. Your booking request is in — we\'ll confirm within hours. Get ready for a perfect install.'; },
                 estimate: 'Estimate #', tvs: 'TVs', tv: 'TV', date: 'Date', time: 'Time', email: 'Email', total: 'TOTAL: $'
-            },
-            quiz: {
-                startOver: '↺ Start over',
-                badge: { outdoor: 'OUTDOOR SETUP', value: 'GREAT VALUE PICK', premium: 'PREMIUM PICK', mid: 'SOLID MID-RANGE PICK' },
-                title: {
-                    outdoor: 'You need a weatherproof, outdoor-rated display.',
-                    value: 'Costco is probably your best bet.',
-                    premium: 'You\'ll likely want to go beyond Costco\'s lineup.',
-                    mid: 'Costco first, with LG, Samsung, or Sony as backup.'
-                },
-                text: {
-                    outdoor: 'Standard indoor TVs aren\'t built for sun, humidity, or temperature swings. Costco doesn\'t carry outdoor-rated displays, so we\'ll source the right one for your space and deliver it free of charge to your install in most cases.',
-                    value: 'For this size and budget, Costco consistently offers some of the best value on the market, including an extended warranty most retailers don\'t match. If they don\'t have the right size or model, we can supply LG or Samsung instead and deliver it free of charge to your install in most cases.',
-                    premium: 'For larger sizes or premium budgets, Costco\'s selection gets thinner. We can source and deliver a premium LG, Samsung, or Sony model matched to your space and budget, delivered free to your install in most cases.',
-                    mid: 'Check Costco first for this size and budget, it\'s usually the best value. If they don\'t have the exact size or features you want, we can supply LG, Samsung, or Sony instead and deliver it free of charge to your install in most cases.'
-                },
-                brands: {
-                    outdoor: ['Outdoor-Rated Displays'],
-                    value: ['Costco', 'LG', 'Samsung'],
-                    premium: ['LG', 'Samsung', 'Sony'],
-                    mid: ['Costco', 'LG', 'Samsung', 'Sony']
-                }
             }
         },
         es: {
@@ -80,28 +57,6 @@
             success: {
                 thankYou: function (name) { return 'Gracias, ' + name + '. Tu solicitud de reserva está en camino — confirmaremos en unas horas. Prepárate para una instalación perfecta.'; },
                 estimate: 'N.º de Estimado', tvs: 'TVs', tv: 'TV', date: 'Fecha', time: 'Hora', email: 'Correo', total: 'TOTAL: $'
-            },
-            quiz: {
-                startOver: '↺ Empezar de nuevo',
-                badge: { outdoor: 'INSTALACIÓN EXTERIOR', value: 'EXCELENTE RELACIÓN CALIDAD-PRECIO', premium: 'OPCIÓN PREMIUM', mid: 'BUENA OPCIÓN DE GAMA MEDIA' },
-                title: {
-                    outdoor: 'Necesitas una pantalla resistente al clima, apta para exteriores.',
-                    value: 'Costco probablemente sea tu mejor opción.',
-                    premium: 'Probablemente quieras ir más allá de la selección de Costco.',
-                    mid: 'Costco primero, con LG, Samsung o Sony como respaldo.'
-                },
-                text: {
-                    outdoor: 'Los televisores estándar para interiores no están hechos para el sol, la humedad o los cambios de temperatura. Costco no tiene pantallas aptas para exteriores, así que conseguiremos la adecuada para tu espacio y la entregaremos sin costo a tu instalación en la mayoría de los casos.',
-                    value: 'Para este tamaño y presupuesto, Costco ofrece consistentemente una de las mejores relaciones calidad-precio del mercado, incluyendo una garantía extendida que la mayoría de los minoristas no igualan. Si no tienen el tamaño o modelo correcto, podemos suministrar LG o Samsung en su lugar y entregarlo sin costo a tu instalación en la mayoría de los casos.',
-                    premium: 'Para tamaños más grandes o presupuestos premium, la selección de Costco se reduce. Podemos conseguir y entregar un modelo premium de LG, Samsung o Sony ajustado a tu espacio y presupuesto, entregado sin costo a tu instalación en la mayoría de los casos.',
-                    mid: 'Revisa Costco primero para este tamaño y presupuesto, generalmente es la mejor opción. Si no tienen el tamaño o características exactas que buscas, podemos suministrar LG, Samsung o Sony en su lugar y entregarlo sin costo a tu instalación en la mayoría de los casos.'
-                },
-                brands: {
-                    outdoor: ['Pantallas Aptas para Exteriores'],
-                    value: ['Costco', 'LG', 'Samsung'],
-                    premium: ['LG', 'Samsung', 'Sony'],
-                    mid: ['Costco', 'LG', 'Samsung', 'Sony']
-                }
             }
         },
         pl: {
@@ -121,28 +76,6 @@
             success: {
                 thankYou: function (name) { return 'Dziękujemy, ' + name + '. Twoja prośba o rezerwację została przyjęta — potwierdzimy w ciągu kilku godzin. Przygotuj się na idealny montaż.'; },
                 estimate: 'Nr wyceny', tvs: 'TV', tv: 'TV', date: 'Data', time: 'Godzina', email: 'E-mail', total: 'SUMA: $'
-            },
-            quiz: {
-                startOver: '↺ Zacznij od nowa',
-                badge: { outdoor: 'MONTAŻ ZEWNĘTRZNY', value: 'ŚWIETNY STOSUNEK JAKOŚCI DO CENY', premium: 'WYBÓR PREMIUM', mid: 'SOLIDNY WYBÓR ŚREDNIEJ KLASY' },
-                title: {
-                    outdoor: 'Potrzebujesz wyświetlacza odpornego na warunki atmosferyczne, przeznaczonego na zewnątrz.',
-                    value: 'Costco to prawdopodobnie twój najlepszy wybór.',
-                    premium: 'Prawdopodobnie będziesz chciał wyjść poza ofertę Costco.',
-                    mid: 'Najpierw Costco, z LG, Samsung lub Sony jako zapasowa opcja.'
-                },
-                text: {
-                    outdoor: 'Standardowe telewizory do wnętrz nie są przystosowane do słońca, wilgoci ani wahań temperatury. Costco nie ma w ofercie wyświetlaczy przeznaczonych na zewnątrz, więc znajdziemy odpowiedni do twojej przestrzeni i w większości przypadków dostarczymy go bezpłatnie na miejsce montażu.',
-                    value: 'Dla tego rozmiaru i budżetu Costco konsekwentnie oferuje jedną z najlepszych wartości na rynku, w tym przedłużoną gwarancję, której większość sprzedawców nie oferuje. Jeśli nie mają odpowiedniego rozmiaru lub modelu, możemy zamiast tego dostarczyć LG lub Samsung, w większości przypadków bezpłatnie na miejsce montażu.',
-                    premium: 'Dla większych rozmiarów lub budżetów premium wybór Costco się zawęża. Możemy sprowadzić i dostarczyć model premium LG, Samsung lub Sony dopasowany do twojej przestrzeni i budżetu, w większości przypadków bezpłatnie na miejsce montażu.',
-                    mid: 'Sprawdź najpierw Costco dla tego rozmiaru i budżetu — zwykle to najlepsza wartość. Jeśli nie mają dokładnego rozmiaru lub funkcji, których szukasz, możemy zamiast tego dostarczyć LG, Samsung lub Sony, w większości przypadków bezpłatnie na miejsce montażu.'
-                },
-                brands: {
-                    outdoor: ['Wyświetlacze na Zewnątrz'],
-                    value: ['Costco', 'LG', 'Samsung'],
-                    premium: ['LG', 'Samsung', 'Sony'],
-                    mid: ['Costco', 'LG', 'Samsung', 'Sony']
-                }
             }
         }
     };
@@ -180,73 +113,6 @@
         }).catch(function () {
             alert(S.guide.networkError);
         });
-    };
-
-    // ============================================================
-    // TV purchase advisor quiz
-    // Quiz buttons pass stable English codes (not display text) as
-    // the tvicQ() argument, so result logic never depends on which
-    // language's button labels happen to be showing.
-    // ============================================================
-    var tvicA = { size: null, location: null, budget: null };
-    var tvicStep = 1;
-
-    function tvicShowStep(step) {
-        document.querySelectorAll('#tvQuizWrap .quiz-step').forEach(function (el) { el.classList.add('hidden'); });
-        document.querySelector('#tvQuizWrap .quiz-step[data-step="' + step + '"]').classList.remove('hidden');
-        document.querySelectorAll('.quiz-dot').forEach(function (dot) {
-            var n = parseInt(dot.getAttribute('data-dot'), 10);
-            dot.style.background = (typeof step === 'number' && n <= step) ? 'var(--gold)' : 'rgba(200,169,74,0.2)';
-        });
-        if (step === 'result') {
-            document.querySelectorAll('.quiz-dot').forEach(function (dot) { dot.style.background = 'var(--gold)'; });
-        }
-    }
-
-    window.tvicQ = function (key, code) {
-        tvicA[key] = code;
-        if (tvicStep < 3) { tvicStep++; tvicShowStep(tvicStep); }
-        else { tvicResult(); }
-    };
-
-    window.tvicBack = function () {
-        if (tvicStep > 1) { tvicStep--; tvicShowStep(tvicStep); }
-    };
-
-    function tvicResult() {
-        var a = tvicA;
-        var isOutdoor = (a.location === 'outdoor' || a.location === 'covered');
-        var isPremium = (a.size === '75plus' || a.budget === 'premium');
-        var isValue = (!isOutdoor && (a.budget === 'value' || a.budget === 'unsure') && a.size !== '75plus');
-
-        var key = isOutdoor ? 'outdoor' : isValue ? 'value' : isPremium ? 'premium' : 'mid';
-        var badge = S.quiz.badge[key];
-        var title = S.quiz.title[key];
-        var text = S.quiz.text[key];
-        var brands = S.quiz.brands[key];
-
-        var chips = brands.map(function (b) {
-            return '<span style="background:#161616; border:1px solid rgba(200,169,74,0.25); color:var(--paper); padding:6px 14px; border-radius:16px; font-size:12.5px; margin-right:8px; display:inline-block; margin-bottom:8px;">' + b + '</span>';
-        }).join('');
-
-        var html = ''
-            + '<span class="board-number-badge" style="display:inline-block; margin-bottom:14px;">' + badge + '</span>'
-            + '<p class="bebas" style="font-size:26px; color:var(--paper);">' + title + '</p>'
-            + '<p style="color:var(--slate-light); font-size:14.5px; line-height:1.7; margin:12px 0 18px;">' + text + '</p>'
-            + '<div style="margin-bottom:22px;">' + chips + '</div>'
-            + '<div style="display:flex; gap:12px; flex-wrap:wrap;">'
-            + '<a href="tel:+16305922982" style="display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--ink); padding:13px 24px; border-radius:3px; font-family:\'Bebas Neue\',sans-serif; font-size:16px; letter-spacing:0.06em; text-decoration:none;">📞 (630) 592-2982</a>'
-            + '<button onclick="tvicRestart()" style="background:none; border:1px solid rgba(200,169,74,0.3); color:var(--slate-light); padding:13px 20px; border-radius:3px; font-size:13px; cursor:pointer;">' + S.quiz.startOver + '</button>'
-            + '</div>';
-
-        document.getElementById('quizResult').innerHTML = html;
-        tvicShowStep('result');
-    }
-
-    window.tvicRestart = function () {
-        tvicA = { size: null, location: null, budget: null };
-        tvicStep = 1;
-        tvicShowStep(1);
     };
 
     // ============================================================
