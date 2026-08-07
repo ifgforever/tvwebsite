@@ -1,0 +1,9 @@
+# book.html was a separate self-serve scheduling page from before the AI
+# assistant could book real appointments. It now does, so these redirect
+# to it rather than 404ing for anyone with the old URL bookmarked or indexed.
+/book.html https://shop.tvserviceschicago.com 301
+/book https://shop.tvserviceschicago.com 301
+/es/book.html https://shop.tvserviceschicago.com 301
+/es/book https://shop.tvserviceschicago.com 301
+/pl/book.html https://shop.tvserviceschicago.com 301
+/pl/book https://shop.tvserviceschicago.com 301
