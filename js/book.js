@@ -136,8 +136,13 @@
         return selectedServices.has('Pillar Mount');
     }
 
+    // One "TV Mounting" line item per TV -- not one shared base charge --
+    // so a 2-TV job actually prices (and books) as two TVs.
     function buildLineItems() {
-        const lineItems = [{ description: 'TV Mounting', price: BASE_PRICE }];
+        const lineItems = [];
+        for (let i = 0; i < tvCount; i++) {
+            lineItems.push({ description: 'TV Mounting', price: BASE_PRICE });
+        }
         for (const label of selectedServices) {
             const svc = SERVICES.find((s) => s.label === label);
             if (svc) lineItems.push({ description: svc.label, price: svc.price });
@@ -145,12 +150,12 @@
         return lineItems;
     }
 
-    // A couple of specific add-ons genuinely add real time on site; the
-    // base TV mount is always 90 minutes since this page only ever books
-    // one TV at a time. Sent to /availability so a job that actually needs
-    // more room doesn't get squeezed into a slot too short for it.
+    // Each TV is its own full slot; a couple of specific add-ons genuinely
+    // add real time on site on top of that. Sent to /availability so a job
+    // that actually needs more room doesn't get squeezed into a slot too
+    // short for it.
     function estimateDurationMinutes() {
-        let minutes = 90;
+        let minutes = 90 * tvCount;
         if (selectedServices.has('Soundbar Mounting')) minutes += 30;
         if (selectedServices.has('In-Wall Concealment')) minutes += 30;
         if (selectedServices.has('Electrical Outlet Install')) minutes += 60;
@@ -169,8 +174,24 @@
     let selectedTime = null;
     let selectedServices = new Set();
     let daysData = [];
+    let tvCount = 1;
+    const MAX_TV_COUNT = 6;
 
     const $ = (sel) => document.querySelector(sel);
+
+    // ---------- TV count stepper ----------
+    function renderTvCount() {
+        $('#tvCountDisplay').textContent = String(tvCount);
+        $('#tvCountMinus').disabled = tvCount <= 1;
+        $('#tvCountPlus').disabled = tvCount >= MAX_TV_COUNT;
+    }
+    $('#tvCountMinus').addEventListener('click', () => {
+        if (tvCount > 1) { tvCount--; renderTvCount(); updatePriceSummary(); }
+    });
+    $('#tvCountPlus').addEventListener('click', () => {
+        if (tvCount < MAX_TV_COUNT) { tvCount++; renderTvCount(); updatePriceSummary(); }
+    });
+    renderTvCount();
 
     // ---------- Address autocomplete ----------
     let suggestDebounce = null;
@@ -464,7 +485,7 @@
                     address: selectedAddress,
                     date: selectedDate,
                     time: selectedTime,
-                    serviceType: ['TV Mounting', ...selectedServices].join(', '),
+                    serviceType: [(tvCount > 1 ? `TV Mounting x${tvCount}` : 'TV Mounting'), ...selectedServices].join(', '),
                     price: total,
                     lineItems,
                     estimatedDurationMinutes: estimateDurationMinutes(),

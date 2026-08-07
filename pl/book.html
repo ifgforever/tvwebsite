@@ -81,7 +81,15 @@
       <div id="addressSuggestions" class="hidden absolute left-0 right-0 z-30 mt-1 rounded-md overflow-hidden" style="background:#1A1A1A; border:1px solid rgba(245,240,232,0.15);"></div>
     </div>
     <div class="mb-3">
-      <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Dodatki (opcjonalne) — stała cena montażu $100 zawsze jest w cenie</p>
+      <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Ile telewizorów?</p>
+      <div class="flex items-center gap-3">
+        <button type="button" id="tvCountMinus" class="btn-ghost rounded-md text-lg leading-none" style="width:36px; height:36px;">&minus;</button>
+        <span id="tvCountDisplay" class="text-lg font-semibold" style="width:24px; text-align:center;">1</span>
+        <button type="button" id="tvCountPlus" class="btn-ghost rounded-md text-lg leading-none" style="width:36px; height:36px;">+</button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <p class="text-xs mb-2" style="color:rgba(245,240,232,0.6);">Dodatki (opcjonalne) — stała cena montażu $100 za telewizor zawsze jest w cenie</p>
         <div id="serviceChips" class="flex flex-wrap gap-2 mb-2"></div>
         <p id="priceSummary" class="text-xs mb-2" style="color:var(--gold);"></p>
     </div>
