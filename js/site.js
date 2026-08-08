@@ -33,7 +33,8 @@
                 fillTvFields: function (i) { return 'Please fill in all fields for TV ' + i; },
                 submissionError: 'Submission error. Please try again or call us directly at (630) 592-2982.',
                 networkError: 'Network error. Please try again or call us directly at (630) 592-2982.',
-                pillarOver65: 'Pillar mounts are hand-made for TVs 65" and under, so that TV was switched to "Customer\'s Own Mount" — please pick a different mount type.'
+                pillarOver65: 'Pillar mounts are hand-made for TVs 65" and under, so that TV was switched to "Customer\'s Own Mount" — please pick a different mount type.',
+                dateUnavailable: 'That date and time can\'t be booked — the day may be full or the time already passed. Please choose a different day or time and try again.'
             },
             success: {
                 thankYou: function (name) { return 'Thank you, ' + name + '. Your booking request is in — we\'ll confirm within hours. Get ready for a perfect install.'; },
@@ -52,7 +53,8 @@
                 fillTvFields: function (i) { return 'Por favor completa todos los campos para el TV ' + i; },
                 submissionError: 'Error de envío. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.',
                 networkError: 'Error de red. Por favor intenta de nuevo o llámanos directamente al (630) 592-2982.',
-                pillarOver65: 'Los montajes en columna se hacen a mano para TVs de 65" o menos, así que ese TV se cambió a "Soporte Propio del Cliente" — por favor elige otro tipo de soporte.'
+                pillarOver65: 'Los montajes en columna se hacen a mano para TVs de 65" o menos, así que ese TV se cambió a "Soporte Propio del Cliente" — por favor elige otro tipo de soporte.',
+                dateUnavailable: 'Esa fecha y hora no se pueden reservar — el día puede estar lleno o la hora ya pasó. Por favor elige otro día u otra hora e intenta de nuevo.'
             },
             success: {
                 thankYou: function (name) { return 'Gracias, ' + name + '. Tu solicitud de reserva está en camino — confirmaremos en unas horas. Prepárate para una instalación perfecta.'; },
@@ -71,7 +73,8 @@
                 fillTvFields: function (i) { return 'Proszę wypełnić wszystkie pola dla TV ' + i; },
                 submissionError: 'Błąd wysyłania. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.',
                 networkError: 'Błąd sieci. Spróbuj ponownie lub zadzwoń bezpośrednio pod (630) 592-2982.',
-                pillarOver65: 'Montaże kolumnowe są wykonywane ręcznie dla telewizorów do 65", więc dla tego telewizora wybrano "Własny Uchwyt Klienta" — wybierz proszę inny typ uchwytu.'
+                pillarOver65: 'Montaże kolumnowe są wykonywane ręcznie dla telewizorów do 65", więc dla tego telewizora wybrano "Własny Uchwyt Klienta" — wybierz proszę inny typ uchwytu.',
+                dateUnavailable: 'Tego terminu nie można zarezerwować — dzień może być zajęty lub godzina już minęła. Wybierz proszę inny dzień lub godzinę i spróbuj ponownie.'
             },
             success: {
                 thankYou: function (name) { return 'Dziękujemy, ' + name + '. Twoja prośba o rezerwację została przyjęta — potwierdzimy w ciągu kilku godzin. Przygotuj się na idealny montaż.'; },
@@ -222,8 +225,29 @@
         '4:00 PM - 6:00 PM': '16:00'
     };
 
+    // fetch() with a timeout so a hung TV Ops worker can't strand the
+    // customer mid-submit -- a timeout falls through to the Formspree path.
+    function fetchWithTimeout(url, opts, ms) {
+        if (typeof AbortController === 'undefined') return fetch(url, opts);
+        var ctrl = new AbortController();
+        var timer = setTimeout(function () { ctrl.abort(); }, ms);
+        opts.signal = ctrl.signal;
+        return fetch(url, opts).then(
+            function (res) { clearTimeout(timer); return res; },
+            function (err) { clearTimeout(timer); throw err; }
+        );
+    }
+
     // Internal record for Lance's own English-language tv-ops dashboard -
     // stays English regardless of site language, same as the PDF.
+    //
+    // This is a GATE, not a best-effort sync: TV Ops enforces blocked-off
+    // dates and slot conflicts, and a 400/409 from it means the customer
+    // must pick a different day -- Formspree is never submitted in that
+    // case (a booking that only exists in email is how a blocked-off day
+    // once got double-booked). Only if TV Ops is unreachable does the
+    // submission fall through to Formspree alone, so an outage never
+    // loses a lead.
     function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs, website, smsConsent) {
         var lineItems = [];
         for (var i = 0; i < tvs.length; i++) {
@@ -270,7 +294,7 @@
             if (isMantelMount(tvs[d].mount)) durationMinutes += 60;
         }
 
-        fetch('https://tv-ops-public-api.tvinstallchicago.workers.dev/book', {
+        return fetchWithTimeout('https://tv-ops-public-api.tvinstallchicago.workers.dev/book', {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify({
@@ -289,14 +313,22 @@
                 smsConsent: smsConsent,
                 language: LANG
             })
+        }, 10000).then(function (res) {
+            // 400/409 are real refusals (blocked-off day, slot conflict,
+            // past date). Anything else -- 201 booked, or 429/5xx where the
+            // gate itself is struggling -- lets the submission continue.
+            return { rejected: res.status === 400 || res.status === 409 };
         }).catch(function () {
-            // Silent — this is a best-effort sync. The Formspree submission
-            // below is the guaranteed path, so a TV Ops hiccup here shouldn't
-            // block or alarm the customer.
+            return { rejected: false };
         });
     }
 
+    // Submitting now waits on the TV Ops gate before Formspree, which opens
+    // a short window where a second tap would double-submit.
+    var bookingInFlight = false;
+
     window.submitBooking = function () {
+        if (bookingInFlight) return;
         var name = document.getElementById('name').value.trim();
         var phone = document.getElementById('phone').value.trim();
         var email = document.getElementById('email').value.trim();
@@ -348,39 +380,50 @@
             tvDetails += 'TV' + j + ': Size=' + document.getElementById('tvSize' + j).value + ', Mount=' + document.getElementById('mountType' + j).value + ', Wire=' + document.getElementById('wireConcealment' + j).value + ', Soundbar=' + document.getElementById('soundbar' + j).value + '; ';
         }
 
-        // Sync this lead straight into TV Ops as a scheduled job — best effort,
-        // never blocks or breaks the existing Formspree submission below.
+        // TV Ops decides first: it enforces blocked-off dates and slot
+        // conflicts, and a refusal stops the whole submission (including
+        // Formspree) so the customer picks a new day instead of getting a
+        // success screen for a day that isn't actually open.
         var website = document.getElementById('website').value;
         var smsConsent = document.getElementById('smsConsent').checked;
-        syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website, smsConsent);
-
-        var fd = new FormData();
-        fd.append('estimateNumber', estNum);
-        fd.append('name', name);
-        fd.append('phone', phone);
-        fd.append('email', email);
-        fd.append('address', address);
-        fd.append('numTvs', num);
-        fd.append('tvDetails', tvDetails);
-        fd.append('preferredDate', date);
-        fd.append('preferredTime', time);
-        fd.append('additionalNotes', notes);
-        fd.append('total', '$' + total);
-        fd.append('liftingAgreement', 'Confirmed — customer will assist with lifting on larger TVs');
-        fd.append('language', LANG);
-
-        fetch('https://formspree.io/f/xeoyyygd', {
-            method: 'POST',
-            body: fd,
-            headers: { 'Accept': 'application/json' }
-        }).then(function (res) {
-            if (res.ok) {
-                showSuccess(name, email, date, time, total, num, estNum);
-            } else {
-                alert(S.booking.submissionError);
+        bookingInFlight = true;
+        syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website, smsConsent).then(function (gate) {
+            if (gate.rejected) {
+                bookingInFlight = false;
+                alert(S.booking.dateUnavailable);
+                return;
             }
-        }).catch(function () {
-            alert(S.booking.networkError);
+
+            var fd = new FormData();
+            fd.append('estimateNumber', estNum);
+            fd.append('name', name);
+            fd.append('phone', phone);
+            fd.append('email', email);
+            fd.append('address', address);
+            fd.append('numTvs', num);
+            fd.append('tvDetails', tvDetails);
+            fd.append('preferredDate', date);
+            fd.append('preferredTime', time);
+            fd.append('additionalNotes', notes);
+            fd.append('total', '$' + total);
+            fd.append('liftingAgreement', 'Confirmed — customer will assist with lifting on larger TVs');
+            fd.append('language', LANG);
+
+            fetch('https://formspree.io/f/xeoyyygd', {
+                method: 'POST',
+                body: fd,
+                headers: { 'Accept': 'application/json' }
+            }).then(function (res) {
+                bookingInFlight = false;
+                if (res.ok) {
+                    showSuccess(name, email, date, time, total, num, estNum);
+                } else {
+                    alert(S.booking.submissionError);
+                }
+            }).catch(function () {
+                bookingInFlight = false;
+                alert(S.booking.networkError);
+            });
         });
     };
 
