@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+<script>try{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Polityka Prywatności | TV Install Chicago</title>
@@ -24,17 +25,19 @@
   }
   * { font-family: 'DM Sans', sans-serif; }
   .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
-  body { background: var(--paper); color: var(--ink); }
-  a { color: var(--gold-dim); text-decoration: underline; text-underline-offset: 2px; }
-  a:hover { color: var(--rust); }
-  .section-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; color: var(--ink); border-bottom: 2px solid var(--gold); padding-bottom: 0.25rem; }
-  .toc a { text-decoration: none; color: var(--ink); }
-  .toc a:hover { color: var(--gold-dim); }
+  body { background: var(--ink); color: var(--paper); }
+  a { color: var(--gold-text, #C8A94A); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--rust-strong, #B4562F); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; color: var(--paper); border-bottom: 2px solid var(--gold); padding-bottom: 0.25rem; }
+  .toc a { text-decoration: none; color: var(--paper); }
+  .toc a:hover { color: var(--gold-text, #C8A94A); }
   .lang-switch { font-size:12px; text-align:right; margin-bottom:1rem; }
   .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
-  .lang-switch a.active { color:var(--gold-dim); }
-  .lang-switch span { color: rgba(200,169,74,0.4); margin:0 4px; }
+  .lang-switch a.active { color:var(--gold-text, #C8A94A); }
+  .lang-switch span { color: rgba(var(--gold-rgb, 200,169,74),0.4); margin:0 4px; }
 </style>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body class="min-h-screen">
 <main>

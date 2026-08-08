@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>try{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
@@ -36,33 +37,33 @@
         .ticker-wrap { background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }
         .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .ticker-item { display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
-        .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
+        .ticker-item { display: inline-block; color: var(--on-gold, #0A0A0A); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
+        .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--on-gold, #0A0A0A); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
         .breadcrumb { font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:820px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
         .breadcrumb a { color:var(--slate-light); text-decoration:none; }
-        .breadcrumb a:hover { color:var(--gold); }
+        .breadcrumb a:hover { color:var(--gold-text, #C8A94A); }
         .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
-        .lang-switch a.active { color:var(--gold); }
-        .lang-switch span { color: rgba(200,169,74,0.7); margin:0 4px; }
-        .hero-section { background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 36px; }
+        .lang-switch a.active { color:var(--gold-text, #C8A94A); }
+        .lang-switch span { color: rgba(var(--gold-rgb, 200,169,74),0.7); margin:0 4px; }
+        .hero-section { background: var(--ink); border-bottom: 1px solid rgba(var(--gold-rgb, 200,169,74),0.3); position: relative; overflow: hidden; padding: 48px 24px 36px; }
         .hero-eyebrow { color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
         .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(34px, 6vw, 64px); color: var(--paper); letter-spacing: 0.02em; line-height: 1.05; margin: 10px 0 14px; }
-        .hero-title span { color: var(--gold); }
+        .hero-title span { color: var(--gold-text, #C8A94A); }
         .hero-sub { color: var(--slate-light); font-size: 16px; max-width:600px; line-height:1.7; }
         .content-wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
-        .content-card { background:#0F0F0F; border:1px solid rgba(200,169,74,0.2); border-radius:4px; padding:32px; margin-bottom:28px; }
-        .content-card h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold); letter-spacing:0.03em; margin:0 0 14px; }
+        .content-card { background:var(--surface, #0F0F0F); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius:4px; padding:32px; margin-bottom:28px; }
+        .content-card h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 14px; }
         .content-card p { color:var(--slate-light); font-size:15px; line-height:1.75; margin:0 0 14px; }
         .content-card p:last-child { margin-bottom:0; }
         .content-card ul { margin:0 0 14px; padding-left:20px; }
         .content-card li { color:var(--slate-light); font-size:15px; line-height:1.75; margin-bottom:8px; }
         .content-card strong { color:var(--paper); }
-        .cta-btn { background: var(--gold); color: var(--ink); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }
-        .cta-btn:hover { background: transparent; color: var(--gold); }
-        .site-footer { background: #050505; border-top: 1px solid rgba(200,169,74,0.15); padding: 40px 24px; text-align: center; }
-        .contact-pill { display: inline-flex; align-items: center; gap: 8px; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
-        .contact-pill:hover { border-color: var(--gold); color: var(--gold); }
-        .source-note { font-size:12px; color:var(--slate-light); margin-top:24px; padding-top:16px; border-top:1px solid rgba(200,169,74,0.12); }
+        .cta-btn { background: var(--gold); color: var(--on-gold, #0A0A0A); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }
+        .cta-btn:hover { background: transparent; color: var(--gold-text, #C8A94A); }
+        .site-footer { background: var(--surface-3, #050505); border-top: 1px solid rgba(var(--gold-rgb, 200,169,74),0.15); padding: 40px 24px; text-align: center; }
+        .contact-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2, #161616); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+        .contact-pill:hover { border-color: var(--gold); color: var(--gold-text, #C8A94A); }
+        .source-note { font-size:12px; color:var(--slate-light); margin-top:24px; padding-top:16px; border-top:1px solid rgba(var(--gold-rgb, 200,169,74),0.12); }
     </style>
     <script type="application/ld+json">
     {
@@ -91,6 +92,8 @@
       ]
     }
     </script>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body>
 <main>
@@ -141,11 +144,11 @@
         <p>Nada de eso es razón para estar nervioso sobre actualizar. Es una razón para asegurarte de que quien lo ponga en la pared sepa lo que está haciendo.</p>
     </div>
 
-    <div class="content-card" style="text-align:center; border-color:rgba(200,169,74,0.4);">
+    <div class="content-card" style="text-align:center; border-color:rgba(var(--gold-rgb, 200,169,74),0.4);">
         <h2>¿Actualizando Este Año?</h2>
         <p>¿Buscando un televisor nuevo? Podemos conseguir televisores Samsung, LG y Sony directamente — llámanos para precios si te interesa. ¿Ya tienes uno en camino, o decidiste otra marca? No hay problema de todos modos, montamos lo que traigas a casa. La instalación en sí siempre es de $100 fijos, sin importar el tamaño o tipo de panel.</p>
         <a href="/es/?source=Blog%20-%20New%20TVs%202026#bookingForm" class="cta-btn" style="margin-top:12px;">RESERVA TU INSTALACIÓN DE $100 &rarr;</a>
-        <p style="font-size:12px; color:var(--slate-light); margin-top:16px;">¿Aún no listo para comprar? Nuestra <a href="/es/tv-mounting-guide.html" style="color:var(--gold);">guía de montaje gratis</a> cubre lo que debes saber antes de perforar algo.</p>
+        <p style="font-size:12px; color:var(--slate-light); margin-top:16px;">¿Aún no listo para comprar? Nuestra <a href="/es/tv-mounting-guide.html" style="color:var(--gold-text, #C8A94A);">guía de montaje gratis</a> cubre lo que debes saber antes de perforar algo.</p>
     </div>
 
     <p class="source-note">Basado en la cobertura actual de 2026 de Samsung Newsroom, Tom's Guide, Consumer Reports, y FlatpanelsHD.</p>
@@ -153,13 +156,13 @@
 </div>
 
 <footer class="site-footer">
-    <p class="bebas" style="font-size:28px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
+    <p class="bebas" style="font-size:28px; color: var(--gold-text, #C8A94A); letter-spacing:0.06em;">TV Install Chicago</p>
     <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">Tarifa Fija de $100 &middot; Cualquier TV &middot; Cualquier Tamaño &middot; Siempre</p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
         <a href="tel:+16305922982" class="contact-pill">&#128222; (630) 592-2982</a>
         <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a>
     </div>
-    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.7); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; La Promesa de $100</p>
+    <p style="margin-top:24px; font-size:11px; color: rgba(var(--gold-rgb, 200,169,74),0.7); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; La Promesa de $100</p>
     <p style="margin-top:10px; font-size:11px;"><a href="/es/" style="color:var(--slate-light);">&larr; Volver al Inicio</a></p>
 </footer>
 <script src="/js/report-problem.js"></script></main>

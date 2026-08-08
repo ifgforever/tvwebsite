@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>try{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Novedades | TV Install Chicago</title>
@@ -28,18 +29,20 @@
   }
   * { font-family: 'DM Sans', sans-serif; }
   .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
-  body { background: var(--paper); color: var(--ink); }
-  a { color: var(--gold-dim); text-decoration: underline; text-underline-offset: 2px; }
-  a:hover { color: var(--rust); }
+  body { background: var(--ink); color: var(--paper); }
+  a { color: var(--gold-text, #C8A94A); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--rust-strong, #B4562F); }
   .lang-switch { font-size:12px; text-align:right; margin-bottom:1rem; }
   .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
-  .lang-switch a.active { color:var(--gold-dim); }
-  .lang-switch span { color: rgba(200,169,74,0.4); margin:0 4px; }
-  .feature-card { background:#fff; border:1px solid rgba(0,0,0,0.08); border-radius:8px; padding:24px; }
-  .feature-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:8px; background:rgba(200,169,74,0.15); font-size:20px; flex-shrink:0; }
-  .cta-pill { display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:var(--paper); padding:12px 24px; border-radius:999px; font-weight:600; text-decoration:none; }
-  .cta-pill:hover { background:var(--gold-dim); color:var(--ink); }
+  .lang-switch a.active { color:var(--gold-text, #C8A94A); }
+  .lang-switch span { color: rgba(var(--gold-rgb, 200,169,74),0.4); margin:0 4px; }
+  .feature-card { background:var(--surface, #0F0F0F); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius:8px; padding:24px; }
+  .feature-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:8px; background:rgba(var(--gold-rgb, 200,169,74),0.15); font-size:20px; flex-shrink:0; }
+  .cta-pill { display:inline-flex; align-items:center; gap:8px; background:var(--paper); color:var(--ink); padding:12px 24px; border-radius:999px; font-weight:600; text-decoration:none; }
+  .cta-pill:hover { background:var(--gold); color:var(--on-gold, #0A0A0A); }
 </style>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body class="min-h-screen">
 <main>

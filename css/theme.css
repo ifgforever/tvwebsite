@@ -1,0 +1,140 @@
+/* Light theme + the theme toggle control.
+ *
+ * Every custom property here is defined ONLY under html[data-theme="light"].
+ * The pages call them as var(--name, <original literal>), so with no attribute
+ * (or data-theme="dark") every var is undefined, the fallback wins, and the
+ * site renders exactly as it always has. Dark is the default and the fallback.
+ *
+ * Role of the two base colors, which SWAP between themes:
+ *   --ink   = the page background, and the text colour on inverted panels
+ *   --paper = the text colour on the page, and the background of inverted panels
+ * The price board and promise strip are inverted panels: a cream slab on the
+ * dark site, a charcoal slab on the light one. Keeping them inverted is what
+ * makes light mode read as the same design rather than a washed-out copy.
+ */
+
+html[data-theme="light"] {
+    --ink: #F7F3EA;
+    --ink-rgb: 247,243,234;
+    --paper: #171410;
+    --paper-rgb: 23,20,16;
+    --paper-dark: #3A342A;
+
+    /* Surfaces that were hardcoded near-black: cards, inputs, footers. */
+    --surface: #FFFFFF;
+    --surface-2: #FFFFFF;
+    --surface-3: #EFE8D8;
+
+    /* Gold splits by role. Fills keep the brand gold so the ticker and CTAs are
+       unmistakably the same buttons; gold-as-text darkens to stay readable.
+       --gold-light and --gold-bright are deliberately absent: they are fills
+       (--gold-light lightens .btn-gold on hover) and the gold-gradient display
+       type that uses them is restyled outright further down. */
+    --gold: #C8A94A;
+    --gold-rgb: 58,43,6;
+    --gold-text: #7A5E12;
+    --gold-dim: #6B520F;
+    --on-gold: #14110B;
+
+    --slate: #ABA495;
+    --slate-mid: #56503F;
+    --slate-light: #575043;
+    --rust: #D2703F;
+    --rust-rgb: 210,112,63;
+    --rust-strong: #A8471F;
+    --ok: #7FC98A;
+
+    color-scheme: light;
+}
+
+/* ---- Components that need more than a colour swap ---------------------- */
+
+/* Gold-gradient display type sits on the page (or on a cream slab) in both
+   themes, so on light it needs the whole ramp darkened, not just one stop. */
+html[data-theme="light"] .hero-number,
+html[data-theme="light"] .hero-price,
+html[data-theme="light"] .hundred-big {
+    background: linear-gradient(135deg, #A8862B 0%, #7A5E12 40%, #C09A34 70%, #7A5E12 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Inside the now-dark price board, gold-tinted washes disappear. Light ones
+   read the same way the gold ones did on cream. */
+html[data-theme="light"] .section-head {
+    background: rgba(var(--ink-rgb), 0.07);
+}
+html[data-theme="light"] .line-item:hover {
+    background: rgba(var(--ink-rgb), 0.06);
+}
+
+/* The CRT scanline overlay is drawn in black; at full strength it stripes a
+   pale page. */
+html[data-theme="light"] body::after {
+    opacity: 0.12;
+}
+
+/* Date/time picker glyphs are inverted to show up on near-black inputs. The
+   inputs are white here, so the inversion would hide them. */
+html[data-theme="light"] .field-input::-webkit-calendar-picker-indicator {
+    filter: none;
+}
+
+/* Spinner rides on a gold button, whose text colour is pinned. */
+html[data-theme="light"] .spinner {
+    border-top-color: var(--on-gold);
+}
+
+/* ---- Theme toggle ------------------------------------------------------ */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    margin-left: 10px;
+    border: 1px solid rgba(var(--gold-rgb, 200,169,74), 0.35);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--gold-text, #C8A94A);
+    font: 600 12px/1 'DM Sans', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    border-color: var(--gold);
+    background: rgba(var(--gold-rgb, 200,169,74), 0.1);
+    outline: none;
+}
+
+.theme-toggle-icon {
+    display: block;
+    width: 14px;
+    height: 14px;
+    flex: none;
+}
+
+/* Pages with no language bar to sit in get a floating control instead. It hugs
+   the top-right because report-problem.js already owns the bottom-right. */
+.theme-toggle--floating {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 9998;
+    margin-left: 0;
+    background: var(--surface, #0F0F0F);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Icon-only on phones, with the padding grown to keep a comfortable thumb
+   target inside the small lang bar. */
+@media (max-width: 480px) {
+    .theme-toggle-label { display: none; }
+    .theme-toggle { padding: 10px 13px; margin-left: 8px; }
+}

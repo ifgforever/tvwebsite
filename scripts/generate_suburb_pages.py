@@ -104,23 +104,23 @@ STYLE_BLOCK = """
         .ticker-wrap {{ background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }}
         .ticker-inner {{ display: inline-block; animation: ticker 22s linear infinite; }}
         @keyframes ticker {{ 0% {{ transform: translateX(0); }} 100% {{ transform: translateX(-50%); }} }}
-        .ticker-item {{ display: inline-block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }}
-        .ticker-dot {{ display: inline-block; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; vertical-align: middle; margin-right: 40px; }}
+        .ticker-item {{ display: inline-block; color: var(--on-gold, #0A0A0A); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }}
+        .ticker-dot {{ display: inline-block; width: 6px; height: 6px; background: var(--on-gold, #0A0A0A); border-radius: 50%; vertical-align: middle; margin-right: 40px; }}
         .breadcrumb {{ font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }}
         .breadcrumb a {{ color:var(--slate-light); text-decoration:none; }}
-        .breadcrumb a:hover {{ color:var(--gold); }}
+        .breadcrumb a:hover {{ color:var(--gold-text, #C8A94A); }}
         .lang-switch a {{ color:var(--slate-light); text-decoration:none; font-weight:600; }}
-        .lang-switch a.active {{ color:var(--gold); }}
-        .lang-switch span {{ color: rgba(200,169,74,0.7); margin:0 4px; }}
-        .hero-section {{ background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }}
-        .hero-section::before {{ content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }}
+        .lang-switch a.active {{ color:var(--gold-text, #C8A94A); }}
+        .lang-switch span {{ color: rgba(var(--gold-rgb, 200,169,74),0.7); margin:0 4px; }}
+        .hero-section {{ background: var(--ink); border-bottom: 1px solid rgba(var(--gold-rgb, 200,169,74),0.3); position: relative; overflow: hidden; padding: 48px 24px 40px; }}
+        .hero-section::before {{ content: '$100'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 38vw; color: rgba(var(--gold-rgb, 200,169,74),0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }}
         .hero-eyebrow {{ color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }}
         .hero-title {{ font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 7vw, 76px); color: var(--paper); letter-spacing: 0.02em; line-height: 1.02; margin: 10px 0 6px; }}
-        .hero-title span {{ color: var(--gold); }}
-        .hero-price {{ font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 12vw, 120px); line-height: 0.9; background: linear-gradient(135deg, #E5C97A 0%, #C8A94A 40%, #F0D890 70%, #C8A94A 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-top:8px; }}
+        .hero-title span {{ color: var(--gold-text, #C8A94A); }}
+        .hero-price {{ font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 12vw, 120px); line-height: 0.9; background: linear-gradient(135deg, var(--gold-light, #E5C97A) 0%, var(--gold, #C8A94A) 40%, var(--gold-bright, #F0D890) 70%, var(--gold, #C8A94A) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-top:8px; }}
         .content-wrap {{ max-width: 900px; margin: 0 auto; padding: 40px 24px; position:relative; z-index:1; }}
-        .content-card {{ background:#0F0F0F; border:1px solid rgba(200,169,74,0.2); border-radius:4px; padding:32px; margin-bottom:28px; }}
-        .content-card h2 {{ font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold); letter-spacing:0.03em; margin:0 0 14px; }}
+        .content-card {{ background:var(--surface, #0F0F0F); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius:4px; padding:32px; margin-bottom:28px; }}
+        .content-card h2 {{ font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 14px; }}
         .content-card p {{ color:var(--slate-light); font-size:15px; line-height:1.75; margin:0 0 12px; }}
         .content-card p:last-child {{ margin-bottom:0; }}
         .promise-strip {{ background: var(--paper); color: var(--ink); display: grid; grid-template-columns: repeat(3, 1fr); border-radius:4px; overflow:hidden; margin-bottom:28px; }}
@@ -128,18 +128,18 @@ STYLE_BLOCK = """
         .promise-item:last-child {{ border-right: none; }}
         .promise-number {{ font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--rust); line-height: 1; }}
         .promise-label {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate); font-weight: 600; margin-top: 4px; }}
-        .faq-item {{ border-bottom:1px solid rgba(200,169,74,0.12); padding:16px 0; }}
+        .faq-item {{ border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.12); padding:16px 0; }}
         .faq-item:last-child {{ border-bottom:none; padding-bottom:0; }}
         .faq-q {{ font-weight:600; color:var(--paper); font-size:14px; margin-bottom:6px; }}
         .faq-a {{ color:var(--slate-light); font-size:14px; line-height:1.65; }}
         .nearby-list {{ display:flex; flex-wrap:wrap; gap:8px; }}
-        .nearby-pill {{ display:inline-block; background:#161616; border:1px solid rgba(200,169,74,0.25); color:var(--paper); padding:8px 16px; border-radius:20px; font-size:13px; text-decoration:none; transition:border-color 0.2s, color 0.2s; }}
-        .nearby-pill:hover {{ border-color:var(--gold); color:var(--gold); }}
-        .cta-btn {{ background: var(--gold); color: var(--ink); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }}
-        .cta-btn:hover {{ background: transparent; color: var(--gold); }}
-        .site-footer {{ background: #050505; border-top: 1px solid rgba(200,169,74,0.15); padding: 40px 24px; text-align: center; }}
-        .contact-pill {{ display: inline-flex; align-items: center; gap: 8px; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }}
-        .contact-pill:hover {{ border-color: var(--gold); color: var(--gold); }}
+        .nearby-pill {{ display:inline-block; background:var(--surface-2, #161616); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); color:var(--paper); padding:8px 16px; border-radius:20px; font-size:13px; text-decoration:none; transition:border-color 0.2s, color 0.2s; }}
+        .nearby-pill:hover {{ border-color:var(--gold); color:var(--gold-text, #C8A94A); }}
+        .cta-btn {{ background: var(--gold); color: var(--on-gold, #0A0A0A); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }}
+        .cta-btn:hover {{ background: transparent; color: var(--gold-text, #C8A94A); }}
+        .site-footer {{ background: var(--surface-3, #050505); border-top: 1px solid rgba(var(--gold-rgb, 200,169,74),0.15); padding: 40px 24px; text-align: center; }}
+        .contact-pill {{ display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2, #161616); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }}
+        .contact-pill:hover {{ border-color: var(--gold); color: var(--gold-text, #C8A94A); }}
 """
 
 HEAD_ICONS = """    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
@@ -222,6 +222,7 @@ S = {
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="{html_lang}">
 <head>
+<script>try{{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 """ + HEAD_ICONS + """
 {persistence_script}    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -280,6 +281,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       ]
     }}
     </script>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body>
 <main>
@@ -347,13 +350,13 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <footer class="site-footer">
-    <p class="bebas" style="font-size:28px; color: var(--gold); letter-spacing:0.06em;">TV Install Chicago</p>
+    <p class="bebas" style="font-size:28px; color: var(--gold-text, #C8A94A); letter-spacing:0.06em;">TV Install Chicago</p>
     <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">{footer_tag}</p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
         <a href="tel:{phone}" class="contact-pill">&#128222; {phone_display}</a>
         <a href="mailto:{email}" class="contact-pill">&#9993; {email}</a>
     </div>
-    <p style="margin-top:24px; font-size:11px; color: rgba(200,169,74,0.7); letter-spacing:0.05em;">{footer_copy}</p>
+    <p style="margin-top:24px; font-size:11px; color: rgba(var(--gold-rgb, 200,169,74),0.7); letter-spacing:0.05em;">{footer_copy}</p>
     <p style="margin-top:10px; font-size:11px;"><a href="{hub_href}" style="color:var(--slate-light);">{footer_link1}</a> &middot; <a href="{hoods_hub_href}" style="color:var(--slate-light);">{footer_link2}</a></p>
 </footer>
 
@@ -446,6 +449,7 @@ HUB_S = {
 HUB_TEMPLATE = """<!DOCTYPE html>
 <html lang="{html_lang}">
 <head>
+<script>try{{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
 {persistence_script}    <meta charset="UTF-8">
@@ -466,23 +470,25 @@ HUB_TEMPLATE = """<!DOCTYPE html>
         .ticker-wrap {{ background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }}
         .ticker-inner {{ display:inline-block; animation: ticker 22s linear infinite; }}
         @keyframes ticker {{ 0% {{ transform: translateX(0); }} 100% {{ transform: translateX(-50%); }} }}
-        .ticker-item {{ display:inline-block; color:var(--ink); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:0 40px; }}
-        .ticker-dot {{ display:inline-block; width:6px; height:6px; background:var(--ink); border-radius:50%; vertical-align:middle; margin-right:40px; }}
+        .ticker-item {{ display:inline-block; color: var(--on-gold, #0A0A0A); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:0 40px; }}
+        .ticker-dot {{ display:inline-block; width:6px; height:6px; background: var(--on-gold, #0A0A0A); border-radius:50%; vertical-align:middle; margin-right:40px; }}
         .lang-switch {{ text-align:center; padding:14px 24px 0; font-size:12px; }}
         .lang-switch a {{ color:var(--slate-light); text-decoration:none; font-weight:600; }}
-        .lang-switch a.active {{ color:var(--gold); }}
-        .lang-switch span {{ color: rgba(200,169,74,0.7); margin:0 4px; }}
-        .hero {{ text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(200,169,74,0.2); }}
+        .lang-switch a.active {{ color:var(--gold-text, #C8A94A); }}
+        .lang-switch span {{ color: rgba(var(--gold-rgb, 200,169,74),0.7); margin:0 4px; }}
+        .hero {{ text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); }}
         .hero h1 {{ font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,7vw,72px); margin:8px 0; letter-spacing:0.03em; }}
         .hero p {{ color:var(--slate-light); font-size:15px; max-width:560px; margin:0 auto; line-height:1.7; }}
         .wrap {{ max-width:1100px; margin:0 auto; padding:40px 24px; }}
-        .region-title {{ font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--gold); letter-spacing:0.05em; margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid rgba(200,169,74,0.2); }}
+        .region-title {{ font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--gold-text, #C8A94A); letter-spacing:0.05em; margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); }}
         .hood-grid {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }}
-        .hood-link {{ display:block; background:#0F0F0F; border:1px solid rgba(200,169,74,0.15); border-radius:3px; padding:14px 16px; color:var(--paper); text-decoration:none; font-size:14px; transition:border-color 0.2s, color 0.2s, background 0.2s; }}
-        .hood-link:hover {{ border-color:var(--gold); color:var(--gold); background:#161616; }}
-        .site-footer {{ background:#050505; border-top:1px solid rgba(200,169,74,0.15); padding:36px 24px; text-align:center; }}
-        .contact-pill {{ display:inline-flex; align-items:center; gap:8px; background:#161616; border:1px solid rgba(200,169,74,0.2); color:var(--paper); padding:12px 24px; border-radius:3px; font-size:14px; text-decoration:none; }}
+        .hood-link {{ display:block; background:var(--surface, #0F0F0F); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.15); border-radius:3px; padding:14px 16px; color:var(--paper); text-decoration:none; font-size:14px; transition:border-color 0.2s, color 0.2s, background 0.2s; }}
+        .hood-link:hover {{ border-color:var(--gold); color:var(--gold-text, #C8A94A); background:var(--surface-2, #161616); }}
+        .site-footer {{ background:var(--surface-3, #050505); border-top:1px solid rgba(var(--gold-rgb, 200,169,74),0.15); padding:36px 24px; text-align:center; }}
+        .contact-pill {{ display:inline-flex; align-items:center; gap:8px; background:var(--surface-2, #161616); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); color:var(--paper); padding:12px 24px; border-radius:3px; font-size:14px; text-decoration:none; }}
     </style>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body>
 <main>
@@ -494,7 +500,7 @@ HUB_TEMPLATE = """<!DOCTYPE html>
 {lang_switch}
 
 <div class="hero">
-    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:700;">{eyebrow}</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold-text, #C8A94A); font-weight:700;">{eyebrow}</p>
     <h1>{h1}</h1>
     <p>{lead}</p>
 </div>
@@ -504,7 +510,7 @@ HUB_TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <footer class="site-footer">
-    <p class="bebas" style="font-size:26px; color:var(--gold);">TV Install Chicago</p>
+    <p class="bebas" style="font-size:26px; color:var(--gold-text, #C8A94A);">TV Install Chicago</p>
     <div class="flex" style="margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
         <a href="tel:{phone}" class="contact-pill">&#128222; {phone_display}</a>
         <a href="mailto:{email}" class="contact-pill">&#9993; {email}</a>

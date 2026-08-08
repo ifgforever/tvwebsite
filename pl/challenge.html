@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+<script>try{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wyzwanie 77 — TV Install Chicago</title>
@@ -34,17 +35,17 @@
     .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
     .hidden { display: none !important; }
 
-    .hero-section { background: var(--ink); border-bottom: 1px solid rgba(200,169,74,0.3); position: relative; overflow: hidden; }
-    .hero-section::before { content: '77'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 42vw; color: rgba(200,169,74,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }
+    .hero-section { background: var(--ink); border-bottom: 1px solid rgba(var(--gold-rgb, 200,169,74),0.3); position: relative; overflow: hidden; }
+    .hero-section::before { content: '77'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 42vw; color: rgba(var(--gold-rgb, 200,169,74),0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; }
     .hero-tagline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(34px, 6vw, 68px); color: var(--paper); letter-spacing: 0.02em; line-height: 1.05; }
-    .hero-sub { color: var(--gold); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+    .hero-sub { color: var(--gold-text, #C8A94A); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
 
-    .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 4px; overflow: hidden; border: 1px solid rgba(200,169,74,0.25); background: #000; }
+    .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 4px; overflow: hidden; border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.25); background: #000; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-    .price-board { background: var(--paper); color: var(--ink); border-radius: 4px; border: 1px solid rgba(200,169,74,0.2); }
+    .price-board { background: var(--paper); color: var(--ink); border-radius: 4px; border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); }
     .board-header { background: var(--ink); color: var(--paper); padding: 18px 28px; border-radius: 3px 3px 0 0; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .board-number-badge { background: var(--gold); color: var(--ink); font-family: 'Bebas Neue', sans-serif; font-size: 14px; padding: 4px 12px; border-radius: 2px; }
+    .board-number-badge { background: var(--gold); color: var(--on-gold, #0A0A0A); font-family: 'Bebas Neue', sans-serif; font-size: 14px; padding: 4px 12px; border-radius: 2px; }
 
     .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
     .stat-item { padding: 22px 12px; border-right: 1px solid var(--paper-dark); text-align: center; }
@@ -56,36 +57,38 @@
     .progress-track { height: 10px; background: var(--paper-dark); border-radius: 6px; overflow: hidden; margin: 0 24px 20px; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--rust), var(--gold)); transition: width 0.4s ease; }
 
-    .region-block { border-top: 1px solid rgba(200,169,74,0.15); }
-    .region-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: var(--gold); padding: 16px 20px 4px; }
+    .region-block { border-top: 1px solid rgba(var(--gold-rgb, 200,169,74),0.15); }
+    .region-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: var(--gold-text, #C8A94A); padding: 16px 20px 4px; }
     .hood-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; padding: 12px 20px 24px; }
 
-    .hood-card { background: #0F0F0F; border: 1px solid rgba(200,169,74,0.15); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
+    .hood-card { background: var(--surface, #0F0F0F); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.15); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
     .hood-card.is-booked { border-color: var(--gold); }
-    .hood-photo { position: relative; aspect-ratio: 1/1; background: #161616; display: flex; align-items: center; justify-content: center; }
+    .hood-photo { position: relative; aspect-ratio: 1/1; background: var(--surface-2, #161616); display: flex; align-items: center; justify-content: center; }
     .hood-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hood-photo-empty { color: rgba(200,169,74,0.7); font-size: 11px; text-align: center; padding: 10px; }
-    .hood-stamp { position: absolute; top: 6px; right: 6px; background: var(--gold); color: var(--ink); font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 2px; }
+    .hood-photo-empty { color: rgba(var(--gold-rgb, 200,169,74),0.7); font-size: 11px; text-align: center; padding: 10px; }
+    .hood-stamp { position: absolute; top: 6px; right: 6px; background: var(--gold); color: var(--on-gold, #0A0A0A); font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 2px; }
     .hood-name { font-size: 12px; font-weight: 600; color: var(--paper); padding: 8px 10px 2px; }
     .hood-caption { font-size: 10.5px; font-style: italic; color: var(--slate-light); padding: 0 10px 8px; min-height: 14px; }
-    .claim-btn { display: block; width: 100%; background: transparent; border: none; border-top: 1px solid rgba(200,169,74,0.15); color: var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.06em; padding: 8px; cursor: pointer; text-align: center; text-decoration: none; box-sizing: border-box; }
-    .claim-btn:hover { background: rgba(200,169,74,0.08); }
+    .claim-btn { display: block; width: 100%; background: transparent; border: none; border-top: 1px solid rgba(var(--gold-rgb, 200,169,74),0.15); color: var(--gold-text, #C8A94A); font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.06em; padding: 8px; cursor: pointer; text-align: center; text-decoration: none; box-sizing: border-box; }
+    .claim-btn:hover { background: rgba(var(--gold-rgb, 200,169,74),0.08); }
     .claim-btn.booked-label { color: var(--slate-light); cursor: default; }
     .claim-btn.booked-label:hover { background: transparent; }
 
-    .form-card { background: #0F0F0F; border: 1px solid rgba(200,169,74,0.2); border-radius: 4px; }
-    .form-card-header { background: var(--gold); color: var(--ink); padding: 16px 24px; border-radius: 3px 3px 0 0; }
+    .form-card { background: var(--surface, #0F0F0F); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius: 4px; }
+    .form-card-header { background: var(--gold); color: var(--on-gold, #0A0A0A); padding: 16px 24px; border-radius: 3px 3px 0 0; }
     label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--slate-light); margin-bottom: 6px; }
-    .field-input { width: 100%; background: #161616; border: 1px solid rgba(200,169,74,0.2); color: var(--paper); padding: 11px 14px; border-radius: 3px; font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; }
-    .field-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,169,74,0.12); }
-    .field-input::placeholder { color: rgba(200,169,74,0.25); }
-    .cta-btn { background: var(--ink); color: var(--gold); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.08em; padding: 14px 28px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; }
-    .cta-btn:hover { background: var(--gold); color: var(--ink); }
+    .field-input { width: 100%; background: var(--surface-2, #161616); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); color: var(--paper); padding: 11px 14px; border-radius: 3px; font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; }
+    .field-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(var(--gold-rgb, 200,169,74),0.12); }
+    .field-input::placeholder { color: rgba(var(--gold-rgb, 200,169,74),0.25); }
+    .cta-btn { background: var(--ink); color: var(--gold-text, #C8A94A); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.08em; padding: 14px 28px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; }
+    .cta-btn:hover { background: var(--gold); color: var(--on-gold, #0A0A0A); }
     .lang-switch { text-align:center; padding:14px 24px 0; font-size:12px; }
     .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
-    .lang-switch a.active { color:var(--gold); }
-    .lang-switch span { color: rgba(200,169,74,0.7); margin:0 4px; }
+    .lang-switch a.active { color:var(--gold-text, #C8A94A); }
+    .lang-switch span { color: rgba(var(--gold-rgb, 200,169,74),0.7); margin:0 4px; }
 </style>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body>
 <main>

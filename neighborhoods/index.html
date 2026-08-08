@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>try{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
     <link rel="shortcut icon" href="/public/favicon.ico">
     <script>
@@ -41,23 +42,25 @@
         .ticker-wrap { background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }
         .ticker-inner { display:inline-block; animation: ticker 22s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .ticker-item { display:inline-block; color:var(--ink); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:0 40px; }
-        .ticker-dot { display:inline-block; width:6px; height:6px; background:var(--ink); border-radius:50%; vertical-align:middle; margin-right:40px; }
+        .ticker-item { display:inline-block; color: var(--on-gold, #0A0A0A); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:0 40px; }
+        .ticker-dot { display:inline-block; width:6px; height:6px; background: var(--on-gold, #0A0A0A); border-radius:50%; vertical-align:middle; margin-right:40px; }
         .lang-switch { text-align:center; padding:14px 24px 0; font-size:12px; }
         .lang-switch a { color:var(--slate-light); text-decoration:none; font-weight:600; }
-        .lang-switch a.active { color:var(--gold); }
-        .lang-switch span { color: rgba(200,169,74,0.7); margin:0 4px; }
-        .hero { text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(200,169,74,0.2); }
+        .lang-switch a.active { color:var(--gold-text, #C8A94A); }
+        .lang-switch span { color: rgba(var(--gold-rgb, 200,169,74),0.7); margin:0 4px; }
+        .hero { text-align:center; padding:56px 24px 32px; border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); }
         .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,7vw,72px); margin:8px 0; letter-spacing:0.03em; }
         .hero p { color:var(--slate-light); font-size:15px; max-width:560px; margin:0 auto; line-height:1.7; }
         .wrap { max-width:1100px; margin:0 auto; padding:40px 24px; }
-        .region-title { font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--gold); letter-spacing:0.05em; margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid rgba(200,169,74,0.2); }
+        .region-title { font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--gold-text, #C8A94A); letter-spacing:0.05em; margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); }
         .hood-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
-        .hood-link { display:block; background:#0F0F0F; border:1px solid rgba(200,169,74,0.15); border-radius:3px; padding:14px 16px; color:var(--paper); text-decoration:none; font-size:14px; transition:border-color 0.2s, color 0.2s, background 0.2s; }
-        .hood-link:hover { border-color:var(--gold); color:var(--gold); background:#161616; }
-        .site-footer { background:#050505; border-top:1px solid rgba(200,169,74,0.15); padding:36px 24px; text-align:center; }
-        .contact-pill { display:inline-flex; align-items:center; gap:8px; background:#161616; border:1px solid rgba(200,169,74,0.2); color:var(--paper); padding:12px 24px; border-radius:3px; font-size:14px; text-decoration:none; }
+        .hood-link { display:block; background:var(--surface, #0F0F0F); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.15); border-radius:3px; padding:14px 16px; color:var(--paper); text-decoration:none; font-size:14px; transition:border-color 0.2s, color 0.2s, background 0.2s; }
+        .hood-link:hover { border-color:var(--gold); color:var(--gold-text, #C8A94A); background:var(--surface-2, #161616); }
+        .site-footer { background:var(--surface-3, #050505); border-top:1px solid rgba(var(--gold-rgb, 200,169,74),0.15); padding:36px 24px; text-align:center; }
+        .contact-pill { display:inline-flex; align-items:center; gap:8px; background:var(--surface-2, #161616); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); color:var(--paper); padding:12px 24px; border-radius:3px; font-size:14px; text-decoration:none; }
     </style>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
 </head>
 <body>
 <main>
@@ -69,7 +72,7 @@
 <span class="lang-switch"><a class="active" href="/neighborhoods/index.html">EN</a><span>|</span><a href="/es/neighborhoods/index.html">ES</a><span>|</span><a href="/pl/neighborhoods/index.html">PL</a></span>
 
 <div class="hero">
-    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:700;">Every Corner Of The City</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold-text, #C8A94A); font-weight:700;">Every Corner Of The City</p>
     <h1>ALL 77 CHICAGO<br>NEIGHBORHOODS</h1>
     <p>One flat $100 rate for TV mounting in every official Chicago community area — find yours below.</p>
 </div>
@@ -182,7 +185,7 @@
 </div>
 
 <footer class="site-footer">
-    <p class="bebas" style="font-size:26px; color:var(--gold);">TV Install Chicago</p>
+    <p class="bebas" style="font-size:26px; color:var(--gold-text, #C8A94A);">TV Install Chicago</p>
     <div class="flex" style="margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
         <a href="tel:+16305922982" class="contact-pill">&#128222; (630) 592-2982</a>
         <a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a>
