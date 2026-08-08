@@ -467,6 +467,26 @@
                     <p class="px-5 pb-5 text-xs" style="color: var(--slate-light);">Dla więcej niż 5 TV, użyj pola uwag poniżej.</p>
                 </div>
 
+                <!-- WHILE WE'RE THERE — HOURLY ADD-ONS -->
+                <div style="background: rgba(var(--gold-rgb, 200,169,74),0.04); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius: 3px; padding: 20px;">
+                    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color: var(--gold-text, #C8A94A); margin-bottom:6px;">Przy Okazji Wizyty &mdash; Usługi Godzinowe</p>
+                    <p style="font-size:13px; color: var(--slate-light, #6B7E94); line-height:1.6; margin-bottom:14px;">Półki, obrazy lub składanie mebli podczas tej samej wizyty &mdash; <strong style="color: var(--paper, #F5F0E8);">$80/godz., rozliczane na miejscu co pełną godzinę</strong>. Nie wlicza się do sumy za montaż poniżej.</p>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label for="addonShelves" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                            <input type="checkbox" id="addonShelves" onchange="toggleAddonDetails()" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                            Zawieszenie półek, obrazów lub luster
+                        </label>
+                        <label for="addonFurniture" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                            <input type="checkbox" id="addonFurniture" onchange="toggleAddonDetails()" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                            Składanie mebli
+                        </label>
+                    </div>
+                    <div id="addonDetailsWrap" class="hidden" style="margin-top:14px;">
+                        <label for="addonDetails">Co wieszamy lub składamy?</label>
+                        <input type="text" id="addonDetails" class="field-input" placeholder="np. 2 półki i szafka RTV z IKEA">
+                    </div>
+                </div>
+
                 <!-- TOTAL -->
                 <div id="priceTotal" class="hidden total-bar">
                     <div>
@@ -707,6 +727,30 @@
         <div style="flex:1; min-width:180px; background:#0A0A0A; border:1px solid rgba(245,240,232,0.12); border-radius:4px; padding:14px 16px;">
           <p style="color:#6B7E94; font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Za godzinę &mdash; rozliczane w pełnych godzinach</p>
           <p style="color:#C8A94A; font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$100</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIESZANIE PÓŁEK I OBRAZÓW -->
+    <div style="background:var(--surface, #111); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); border-radius:6px; padding:28px; margin-bottom:24px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 6px;">WIESZANIE PÓŁEK I OBRAZÓW</h3>
+      <p style="color:var(--slate-light, #6B7E94); font-size:14px; line-height:1.7; margin:0 0 20px; font-family:'DM Sans',sans-serif;">Półki, galerie zdjęć, lustra, cięższe dekoracje &mdash; mocowane do właściwego podłoża, równo i solidnie. Zarezerwuj osobno albo dodaj do montażu TV &mdash; zajmiemy się tym podczas tej samej wizyty.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1; min-width:180px; background:var(--ink, #0A0A0A); border:1px solid rgba(var(--paper-rgb, 245,240,232),0.12); border-radius:4px; padding:14px 16px;">
+          <p style="color:var(--slate-light, #6B7E94); font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Za godzinę &mdash; rozliczane co pełną godzinę</p>
+          <p style="color:var(--gold-text, #C8A94A); font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$80</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKŁADANIE MEBLI -->
+    <div style="background:var(--surface, #111); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); border-radius:6px; padding:28px; margin-bottom:24px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 6px;">SKŁADANIE MEBLI</h3>
+      <p style="color:var(--slate-light, #6B7E94); font-size:14px; line-height:1.7; margin:0 0 20px; font-family:'DM Sans',sans-serif;">Szafki RTV, regały, biurka, ramy łóżek &mdash; meble w paczkach składamy solidnie i ustawiamy dokładnie tam, gdzie chcesz. Osobno albo razem z montażem telewizora.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1; min-width:180px; background:var(--ink, #0A0A0A); border:1px solid rgba(var(--paper-rgb, 245,240,232),0.12); border-radius:4px; padding:14px 16px;">
+          <p style="color:var(--slate-light, #6B7E94); font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Za godzinę &mdash; rozliczane co pełną godzinę</p>
+          <p style="color:var(--gold-text, #C8A94A); font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$80</p>
         </div>
       </div>
     </div>

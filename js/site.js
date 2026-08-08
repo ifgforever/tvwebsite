@@ -214,6 +214,40 @@
         return total;
     };
 
+    // Hourly add-ons (shelves/pictures, furniture assembly) are billed on
+    // site at $80/hr, so they never touch the calculated total -- the total
+    // bar promises "all-inclusive" and an unknown hour count can't be part
+    // of that number.
+    window.toggleAddonDetails = function () {
+        var wrap = document.getElementById('addonDetailsWrap');
+        if (!wrap) return;
+        var shelves = document.getElementById('addonShelves');
+        var furniture = document.getElementById('addonFurniture');
+        var on = (shelves && shelves.checked) || (furniture && furniture.checked);
+        wrap.classList.toggle('hidden', !on);
+    };
+
+    function getAddOns() {
+        var shelves = document.getElementById('addonShelves');
+        var furniture = document.getElementById('addonFurniture');
+        var details = document.getElementById('addonDetails');
+        return {
+            shelves: !!(shelves && shelves.checked),
+            furniture: !!(furniture && furniture.checked),
+            details: details ? details.value.trim() : ''
+        };
+    }
+
+    function addOnSummary(addOns) {
+        var parts = [];
+        if (addOns.shelves) parts.push('Shelf & Picture Hanging');
+        if (addOns.furniture) parts.push('Furniture Assembly');
+        if (!parts.length) return '';
+        var s = parts.join(' + ') + ' ($80/hr, billed on site)';
+        if (addOns.details) s += ' — ' + addOns.details;
+        return s;
+    }
+
     // Option `value`s for this select are stable English strings on every
     // language page (only the visible <option> text is translated), so
     // this lookup works unchanged regardless of site language.
@@ -248,7 +282,7 @@
     // once got double-booked). Only if TV Ops is unreachable does the
     // submission fall through to Formspree alone, so an outage never
     // loses a lead.
-    function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs, website, smsConsent) {
+    function syncBookingToTvOps(name, phone, email, address, date, timeWindow, notes, total, tvs, website, smsConsent, addOns) {
         var lineItems = [];
         for (var i = 0; i < tvs.length; i++) {
             var tv = tvs[i];
@@ -276,8 +310,20 @@
             }
         }
 
+        // Hourly add-ons ride along at $0 so the line-item sum still matches
+        // `price` (the fixed install total) -- the real money is collected on
+        // site by the hour, and the description says exactly that.
+        if (addOns && addOns.shelves) {
+            lineItems.push({ description: 'Shelf & Picture Hanging — $80/hr, billed on site', price: 0 });
+        }
+        if (addOns && addOns.furniture) {
+            lineItems.push({ description: 'Furniture Assembly — $80/hr, billed on site', price: 0 });
+        }
+
         var startTime = TIME_WINDOW_START[timeWindow] || '';
         var fullNotes = 'Preferred window: ' + timeWindow + (notes ? ' — ' + notes : '');
+        var addOnText = addOns ? addOnSummary(addOns) : '';
+        if (addOnText) fullNotes += ' — Add-on request: ' + addOnText;
 
         // Same duration formula the chat assistant uses, so a multi-TV or
         // wiring-heavy booking blocks a realistic stretch of the calendar
@@ -293,6 +339,10 @@
             // minutes as a basic drywall mount.
             if (isMantelMount(tvs[d].mount)) durationMinutes += 60;
         }
+        // Hourly add-ons have no fixed scope, so block an hour each -- the
+        // 1-hour billing minimum makes that the realistic floor.
+        if (addOns && addOns.shelves) durationMinutes += 60;
+        if (addOns && addOns.furniture) durationMinutes += 60;
 
         return fetchWithTimeout('https://tv-ops-public-api.tvinstallchicago.workers.dev/book', {
             method: 'POST',
@@ -367,13 +417,14 @@
             });
         }
 
+        var addOns = getAddOns();
         var total = calculateTotal();
         var estNum = genEstNum();
         var today = new Date();
         var created = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         var valid = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        estimateData = { estimateNumber: estNum, createdDate: created, validUntil: valid, name: name, phone: phone, email: email, address: address, numTvs: num, tvs: tvs, preferredDate: date, preferredTime: time, notes: notes, total: total };
+        estimateData = { estimateNumber: estNum, createdDate: created, validUntil: valid, name: name, phone: phone, email: email, address: address, numTvs: num, tvs: tvs, addOns: addOns, preferredDate: date, preferredTime: time, notes: notes, total: total };
 
         var tvDetails = '';
         for (var j = 1; j <= num; j++) {
@@ -387,7 +438,7 @@
         var website = document.getElementById('website').value;
         var smsConsent = document.getElementById('smsConsent').checked;
         bookingInFlight = true;
-        syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website, smsConsent).then(function (gate) {
+        syncBookingToTvOps(name, phone, email, address, date, time, notes, total, tvs, website, smsConsent, addOns).then(function (gate) {
             if (gate.rejected) {
                 bookingInFlight = false;
                 alert(S.booking.dateUnavailable);
@@ -406,6 +457,7 @@
             fd.append('preferredTime', time);
             fd.append('additionalNotes', notes);
             fd.append('total', '$' + total);
+            fd.append('addOnServices', addOnSummary(addOns) || 'None');
             fd.append('liftingAgreement', 'Confirmed — customer will assist with lifting on larger TVs');
             fd.append('language', LANG);
 
@@ -519,6 +571,23 @@
             rows.push(['   Wire: ' + wireLabel(tv.wire), '$' + tv.wirePrice]);
             if (tv.soundbar === 'yes') rows.push(['   Soundbar Mounting', '$' + tv.soundbarPrice]);
             rows.forEach(function (r) { doc.text(r[0], 20, y); doc.text(r[1], pw - 20, y, { align: 'right' }); y += 6; });
+            y += 4;
+            if (y > 250) { doc.addPage(); y = 20; }
+        }
+
+        // Hourly add-ons are billed on site, so they're listed at their rate
+        // but deliberately left out of the TOTAL box -- the total only covers
+        // the fixed-price install work above.
+        if (estimateData.addOns && (estimateData.addOns.shelves || estimateData.addOns.furniture)) {
+            doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+            doc.text('HOURLY ADD-ONS (billed on site, 1-hour increments)', 20, y); y += 7;
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+            if (estimateData.addOns.shelves) { doc.text('   Shelf & Picture Hanging', 20, y); doc.text('$80/hr', pw - 20, y, { align: 'right' }); y += 6; }
+            if (estimateData.addOns.furniture) { doc.text('   Furniture Assembly', 20, y); doc.text('$80/hr', pw - 20, y, { align: 'right' }); y += 6; }
+            if (estimateData.addOns.details) {
+                var al = doc.splitTextToSize('   Details: ' + estimateData.addOns.details, pw - 40);
+                doc.text(al, 20, y); y += al.length * 6;
+            }
             y += 4;
             if (y > 250) { doc.addPage(); y = 20; }
         }

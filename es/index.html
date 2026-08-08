@@ -467,6 +467,26 @@
                     <p class="px-5 pb-5 text-xs" style="color: var(--slate-light);">Para más de 5 TVs, usa el campo de notas abajo.</p>
                 </div>
 
+                <!-- WHILE WE'RE THERE — HOURLY ADD-ONS -->
+                <div style="background: rgba(var(--gold-rgb, 200,169,74),0.04); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius: 3px; padding: 20px;">
+                    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color: var(--gold-text, #C8A94A); margin-bottom:6px;">Mientras Estamos Ahí &mdash; Extras por Hora</p>
+                    <p style="font-size:13px; color: var(--slate-light, #6B7E94); line-height:1.6; margin-bottom:14px;">Repisas, cuadros o ensamblaje de muebles durante la misma visita &mdash; <strong style="color: var(--paper, #F5F0E8);">$80/hr, cobrado en el lugar en incrementos de 1 hora</strong>. No se incluye en el total de instalación de abajo.</p>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label for="addonShelves" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                            <input type="checkbox" id="addonShelves" onchange="toggleAddonDetails()" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                            Colgar repisas, cuadros o espejos
+                        </label>
+                        <label for="addonFurniture" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                            <input type="checkbox" id="addonFurniture" onchange="toggleAddonDetails()" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                            Ensamblaje de muebles
+                        </label>
+                    </div>
+                    <div id="addonDetailsWrap" class="hidden" style="margin-top:14px;">
+                        <label for="addonDetails">¿Qué colgamos o ensamblamos?</label>
+                        <input type="text" id="addonDetails" class="field-input" placeholder="p. ej., 2 repisas flotantes y un mueble de TV de IKEA">
+                    </div>
+                </div>
+
                 <!-- TOTAL -->
                 <div id="priceTotal" class="hidden total-bar">
                     <div>
@@ -707,6 +727,30 @@
         <div style="flex:1; min-width:180px; background:#0A0A0A; border:1px solid rgba(245,240,232,0.12); border-radius:4px; padding:14px 16px;">
           <p style="color:#6B7E94; font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Por hora &mdash; facturado en incrementos de 1 hora</p>
           <p style="color:#C8A94A; font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$100</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLGADO DE REPISAS Y CUADROS -->
+    <div style="background:var(--surface, #111); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); border-radius:6px; padding:28px; margin-bottom:24px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 6px;">COLGADO DE REPISAS Y CUADROS</h3>
+      <p style="color:var(--slate-light, #6B7E94); font-size:14px; line-height:1.7; margin:0 0 20px; font-family:'DM Sans',sans-serif;">Repisas flotantes, paredes de cuadros, espejos, arte pesado &mdash; anclados al soporte correcto para tu pared, nivelados y firmes. Resérvalo por separado o agrégalo a tu instalación de TV y lo hacemos en la misma visita.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1; min-width:180px; background:var(--ink, #0A0A0A); border:1px solid rgba(var(--paper-rgb, 245,240,232),0.12); border-radius:4px; padding:14px 16px;">
+          <p style="color:var(--slate-light, #6B7E94); font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Por hora &mdash; facturado en incrementos de 1 hora</p>
+          <p style="color:var(--gold-text, #C8A94A); font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$80</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENSAMBLAJE DE MUEBLES -->
+    <div style="background:var(--surface, #111); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); border-radius:6px; padding:28px; margin-bottom:24px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 6px;">ENSAMBLAJE DE MUEBLES</h3>
+      <p style="color:var(--slate-light, #6B7E94); font-size:14px; line-height:1.7; margin:0 0 20px; font-family:'DM Sans',sans-serif;">Muebles para TV, libreros, escritorios, marcos de cama &mdash; cualquier mueble armable, ensamblado firme y colocado exactamente donde lo quieras. Resérvalo solo o inclúyelo en tu cita de instalación.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1; min-width:180px; background:var(--ink, #0A0A0A); border:1px solid rgba(var(--paper-rgb, 245,240,232),0.12); border-radius:4px; padding:14px 16px;">
+          <p style="color:var(--slate-light, #6B7E94); font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Por hora &mdash; facturado en incrementos de 1 hora</p>
+          <p style="color:var(--gold-text, #C8A94A); font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$80</p>
         </div>
       </div>
     </div>

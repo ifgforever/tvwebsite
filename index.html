@@ -467,6 +467,26 @@
                     <p class="px-5 pb-5 text-xs" style="color: var(--slate-light);">For more than 5 TVs, use the notes field below.</p>
                 </div>
 
+                <!-- WHILE WE'RE THERE — HOURLY ADD-ONS -->
+                <div style="background: rgba(var(--gold-rgb, 200,169,74),0.04); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius: 3px; padding: 20px;">
+                    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color: var(--gold-text, #C8A94A); margin-bottom:6px;">While We're There &mdash; Hourly Add-Ons</p>
+                    <p style="font-size:13px; color: var(--slate-light, #6B7E94); line-height:1.6; margin-bottom:14px;">Shelves, pictures, or furniture assembly during the same visit &mdash; <strong style="color: var(--paper, #F5F0E8);">$80/hr, billed on site in 1-hour increments</strong>. Not included in the install total below.</p>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label for="addonShelves" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                            <input type="checkbox" id="addonShelves" onchange="toggleAddonDetails()" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                            Hang shelves, pictures, or mirrors
+                        </label>
+                        <label for="addonFurniture" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                            <input type="checkbox" id="addonFurniture" onchange="toggleAddonDetails()" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                            Furniture assembly
+                        </label>
+                    </div>
+                    <div id="addonDetailsWrap" class="hidden" style="margin-top:14px;">
+                        <label for="addonDetails">What are we hanging or assembling?</label>
+                        <input type="text" id="addonDetails" class="field-input" placeholder="e.g., 2 floating shelves and an IKEA media console">
+                    </div>
+                </div>
+
                 <!-- TOTAL -->
                 <div id="priceTotal" class="hidden total-bar">
                     <div>
@@ -707,6 +727,30 @@
         <div style="flex:1; min-width:180px; background:#0A0A0A; border:1px solid rgba(245,240,232,0.12); border-radius:4px; padding:14px 16px;">
           <p style="color:#6B7E94; font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Per hour &mdash; billed in 1-hour increments</p>
           <p style="color:#C8A94A; font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$100</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHELF & PICTURE HANGING -->
+    <div style="background:var(--surface, #111); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); border-radius:6px; padding:28px; margin-bottom:24px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 6px;">SHELF &amp; PICTURE HANGING</h3>
+      <p style="color:var(--slate-light, #6B7E94); font-size:14px; line-height:1.7; margin:0 0 20px; font-family:'DM Sans',sans-serif;">Floating shelves, gallery walls, mirrors, heavy art &mdash; anchored to the right thing for your wall so everything hangs level and stays put. Book it on its own, or add it to a TV install and we'll handle it in the same visit.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1; min-width:180px; background:var(--ink, #0A0A0A); border:1px solid rgba(var(--paper-rgb, 245,240,232),0.12); border-radius:4px; padding:14px 16px;">
+          <p style="color:var(--slate-light, #6B7E94); font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Per hour &mdash; billed in 1-hour increments</p>
+          <p style="color:var(--gold-text, #C8A94A); font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$80</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FURNITURE ASSEMBLY -->
+    <div style="background:var(--surface, #111); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.25); border-radius:6px; padding:28px; margin-bottom:24px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 6px;">FURNITURE ASSEMBLY</h3>
+      <p style="color:var(--slate-light, #6B7E94); font-size:14px; line-height:1.7; margin:0 0 20px; font-family:'DM Sans',sans-serif;">Media consoles, bookcases, desks, bed frames &mdash; flat-pack anything, assembled square and solid and set exactly where you want it. Book it standalone or fold it into your install appointment.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1; min-width:180px; background:var(--ink, #0A0A0A); border:1px solid rgba(var(--paper-rgb, 245,240,232),0.12); border-radius:4px; padding:14px 16px;">
+          <p style="color:var(--slate-light, #6B7E94); font-size:12px; margin:0 0 4px; font-family:'DM Sans',sans-serif;">Per hour &mdash; billed in 1-hour increments</p>
+          <p style="color:var(--gold-text, #C8A94A); font-family:'Bebas Neue',sans-serif; font-size:28px; margin:0; letter-spacing:0.02em;">$80</p>
         </div>
       </div>
     </div>
