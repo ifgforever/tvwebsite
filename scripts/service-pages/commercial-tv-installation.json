@@ -14,7 +14,11 @@
       "sub": "Multiple displays behind a bar, cameras covering a storefront, sound through a dining room. We do the same work for businesses that we do for homes, scheduled around your hours instead of ours, and quoted per job rather than guessed at.",
       "home": "Home",
       "crumb": "Commercial Installation",
-      "ticker": ["Displays &middot; Cameras &middot; Sound", "Scheduled Around Your Hours", "Quoted Per Job"],
+      "ticker": [
+        "Displays &middot; Cameras &middot; Sound",
+        "Scheduled Around Your Hours",
+        "Quoted Per Job"
+      ],
       "ctah2": "Tell us about the space",
       "ctap": "How many displays, what the walls are, and when you're closed. That's usually enough for a real number rather than a range.",
       "ctabtn": "GET A COMMERCIAL QUOTE &rarr;",
@@ -30,15 +34,35 @@
           "html": "<p>The residential $100 flat rate is built around one TV in one living room. A business install isn't that, and pretending otherwise would mean quoting you badly.</p><p>What actually moves a commercial number: how many displays, whether cabling runs through a ceiling or a wall, whether there's an existing rack to tie into, and whether the work has to happen outside trading hours. A four-screen bar install with concealed runs is a different day from a single office display.</p><p>So commercial work is quoted per job. Tell us the space and what you want out of it, and you'll get a real figure rather than a range that moves once we're on site.</p>"
         },
         {
+          "h2": "Certificates of insurance",
+          "html": "<p>Plenty of Chicago buildings won't let a contractor past the loading dock without a certificate of insurance on file, usually naming the management company or association as additional insured. Offices, condo towers and retail units in managed buildings all tend to want one.</p><p><strong style=\"color:var(--paper);\">If your building or HOA needs one, tell us when you book and we'll help you sort it.</strong></p><p>The one piece of advice: raise it early rather than on the morning of the install. Management companies can take a few days to review and approve the paperwork, and a certificate that arrives at nine on the day is the most common reason a job gets turned away at the door.</p>"
+        },
+        {
           "h2": "Working around your hours",
           "html": "<p>The part most businesses actually care about is not the mounting &mdash; it's not losing a service. A bar doesn't want a drill going at seven on a Friday, and an office doesn't want a ladder in reception mid-morning.</p><p>Most of our commercial work happens before opening, after close, or on a quiet weekday. Tell us your hours when you call and we'll build the job around them.</p><p>We also take the packaging away, which sounds trivial until four display boxes are stacked behind your bar during service.</p>"
         }
       ],
       "faq": [
-        ["Do you do commercial TV installation in Chicago?", "Yes — displays and multi-screen setups, security cameras, sound systems and Ubiquiti networking for bars, restaurants, offices, gyms and storefronts across Chicago and the north and northwest suburbs."],
-        ["How much does a commercial install cost?", "It's quoted per job rather than a flat rate, because the number depends on how many displays, how the cabling runs, and whether the work has to happen outside trading hours. Tell us about the space and you'll get a real figure."],
-        ["Can you work outside our opening hours?", "Yes, and most commercial jobs are done that way — before opening, after close, or on a quiet weekday. Tell us your hours when you call."],
-        ["Do you install security cameras for businesses?", "Yes. Cameras, video doorbells and entry sensors for storefronts and offices, mounted, wired and connected to your recorder or your phone."]
+        [
+          "Do you do commercial TV installation in Chicago?",
+          "Yes — displays and multi-screen setups, security cameras, sound systems and Ubiquiti networking for bars, restaurants, offices, gyms and storefronts across Chicago and the north and northwest suburbs."
+        ],
+        [
+          "Can you provide a certificate of insurance for my building or HOA?",
+          "Yes — tell us when you book and we'll help you get it sorted. Raise it early rather than on the day, because management companies often take a few days to review and approve the paperwork."
+        ],
+        [
+          "How much does a commercial install cost?",
+          "It's quoted per job rather than a flat rate, because the number depends on how many displays, how the cabling runs, and whether the work has to happen outside trading hours. Tell us about the space and you'll get a real figure."
+        ],
+        [
+          "Can you work outside our opening hours?",
+          "Yes, and most commercial jobs are done that way — before opening, after close, or on a quiet weekday. Tell us your hours when you call."
+        ],
+        [
+          "Do you install security cameras for businesses?",
+          "Yes. Cameras, video doorbells and entry sensors for storefronts and offices, mounted, wired and connected to your recorder or your phone."
+        ]
       ]
     },
     "es": {
@@ -52,7 +76,11 @@
       "sub": "Varias pantallas detrás de una barra, cámaras cubriendo un local, sonido en un comedor. Hacemos para negocios el mismo trabajo que para casas, agendado según su horario y no el nuestro, y cotizado por trabajo en vez de adivinado.",
       "home": "Inicio",
       "crumb": "Instalación Comercial",
-      "ticker": ["Pantallas &middot; Cámaras &middot; Sonido", "Agendado Según Su Horario", "Cotizado por Trabajo"],
+      "ticker": [
+        "Pantallas &middot; Cámaras &middot; Sonido",
+        "Agendado Según Su Horario",
+        "Cotizado por Trabajo"
+      ],
       "ctah2": "Cuéntenos del espacio",
       "ctap": "Cuántas pantallas, de qué son las paredes y cuándo cierran. Con eso normalmente basta para un número real y no un rango.",
       "ctabtn": "SOLICITE COTIZACIÓN COMERCIAL &rarr;",
@@ -68,15 +96,35 @@
           "html": "<p>La tarifa residencial de $100 fijos está pensada para una TV en una sala. Una instalación comercial no es eso, y fingir lo contrario significaría cotizarle mal.</p><p>Lo que realmente mueve un número comercial: cuántas pantallas, si el cableado va por techo o por pared, si hay un rack existente al cual conectarse, y si el trabajo debe hacerse fuera del horario de atención. Un bar de cuatro pantallas con cableado oculto es un día distinto a una sola pantalla de oficina.</p><p>Por eso el trabajo comercial se cotiza por proyecto. Cuéntenos del espacio y qué quiere lograr, y tendrá una cifra real en vez de un rango que cambia cuando ya estamos ahí.</p>"
         },
         {
+          "h2": "Certificados de seguro",
+          "html": "<p>Muchos edificios en Chicago no dejan pasar a un contratista del área de carga sin un certificado de seguro en archivo, normalmente nombrando a la administración o a la asociación como asegurado adicional. Oficinas, torres de condominios y locales en edificios administrados suelen pedirlo.</p><p><strong style=\"color:var(--paper);\">Si su edificio o HOA necesita uno, dígalo al reservar y le ayudamos a resolverlo.</strong></p><p>Un solo consejo: plantéelo con tiempo y no la mañana de la instalación. Las administraciones pueden tardar varios días en revisar y aprobar el papeleo, y un certificado que llega a las nueve del mismo día es la razón más común de que rechacen un trabajo en la puerta.</p>"
+        },
+        {
           "h2": "Trabajar según su horario",
           "html": "<p>Lo que de verdad le importa a un negocio no es el montaje &mdash; es no perder servicio. Un bar no quiere un taladro a las siete de un viernes, y una oficina no quiere una escalera en recepción a media mañana.</p><p>La mayoría de nuestro trabajo comercial ocurre antes de abrir, después de cerrar o en un día entre semana tranquilo. Díganos su horario al llamar y armamos el trabajo alrededor.</p><p>También nos llevamos el empaque, lo que suena trivial hasta que hay cuatro cajas de pantallas apiladas detrás de su barra durante el servicio.</p>"
         }
       ],
       "faq": [
-        ["¿Hacen instalación comercial de TV en Chicago?", "Sí — pantallas y configuraciones de varias pantallas, cámaras de seguridad, sistemas de sonido y redes Ubiquiti para bares, restaurantes, oficinas, gimnasios y locales en Chicago y los suburbios del norte y noroeste."],
-        ["¿Cuánto cuesta una instalación comercial?", "Se cotiza por trabajo y no con tarifa fija, porque el número depende de cuántas pantallas, cómo va el cableado y si hay que trabajar fuera del horario. Cuéntenos del espacio y tendrá una cifra real."],
-        ["¿Pueden trabajar fuera de nuestro horario?", "Sí, y así se hace la mayoría del trabajo comercial — antes de abrir, después de cerrar o en un día tranquilo entre semana. Díganos su horario al llamar."],
-        ["¿Instalan cámaras de seguridad para negocios?", "Sí. Cámaras, timbres con video y sensores de entrada para locales y oficinas, montados, cableados y conectados a su grabador o su teléfono."]
+        [
+          "¿Hacen instalación comercial de TV en Chicago?",
+          "Sí — pantallas y configuraciones de varias pantallas, cámaras de seguridad, sistemas de sonido y redes Ubiquiti para bares, restaurantes, oficinas, gimnasios y locales en Chicago y los suburbios del norte y noroeste."
+        ],
+        [
+          "¿Pueden proporcionar un certificado de seguro para mi edificio o HOA?",
+          "Sí — díganos al reservar y le ayudamos a resolverlo. Plantéelo con tiempo y no el mismo día, porque las administraciones suelen tardar varios días en revisar y aprobar el papeleo."
+        ],
+        [
+          "¿Cuánto cuesta una instalación comercial?",
+          "Se cotiza por trabajo y no con tarifa fija, porque el número depende de cuántas pantallas, cómo va el cableado y si hay que trabajar fuera del horario. Cuéntenos del espacio y tendrá una cifra real."
+        ],
+        [
+          "¿Pueden trabajar fuera de nuestro horario?",
+          "Sí, y así se hace la mayoría del trabajo comercial — antes de abrir, después de cerrar o en un día tranquilo entre semana. Díganos su horario al llamar."
+        ],
+        [
+          "¿Instalan cámaras de seguridad para negocios?",
+          "Sí. Cámaras, timbres con video y sensores de entrada para locales y oficinas, montados, cableados y conectados a su grabador o su teléfono."
+        ]
       ]
     },
     "pl": {
@@ -90,7 +138,11 @@
       "sub": "Kilka ekranów za barem, kamery obejmujące lokal, nagłośnienie sali. Dla firm robimy to samo co w domach, tylko zaplanowane pod Wasze godziny, nie nasze, i wycenione za zlecenie zamiast zgadywane.",
       "home": "Strona główna",
       "crumb": "Montaż Komercyjny",
-      "ticker": ["Ekrany &middot; Kamery &middot; Dźwięk", "Pod Wasze Godziny", "Wycena za Zlecenie"],
+      "ticker": [
+        "Ekrany &middot; Kamery &middot; Dźwięk",
+        "Pod Wasze Godziny",
+        "Wycena za Zlecenie"
+      ],
       "ctah2": "Opowiedz o lokalu",
       "ctap": "Ile ekranów, z czego są ściany i kiedy jest zamknięte. Zwykle to wystarczy na realną kwotę, nie widełki.",
       "ctabtn": "POPROŚ O WYCENĘ KOMERCYJNĄ &rarr;",
@@ -106,15 +158,35 @@
           "html": "<p>Domowa stawka $100 ryczałtem jest zbudowana wokół jednego telewizora w jednym salonie. Instalacja komercyjna to nie to samo, a udawanie inaczej oznaczałoby złą wycenę.</p><p>Co realnie zmienia kwotę komercyjną: ile ekranów, czy okablowanie idzie sufitem czy ścianą, czy jest istniejąca szafa rack do podpięcia i czy praca musi się odbyć poza godzinami otwarcia. Bar z czterema ekranami i ukrytym okablowaniem to inny dzień niż pojedynczy ekran w biurze.</p><p>Dlatego prace komercyjne wyceniamy za zlecenie. Opisz lokal i czego oczekujesz, a dostaniesz realną liczbę, a nie widełki, które zmieniają się po naszym przyjeździe.</p>"
         },
         {
+          "h2": "Certyfikaty ubezpieczenia",
+          "html": "<p>Wiele budynków w Chicago nie wpuści wykonawcy dalej niż rampa bez certyfikatu ubezpieczenia w aktach, zwykle wskazującego zarządcę albo wspólnotę jako dodatkowo ubezpieczonego. Biura, wieżowce mieszkaniowe i lokale w zarządzanych budynkach zwykle tego wymagają.</p><p><strong style=\"color:var(--paper);\">Jeśli Twój budynek albo HOA tego wymaga, powiedz przy rezerwacji, a pomożemy to załatwić.</strong></p><p>Jedna rada: zgłoś to wcześniej, a nie rano w dniu montażu. Zarządcy potrafią potrzebować kilku dni na sprawdzenie i zatwierdzenie dokumentów, a certyfikat dostarczony o dziewiątej tego samego dnia to najczęstszy powód odesłania ekipy z drzwiami.</p>"
+        },
+        {
           "h2": "Praca pod Wasze godziny",
           "html": "<p>To, na czym firmom naprawdę zależy, to nie montaż &mdash; to nieutracenie obrotu. Bar nie chce wiertarki o siódmej w piątek, a biuro nie chce drabiny w recepcji w środku przedpołudnia.</p><p>Większość naszych prac komercyjnych odbywa się przed otwarciem, po zamknięciu albo w spokojny dzień tygodnia. Podaj godziny przy telefonie, a ułożymy pracę wokół nich.</p><p>Zabieramy też opakowania, co brzmi błaho, dopóki cztery kartony po ekranach nie stoją za barem w trakcie serwisu.</p>"
         }
       ],
       "faq": [
-        ["Czy robicie komercyjny montaż TV w Chicago?", "Tak — ekrany i zestawy wieloekranowe, kamery bezpieczeństwa, nagłośnienie i sieci Ubiquiti dla barów, restauracji, biur, siłowni i lokali w Chicago oraz na przedmieściach północnych i północno-zachodnich."],
-        ["Ile kosztuje montaż komercyjny?", "Wyceniamy za zlecenie, a nie ryczałtem, bo kwota zależy od liczby ekranów, sposobu prowadzenia kabli i tego, czy praca musi być poza godzinami otwarcia. Opisz lokal, a dostaniesz realną liczbę."],
-        ["Czy możecie pracować poza naszymi godzinami otwarcia?", "Tak i tak wygląda większość zleceń komercyjnych — przed otwarciem, po zamknięciu albo w spokojny dzień tygodnia. Podaj godziny przy telefonie."],
-        ["Czy montujecie kamery bezpieczeństwa dla firm?", "Tak. Kamery, wideodomofony i czujniki wejścia do lokali i biur, zamontowane, okablowane i podpięte do rejestratora albo telefonu."]
+        [
+          "Czy robicie komercyjny montaż TV w Chicago?",
+          "Tak — ekrany i zestawy wieloekranowe, kamery bezpieczeństwa, nagłośnienie i sieci Ubiquiti dla barów, restauracji, biur, siłowni i lokali w Chicago oraz na przedmieściach północnych i północno-zachodnich."
+        ],
+        [
+          "Czy możecie dostarczyć certyfikat ubezpieczenia dla budynku albo HOA?",
+          "Tak — powiedz przy rezerwacji, a pomożemy to załatwić. Zgłoś to wcześniej, a nie w dniu montażu, bo zarządcy często potrzebują kilku dni na sprawdzenie i zatwierdzenie dokumentów."
+        ],
+        [
+          "Ile kosztuje montaż komercyjny?",
+          "Wyceniamy za zlecenie, a nie ryczałtem, bo kwota zależy od liczby ekranów, sposobu prowadzenia kabli i tego, czy praca musi być poza godzinami otwarcia. Opisz lokal, a dostaniesz realną liczbę."
+        ],
+        [
+          "Czy możecie pracować poza naszymi godzinami otwarcia?",
+          "Tak i tak wygląda większość zleceń komercyjnych — przed otwarciem, po zamknięciu albo w spokojny dzień tygodnia. Podaj godziny przy telefonie."
+        ],
+        [
+          "Czy montujecie kamery bezpieczeństwa dla firm?",
+          "Tak. Kamery, wideodomofony i czujniki wejścia do lokali i biur, zamontowane, okablowane i podpięte do rejestratora albo telefonu."
+        ]
       ]
     }
   }
