@@ -1,0 +1,122 @@
+{
+  "slug": "tv-dismounting",
+  "serviceType": "TV dismounting and removal",
+  "offer": "100",
+  "source": "Dismount%20Page",
+  "lang": {
+    "en": {
+      "title": "TV Dismounting in Chicago — $100 for Any Number of TVs | TV Install Chicago",
+      "desc": "Moving out and need the TVs off the walls? $100 flat covers any number of TVs at one address — one or five, same price. Same-day slots often available across Chicago and the north suburbs.",
+      "ogtitle": "TV Dismounting in Chicago — $100 for Any Number of TVs",
+      "ogdesc": "One TV or five, $100 flat at one address. Often same-day, across Chicago and the north suburbs.",
+      "h1plain": "TV Dismounting in Chicago",
+      "h1": "TAKING IT<br><span>BACK DOWN</span>",
+      "eyebrow": "$100 Flat &middot; Any Number Of TVs",
+      "sub": "Moving out, selling up, or the landlord wants the walls back. We take the TVs down, remove the brackets, and hand you the hardware. One TV or five at the same address, it's $100 &mdash; the count doesn't change the price.",
+      "home": "Home",
+      "crumb": "TV Dismounting",
+      "ticker": ["$100 Any Number Of TVs", "Same Day Often Available", "Brackets Off, Hardware Bagged"],
+      "ctah2": "Moving soon?",
+      "ctap": "Tell us how many TVs and roughly when. Dismounts are quick, so there's usually a slot sooner than you'd expect.",
+      "ctabtn": "BOOK A DISMOUNT &rarr;",
+      "link1": "See the full price list",
+      "link2": "Check we cover your address",
+      "cards": [
+        {
+          "h2": "One price, however many screens",
+          "html": "<p>Most of this work happens when someone's moving, and moving is already expensive enough. So dismounting is <strong style=\"color:var(--paper);\">$100 flat for any number of TVs at one address</strong>. A studio with one screen and a house with five pay the same.</p><p>That's deliberate. Once we're at your address with the tools out, a second and third TV take minutes. Charging per screen would be charging you for our travel twice.</p><p>What you get: TVs off the wall and set down safely, brackets removed, and all the hardware bagged so it's with the mount when it goes back up somewhere else.</p>"
+        },
+        {
+          "h2": "Getting your deposit back",
+          "html": "<p>The usual reason for a dismount is a lease ending, and the usual worry is what the wall looks like afterwards.</p><p>A mount that went in properly leaves a handful of anchor holes in a rectangle. That's normal wear as far as most landlords are concerned, and it's a small patching job. What causes actual disputes is a mount that was over-tightened into drywall with no stud behind it, which can pull through and take a chunk of the wall with it.</p><p>We'll tell you what we're looking at when we take it down. If the wall needs more than filler, better you hear it from us with time to sort it than from your landlord after you've moved out.</p>"
+        },
+        {
+          "h2": "Taking it with you",
+          "html": "<p>If the TV is going to a new place, a few things are worth knowing before moving day.</p><p><strong style=\"color:var(--paper);\">Keep the bracket hardware together.</strong> Mount bolts are specific to the TV's VESA pattern, and a bag of unlabelled screws is how a twenty-minute reinstall becomes a trip to the hardware shop. We bag them for you.</p><p><strong style=\"color:var(--paper);\">Transport it upright.</strong> Flat on its back is how panels crack. If the original box is long gone, upright and padded in the car beats laid flat in a van.</p><p><strong style=\"color:var(--paper);\">The new wall may not match the old one.</strong> A mount that was fine on timber studs may need different anchors in a high-rise with metal studs. Worth mentioning when you book the reinstall.</p>"
+        }
+      ],
+      "faq": [
+        ["How much does TV dismounting cost in Chicago?", "$100 flat for any number of TVs at one address. One or five, the price is the same."],
+        ["Do you charge per TV?", "No. The $100 covers every TV at the same address. Once we're there with the tools out, extra screens take minutes."],
+        ["Do you patch the holes afterwards?", "Removing the bracket leaves anchor holes, which is usually a small filler job. Tell us what you need when you call and we'll tell you honestly whether it's something we can sort on the visit."],
+        ["Can you dismount and reinstall at my new place?", "Yes. That's two jobs — the $100 dismount and a $100 install at the new address — and we'll bag the hardware so nothing goes missing in between."]
+      ]
+    },
+    "es": {
+      "title": "Desmontaje de TV en Chicago — $100 por Cualquier Cantidad | TV Install Chicago",
+      "desc": "¿Se muda y necesita bajar las TVs de la pared? $100 fijos cubren cualquier cantidad de TVs en una dirección — una o cinco, mismo precio. Citas el mismo día con frecuencia.",
+      "ogtitle": "Desmontaje de TV en Chicago — $100 por Cualquier Cantidad",
+      "ogdesc": "Una TV o cinco, $100 fijos en una dirección. A menudo el mismo día.",
+      "h1plain": "Desmontaje de TV en Chicago",
+      "h1": "BAJARLA<br><span>DE LA PARED</span>",
+      "eyebrow": "$100 Fijo &middot; Cualquier Cantidad de TVs",
+      "sub": "Se muda, vende la casa, o el arrendador quiere las paredes de vuelta. Bajamos las TVs, quitamos los soportes y le entregamos la tornillería. Una TV o cinco en la misma dirección, son $100 &mdash; la cantidad no cambia el precio.",
+      "home": "Inicio",
+      "crumb": "Desmontaje de TV",
+      "ticker": ["$100 Cualquier Cantidad", "A Menudo el Mismo Día", "Soportes Fuera, Tornillería Guardada"],
+      "ctah2": "¿Se muda pronto?",
+      "ctap": "Díganos cuántas TVs y más o menos cuándo. Los desmontajes son rápidos, así que suele haber espacio antes de lo que cree.",
+      "ctabtn": "RESERVE UN DESMONTAJE &rarr;",
+      "link1": "Vea la lista completa de precios",
+      "link2": "Confirme que cubrimos su dirección",
+      "cards": [
+        {
+          "h2": "Un precio, sin importar cuántas pantallas",
+          "html": "<p>La mayoría de este trabajo ocurre cuando alguien se muda, y mudarse ya es bastante caro. Por eso el desmontaje es <strong style=\"color:var(--paper);\">$100 fijos por cualquier cantidad de TVs en una dirección</strong>. Un estudio con una pantalla y una casa con cinco pagan lo mismo.</p><p>Es a propósito. Una vez que estamos en su dirección con las herramientas afuera, una segunda y tercera TV toman minutos. Cobrar por pantalla sería cobrarle el desplazamiento dos veces.</p><p>Lo que recibe: las TVs fuera de la pared y apoyadas con cuidado, los soportes retirados y toda la tornillería en una bolsa para que viaje junto al soporte cuando vuelva a subir en otro lado.</p>"
+        },
+        {
+          "h2": "Recuperar su depósito",
+          "html": "<p>La razón habitual de un desmontaje es que termina un contrato, y la preocupación habitual es cómo queda la pared.</p><p>Un soporte bien instalado deja un puñado de agujeros de anclaje en rectángulo. Para la mayoría de los arrendadores eso es desgaste normal y es un resane pequeño. Lo que sí genera disputas es un soporte apretado de más en panel de yeso sin viga detrás, que puede desprenderse y llevarse un pedazo de pared.</p><p>Le diremos qué estamos viendo cuando lo bajemos. Si la pared necesita más que masilla, mejor que lo sepa por nosotros con tiempo que por su arrendador después de mudarse.</p>"
+        },
+        {
+          "h2": "Llevársela con usted",
+          "html": "<p>Si la TV va a un lugar nuevo, conviene saber algunas cosas antes del día de la mudanza.</p><p><strong style=\"color:var(--paper);\">Mantenga junta la tornillería.</strong> Los tornillos del soporte son específicos del patrón VESA de la TV, y una bolsa de tornillos sin etiquetar convierte una reinstalación de veinte minutos en un viaje a la ferretería. Nosotros se los embolsamos.</p><p><strong style=\"color:var(--paper);\">Transpórtela de pie.</strong> Acostada boca arriba es como se rompen los paneles. Si ya no tiene la caja original, de pie y acolchada en el auto es mejor que acostada en una camioneta.</p><p><strong style=\"color:var(--paper);\">La pared nueva puede no ser igual.</strong> Un soporte que estuvo bien en vigas de madera puede necesitar otros anclajes en un edificio alto con vigas metálicas. Vale mencionarlo al reservar la reinstalación.</p>"
+        }
+      ],
+      "faq": [
+        ["¿Cuánto cuesta desmontar una TV en Chicago?", "$100 fijos por cualquier cantidad de TVs en una dirección. Una o cinco, el precio es el mismo."],
+        ["¿Cobran por cada TV?", "No. Los $100 cubren todas las TVs de la misma dirección. Una vez ahí con las herramientas afuera, cada pantalla extra toma minutos."],
+        ["¿Resanan los agujeros después?", "Quitar el soporte deja agujeros de anclaje, que suele ser un resane pequeño. Díganos qué necesita al llamar y le diremos con honestidad si es algo que podemos resolver en la visita."],
+        ["¿Pueden desmontar y reinstalar en mi nueva casa?", "Sí. Son dos trabajos — el desmontaje de $100 y una instalación de $100 en la nueva dirección — y embolsamos la tornillería para que nada se pierda en el camino."]
+      ]
+    },
+    "pl": {
+      "title": "Demontaż TV w Chicago — $100 za Dowolną Liczbę Telewizorów | TV Install Chicago",
+      "desc": "Wyprowadzka i trzeba zdjąć telewizory ze ścian? $100 ryczałtem obejmuje dowolną liczbę telewizorów pod jednym adresem — jeden czy pięć, ta sama cena. Często terminy tego samego dnia.",
+      "ogtitle": "Demontaż TV w Chicago — $100 za Dowolną Liczbę Telewizorów",
+      "ogdesc": "Jeden telewizor czy pięć, $100 ryczałtem pod jednym adresem. Często tego samego dnia.",
+      "h1plain": "Demontaż TV w Chicago",
+      "h1": "ZDEJMUJEMY<br><span>ZE ŚCIANY</span>",
+      "eyebrow": "$100 Ryczałt &middot; Dowolna Liczba Telewizorów",
+      "sub": "Wyprowadzka, sprzedaż mieszkania albo właściciel chce ściany z powrotem. Zdejmujemy telewizory, demontujemy uchwyty i oddajemy Ci osprzęt. Jeden telewizor czy pięć pod tym samym adresem &mdash; to $100, liczba nie zmienia ceny.",
+      "home": "Strona główna",
+      "crumb": "Demontaż TV",
+      "ticker": ["$100 Dowolna Liczba", "Często Tego Samego Dnia", "Uchwyty Zdjęte, Osprzęt Spakowany"],
+      "ctah2": "Wyprowadzka niedługo?",
+      "ctap": "Powiedz ile telewizorów i mniej więcej kiedy. Demontaże idą szybko, więc termin zwykle jest wcześniej, niż się spodziewasz.",
+      "ctabtn": "ZAREZERWUJ DEMONTAŻ &rarr;",
+      "link1": "Zobacz pełny cennik",
+      "link2": "Sprawdź, czy obsługujemy Twój adres",
+      "cards": [
+        {
+          "h2": "Jedna cena, niezależnie od liczby ekranów",
+          "html": "<p>Większość takich zleceń zdarza się przy przeprowadzce, a przeprowadzka i tak jest wystarczająco droga. Dlatego demontaż to <strong style=\"color:var(--paper);\">$100 ryczałtem za dowolną liczbę telewizorów pod jednym adresem</strong>. Kawalerka z jednym ekranem i dom z pięcioma płacą tyle samo.</p><p>To celowe. Gdy już jesteśmy pod Twoim adresem z wyciągniętymi narzędziami, drugi i trzeci telewizor to kwestia minut. Liczenie za ekran byłoby liczeniem dojazdu dwa razy.</p><p>Co dostajesz: telewizory zdjęte i bezpiecznie odstawione, uchwyty zdemontowane i cały osprzęt spakowany, żeby pojechał razem z uchwytem tam, gdzie znów zawiśnie.</p>"
+        },
+        {
+          "h2": "Odzyskanie kaucji",
+          "html": "<p>Zwykłym powodem demontażu jest koniec najmu, a zwykłą obawą to, jak wygląda ściana potem.</p><p>Porządnie zamontowany uchwyt zostawia kilka otworów po kotwach w prostokącie. Dla większości właścicieli to normalne zużycie i drobne szpachlowanie. Prawdziwe spory wywołuje uchwyt przekręcony w płycie gipsowej bez słupka za nią, który potrafi się wyrwać razem z kawałkiem ściany.</p><p>Powiemy, co widzimy, gdy będziemy go zdejmować. Jeśli ściana potrzebuje czegoś więcej niż szpachli, lepiej usłyszeć to od nas z zapasem czasu niż od właściciela po wyprowadzce.</p>"
+        },
+        {
+          "h2": "Zabranie go ze sobą",
+          "html": "<p>Jeśli telewizor jedzie w nowe miejsce, kilka rzeczy warto wiedzieć przed dniem przeprowadzki.</p><p><strong style=\"color:var(--paper);\">Trzymaj osprzęt razem.</strong> Śruby uchwytu są dobrane do rozstawu VESA telewizora, a woreczek nieopisanych wkrętów zamienia dwudziestominutowy ponowny montaż w wycieczkę do sklepu. Pakujemy je za Ciebie.</p><p><strong style=\"color:var(--paper);\">Przewoź go na sztorc.</strong> Płasko na plecach to sposób, w jaki pękają matryce. Jeśli oryginalnego kartonu dawno nie ma, na sztorc i wyściełany w aucie bije leżenie płasko w busie.</p><p><strong style=\"color:var(--paper);\">Nowa ściana może być inna.</strong> Uchwyt, który dobrze siedział na drewnianych słupkach, w wieżowcu ze słupkami metalowymi może wymagać innych kotew. Warto o tym wspomnieć przy rezerwacji ponownego montażu.</p>"
+        }
+      ],
+      "faq": [
+        ["Ile kosztuje demontaż telewizora w Chicago?", "$100 ryczałtem za dowolną liczbę telewizorów pod jednym adresem. Jeden czy pięć — cena ta sama."],
+        ["Czy liczycie za każdy telewizor?", "Nie. $100 obejmuje wszystkie telewizory pod tym samym adresem. Gdy już jesteśmy na miejscu z narzędziami, każdy kolejny ekran to kwestia minut."],
+        ["Czy zaszpachlujecie potem dziury?", "Zdjęcie uchwytu zostawia otwory po kotwach, co zwykle jest drobnym szpachlowaniem. Powiedz przy telefonie, czego potrzebujesz, a uczciwie odpowiemy, czy da się to zrobić przy tej wizycie."],
+        ["Czy możecie zdemontować i zamontować w nowym mieszkaniu?", "Tak. To dwa zlecenia — demontaż za $100 i montaż za $100 pod nowym adresem — a osprzęt spakujemy, żeby nic nie zginęło po drodze."]
+      ]
+    }
+  }
+}

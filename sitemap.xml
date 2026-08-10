@@ -25,6 +25,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tvserviceschicago.com/tv-dismounting</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://tvserviceschicago.com/tv-mounting-guide</loc>
     <priority>0.7</priority>
   </url>
@@ -73,6 +77,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tvserviceschicago.com/es/tv-dismounting</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://tvserviceschicago.com/es/tv-mounting-guide</loc>
     <priority>0.7</priority>
   </url>
@@ -118,6 +126,10 @@
   </url>
   <url>
     <loc>https://tvserviceschicago.com/pl/commercial-tv-installation</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tvserviceschicago.com/pl/tv-dismounting</loc>
     <priority>0.8</priority>
   </url>
   <url>
