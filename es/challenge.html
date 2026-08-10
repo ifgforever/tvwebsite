@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Desafío de los 77 — TV Install Chicago</title>
 <meta name="description" content="Estamos en una misión para reservar un trabajo en cada uno de los 77 vecindarios de Chicago antes de que termine el verano. Síguenos y mira quién sigue.">
-<link rel="canonical" href="https://tvserviceschicago.com/es/challenge.html">
-<link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/challenge.html">
-<link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/challenge.html">
-<link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/challenge.html">
-<link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/challenge.html">
+<link rel="canonical" href="https://tvserviceschicago.com/es/challenge">
+<link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/challenge">
+<link rel="alternate" hreflang="es" href="https://tvserviceschicago.com/es/challenge">
+<link rel="alternate" hreflang="pl" href="https://tvserviceschicago.com/pl/challenge">
+<link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/challenge">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"></noscript>
@@ -93,7 +93,7 @@
 <body>
 <main>
 
-<nav class="lang-switch"><a href="/challenge.html">EN</a><span>|</span><a class="active" href="/es/challenge.html">ES</a><span>|</span><a href="/pl/challenge.html">PL</a></nav>
+<nav class="lang-switch"><a href="/challenge">EN</a><span>|</span><a class="active" href="/es/challenge">ES</a><span>|</span><a href="/pl/challenge">PL</a></nav>
 
 <div class="hero-section px-6 py-14 md:py-20">
     <div class="max-w-3xl mx-auto text-center">
@@ -229,20 +229,29 @@ function renderBoard() {
             <div class="hood-card ${booked ? 'is-booked' : ''}">
               <div class="hood-photo">
                 ${entry && entry.photo
-                  ? `<img src="${entry.photo}" alt="${name}">`
+                  ? `<img data-photo="${entry.photo}" alt="${name}">`
                   : `<span class="hood-photo-empty">${booked ? 'Foto próximamente' : 'Aún no reservado'}</span>`}
                 ${booked ? `<span class="hood-stamp">RESERVADO</span>` : ''}
               </div>
-              <div class="hood-name"><a href="/es/neighborhoods/${slugify(name)}.html" style="color:inherit; text-decoration:none;">${name}</a></div>
+              <div class="hood-name"><a class="hood-link" data-slug="${slugify(name)}" style="color:inherit; text-decoration:none;">${name}</a></div>
               <div class="hood-caption">${entry && entry.caption ? entry.caption : ''}</div>
               ${booked
                 ? `<button class="claim-btn booked-label">Hecho — ${entry.date || ''}</button>`
-                : `<a class="claim-btn" href="${MAIN_SITE_URL}?neighborhood=${encodeURIComponent(name)}#bookingForm">Reserva Este Vecindario</a>`}
+                : `<a class="claim-btn" data-hood="${name}">Reserva Este Vecindario</a>`}
             </div>`;
         }).join('')}
       </div>
     </div>
   `).join('');
+
+  // URLs are assigned here, after render, instead of inside the template
+  // strings above: crawlers with JS off scrape href=/src= patterns out of
+  // raw script text and treat the ${...} placeholders as literal URLs.
+  wrap.querySelectorAll('img[data-photo]').forEach(img => { img.src = img.dataset.photo; });
+  wrap.querySelectorAll('a.hood-link').forEach(a => { a.href = '/es/neighborhoods/' + a.dataset.slug; });
+  wrap.querySelectorAll('a.claim-btn[data-hood]').forEach(a => {
+    a.href = MAIN_SITE_URL + '?neighborhood=' + encodeURIComponent(a.dataset.hood) + '#bookingForm';
+  });
 }
 renderBoard();
 
