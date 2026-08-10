@@ -567,6 +567,9 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     # core page is added, removed, or renamed.
     CORE_PAGES = [
         ("index.html", "1.0"),
+        # Built for the "near me" searches, which carry far more volume than
+        # any city or neighborhood term — hence the priority above the guide.
+        ("tv-mounting-near-me", "0.9"),
         ("tv-mounting-guide", "0.7"),
         ("whats-new", "0.6"),
         ("blog/", "0.6"),
