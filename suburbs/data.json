@@ -153,36 +153,6 @@
           "blurb": "A North Shore suburb known for its mix of corporate campuses and quiet residential neighborhoods, from mid-century ranch homes to larger newer construction. Same $100 flat rate as our closest Chicago jobs.",
           "blurb_es": "Un suburbio de North Shore conocido por su mezcla de campus corporativos y tranquilos vecindarios residenciales, desde casas de rancho de mediados de siglo hasta construcciones nuevas más grandes. Misma tarifa fija de $100 que nuestros trabajos más cercanos en Chicago.",
           "blurb_pl": "Przedmieście North Shore znane z mieszanki kampusów korporacyjnych i spokojnych dzielnic mieszkalnych, od domów rancho z połowy wieku po nowsze, większe budowy. Ta sama stała stawka $100, co nasze najbliższe zlecenia w Chicago."
-        },
-        {
-          "name": "Highland Park",
-          "blurb": "Home to the Ravinia Festival, Chicago's iconic outdoor concert venue, and a lakefront community full of striking architecture. We bring the same professional, flat-rate install to every Highland Park home.",
-          "blurb_es": "Hogar del Ravinia Festival, el emblemático recinto de conciertos al aire libre de Chicago, y una comunidad frente al lago llena de arquitectura llamativa. Ofrecemos la misma instalación profesional a tarifa fija en cada casa de Highland Park.",
-          "blurb_pl": "Siedziba Ravinia Festival, kultowego miejsca koncertów na świeżym powietrzu w Chicago, i społeczności nad jeziorem pełnej uderzającej architektury. Oferujemy tę samą profesjonalną instalację w stałej cenie w każdym domu Highland Park."
-        },
-        {
-          "name": "Highwood",
-          "blurb": "A small, historically Italian-American suburb next to Highland Park, known for its concentrated restaurant row along Sheridan Road and close-knit residential streets. Small town, same dependable service.",
-          "blurb_es": "Un pequeño suburbio históricamente ítalo-americano junto a Highland Park, conocido por su concentrada hilera de restaurantes a lo largo de Sheridan Road y sus calles residenciales muy unidas. Pueblo pequeño, mismo servicio confiable.",
-          "blurb_pl": "Małe, historycznie włosko-amerykańskie przedmieście obok Highland Park, znane ze skoncentrowanego rzędu restauracji wzdłuż Sheridan Road i zżytych ulic mieszkalnych. Małe miasteczko, ta sama niezawodna usługa."
-        },
-        {
-          "name": "Lake Bluff",
-          "blurb": "A small, charming lakefront suburb just south of Lake Forest, with tree-lined streets and a walkable downtown. We're happy to make the drive — same flat rate as the rest of our service area.",
-          "blurb_es": "Un pequeño y encantador suburbio frente al lago justo al sur de Lake Forest, con calles arboladas y un centro caminable. Con gusto hacemos el recorrido: misma tarifa fija que el resto de nuestra área de servicio.",
-          "blurb_pl": "Małe, urokliwe przedmieście nad jeziorem tuż na południe od Lake Forest, z zadrzewionymi ulicami i spacerowym centrum. Chętnie przyjeżdżamy — ta sama stała stawka, co w reszcie naszego obszaru obsługi."
-        },
-        {
-          "name": "Lake Forest",
-          "blurb": "Home to Lake Forest College and Market Square, one of the first planned shopping districts built in the United States, surrounded by grand historic estates. The farthest edge of our service area, still just $100 flat.",
-          "blurb_es": "Hogar de Lake Forest College y Market Square, uno de los primeros distritos comerciales planificados construidos en Estados Unidos, rodeado de grandiosas propiedades históricas. El borde más lejano de nuestra área de servicio, y aun así solo $100 fijos.",
-          "blurb_pl": "Siedziba Lake Forest College i Market Square, jednej z pierwszych zaplanowanych dzielnic handlowych zbudowanych w Stanach Zjednoczonych, otoczonej wielkimi historycznymi rezydencjami. Najdalszy kraniec naszego obszaru obsługi, a mimo to wciąż tylko $100 stałej ceny."
-        },
-        {
-          "name": "Bannockburn",
-          "blurb": "One of the smallest and most private suburbs on the North Shore, made up largely of large residential estates near the Tri-State Tollway. We're glad to make the trip for Bannockburn homeowners.",
-          "blurb_es": "Uno de los suburbios más pequeños y privados de North Shore, formado en gran parte por grandes propiedades residenciales cerca de la autopista Tri-State. Nos alegra hacer el viaje para los propietarios de Bannockburn.",
-          "blurb_pl": "Jedno z najmniejszych i najbardziej prywatnych przedmieść na North Shore, złożone głównie z dużych rezydencji mieszkalnych blisko autostrady Tri-State. Chętnie przyjeżdżamy dla właścicieli domów w Bannockburn."
         }
       ],
       "band_es": "North Shore, Anillo Exterior",

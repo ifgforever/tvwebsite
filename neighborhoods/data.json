@@ -179,10 +179,40 @@
           "blurb_pl": "Jedna z największych i najbardziej zróżnicowanych dzielnic miasta, obejmująca wszystko od przekształconych loftów po zabytkowe domy dwupiętrowe w wielu zakątkach. Niezależnie od tego, w którym rogu West Town jesteś, nie jesteśmy daleko."
         },
         {
+          "name": "Austin",
+          "blurb": "Chicago's largest community area by population, home to the Jens Jensen-designed Columbus Park and blocks of classic bungalows and greystones. We serve Austin regularly — reliable service, flat rate, no surprises.",
+          "blurb_es": "El área comunitaria más grande de Chicago por población, hogar del Columbus Park diseñado por Jens Jensen y cuadras enteras de bungalows y greystones clásicos. Damos servicio a Austin con regularidad: servicio confiable, tarifa fija, sin sorpresas.",
+          "blurb_pl": "Największa dzielnica Chicago pod względem liczby ludności, siedziba zaprojektowanego przez Jensa Jensena Columbus Park oraz całych ulic klasycznych bungalowów i szarych kamienic. Regularnie obsługujemy Austin — niezawodna usługa, stała stawka, bez niespodzianek."
+        },
+        {
+          "name": "West Garfield Park",
+          "blurb": "A residential neighborhood of greystones and brick two- and three-flats just west of the historic Garfield Park Conservatory. We bring the same professional install here as anywhere else in the city.",
+          "blurb_es": "Un vecindario residencial de greystones y dúplex y tripléx de ladrillo justo al oeste del histórico invernadero Garfield Park Conservatory. Ofrecemos la misma instalación profesional aquí que en cualquier otra parte de la ciudad.",
+          "blurb_pl": "Dzielnica mieszkalna z szarymi kamienicami oraz ceglanymi domami dwu- i trzypiętrowymi, tuż na zachód od zabytkowej oranżerii Garfield Park Conservatory. Oferujemy tu tę samą profesjonalną instalację, co w każdej innej części miasta."
+        },
+        {
+          "name": "East Garfield Park",
+          "blurb": "Home to the landmark Garfield Park Conservatory, surrounded by classic greystones and courtyard buildings. We know the older plaster construction common throughout this part of the West Side.",
+          "blurb_es": "Hogar del emblemático Garfield Park Conservatory, rodeado de greystones clásicos y edificios con patio interior. Conocemos bien la construcción de yeso antigua común en esta parte del West Side.",
+          "blurb_pl": "Siedziba zabytkowej oranżerii Garfield Park Conservatory, otoczonej klasycznymi szarymi kamienicami i budynkami z dziedzińcem. Znamy starszą konstrukcję tynkową, powszechną w tej części West Side."
+        },
+        {
           "name": "Near West Side",
           "blurb": "Home to UIC, the United Center, and the Taylor Street Little Italy corridor, this neighborhood mixes student housing, rehabbed lofts, and new mid-rise construction. We're comfortable with all of it.",
           "blurb_es": "Hogar de UIC, el United Center y el corredor de la Pequeña Italia en Taylor Street, este vecindario mezcla vivienda estudiantil, lofts renovados y nueva construcción de media altura. Nos sentimos cómodos con todo eso.",
           "blurb_pl": "Siedziba UIC, United Center i korytarza Taylor Street znanego jako Mała Italia — ta dzielnica łączy mieszkania studenckie, przekształcone lofty i nową zabudowę średniej wysokości. Czujemy się dobrze ze wszystkimi tymi typami."
+        },
+        {
+          "name": "North Lawndale",
+          "blurb": "A neighborhood with deep history around Douglas Park, filled with greystones, courtyard buildings, and ongoing redevelopment. We treat every install here with the same care and professionalism as our highest-end jobs.",
+          "blurb_es": "Un vecindario con profunda historia alrededor de Douglas Park, lleno de greystones, edificios con patio interior y un continuo redesarrollo. Tratamos cada instalación aquí con el mismo cuidado y profesionalismo que nuestros trabajos más exclusivos.",
+          "blurb_pl": "Dzielnica o głębokiej historii wokół Douglas Park, pełna szarych kamienic, budynków z dziedzińcem i trwającej rewitalizacji. Traktujemy każdy montaż tutaj z taką samą starannością i profesjonalizmem, jak nasze najbardziej ekskluzywne zlecenia."
+        },
+        {
+          "name": "Lower West Side",
+          "blurb": "Known to most as Pilsen, home to the National Museum of Mexican Art and blocks of colorful murals along 18th Street. Vintage two- and three-flats with plaster walls are the norm, and we come prepared for them.",
+          "blurb_es": "Conocido por la mayoría como Pilsen, hogar del National Museum of Mexican Art y cuadras enteras de coloridos murales a lo largo de la calle 18. Dúplex y tripléx antiguos con paredes de yeso son la norma, y llegamos preparados para ellos.",
+          "blurb_pl": "Znane większości jako Pilsen, siedziba National Museum of Mexican Art i całych ulic kolorowych murali wzdłuż 18. ulicy. Zabytkowe domy dwu- i trzypiętrowe z tynkowanymi ścianami to norma, i jesteśmy na nie przygotowani."
         }
       ],
       "region_es": "Zona Oeste",
@@ -202,10 +232,29 @@
           "blurb": "Covers the Magnificent Mile, River North, Gold Coast, Streeterville, and Old Town — some of the densest high-rise living in the city. Concrete walls, steel studs, elevator buildings — we bring the right anchors every time.",
           "blurb_es": "Abarca la Magnificent Mile, River North, Gold Coast, Streeterville y Old Town: algunas de las zonas de vida en torres más densas de la ciudad. Paredes de concreto, postes de acero, edificios con elevador: llevamos los anclajes correctos siempre.",
           "blurb_pl": "Obejmuje Magnificent Mile, River North, Gold Coast, Streeterville i Old Town — jedne z najgęściej zabudowanych wieżowcami części miasta. Betonowe ściany, stalowe słupki, budynki z windą — zawsze mamy odpowiednie kołki montażowe."
+        },
+        {
+          "name": "Near South Side",
+          "blurb": "Home to the South Loop, Printers Row's converted lofts, and the Museum Campus along the lakefront. A mix of historic loft conversions and new-construction high-rises, all served at the same flat rate.",
+          "blurb_es": "Hogar del South Loop, los lofts convertidos de Printers Row y el Museum Campus junto al lago. Una mezcla de conversiones de lofts históricos y torres de construcción nueva, todos con la misma tarifa fija.",
+          "blurb_pl": "Siedziba South Loop, przekształconych loftów Printers Row i Museum Campus nad jeziorem. Mieszanka historycznych przekształceń loftów i nowej zabudowy wieżowców, wszystko w tej samej stałej cenie."
         }
       ],
       "region_es": "Centro",
       "region_pl": "Centrum"
+    },
+    {
+      "region": "South Side",
+      "hoods": [
+        {
+          "name": "Armour Square",
+          "blurb": "Home to Chicago's Chinatown and the White Sox' home ballpark, with a tight mix of two-flats and newer construction near Wentworth Avenue. Compact neighborhood, same reliable $100 install.",
+          "blurb_es": "Hogar del Chinatown de Chicago y el estadio local de los White Sox, con una mezcla compacta de dúplex y construcción más nueva cerca de Wentworth Avenue. Vecindario compacto, misma instalación confiable de $100.",
+          "blurb_pl": "Siedziba chicagowskiego Chinatown i stadionu domowego White Sox, z gęstą mieszanką domów dwupiętrowych i nowszej zabudowy blisko Wentworth Avenue. Kompaktowa dzielnica, ta sama niezawodna instalacja za $100."
+        }
+      ],
+      "region_es": "Zona Sur",
+      "region_pl": "Południowa Strona"
     }
   ]
 }
