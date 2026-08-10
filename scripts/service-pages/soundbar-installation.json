@@ -15,7 +15,11 @@
       "sub": "A soundbar balanced on a shelf under a wall-mounted TV always looks like an afterthought, because it is one. Mounted properly it sits square, centred and floating with the screen &mdash; and nothing rattles when the bass hits.",
       "home": "Home",
       "crumb": "Soundbar Installation",
-      "ticker": ["$60 Added To Any Install", "Square And Centred", "Cables Tidied"],
+      "ticker": [
+        "$60 Added To Any Install",
+        "Square And Centred",
+        "Cables Tidied"
+      ],
       "ctah2": "Adding a soundbar?",
       "ctap": "Mention it when you book the TV and we'll bring what's needed. It adds about twenty minutes to the visit.",
       "ctabtn": "BOOK THE INSTALL &rarr;",
@@ -27,15 +31,35 @@
           "html": "<p>Most soundbars ship with a little stand, and most people use it because it's there. It works, but it costs you three things.</p><p><strong style=\"color:var(--paper);\">It fills your shelf.</strong> A 40-inch bar takes the whole surface, so the console below the TV stops being useful for anything else.</p><p><strong style=\"color:var(--paper);\">It's rarely centred.</strong> Sitting on furniture, a bar lines up with the cabinet rather than the screen. Once you notice it's off-centre you can't stop noticing.</p><p><strong style=\"color:var(--paper);\">It buzzes.</strong> A bar resting on a hollow media unit turns it into a resonating box. Mounted to the wall, that stops entirely.</p><p>Mounted, it also sits at ear height rather than firing across a coffee table, which is what it was designed for.</p>"
         },
         {
+          "h2": "Does your soundbar even come with a bracket?",
+          "html": "<p>Worth checking before you buy anything. <strong style=\"color:var(--paper);\">Most soundbars include a wall bracket in the box</strong> &mdash; often a thin metal plate taped inside the packaging that people throw out with the polystyrene. If yours has one, that's all we need.</p><p><strong style=\"color:var(--paper);\">Sonos and Bose are the two that usually don't.</strong> They tend to need a proprietary mount sold separately, and the manufacturer's own version is rarely cheap for what it is.</p><p>Third-party equivalents are widely available on Amazon, frequently for about half the price, and for most models they do the same job. We'd rather tell you that than quietly sell you the expensive one &mdash; order it before the appointment and we'll fit it.</p><p><strong style=\"color:var(--paper);\">And if you haven't got the right mount at all, it's usually still hangable.</strong> We put up a Sonos Playbar recently for someone without the official bracket. Send a photo of the back of the bar when you book and we'll tell you honestly whether it can be done properly or whether it's worth ordering the part first.</p>"
+        },
+        {
           "h2": "How we set it up",
           "html": "<p>The bar goes directly below the TV, centred to the screen rather than the furniture, with a consistent gap. If your TV is on a full-motion mount we account for the swing so the bar never fouls the arm.</p><p>Cables get run the same way as the TV's &mdash; visible and tidy, in an external strip, or inside the wall if you're already having that done. A soundbar adds a power lead and usually one HDMI, and those are the two that end up dangling if nobody plans for them.</p><p>It's <strong style=\"color:var(--paper);\">$60 added to any install</strong>, and adds roughly twenty minutes to the visit. Booking it at the same time as the TV is much cheaper than a separate trip later.</p>"
         }
       ],
       "faq": [
-        ["How much does soundbar installation cost?", "$60 added to any TV install. It's an add-on rather than a standalone job, so booking it with the TV is far cheaper than a separate visit."],
-        ["Can you mount a soundbar without mounting the TV?", "Yes, though it's normally booked alongside a TV install. Call and we'll tell you what makes sense for your setup."],
-        ["Will the soundbar block the TV's remote sensor?", "We account for it when setting the height and gap. It's a common problem with bars stood on furniture and one of the things careful placement solves."],
-        ["Can you hide the soundbar cables too?", "Yes. They're run the same way as the TV's — external cable strip at $35, or inside the wall at $60."]
+        [
+          "How much does soundbar installation cost?",
+          "$60 added to any TV install. It's an add-on rather than a standalone job, so booking it with the TV is far cheaper than a separate visit."
+        ],
+        [
+          "Does my soundbar come with a wall mount?",
+          "Most do — usually a metal plate taped inside the box. Sonos and Bose commonly need a proprietary bracket sold separately, though third-party versions on Amazon often cost about half and work fine. Even without the right mount we can usually still hang it; send a photo of the back when you book."
+        ],
+        [
+          "Can you mount a soundbar without mounting the TV?",
+          "Yes, though it's normally booked alongside a TV install. Call and we'll tell you what makes sense for your setup."
+        ],
+        [
+          "Will the soundbar block the TV's remote sensor?",
+          "We account for it when setting the height and gap. It's a common problem with bars stood on furniture and one of the things careful placement solves."
+        ],
+        [
+          "Can you hide the soundbar cables too?",
+          "Yes. They're run the same way as the TV's — external cable strip at $35, or inside the wall at $60."
+        ]
       ]
     },
     "es": {
@@ -49,7 +73,11 @@
       "sub": "Una barra de sonido apoyada en un mueble bajo una TV en la pared siempre parece algo improvisado, porque lo es. Montada correctamente queda a escuadra, centrada y flotando con la pantalla &mdash; y nada vibra cuando entran los graves.",
       "home": "Inicio",
       "crumb": "Instalación de Barra de Sonido",
-      "ticker": ["$60 en Cualquier Instalación", "A Escuadra y Centrada", "Cables Ordenados"],
+      "ticker": [
+        "$60 en Cualquier Instalación",
+        "A Escuadra y Centrada",
+        "Cables Ordenados"
+      ],
       "ctah2": "¿Agrega una barra de sonido?",
       "ctap": "Menciónelo al reservar la TV y llevamos lo necesario. Agrega unos veinte minutos a la visita.",
       "ctabtn": "RESERVE LA INSTALACIÓN &rarr;",
@@ -61,15 +89,35 @@
           "html": "<p>Casi todas las barras vienen con una basita, y casi todos la usan porque está ahí. Funciona, pero le cuesta tres cosas.</p><p><strong style=\"color:var(--paper);\">Le ocupa el mueble.</strong> Una barra de 40 pulgadas se lleva toda la superficie, así que el mueble bajo la TV deja de servir para otra cosa.</p><p><strong style=\"color:var(--paper);\">Rara vez queda centrada.</strong> Apoyada en un mueble, la barra se alinea con el mueble y no con la pantalla. Y una vez que nota que está descentrada, ya no puede dejar de verlo.</p><p><strong style=\"color:var(--paper);\">Vibra.</strong> Una barra apoyada en un mueble hueco lo convierte en caja de resonancia. Montada en la pared eso desaparece.</p><p>Montada también queda a la altura del oído en vez de disparar sobre la mesa de centro, que es para lo que fue diseñada.</p>"
         },
         {
+          "h2": "¿Su barra de sonido trae soporte?",
+          "html": "<p>Vale la pena revisarlo antes de comprar nada. <strong style=\"color:var(--paper);\">La mayoría de las barras incluye un soporte de pared en la caja</strong> &mdash; a menudo una placa metálica delgada pegada dentro del empaque que la gente tira junto con el unicel. Si la suya lo trae, es todo lo que necesitamos.</p><p><strong style=\"color:var(--paper);\">Sonos y Bose son las dos que normalmente no.</strong> Suelen requerir un soporte propietario que se vende aparte, y la versión del fabricante rara vez es barata para lo que es.</p><p>Hay equivalentes de terceros ampliamente disponibles en Amazon, con frecuencia por la mitad del precio, y para la mayoría de los modelos hacen el mismo trabajo. Preferimos decírselo a venderle en silencio el caro &mdash; ordénelo antes de la cita y nosotros lo instalamos.</p><p><strong style=\"color:var(--paper);\">Y si no tiene el soporte correcto, normalmente igual se puede colgar.</strong> Hace poco instalamos una Sonos Playbar para alguien sin el soporte oficial. Mande una foto de la parte trasera de la barra al reservar y le diremos con honestidad si se puede hacer bien o si conviene pedir la pieza primero.</p>"
+        },
+        {
           "h2": "Cómo la instalamos",
           "html": "<p>La barra va justo debajo de la TV, centrada a la pantalla y no al mueble, con una separación pareja. Si su TV está en soporte de movimiento total, calculamos el giro para que la barra nunca estorbe el brazo.</p><p>Los cables se ocultan igual que los de la TV &mdash; a la vista y ordenados, en canaleta externa, o dentro de la pared si ya está haciendo eso. Una barra suma un cable de corriente y normalmente un HDMI, y esos son los dos que terminan colgando si nadie los planea.</p><p>Son <strong style=\"color:var(--paper);\">$60 agregados a cualquier instalación</strong>, y suman unos veinte minutos a la visita. Reservarla junto con la TV sale mucho más barato que un viaje aparte después.</p>"
         }
       ],
       "faq": [
-        ["¿Cuánto cuesta instalar una barra de sonido?", "$60 agregados a cualquier instalación de TV. Es un complemento y no un trabajo aparte, así que reservarla con la TV sale mucho más barato."],
-        ["¿Pueden montar la barra sin montar la TV?", "Sí, aunque normalmente se reserva junto con una instalación de TV. Llame y le decimos qué conviene para su caso."],
-        ["¿La barra bloqueará el sensor del control remoto?", "Lo tomamos en cuenta al definir altura y separación. Es un problema común con barras apoyadas en muebles y algo que la colocación cuidadosa resuelve."],
-        ["¿También pueden ocultar los cables de la barra?", "Sí. Van igual que los de la TV — canaleta externa por $35, o dentro de la pared por $60."]
+        [
+          "¿Cuánto cuesta instalar una barra de sonido?",
+          "$60 agregados a cualquier instalación de TV. Es un complemento y no un trabajo aparte, así que reservarla con la TV sale mucho más barato."
+        ],
+        [
+          "¿Mi barra de sonido incluye soporte de pared?",
+          "La mayoría sí — normalmente una placa metálica pegada dentro de la caja. Sonos y Bose suelen requerir un soporte propietario aparte, aunque las versiones de terceros en Amazon a menudo cuestan la mitad y funcionan bien. Incluso sin el soporte correcto normalmente se puede colgar; mande una foto de la parte trasera al reservar."
+        ],
+        [
+          "¿Pueden montar la barra sin montar la TV?",
+          "Sí, aunque normalmente se reserva junto con una instalación de TV. Llame y le decimos qué conviene para su caso."
+        ],
+        [
+          "¿La barra bloqueará el sensor del control remoto?",
+          "Lo tomamos en cuenta al definir altura y separación. Es un problema común con barras apoyadas en muebles y algo que la colocación cuidadosa resuelve."
+        ],
+        [
+          "¿También pueden ocultar los cables de la barra?",
+          "Sí. Van igual que los de la TV — canaleta externa por $35, o dentro de la pared por $60."
+        ]
       ]
     },
     "pl": {
@@ -83,7 +131,11 @@
       "sub": "Soundbar postawiony na szafce pod telewizorem na ścianie zawsze wygląda jak coś dorzuconego na końcu, bo tym jest. Zamontowany porządnie wisi równo, wyśrodkowany i unosi się razem z ekranem &mdash; i nic nie brzęczy, gdy wejdzie bas.",
       "home": "Strona główna",
       "crumb": "Montaż Soundbara",
-      "ticker": ["$60 Do Dowolnego Montażu", "Równo i Wyśrodkowany", "Kable Uporządkowane"],
+      "ticker": [
+        "$60 Do Dowolnego Montażu",
+        "Równo i Wyśrodkowany",
+        "Kable Uporządkowane"
+      ],
       "ctah2": "Dokładasz soundbar?",
       "ctap": "Wspomnij przy rezerwacji telewizora, a przywieziemy co trzeba. Dokłada około dwudziestu minut do wizyty.",
       "ctabtn": "ZAREZERWUJ MONTAŻ &rarr;",
@@ -95,15 +147,35 @@
           "html": "<p>Większość soundbarów ma w zestawie podstawkę i większość ludzi jej używa, bo jest. Działa, ale kosztuje trzy rzeczy.</p><p><strong style=\"color:var(--paper);\">Zajmuje półkę.</strong> Metrowy soundbar zabiera całą powierzchnię, więc szafka pod telewizorem przestaje się do czegokolwiek nadawać.</p><p><strong style=\"color:var(--paper);\">Rzadko jest wyśrodkowany.</strong> Postawiony na meblu równa się do mebla, a nie do ekranu. A gdy raz zauważysz, że jest krzywo, już tego nie odzobaczysz.</p><p><strong style=\"color:var(--paper);\">Brzęczy.</strong> Soundbar na pustej szafce zamienia ją w pudło rezonansowe. Na ścianie to znika całkowicie.</p><p>Zamontowany trafia też na wysokość ucha, zamiast strzelać nad stolikiem kawowym, a do tego został zaprojektowany.</p>"
         },
         {
+          "h2": "Czy Twój soundbar ma w ogóle uchwyt?",
+          "html": "<p>Warto sprawdzić, zanim cokolwiek kupisz. <strong style=\"color:var(--paper);\">Większość soundbarów ma uchwyt ścienny w pudełku</strong> &mdash; często cienką metalową blaszkę przyklejoną wewnątrz opakowania, którą ludzie wyrzucają razem ze styropianem. Jeśli Twój go ma, to wszystko, czego potrzebujemy.</p><p><strong style=\"color:var(--paper);\">Sonos i Bose to te dwie marki, które zwykle go nie mają.</strong> Zwykle wymagają firmowego uchwytu sprzedawanego osobno, a wersja producenta rzadko jest tania jak na to, czym jest.</p><p>Zamienniki innych firm są szeroko dostępne na Amazonie, często za mniej więcej połowę ceny, i przy większości modeli robią dokładnie to samo. Wolimy Ci to powiedzieć, niż po cichu sprzedać ten drogi &mdash; zamów przed wizytą, a my zamontujemy.</p><p><strong style=\"color:var(--paper);\">A jeśli nie masz właściwego uchwytu w ogóle, zwykle i tak da się powiesić.</strong> Niedawno powiesiliśmy Sonos Playbar komuś bez oryginalnego uchwytu. Wyślij zdjęcie tyłu soundbara przy rezerwacji, a uczciwie powiemy, czy da się to zrobić porządnie, czy lepiej najpierw zamówić część.</p>"
+        },
+        {
           "h2": "Jak to ustawiamy",
           "html": "<p>Soundbar idzie bezpośrednio pod telewizorem, wyśrodkowany do ekranu a nie do mebla, z równym odstępem. Jeśli telewizor jest na uchwycie ruchomym, uwzględniamy wysuw, żeby soundbar nigdy nie kolidował z ramieniem.</p><p>Kable prowadzimy tak samo jak telewizora &mdash; widoczne i schludne, w listwie maskującej albo w ścianie, jeśli i tak to robimy. Soundbar dokłada zasilanie i zwykle jeden HDMI, i to właśnie te dwa zwisają, gdy nikt ich nie zaplanuje.</p><p>To <strong style=\"color:var(--paper);\">$60 doliczone do dowolnego montażu</strong> i jakieś dwadzieścia minut więcej na wizycie. Rezerwacja razem z telewizorem wychodzi znacznie taniej niż osobny dojazd później.</p>"
         }
       ],
       "faq": [
-        ["Ile kosztuje montaż soundbara?", "$60 doliczone do dowolnego montażu telewizora. To dodatek, a nie osobne zlecenie, więc rezerwacja razem z telewizorem jest dużo tańsza."],
-        ["Czy możecie zamontować soundbar bez montażu telewizora?", "Tak, choć zwykle rezerwuje się to razem z montażem TV. Zadzwoń, a powiemy, co ma sens w Twoim przypadku."],
-        ["Czy soundbar zasłoni czujnik pilota?", "Uwzględniamy to przy ustalaniu wysokości i odstępu. To częsty problem soundbarów stawianych na meblach i jedna z rzeczy, które rozwiązuje staranne umiejscowienie."],
-        ["Czy możecie ukryć też kable soundbara?", "Tak. Prowadzimy je tak samo jak kable telewizora — listwa maskująca za $35 albo w ścianie za $60."]
+        [
+          "Ile kosztuje montaż soundbara?",
+          "$60 doliczone do dowolnego montażu telewizora. To dodatek, a nie osobne zlecenie, więc rezerwacja razem z telewizorem jest dużo tańsza."
+        ],
+        [
+          "Czy mój soundbar ma uchwyt ścienny?",
+          "Większość ma — zwykle metalową blaszkę przyklejoną w pudełku. Sonos i Bose często wymagają firmowego uchwytu osobno, choć zamienniki na Amazonie kosztują zwykle połowę i działają dobrze. Nawet bez właściwego uchwytu zwykle da się powiesić; wyślij zdjęcie tyłu przy rezerwacji."
+        ],
+        [
+          "Czy możecie zamontować soundbar bez montażu telewizora?",
+          "Tak, choć zwykle rezerwuje się to razem z montażem TV. Zadzwoń, a powiemy, co ma sens w Twoim przypadku."
+        ],
+        [
+          "Czy soundbar zasłoni czujnik pilota?",
+          "Uwzględniamy to przy ustalaniu wysokości i odstępu. To częsty problem soundbarów stawianych na meblach i jedna z rzeczy, które rozwiązuje staranne umiejscowienie."
+        ],
+        [
+          "Czy możecie ukryć też kable soundbara?",
+          "Tak. Prowadzimy je tak samo jak kable telewizora — listwa maskująca za $35 albo w ścianie za $60."
+        ]
       ]
     }
   }
