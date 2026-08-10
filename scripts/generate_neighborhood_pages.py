@@ -6,7 +6,9 @@ community areas, plus hub pages for all three languages, and refreshes
 sitemap.xml with every URL in every language.
 
 Source of truth for names/regions/translations: neighborhoods/data.json
-(kept in sync with the GROUPS array in challenge.html)
+URLs are emitted extensionless on purpose: Cloudflare Pages 301s
+/page.html -> /page, so writing .html here would point every canonical,
+hreflang and sitemap entry at a redirect.
 
 Usage:
     python3 scripts/generate_neighborhood_pages.py
@@ -58,7 +60,7 @@ def lang_switch_link(current_lang, slug, kind="page"):
     """kind='page' -> per-hood page link set, kind='hub' -> hub index link set."""
     parts = []
     for lang in LANGS:
-        href = URL_PREFIX[lang] + (f"{slug}.html" if kind == "page" else "index.html")
+        href = URL_PREFIX[lang] + (slug if kind == "page" else "")
         cls = ' class="active"' if lang == current_lang else ""
         parts.append(f'<a{cls} href="{href}">{lang.upper()}</a>')
     return '<span class="lang-switch">' + '<span>|</span>'.join(parts) + '</span>'
@@ -375,10 +377,10 @@ def render_page(hood, flat_by_region, data, lang):
     nearby = same_region[:6]
     prefix = URL_PREFIX[lang]
     nearby_links = "\n            ".join(
-        f'<a href="{prefix}{n["slug"]}.html" class="nearby-pill">{n["name"]}</a>' for n in nearby
+        f'<a href="{prefix}{n["slug"]}" class="nearby-pill">{n["name"]}</a>' for n in nearby
     )
-    rel_path = f'neighborhoods/{hood["slug"]}.html'
-    canonical = f'{data["domain"]}{prefix}{hood["slug"]}.html'
+    rel_path = f'neighborhoods/{hood["slug"]}'
+    canonical = f'{data["domain"]}{prefix}{hood["slug"]}'
     ticker_html = "".join(
         f'<span class="ticker-item">{t.format(name=hood["name"])}</span><span class="ticker-dot"></span>'
         for t in strings["ticker"]
@@ -397,7 +399,7 @@ def render_page(hood, flat_by_region, data, lang):
         name=hood["name"], name_url=hood["name"].replace(" ", "%20").replace("'", "%27"),
         region=region_label,
         home=strings["home"], home_href=strings["home_href"],
-        hoods_label=strings["hoods_label"], hub_href=prefix + "index.html",
+        hoods_label=strings["hoods_label"], hub_href=prefix,
         book_href=strings["book_href"],
         lang_switch=lang_switch_link(lang, hood["slug"], "page"),
         hero_head=strings["hero_head"], hero_lead=strings["hero_lead"].format(name=hood["name"]),
@@ -527,7 +529,7 @@ def render_hub(data, flat, lang):
     for g in data["groups"]:
         region_label = g["region"] if lang == "en" else g.get(f"region_{lang}", g["region"])
         links = "\n            ".join(
-            f'<a href="{prefix}{slugify(h["name"])}.html" class="hood-link">{h["name"]}</a>'
+            f'<a href="{prefix}{slugify(h["name"])}" class="hood-link">{h["name"]}</a>'
             for h in g["hoods"]
         )
         regions_html.append(
@@ -535,12 +537,12 @@ def render_hub(data, flat, lang):
             f'    <div class="hood-grid">\n            {links}\n    </div>'
         )
     ticker_html = "".join(f'<span class="ticker-item">{t}</span><span class="ticker-dot"></span>' for t in strings["ticker"])
-    rel_path = "neighborhoods/index.html"
+    rel_path = "neighborhoods/"
     return HUB_TEMPLATE.format(
         html_lang=lang,
         persistence_script=persistence_script(lang),
         title=strings["title"], meta_desc=strings["meta_desc"],
-        canonical=f'{data["domain"]}{prefix}index.html',
+        canonical=f'{data["domain"]}{prefix}',
         hreflang=hreflang_block(data["domain"], rel_path),
         domain=data["domain"], phone=data["phone"], phone_display=data["phoneDisplay"], email=data["email"],
         regions="\n".join(regions_html),
@@ -564,10 +566,9 @@ def main():
         (data["domain"] + "/", "1.0"),
         (data["domain"] + "/es/", "1.0"),
         (data["domain"] + "/pl/", "1.0"),
-        (data["domain"] + "/challenge.html", "0.8"),
     ]
     for lang in LANGS:
-        urls.append((f'{data["domain"]}{URL_PREFIX[lang]}index.html', "0.9"))
+        urls.append((f'{data["domain"]}{URL_PREFIX[lang]}', "0.9"))
 
     for hood in flat:
         for lang in LANGS:
@@ -575,7 +576,7 @@ def main():
             with open(os.path.join(OUT_DIRS[lang], f'{hood["slug"]}.html'), "w", encoding="utf-8") as f:
                 f.write(html)
             priority = "0.7" if lang == "en" else "0.6"
-            urls.append((f'{data["domain"]}{URL_PREFIX[lang]}{hood["slug"]}.html', priority))
+            urls.append((f'{data["domain"]}{URL_PREFIX[lang]}{hood["slug"]}', priority))
 
     for lang in LANGS:
         with open(os.path.join(OUT_DIRS[lang], "index.html"), "w", encoding="utf-8") as f:

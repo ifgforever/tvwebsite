@@ -56,7 +56,7 @@ def load_suburb_data():
 def lang_switch_link(current_lang, slug, kind="page"):
     parts = []
     for lang in LANGS:
-        href = URL_PREFIX[lang] + (f"{slug}.html" if kind == "page" else "index.html")
+        href = URL_PREFIX[lang] + (slug if kind == "page" else "")
         cls = ' class="active"' if lang == current_lang else ""
         parts.append(f'<a{cls} href="{href}">{lang.upper()}</a>')
     return '<span class="lang-switch">' + '<span>|</span>'.join(parts) + '</span>'
@@ -375,8 +375,8 @@ def render_page(hood, flat_by_band, data, lang):
     nearby_links = "\n            ".join(
         f'<a href="{prefix}{n["slug"]}.html" class="nearby-pill">{n["name"]}</a>' for n in nearby
     )
-    rel_path = f'suburbs/{hood["slug"]}.html'
-    canonical = f'{data["domain"]}{prefix}{hood["slug"]}.html'
+    rel_path = f'suburbs/{hood["slug"]}'
+    canonical = f'{data["domain"]}{prefix}{hood["slug"]}'
     ticker_html = "".join(
         f'<span class="ticker-item">{t.format(name=hood["name"])}</span><span class="ticker-dot"></span>'
         for t in strings["ticker"]
@@ -395,8 +395,8 @@ def render_page(hood, flat_by_band, data, lang):
         name=hood["name"], name_url=hood["name"].replace(" ", "%20").replace("'", "%27"),
         band=band_label,
         home=strings["home"], home_href=strings["home_href"],
-        suburbs_label=strings["suburbs_label"], hub_href=prefix + "index.html",
-        hoods_hub_href=HOOD_URL_PREFIX[lang] + "index.html",
+        suburbs_label=strings["suburbs_label"], hub_href=prefix,
+        hoods_hub_href=HOOD_URL_PREFIX[lang],
         lang_switch=lang_switch_link(lang, hood["slug"], "page"),
         hero_head=strings["hero_head"], hero_sub=strings["hero_sub"].format(name=hood["name"]),
         hero_lead=strings["hero_lead"].format(name=hood["name"]),
@@ -539,12 +539,12 @@ def render_hub(data, lang):
             f'    <div class="hood-grid">\n            {links}\n    </div>'
         )
     ticker_html = "".join(f'<span class="ticker-item">{t}</span><span class="ticker-dot"></span>' for t in strings["ticker"])
-    rel_path = "suburbs/index.html"
+    rel_path = "suburbs/"
     return HUB_TEMPLATE.format(
         html_lang=lang,
         persistence_script=persistence_script(lang),
         title=strings["title"], meta_desc=strings["meta_desc"],
-        canonical=f'{data["domain"]}{prefix}index.html',
+        canonical=f'{data["domain"]}{prefix}',
         hreflang=hreflang_block(data["domain"], rel_path),
         domain=data["domain"], phone=data["phone"], phone_display=data["phoneDisplay"], email=data["email"],
         regions="\n".join(regions_html),
@@ -567,19 +567,18 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     # core page is added, removed, or renamed.
     CORE_PAGES = [
         ("index.html", "1.0"),
-        ("tv-mounting-guide.html", "0.7"),
-        ("challenge.html", "0.6"),
-        ("whats-new.html", "0.6"),
-        ("blog/index.html", "0.6"),
-        ("blog/new-tvs-2026.html", "0.5"),
-        ("terms-and-conditions.html", "0.3"),
-        ("privacy-policy.html", "0.3"),
+        ("tv-mounting-guide", "0.7"),
+        ("whats-new", "0.6"),
+        ("blog/", "0.6"),
+        ("blog/new-tvs-2026", "0.5"),
+        ("terms-and-conditions", "0.3"),
+        ("privacy-policy", "0.3"),
     ]
     # EN-only pages (no es/pl translations exist yet) -- appended after the
     # per-language loop below via EN_ONLY_PAGES.
     EN_ONLY_PAGES = [
-        ("blog/tv-release-calendar.html", "0.5"),
-        ("blog/tv-mounting-home-theater-chicago.html", "0.5"),
+        ("blog/tv-release-calendar", "0.5"),
+        ("blog/tv-mounting-home-theater-chicago", "0.5"),
     ]
     LANG_ROOT = {"en": "/", "es": "/es/", "pl": "/pl/"}
     urls = []
@@ -591,19 +590,19 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     for page, priority in EN_ONLY_PAGES:
         urls.append((f'{domain}/{page}', priority))
     for lang in LANGS:
-        urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}index.html', "0.9"))
-        urls.append((f'{domain}{URL_PREFIX[lang]}index.html', "0.9"))
+        urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}', "0.9"))
+        urls.append((f'{domain}{URL_PREFIX[lang]}', "0.9"))
 
     for h in hood_flat:
         slug = slugify(h["name"])
         for lang in LANGS:
             priority = "0.7" if lang == "en" else "0.6"
-            urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}{slug}.html', priority))
+            urls.append((f'{domain}{HOOD_URL_PREFIX[lang]}{slug}', priority))
 
     for h in suburb_flat:
         for lang in LANGS:
             priority = "0.6" if lang == "en" else "0.5"
-            urls.append((f'{domain}{URL_PREFIX[lang]}{h["slug"]}.html', priority))
+            urls.append((f'{domain}{URL_PREFIX[lang]}{h["slug"]}', priority))
 
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
