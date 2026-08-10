@@ -1,0 +1,121 @@
+{
+  "slug": "mantelmount-installation",
+  "serviceType": "MantelMount pull-down TV mount installation",
+  "source": "MantelMount%20Page",
+  "lang": {
+    "en": {
+      "title": "MantelMount Installers in Chicago — Authorized Dealer | TV Install Chicago",
+      "desc": "Authorized MantelMount dealer and installer in Chicago. We supply the mount and fit it: labor $350 for TVs 65\" and under, $500 above. Mounts from $189.95 at MantelMount's own retail price.",
+      "ogtitle": "MantelMount Installers in Chicago — Authorized Dealer",
+      "ogdesc": "We supply and fit MantelMount pull-down mounts. Labor from $350, mounts at MantelMount's retail price.",
+      "h1plain": "MantelMount Installation in Chicago",
+      "h1": "TV OVER THE<br><span>FIREPLACE</span>",
+      "eyebrow": "Authorized MantelMount Dealer",
+      "sub": "A TV above a mantel sits too high to watch for more than ten minutes without your neck complaining. A MantelMount pulls it down and out to eye level, then swings it back flush when you're done. We're an authorized dealer, so we bring the mount with us.",
+      "home": "Home",
+      "crumb": "MantelMount Installation",
+      "ticker": ["Authorized Dealer", "We Supply The Mount", "Labor From $350"],
+      "ctah2": "Not sure which model you need?",
+      "ctap": "Tell us the TV size and what the fireplace is made of, and we'll tell you which mount fits and what the whole thing costs.",
+      "ctabtn": "GET A QUOTE &amp; BOOK &rarr;",
+      "link1": "See the full price list",
+      "link2": "Check we cover your address",
+      "cards": [
+        {
+          "h2": "Why a normal mount doesn't work over a fireplace",
+          "html": "<p>Mounting a TV above a mantel puts the screen roughly 60 to 70 inches off the floor. You end up watching at an angle your neck was not designed to hold, and after a while people quietly stop using the room.</p><p>A tilting mount helps a little by angling the screen down, but it doesn't fix the height &mdash; you're still looking up. A MantelMount is different: it takes the weight and lets you pull the TV down and forward, often 20 inches or more, so it sits at normal eye level while you're watching. Push it back when you're finished and it returns flush against the wall.</p><p>The other thing worth knowing is heat. A working fireplace pushes warm air straight up the wall, and a pull-down mount lets you bring the screen out of that column when the fire is lit.</p>"
+        },
+        {
+          "h2": "What it costs, in full",
+          "html": "<p>Two parts, both stated openly: our labor, and the mount at MantelMount's own retail price.</p><p class=\"sub-head\">Installation labor</p><div class=\"row\"><div><div class=\"row-name\">TVs 65&Prime; and under</div></div><div class=\"row-price\">$350</div></div><div class=\"row\"><div><div class=\"row-name\">TVs over 65&Prime;</div></div><div class=\"row-price\">$500</div></div><p class=\"sub-head\">The mount</p><div class=\"row\"><div><div class=\"row-name\">MM340 Standard</div></div><div class=\"row-price\">$189.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM540 Enhanced</div><div class=\"row-desc\">Best value by a wide margin &mdash; a real step up in build quality.</div></div><div class=\"row-price\">$249.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM700 Premier</div></div><div class=\"row-price\">$349.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM-MAX1 Full Motion</div></div><div class=\"row-price\">$559.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM815 Motorized</div></div><div class=\"row-price\">$649.95</div></div><p style=\"margin-top:14px;\">MantelMount run sales fairly often. Those are their retail prices as of August 2026, and we confirm the current number with your quote rather than quietly pocketing the difference. Soundbar mounting and wire concealment can be added at the usual rates.</p>"
+        },
+        {
+          "h2": "The fireplace itself decides a lot",
+          "html": "<p>A pull-down mount carries real load and moves while it does it, so what it's anchored into matters more than with a fixed bracket.</p><p><strong style=\"color:var(--paper);\">Brick or stone</strong> is common on older Chicago fireplaces and is genuinely the strongest option, fixed with masonry anchors and a hammer drill.</p><p><strong style=\"color:var(--paper);\">Drywall over studs</strong> is fine as long as we can hit solid framing, which is the usual case above a mantel.</p><p><strong style=\"color:var(--paper);\">Stone veneer over drywall</strong> is the one to watch. It looks like stone and isn't, so the anchors have to reach the framing behind it. This is worth mentioning on the phone.</p><p>If you're unsure what your chimney breast is made of, a photo usually settles it before we arrive.</p>"
+        }
+      ],
+      "faq": [
+        ["Are you an authorized MantelMount dealer?", "Yes. We supply the mount and bring it to the appointment, so you aren't ordering it yourself and hoping it fits. We sell every model."],
+        ["How much does MantelMount installation cost in Chicago?", "Labor is $350 for TVs 65 inches and under, or $500 above that. The mount is extra at MantelMount's retail price, from $189.95 for the MM340 up to $649.95 for the motorized MM815."],
+        ["Which MantelMount model should I get?", "The MM540 Enhanced is the best value by a clear margin — a real step up in build quality for a little more money. Tell us your TV size and we'll confirm what fits."],
+        ["Can you mount it on a brick fireplace?", "Yes. Brick and stone are the strongest anchoring surfaces there are, fixed with masonry anchors. Stone veneer over drywall needs more care, so mention it when you call."]
+      ]
+    },
+    "es": {
+      "title": "Instaladores de MantelMount en Chicago — Distribuidor Autorizado | TV Install Chicago",
+      "desc": "Distribuidor e instalador autorizado de MantelMount en Chicago. Suministramos el soporte y lo instalamos: mano de obra $350 para TVs de 65\" o menos, $500 arriba. Soportes desde $189.95 al precio de lista de MantelMount.",
+      "ogtitle": "Instaladores de MantelMount en Chicago — Distribuidor Autorizado",
+      "ogdesc": "Suministramos e instalamos soportes abatibles MantelMount. Mano de obra desde $350.",
+      "h1plain": "Instalación de MantelMount en Chicago",
+      "h1": "TV SOBRE<br><span>LA CHIMENEA</span>",
+      "eyebrow": "Distribuidor Autorizado MantelMount",
+      "sub": "Una TV sobre la chimenea queda demasiado alta para verla más de diez minutos sin que se queje el cuello. Un MantelMount la baja y la acerca a la altura de los ojos, y luego vuelve al ras. Somos distribuidor autorizado, así que llevamos el soporte.",
+      "home": "Inicio",
+      "crumb": "Instalación de MantelMount",
+      "ticker": ["Distribuidor Autorizado", "Suministramos el Soporte", "Mano de Obra desde $350"],
+      "ctah2": "¿No sabe qué modelo necesita?",
+      "ctap": "Díganos el tamaño de la TV y de qué es la chimenea, y le decimos qué soporte encaja y cuánto cuesta todo.",
+      "ctabtn": "COTICE Y RESERVE &rarr;",
+      "link1": "Vea la lista completa de precios",
+      "link2": "Confirme que cubrimos su dirección",
+      "cards": [
+        {
+          "h2": "Por qué un soporte normal no sirve sobre la chimenea",
+          "html": "<p>Montar una TV sobre la chimenea deja la pantalla a unas 60 o 70 pulgadas del piso. Termina viendo en un ángulo para el que su cuello no fue diseñado, y con el tiempo la gente deja de usar ese cuarto.</p><p>Un soporte inclinable ayuda un poco al angular la pantalla, pero no arregla la altura &mdash; sigue mirando hacia arriba. Un MantelMount es distinto: sostiene el peso y le permite bajar y acercar la TV, a menudo 20 pulgadas o más, para que quede a la altura normal de los ojos mientras ve. Al terminar, la empuja de vuelta y queda al ras de la pared.</p><p>Lo otro que vale saber es el calor. Una chimenea encendida empuja aire caliente hacia arriba por la pared, y un soporte abatible le permite sacar la pantalla de esa columna cuando hay fuego.</p>"
+        },
+        {
+          "h2": "Cuánto cuesta, completo",
+          "html": "<p>Dos partes, ambas a la vista: nuestra mano de obra y el soporte al precio de lista de MantelMount.</p><p class=\"sub-head\">Mano de obra</p><div class=\"row\"><div><div class=\"row-name\">TVs de 65&Prime; o menos</div></div><div class=\"row-price\">$350</div></div><div class=\"row\"><div><div class=\"row-name\">TVs de más de 65&Prime;</div></div><div class=\"row-price\">$500</div></div><p class=\"sub-head\">El soporte</p><div class=\"row\"><div><div class=\"row-name\">MM340 Standard</div></div><div class=\"row-price\">$189.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM540 Enhanced</div><div class=\"row-desc\">La mejor relación por mucho &mdash; un salto real en calidad.</div></div><div class=\"row-price\">$249.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM700 Premier</div></div><div class=\"row-price\">$349.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM-MAX1 Full Motion</div></div><div class=\"row-price\">$559.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM815 Motorized</div></div><div class=\"row-price\">$649.95</div></div><p style=\"margin-top:14px;\">MantelMount hace promociones con frecuencia. Esos son sus precios de lista a agosto de 2026, y confirmamos el número vigente con su cotización en vez de quedarnos con la diferencia. La barra de sonido y ocultar cables se agregan a las tarifas de siempre.</p>"
+        },
+        {
+          "h2": "La chimenea decide bastante",
+          "html": "<p>Un soporte abatible carga peso real y además se mueve, así que a qué está anclado importa más que con un soporte fijo.</p><p><strong style=\"color:var(--paper);\">Ladrillo o piedra</strong> es común en chimeneas antiguas de Chicago y es la opción más fuerte, fijada con anclajes de mampostería y taladro percutor.</p><p><strong style=\"color:var(--paper);\">Panel de yeso sobre vigas</strong> está bien mientras podamos alcanzar estructura sólida, que es lo habitual sobre una chimenea.</p><p><strong style=\"color:var(--paper);\">Enchape de piedra sobre panel de yeso</strong> es el caso a vigilar. Parece piedra y no lo es, así que los anclajes deben llegar a la estructura detrás. Vale mencionarlo por teléfono.</p><p>Si no sabe de qué es su chimenea, una foto normalmente lo resuelve antes de que lleguemos.</p>"
+        }
+      ],
+      "faq": [
+        ["¿Son distribuidor autorizado de MantelMount?", "Sí. Suministramos el soporte y lo llevamos a la cita, así usted no lo pide por su cuenta esperando que encaje. Vendemos todos los modelos."],
+        ["¿Cuánto cuesta instalar un MantelMount en Chicago?", "La mano de obra es $350 para TVs de 65 pulgadas o menos, o $500 arriba de eso. El soporte va aparte al precio de lista de MantelMount, desde $189.95 el MM340 hasta $649.95 el MM815 motorizado."],
+        ["¿Qué modelo de MantelMount debo elegir?", "El MM540 Enhanced es la mejor relación por un margen claro — un salto real en calidad por poco más. Díganos el tamaño de su TV y confirmamos qué encaja."],
+        ["¿Pueden montarlo en una chimenea de ladrillo?", "Sí. El ladrillo y la piedra son las superficies de anclaje más fuertes que existen, con anclajes de mampostería. El enchape de piedra sobre panel de yeso requiere más cuidado, así que menciónelo al llamar."]
+      ]
+    },
+    "pl": {
+      "title": "Montaż MantelMount w Chicago — Autoryzowany Dealer | TV Install Chicago",
+      "desc": "Autoryzowany dealer i instalator MantelMount w Chicago. Dostarczamy uchwyt i montujemy: robocizna $350 dla telewizorów 65\" i mniejszych, $500 powyżej. Uchwyty od $189.95 w cenie detalicznej MantelMount.",
+      "ogtitle": "Montaż MantelMount w Chicago — Autoryzowany Dealer",
+      "ogdesc": "Dostarczamy i montujemy opuszczane uchwyty MantelMount. Robocizna od $350.",
+      "h1plain": "Montaż MantelMount w Chicago",
+      "h1": "TELEWIZOR NAD<br><span>KOMINKIEM</span>",
+      "eyebrow": "Autoryzowany Dealer MantelMount",
+      "sub": "Telewizor nad kominkiem wisi za wysoko, by oglądać dłużej niż dziesięć minut bez pretensji ze strony karku. MantelMount opuszcza go i wysuwa na wysokość wzroku, a potem chowa z powrotem przy ścianie. Jesteśmy autoryzowanym dealerem, więc przywozimy uchwyt ze sobą.",
+      "home": "Strona główna",
+      "crumb": "Montaż MantelMount",
+      "ticker": ["Autoryzowany Dealer", "Dostarczamy Uchwyt", "Robocizna od $350"],
+      "ctah2": "Nie wiesz, który model wybrać?",
+      "ctap": "Podaj rozmiar telewizora i z czego jest kominek, a powiemy, który uchwyt pasuje i ile kosztuje całość.",
+      "ctabtn": "WYCENA I REZERWACJA &rarr;",
+      "link1": "Zobacz pełny cennik",
+      "link2": "Sprawdź, czy obsługujemy Twój adres",
+      "cards": [
+        {
+          "h2": "Dlaczego zwykły uchwyt nie sprawdza się nad kominkiem",
+          "html": "<p>Telewizor nad kominkiem ląduje jakieś 150–180 cm nad podłogą. Oglądasz pod kątem, do którego kark nie został zaprojektowany, i po jakimś czasie ludzie po cichu przestają korzystać z tego pokoju.</p><p>Uchwyt uchylny trochę pomaga, pochylając ekran, ale nie rozwiązuje wysokości &mdash; wciąż patrzysz w górę. MantelMount działa inaczej: przejmuje ciężar i pozwala opuścić telewizor do przodu, często o pół metra lub więcej, tak że podczas oglądania jest na normalnej wysokości wzroku. Po wszystkim odsuwasz go i wraca płasko do ściany.</p><p>Druga rzecz warta uwagi to ciepło. Czynny kominek wypycha gorące powietrze prosto w górę ściany, a opuszczany uchwyt pozwala wysunąć ekran z tej kolumny, gdy pali się ogień.</p>"
+        },
+        {
+          "h2": "Ile to kosztuje, w całości",
+          "html": "<p>Dwie części, obie jawne: nasza robocizna i uchwyt w cenie detalicznej MantelMount.</p><p class=\"sub-head\">Robocizna montażu</p><div class=\"row\"><div><div class=\"row-name\">Telewizory 65&Prime; i mniejsze</div></div><div class=\"row-price\">$350</div></div><div class=\"row\"><div><div class=\"row-name\">Telewizory powyżej 65&Prime;</div></div><div class=\"row-price\">$500</div></div><p class=\"sub-head\">Uchwyt</p><div class=\"row\"><div><div class=\"row-name\">MM340 Standard</div></div><div class=\"row-price\">$189.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM540 Enhanced</div><div class=\"row-desc\">Zdecydowanie najlepszy stosunek jakości do ceny.</div></div><div class=\"row-price\">$249.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM700 Premier</div></div><div class=\"row-price\">$349.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM-MAX1 Full Motion</div></div><div class=\"row-price\">$559.95</div></div><div class=\"row\"><div><div class=\"row-name\">MM815 Motorized</div></div><div class=\"row-price\">$649.95</div></div><p style=\"margin-top:14px;\">MantelMount dość często robi promocje. To ich ceny detaliczne na sierpień 2026, a aktualną kwotę potwierdzamy przy wycenie, zamiast po cichu zatrzymywać różnicę. Soundbar i ukrycie kabli dochodzą po zwykłych stawkach.</p>"
+        },
+        {
+          "h2": "Sam kominek decyduje o wielu rzeczach",
+          "html": "<p>Opuszczany uchwyt przenosi realne obciążenie i przy tym się porusza, więc to, w czym jest zakotwiony, znaczy więcej niż przy zwykłym wieszaku.</p><p><strong style=\"color:var(--paper);\">Cegła lub kamień</strong> to częsty przypadek w starszych kominkach w Chicago i naprawdę najmocniejsza opcja, na kotwach do muru i wiertarce udarowej.</p><p><strong style=\"color:var(--paper);\">Płyta gipsowa na słupkach</strong> jest w porządku, o ile trafimy w solidną konstrukcję, co nad kominkiem jest normą.</p><p><strong style=\"color:var(--paper);\">Okładzina kamienna na płycie</strong> to przypadek do pilnowania. Wygląda jak kamień, a nim nie jest, więc kotwy muszą sięgnąć konstrukcji za nią. Warto o tym wspomnieć przez telefon.</p><p>Jeśli nie wiesz, z czego jest Twój kominek, zdjęcie zwykle rozstrzyga sprawę, zanim przyjedziemy.</p>"
+        }
+      ],
+      "faq": [
+        ["Czy jesteście autoryzowanym dealerem MantelMount?", "Tak. Dostarczamy uchwyt i przywozimy go na montaż, więc nie zamawiasz go sam z nadzieją, że pasuje. Sprzedajemy każdy model."],
+        ["Ile kosztuje montaż MantelMount w Chicago?", "Robocizna to $350 dla telewizorów 65 cali i mniejszych albo $500 powyżej. Uchwyt osobno, w cenie detalicznej MantelMount, od $189.95 za MM340 do $649.95 za motoryzowany MM815."],
+        ["Który model MantelMount wybrać?", "MM540 Enhanced to zdecydowanie najlepszy stosunek jakości do ceny — realny skok w jakości za niewiele więcej. Podaj rozmiar telewizora, a potwierdzimy, co pasuje."],
+        ["Czy da się zamontować na kominku z cegły?", "Tak. Cegła i kamień to najmocniejsze powierzchnie kotwiące, na kotwach do muru. Okładzina kamienna na płycie wymaga większej ostrożności, więc wspomnij o tym przy telefonie."]
+      ]
+    }
+  }
+}
