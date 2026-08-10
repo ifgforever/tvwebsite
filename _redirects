@@ -7,3 +7,12 @@
 /es/book https://shop.tvserviceschicago.com 301
 /pl/book.html https://shop.tvserviceschicago.com 301
 /pl/book https://shop.tvserviceschicago.com 301
+
+# The 77 Challenge scoreboard is retired. Same reasoning as book.html above —
+# send anyone with the old URL to the homepage in their language.
+/challenge.html / 301
+/challenge / 301
+/es/challenge.html /es/ 301
+/es/challenge /es/ 301
+/pl/challenge.html /pl/ 301
+/pl/challenge /pl/ 301

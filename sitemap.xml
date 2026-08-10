@@ -9,10 +9,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://tvserviceschicago.com/challenge</loc>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://tvserviceschicago.com/blog/</loc>
     <priority>0.6</priority>
   </url>
@@ -49,10 +45,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://tvserviceschicago.com/es/challenge</loc>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://tvserviceschicago.com/es/blog/</loc>
     <priority>0.6</priority>
   </url>
@@ -79,10 +71,6 @@
   <url>
     <loc>https://tvserviceschicago.com/pl/tv-mounting-guide</loc>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tvserviceschicago.com/pl/challenge</loc>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tvserviceschicago.com/pl/blog/</loc>
