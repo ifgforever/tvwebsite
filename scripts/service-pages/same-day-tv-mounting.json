@@ -1,0 +1,134 @@
+{
+  "slug": "same-day-tv-mounting",
+  "serviceType": "Same-day TV mounting and installation",
+  "offer": "100",
+  "source": "Same%20Day%20Page",
+  "lang": {
+    "en": {
+      "title": "Same-Day TV Mounting in Chicago — Book Today, Mounted Today | TV Install Chicago",
+      "desc": "Need a TV mounted today? We hold same-day slots most days across Chicago and the north suburbs. $100 flat, no rush fee, no premium for booking last minute.",
+      "ogtitle": "Same-Day TV Mounting in Chicago — Mounted Today, $100 Flat",
+      "ogdesc": "Same-day slots most days across Chicago and the north suburbs. No rush fee, no last-minute premium.",
+      "h1plain": "Same-Day TV Mounting in Chicago",
+      "h1": "MOUNTED<br><span>TODAY</span>",
+      "eyebrow": "Call Before Noon &middot; Often Same Afternoon",
+      "sub": "The TV arrived, people are coming over, and it's still in the box. We keep same-day slots open most days for exactly this. $100 flat, same as any other booking &mdash; there is no rush fee and no premium for calling late.",
+      "home": "Home",
+      "crumb": "Same-Day TV Mounting",
+      "ticker": ["Same Day Available", "No Rush Fee", "$100 Flat"],
+      "ctah2": "Call now and we'll tell you what's open",
+      "ctap": "One quick call gives you a real answer about today. If we can't make it work, we'll say so rather than string you along.",
+      "ctabtn": "BOOK THE $100 INSTALL &rarr;",
+      "link1": "See the full price list",
+      "link2": "Check we cover your address",
+      "cards": [
+        {
+          "h2": "How same-day actually works here",
+          "html": "<p>Plenty of companies advertise same-day and mean &ldquo;we'll call you back today.&rdquo; What we mean is that a van comes to your address and the TV is on the wall before the evening.</p><p>The honest mechanics: we hold open slots in the day rather than booking every hour solid a week out. Call in the morning and there is usually something. Call at four on a Saturday and there may not be. Either way you'll be told on the phone, not left waiting on a callback that decides your evening for you.</p><p><strong style=\"color:var(--paper);\">There's no surcharge for it.</strong> A same-day booking is $100, exactly like one made three weeks ahead. Charging extra for urgency has always struck us as taxing people for bad luck.</p>"
+        },
+        {
+          "h2": "What we need to know on the call",
+          "html": "<p>Three questions and we'll know whether today is realistic:</p><ul><li><strong style=\"color:var(--paper);\">Roughly what size is the TV?</strong> Not for pricing &mdash; the rate doesn't change &mdash; but anything over about 75&Prime; is a two-person lift and that affects scheduling.</li><li><strong style=\"color:var(--paper);\">What's the wall?</strong> Drywall, plaster, brick, or a downtown high-rise. Brick and concrete need a hammer drill and masonry anchors on the van.</li><li><strong style=\"color:var(--paper);\">Do you have a mount?</strong> If not we'll bring one. If you want wires hidden inside the wall, say so on the call &mdash; that changes how long the job takes.</li></ul><p>Answer those and you'll get a straight yes or no about today, plus a time window.</p>"
+        },
+        {
+          "h2": "When same-day is genuinely harder",
+          "html": "<p>We'd rather set expectations than over-promise. A few things make a same-day job unlikely:</p><p><strong style=\"color:var(--paper);\">A new outlet behind the TV.</strong> That's electrical work and takes longer than a standard install &mdash; usually better scheduled properly.</p><p><strong style=\"color:var(--paper);\">A Frame TV with a recessed box.</strong> Cutting the wall and burying the One Connect box isn't a rushed job, and if we need to source the enclosure it won't be on the van.</p><p><strong style=\"color:var(--paper);\">A specific MantelMount model.</strong> We stock the common ones, but if you want a particular model we may need to order it.</p><p>A standard mount on any normal Chicago wall, though &mdash; drywall, plaster, brick, metal stud &mdash; is a same-day job all day long.</p>"
+        },
+        {
+          "h2": "Where we can get to today",
+          "html": "<p>Same-day depends a little on geography, since it's about what's already on the route. The city north of Cermak and the nearer suburbs &mdash; Evanston, Skokie, Oak Park, Park Ridge, Des Plaines, Niles &mdash; are usually straightforward.</p><p>Further out, Schaumburg, Palatine, Arlington Heights or up toward Northbrook and Winnetka, same-day is still often possible but depends more on the day's schedule. Call and ask; we'll be honest about it rather than booking you and rescheduling tomorrow.</p>"
+        }
+      ],
+      "faq": [
+        ["Can you really mount a TV the same day I call?", "Most days, yes. We keep slots open rather than booking solid, so a morning call usually gets an afternoon or evening slot. Call (630) 592-2982 and you'll get a straight answer immediately rather than a callback."],
+        ["Do you charge extra for same-day service?", "No. Same-day is $100 flat, exactly the same as a booking made weeks ahead. There is no rush fee and no weekend rate."],
+        ["What might stop you coming today?", "Jobs that need a new electrical outlet behind the TV, a Frame TV recessed box, or a specific MantelMount model we'd have to order. A standard mount on any normal wall is almost always doable."],
+        ["How late can I call and still get it done today?", "The earlier the better, but it depends on the day's route rather than a cutoff time. Call and we'll tell you what's genuinely open instead of guessing."]
+      ]
+    },
+    "es": {
+      "title": "Instalación de TV el Mismo Día en Chicago — Reserve Hoy, Montada Hoy | TV Install Chicago",
+      "desc": "¿Necesita montar su TV hoy? Guardamos citas el mismo día casi todos los días en Chicago y los suburbios del norte. $100 fijos, sin cargo por urgencia.",
+      "ogtitle": "Instalación de TV el Mismo Día en Chicago — Montada Hoy, $100 Fijo",
+      "ogdesc": "Citas el mismo día casi todos los días en Chicago y los suburbios del norte. Sin cargo por urgencia.",
+      "h1plain": "Instalación de TV el Mismo Día en Chicago",
+      "h1": "MONTADA<br><span>HOY MISMO</span>",
+      "eyebrow": "Llame Antes del Mediodía &middot; A Menudo Esa Misma Tarde",
+      "sub": "Llegó la TV, viene gente a casa y sigue en la caja. Guardamos citas el mismo día justo para esto. $100 fijos, igual que cualquier otra reserva &mdash; no hay cargo por urgencia ni recargo por llamar tarde.",
+      "home": "Inicio",
+      "crumb": "Instalación el Mismo Día",
+      "ticker": ["Disponible el Mismo Día", "Sin Cargo por Urgencia", "$100 Fijo"],
+      "ctah2": "Llame y le decimos qué hay disponible",
+      "ctap": "Una llamada rápida le da una respuesta real sobre hoy. Si no podemos, se lo decimos en vez de darle largas.",
+      "ctabtn": "RESERVE LA INSTALACIÓN DE $100 &rarr;",
+      "link1": "Vea la lista completa de precios",
+      "link2": "Confirme que cubrimos su dirección",
+      "cards": [
+        {
+          "h2": "Cómo funciona de verdad el mismo día",
+          "html": "<p>Muchas empresas anuncian &ldquo;mismo día&rdquo; y quieren decir &ldquo;le devolvemos la llamada hoy&rdquo;. Para nosotros significa que una camioneta llega a su dirección y la TV queda en la pared antes de la noche.</p><p>La mecánica honesta: dejamos espacios abiertos en el día en lugar de llenar cada hora con semanas de anticipación. Si llama por la mañana, normalmente hay algo. Si llama a las cuatro de un sábado, puede que no. En cualquier caso se lo decimos por teléfono, sin dejarlo esperando una llamada que le decide la tarde.</p><p><strong style=\"color:var(--paper);\">No hay recargo por esto.</strong> Una cita el mismo día cuesta $100, igual que una hecha con tres semanas de anticipación. Cobrar más por la urgencia siempre nos ha parecido cobrarle a la gente por su mala suerte.</p>"
+        },
+        {
+          "h2": "Lo que necesitamos saber en la llamada",
+          "html": "<p>Tres preguntas y sabremos si hoy es realista:</p><ul><li><strong style=\"color:var(--paper);\">¿Qué tamaño tiene la TV?</strong> No por el precio &mdash; la tarifa no cambia &mdash; sino porque algo de más de 75&Prime; requiere dos personas y eso afecta la agenda.</li><li><strong style=\"color:var(--paper);\">¿De qué es la pared?</strong> Panel de yeso, yeso antiguo, ladrillo, o un edificio alto del centro. El ladrillo y el concreto requieren taladro percutor y anclajes de mampostería en la camioneta.</li><li><strong style=\"color:var(--paper);\">¿Tiene soporte?</strong> Si no, llevamos uno. Si quiere los cables dentro de la pared, dígalo en la llamada &mdash; cambia cuánto dura el trabajo.</li></ul><p>Con eso tendrá un sí o un no claro sobre hoy, y una ventana de horario.</p>"
+        },
+        {
+          "h2": "Cuándo el mismo día sí es más difícil",
+          "html": "<p>Preferimos ajustar expectativas a prometer de más. Algunas cosas hacen improbable el mismo día:</p><p><strong style=\"color:var(--paper);\">Un tomacorriente nuevo detrás de la TV.</strong> Es trabajo eléctrico y toma más tiempo &mdash; suele ser mejor agendarlo con calma.</p><p><strong style=\"color:var(--paper);\">Una Frame TV con caja empotrada.</strong> Cortar la pared y ocultar la caja One Connect no es trabajo apurado, y si hay que pedir la caja no estará en la camioneta.</p><p><strong style=\"color:var(--paper);\">Un modelo específico de MantelMount.</strong> Tenemos los comunes, pero si quiere uno en particular puede que haya que ordenarlo.</p><p>Un soporte estándar en cualquier pared normal de Chicago &mdash; yeso, ladrillo, viga metálica &mdash; sí es trabajo del mismo día sin problema.</p>"
+        },
+        {
+          "h2": "Hasta dónde podemos llegar hoy",
+          "html": "<p>El mismo día depende algo de la geografía, porque se trata de lo que ya está en la ruta. La ciudad al norte de Cermak y los suburbios más cercanos &mdash; Evanston, Skokie, Oak Park, Park Ridge, Des Plaines, Niles &mdash; suelen ser sencillos.</p><p>Más lejos, Schaumburg, Palatine, Arlington Heights o hacia Northbrook y Winnetka, el mismo día sigue siendo posible pero depende más de la agenda del día. Llame y pregunte; seremos honestos en vez de reservarle y reprogramar mañana.</p>"
+        }
+      ],
+      "faq": [
+        ["¿De verdad pueden montar la TV el mismo día que llamo?", "Casi siempre, sí. Dejamos espacios abiertos en vez de llenar la agenda, así que una llamada por la mañana suele conseguir un espacio por la tarde. Llame al (630) 592-2982 y tendrá respuesta inmediata."],
+        ["¿Cobran más por el servicio el mismo día?", "No. El mismo día cuesta $100 fijos, igual que una reserva hecha con semanas de anticipación. Sin cargo por urgencia ni tarifa de fin de semana."],
+        ["¿Qué podría impedir que vengan hoy?", "Trabajos que requieren un tomacorriente nuevo detrás de la TV, una caja empotrada para Frame TV, o un modelo específico de MantelMount que haya que pedir. Un soporte estándar en pared normal casi siempre se puede."],
+        ["¿Hasta qué hora puedo llamar y que aún se haga hoy?", "Cuanto antes mejor, pero depende de la ruta del día más que de una hora límite. Llame y le diremos qué hay realmente disponible."]
+      ]
+    },
+    "pl": {
+      "title": "Montaż TV Tego Samego Dnia w Chicago — Zamów Dziś, Powieszone Dziś | TV Install Chicago",
+      "desc": "Potrzebujesz zamontować telewizor dzisiaj? Trzymamy wolne terminy tego samego dnia przez większość dni w Chicago i na przedmieściach północnych. $100 ryczałtem, bez dopłaty za pilność.",
+      "ogtitle": "Montaż TV Tego Samego Dnia w Chicago — Powieszone Dziś, $100 Ryczałt",
+      "ogdesc": "Terminy tego samego dnia przez większość dni w Chicago i na przedmieściach północnych. Bez dopłaty za pilność.",
+      "h1plain": "Montaż TV Tego Samego Dnia w Chicago",
+      "h1": "POWIESZONE<br><span>JESZCZE DZIŚ</span>",
+      "eyebrow": "Zadzwoń Przed Południem &middot; Często Tego Samego Popołudnia",
+      "sub": "Telewizor przyjechał, goście się schodzą, a on wciąż w kartonie. Trzymamy wolne terminy tego samego dnia właśnie na takie sytuacje. $100 ryczałtem, jak przy każdej innej rezerwacji &mdash; bez dopłaty za pilność i bez kary za późny telefon.",
+      "home": "Strona główna",
+      "crumb": "Montaż Tego Samego Dnia",
+      "ticker": ["Dostępne Tego Samego Dnia", "Bez Dopłaty za Pilność", "$100 Ryczałt"],
+      "ctah2": "Zadzwoń, a powiemy co jest wolne",
+      "ctap": "Jeden szybki telefon daje realną odpowiedź na dziś. Jeśli się nie da, powiemy wprost, zamiast zwodzić.",
+      "ctabtn": "ZAREZERWUJ MONTAŻ ZA $100 &rarr;",
+      "link1": "Zobacz pełny cennik",
+      "link2": "Sprawdź, czy obsługujemy Twój adres",
+      "cards": [
+        {
+          "h2": "Jak naprawdę wygląda ten sam dzień",
+          "html": "<p>Wiele firm reklamuje &ldquo;ten sam dzień&rdquo;, a ma na myśli &ldquo;oddzwonimy dzisiaj&rdquo;. U nas znaczy to, że bus podjeżdża pod Twój adres, a telewizor wisi na ścianie przed wieczorem.</p><p>Uczciwa mechanika: zostawiamy wolne okna w ciągu dnia, zamiast zapełniać każdą godzinę z tygodniowym wyprzedzeniem. Telefon rano zwykle coś znajdzie. Telefon o czwartej w sobotę &mdash; niekoniecznie. Tak czy inaczej dowiesz się przez telefon, a nie czekając na oddzwonienie, które zdecyduje o Twoim wieczorze.</p><p><strong style=\"color:var(--paper);\">Nie ma za to dopłaty.</strong> Rezerwacja na dziś to $100, dokładnie tak jak zrobiona trzy tygodnie wcześniej. Doliczanie za pośpiech zawsze wydawało nam się podatkiem od pecha.</p>"
+        },
+        {
+          "h2": "Co musimy wiedzieć przez telefon",
+          "html": "<p>Trzy pytania i wiemy, czy dziś jest realne:</p><ul><li><strong style=\"color:var(--paper);\">Jaki mniej więcej rozmiar ma telewizor?</strong> Nie dla ceny &mdash; stawka się nie zmienia &mdash; ale powyżej mniej więcej 75&Prime; to podnoszenie we dwóch, co wpływa na grafik.</li><li><strong style=\"color:var(--paper);\">Z czego jest ściana?</strong> Płyta gipsowa, tynk, cegła albo wieżowiec w centrum. Cegła i beton wymagają wiertarki udarowej i kotew do muru w busie.</li><li><strong style=\"color:var(--paper);\">Masz uchwyt?</strong> Jeśli nie, przywieziemy. Jeśli chcesz kable w ścianie, powiedz przez telefon &mdash; to zmienia czas pracy.</li></ul><p>Odpowiedz na to, a dostaniesz jasne tak lub nie na dziś, plus przedział godzinowy.</p>"
+        },
+        {
+          "h2": "Kiedy ten sam dzień jest naprawdę trudniejszy",
+          "html": "<p>Wolimy ustawić oczekiwania niż obiecać za dużo. Kilka rzeczy sprawia, że dziś jest mało prawdopodobne:</p><p><strong style=\"color:var(--paper);\">Nowe gniazdko za telewizorem.</strong> To robota elektryczna i trwa dłużej niż standardowy montaż &mdash; zwykle lepiej zaplanować ją porządnie.</p><p><strong style=\"color:var(--paper);\">Frame TV z puszką podtynkową.</strong> Cięcie ściany i chowanie puszki One Connect to nie jest praca na szybko, a jeśli trzeba sprowadzić obudowę, nie będzie jej w busie.</p><p><strong style=\"color:var(--paper);\">Konkretny model MantelMount.</strong> Popularne mamy, ale jeśli chcesz określony model, może wymagać zamówienia.</p><p>Standardowy uchwyt na normalnej ścianie w Chicago &mdash; płyta, tynk, cegła, słupek metalowy &mdash; to spokojnie robota na ten sam dzień.</p>"
+        },
+        {
+          "h2": "Dokąd zdążymy dzisiaj",
+          "html": "<p>Ten sam dzień trochę zależy od geografii, bo chodzi o to, co już jest na trasie. Miasto na północ od Cermak i bliższe przedmieścia &mdash; Evanston, Skokie, Oak Park, Park Ridge, Des Plaines, Niles &mdash; zwykle są proste.</p><p>Dalej, Schaumburg, Palatine, Arlington Heights czy w stronę Northbrook i Winnetki, ten sam dzień wciąż bywa możliwy, ale bardziej zależy od grafiku. Zadzwoń i zapytaj; powiemy uczciwie, zamiast rezerwować i przekładać na jutro.</p>"
+        }
+      ],
+      "faq": [
+        ["Czy naprawdę zamontujecie telewizor tego samego dnia?", "Przez większość dni tak. Zostawiamy wolne okna zamiast zapełniać grafik, więc poranny telefon zwykle daje termin po południu. Zadzwoń pod (630) 592-2982, a dostaniesz odpowiedź od razu."],
+        ["Czy bierzecie dopłatę za ten sam dzień?", "Nie. Ten sam dzień to $100 ryczałtem, dokładnie tak jak rezerwacja zrobiona tygodnie wcześniej. Bez dopłaty za pilność i bez stawki weekendowej."],
+        ["Co może uniemożliwić przyjazd dzisiaj?", "Zlecenia wymagające nowego gniazdka za telewizorem, puszki podtynkowej do Frame TV albo konkretnego modelu MantelMount, który trzeba zamówić. Standardowy uchwyt na normalnej ścianie prawie zawsze się da."],
+        ["Jak późno mogę zadzwonić, żeby zdążyć dzisiaj?", "Im wcześniej tym lepiej, ale zależy to od trasy dnia, a nie od sztywnej godziny. Zadzwoń, a powiemy, co realnie jest wolne."]
+      ]
+    }
+  }
+}
