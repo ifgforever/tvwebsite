@@ -1,0 +1,193 @@
+{
+  "slug": "home-theater-installation",
+  "serviceType": "Home theater and surround sound installation",
+  "source": "Home%20Theater%20Page",
+  "lang": {
+    "en": {
+      "title": "Home Theater Installation Chicago — Surround Sound Set Up Right | TV Install Chicago",
+      "desc": "Home theater and surround sound installation in Chicago. Receivers configured, speakers placed for where you actually sit, subwoofer dialled in and speaker wire kept out of sight. Quoted per job after a free estimate.",
+      "ogtitle": "Home Theater Installation Chicago — Surround Sound Set Up Right",
+      "ogdesc": "Receivers, speakers, subwoofer placement and hidden speaker wire. Quoted per job.",
+      "h1plain": "Home Theater Installation in Chicago",
+      "h1": "HOME THEATER<br><span>SET UP RIGHT</span>",
+      "eyebrow": "Surround Sound &middot; Receivers &middot; In-Wall Speakers",
+      "sub": "A surround system is only as good as where the speakers end up and how the receiver is configured. Most of the ones we're called out to fix were assembled correctly and placed wrong. We handle the whole thing &mdash; receiver, speakers, subwoofer, wiring &mdash; and tune it for the seat you actually watch from.",
+      "home": "Home",
+      "crumb": "Home Theater Installation",
+      "ticker": [
+        "Surround Sound &middot; Atmos &middot; In-Wall",
+        "Tuned To Where You Sit",
+        "Quoted Per Job"
+      ],
+      "ctah2": "Tell us about the room",
+      "ctap": "Room size, how many speakers, and whether the gear is already bought. That's usually enough to give you a real number instead of a range.",
+      "ctabtn": "GET A FREE ESTIMATE &rarr;",
+      "link1": "See residential pricing",
+      "link2": "Check we cover your address",
+      "cards": [
+        {
+          "h2": "What we set up",
+          "html": "<p><strong style=\"color:var(--paper);\">Receivers and amplifiers.</strong> Sources in, speakers out, everything labelled so the back of the cabinet isn't a knot in six months. Inputs named on screen, so the remote says <em>Xbox</em> rather than <em>HDMI 3</em>.</p><p><strong style=\"color:var(--paper);\">Surround speakers.</strong> 5.1 and 7.1, on stands, on the wall, or in the wall. Height and angle set for seated ear level rather than wherever the bracket happened to land.</p><p><strong style=\"color:var(--paper);\">Atmos and in-ceiling.</strong> Overhead channels cut into the ceiling and aimed at the seating, where the joists allow it. We'll tell you honestly before we start whether your ceiling allows it.</p><p><strong style=\"color:var(--paper);\">Subwoofers.</strong> Placed and phase-checked. This is the single cheapest improvement in most rooms and the one most often skipped.</p>"
+        },
+        {
+          "h2": "Placement is most of the result",
+          "html": "<p>People spend months choosing speakers and ten minutes deciding where they go. It's backwards. A mid-range set placed properly beats an expensive set pushed against whatever wall had a free socket.</p><p>What actually matters: tweeters near ear height when you're sitting, surrounds slightly behind and above you rather than pointed at the back of your head, and a centre channel aimed at the seats instead of the ceiling &mdash; that one channel carries nearly all the dialogue, which is why so many systems have people reaching for subtitles.</p><p>Then the subwoofer, which is the least predictable thing in the room. Bass builds up in corners and disappears in others, and the difference between a good spot and a bad one three feet away is not subtle. We check rather than guess.</p>"
+        },
+        {
+          "h2": "Speaker wire, and Chicago walls",
+          "html": "<p>Surround sound means wire running to the back of the room, and nobody wants to see it. How we hide it depends entirely on what your walls are made of, which in this city varies street by street.</p><p><strong style=\"color:var(--paper);\">Drywall</strong> is the straightforward one &mdash; wire drops inside the cavity and comes out at a plate near the speaker.</p><p><strong style=\"color:var(--paper);\">Plaster and lath</strong>, common in older Chicago two-flats and bungalows, is slower and messier to fish and sometimes not worth opening up. We'll say so.</p><p><strong style=\"color:var(--paper);\">Brick and concrete</strong>, including most high-rise interior walls, can't be fished at all. There the honest answer is a low-profile raceway painted to match, run along a baseboard or ceiling line where your eye doesn't follow it.</p><p>We'd rather tell you which of those you're dealing with during the estimate than discover it with a drill in our hand.</p>"
+        },
+        {
+          "h2": "Why it's quoted per job",
+          "html": "<p>The $100 flat rate at the top of this site covers mounting a TV &mdash; any TV, any size. Audio work sits outside it, and putting a flat rate on it would mean quoting most people wrongly.</p><p>Home theater doesn't have a flat rate, because two jobs with the same speaker count can be a two-hour visit or a full day apart.</p><p>What moves the number: how many channels, whether speakers go on the wall or inside it, whether the wire can be fished or has to be surface-run, how far the run is to the rear of the room, and whether there's a rack or cabinet to tie into. Ceilings add a variable of their own.</p><p>So you get a free estimate instead of a guess. Describe the room and what you already own, and we'll give you a real figure before anyone turns up.</p><p>If you're mounting the TV at the same time, say so &mdash; it's one visit and one set of holes in the wall rather than two.</p>"
+        }
+      ],
+      "faq": [
+        [
+          "Do you install home theater systems in Chicago?",
+          "Yes — receivers and amplifiers, 5.1 and 7.1 surround, Atmos and in-ceiling speakers, and subwoofer placement, across Chicago and the north and northwest suburbs."
+        ],
+        [
+          "How much does home theater installation cost?",
+          "It's quoted per job rather than a flat rate. Channel count, whether speaker wire can be run inside the wall, and how far the rear speakers sit from the receiver all change the work substantially. Tell us about the room and you'll get a real number from a free estimate."
+        ],
+        [
+          "Can you run the speaker wire inside the wall?",
+          "In drywall, almost always. In plaster and lath it's possible but slower, and sometimes not worth the disruption. In brick, concrete or most high-rise walls it can't be done, and the tidy answer there is a slim raceway painted to match your wall."
+        ],
+        [
+          "Can you set up Dolby Atmos with in-ceiling speakers?",
+          "Yes, where the ceiling allows it — joist direction and what's above the room decide that. We check during the estimate and tell you before any cutting starts, rather than after."
+        ],
+        [
+          "Can you mount the TV and set up surround sound in the same visit?",
+          "Yes, and it's the sensible way to do it. Doing both at once means the cable routing gets planned once, and you're not paying for a second trip or living with a second set of holes."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Instalación de Home Theater en Chicago — Sonido Envolvente Bien Hecho | TV Install Chicago",
+      "desc": "Instalación de home theater y sonido envolvente en Chicago. Receptores configurados, bocinas ubicadas según dónde se sienta usted, subwoofer ajustado y cable de bocina fuera de la vista. Cotizado por trabajo tras una estimación gratuita.",
+      "ogtitle": "Instalación de Home Theater en Chicago — Sonido Envolvente Bien Hecho",
+      "ogdesc": "Receptores, bocinas, ubicación del subwoofer y cable oculto. Cotizado por trabajo.",
+      "h1plain": "Instalación de Home Theater en Chicago",
+      "h1": "HOME THEATER<br><span>BIEN INSTALADO</span>",
+      "eyebrow": "Sonido Envolvente &middot; Receptores &middot; Bocinas en Pared",
+      "sub": "Un sistema envolvente vale lo que valen la ubicación de sus bocinas y la configuración del receptor. Casi todos los que nos llaman a corregir estaban bien armados y mal ubicados. Nos encargamos de todo &mdash; receptor, bocinas, subwoofer, cableado &mdash; y lo ajustamos para el asiento desde donde usted realmente ve.",
+      "home": "Inicio",
+      "crumb": "Instalación de Home Theater",
+      "ticker": [
+        "Envolvente &middot; Atmos &middot; En Pared",
+        "Ajustado a Donde Usted Se Sienta",
+        "Cotizado Por Trabajo"
+      ],
+      "ctah2": "Cuéntenos sobre la sala",
+      "ctap": "Tamaño de la sala, cuántas bocinas, y si ya compró el equipo. Con eso solemos dar un número real en vez de un rango.",
+      "ctabtn": "OBTENGA UNA ESTIMACIÓN GRATIS &rarr;",
+      "link1": "Vea los precios residenciales",
+      "link2": "Confirme que cubrimos su dirección",
+      "cards": [
+        {
+          "h2": "Qué instalamos",
+          "html": "<p><strong style=\"color:var(--paper);\">Receptores y amplificadores.</strong> Fuentes de entrada, bocinas de salida, todo etiquetado para que la parte de atrás del mueble no sea un nudo en seis meses. Entradas nombradas en pantalla, para que el control diga <em>Xbox</em> y no <em>HDMI 3</em>.</p><p><strong style=\"color:var(--paper);\">Bocinas envolventes.</strong> 5.1 y 7.1, en bases, en la pared o dentro de la pared. Altura y ángulo fijados a la altura del oído sentado, no donde cayó el soporte.</p><p><strong style=\"color:var(--paper);\">Atmos y en techo.</strong> Canales superiores instalados en el techo y apuntados a los asientos, cuando las vigas lo permiten. Le decimos con honestidad antes de empezar si su techo lo permite.</p><p><strong style=\"color:var(--paper);\">Subwoofers.</strong> Ubicados y con la fase verificada. Es la mejora más barata en casi toda sala y la que más se omite.</p>"
+        },
+        {
+          "h2": "La ubicación es casi todo el resultado",
+          "html": "<p>La gente pasa meses eligiendo bocinas y diez minutos decidiendo dónde van. Es al revés. Un juego intermedio bien ubicado supera a uno caro empujado contra la pared que tenía enchufe libre.</p><p>Lo que de verdad importa: los tweeters cerca de la altura del oído estando sentado, los envolventes un poco detrás y por encima de usted en vez de apuntados a su nuca, y el canal central dirigido a los asientos y no al techo &mdash; ese canal lleva casi todo el diálogo, y por eso tanta gente termina poniendo subtítulos.</p><p>Después el subwoofer, lo menos predecible de la sala. Los graves se acumulan en las esquinas y desaparecen en otros puntos, y la diferencia entre un buen lugar y uno malo a un metro no es sutil. Lo verificamos en vez de adivinar.</p>"
+        },
+        {
+          "h2": "El cable de bocina y las paredes de Chicago",
+          "html": "<p>Sonido envolvente significa cable hasta el fondo de la sala, y nadie quiere verlo. Cómo lo escondemos depende por completo del material de sus paredes, que en esta ciudad cambia de calle en calle.</p><p><strong style=\"color:var(--paper);\">El drywall</strong> es el caso sencillo: el cable baja por dentro y sale en una placa junto a la bocina.</p><p><strong style=\"color:var(--paper);\">El yeso con listones</strong>, común en two-flats y bungalows antiguos de Chicago, es más lento y sucio de pasar, y a veces no vale la pena abrirlo. Se lo diremos.</p><p><strong style=\"color:var(--paper);\">El ladrillo y el concreto</strong>, incluidas casi todas las paredes interiores de edificios altos, no se pueden pasar por dentro. Ahí la respuesta honesta es una canaleta de perfil bajo pintada del color de la pared, junto al zócalo o la línea del techo, donde la vista no la sigue.</p><p>Preferimos decirle cuál de esos casos tiene durante la estimación, y no descubrirlo con el taladro en la mano.</p>"
+        },
+        {
+          "h2": "Por qué se cotiza por trabajo",
+          "html": "<p>La tarifa fija de $100 que ve arriba en este sitio cubre montar una TV &mdash; cualquier TV, cualquier tamaño. El trabajo de audio queda fuera de eso, y ponerle tarifa fija significaría cotizarle mal a casi todos.</p><p>El home theater no tiene tarifa fija, porque dos trabajos con el mismo número de bocinas pueden ser una visita de dos horas o un día entero.</p><p>Lo que mueve el número: cuántos canales, si las bocinas van sobre la pared o dentro de ella, si el cable se puede pasar por dentro o va en superficie, qué tan lejos queda el fondo de la sala, y si hay un rack o mueble al cual conectarse. Los techos añaden su propia variable.</p><p>Por eso recibe una estimación gratuita en lugar de una suposición. Describa la sala y lo que ya tiene, y le damos una cifra real antes de que alguien se presente.</p><p>Si además va a montar la TV, dígalo &mdash; es una sola visita y un solo juego de agujeros en la pared en vez de dos.</p>"
+        }
+      ],
+      "faq": [
+        [
+          "¿Instalan sistemas de home theater en Chicago?",
+          "Sí — receptores y amplificadores, sonido envolvente 5.1 y 7.1, Atmos y bocinas en techo, y ubicación de subwoofer, en Chicago y los suburbios del norte y noroeste."
+        ],
+        [
+          "¿Cuánto cuesta la instalación de home theater?",
+          "Se cotiza por trabajo y no con tarifa fija. El número de canales, si el cable puede ir dentro de la pared, y qué tan lejos quedan las bocinas traseras del receptor cambian mucho el trabajo. Cuéntenos sobre la sala y recibirá un número real con una estimación gratuita."
+        ],
+        [
+          "¿Pueden pasar el cable de bocina dentro de la pared?",
+          "En drywall, casi siempre. En yeso con listones es posible pero más lento, y a veces no compensa la molestia. En ladrillo, concreto o casi cualquier pared de edificio alto no se puede, y la solución ordenada ahí es una canaleta delgada pintada del color de su pared."
+        ],
+        [
+          "¿Pueden instalar Dolby Atmos con bocinas en el techo?",
+          "Sí, cuando el techo lo permite — la dirección de las vigas y lo que hay encima de la sala lo deciden. Lo revisamos durante la estimación y se lo decimos antes de cortar nada, no después."
+        ],
+        [
+          "¿Pueden montar la TV e instalar el sonido envolvente en la misma visita?",
+          "Sí, y es la forma sensata de hacerlo. Hacer ambas cosas a la vez permite planificar el cableado una sola vez, y usted no paga un segundo viaje ni vive con un segundo juego de agujeros."
+        ]
+      ]
+    },
+    "pl": {
+      "title": "Montaż Kina Domowego w Chicago — Dźwięk Przestrzenny Zrobiony Dobrze | TV Install Chicago",
+      "desc": "Montaż kina domowego i dźwięku przestrzennego w Chicago. Skonfigurowane amplitunery, głośniki ustawione pod miejsce, w którym naprawdę siedzisz, dostrojony subwoofer i schowane przewody głośnikowe. Wycena za zlecenie po bezpłatnym kosztorysie.",
+      "ogtitle": "Montaż Kina Domowego w Chicago — Dźwięk Przestrzenny Zrobiony Dobrze",
+      "ogdesc": "Amplitunery, głośniki, ustawienie subwoofera i schowane przewody. Wycena za zlecenie.",
+      "h1plain": "Montaż Kina Domowego w Chicago",
+      "h1": "KINO DOMOWE<br><span>ZROBIONE DOBRZE</span>",
+      "eyebrow": "Dźwięk Przestrzenny &middot; Amplitunery &middot; Głośniki w Ścianie",
+      "sub": "System przestrzenny jest tyle wart, ile ustawienie głośników i konfiguracja amplitunera. Większość tych, do których jeździmy po poprawki, była złożona poprawnie i ustawiona źle. Zajmujemy się całością &mdash; amplituner, głośniki, subwoofer, okablowanie &mdash; i stroimy to pod fotel, z którego naprawdę oglądasz.",
+      "home": "Strona główna",
+      "crumb": "Montaż Kina Domowego",
+      "ticker": [
+        "Przestrzenny &middot; Atmos &middot; W Ścianie",
+        "Strojone Pod Twoje Miejsce",
+        "Wycena Za Zlecenie"
+      ],
+      "ctah2": "Opowiedz nam o pomieszczeniu",
+      "ctap": "Wielkość pokoju, ile głośników i czy sprzęt jest już kupiony. Zwykle to wystarczy, żeby podać konkretną kwotę zamiast widełek.",
+      "ctabtn": "BEZPŁATNY KOSZTORYS &rarr;",
+      "link1": "Zobacz cennik dla domów",
+      "link2": "Sprawdź, czy obsługujemy Twój adres",
+      "cards": [
+        {
+          "h2": "Co montujemy",
+          "html": "<p><strong style=\"color:var(--paper);\">Amplitunery i wzmacniacze.</strong> Źródła na wejściu, głośniki na wyjściu, wszystko opisane, żeby tył szafki nie był supłem za pół roku. Wejścia nazwane na ekranie, żeby pilot pokazywał <em>Xbox</em>, a nie <em>HDMI 3</em>.</p><p><strong style=\"color:var(--paper);\">Głośniki przestrzenne.</strong> 5.1 i 7.1, na statywach, na ścianie albo w ścianie. Wysokość i kąt ustawione na wysokość ucha na siedząco, a nie tam, gdzie akurat wypadł uchwyt.</p><p><strong style=\"color:var(--paper);\">Atmos i głośniki sufitowe.</strong> Kanały górne wpuszczone w sufit i skierowane na miejsca siedzące, jeśli pozwalają na to belki. Powiemy uczciwie przed rozpoczęciem, czy Twój sufit to umożliwia.</p><p><strong style=\"color:var(--paper);\">Subwoofery.</strong> Ustawione i sprawdzone fazowo. To najtańsza poprawa w większości pomieszczeń i ta najczęściej pomijana.</p>"
+        },
+        {
+          "h2": "Ustawienie to większość efektu",
+          "html": "<p>Ludzie wybierają głośniki miesiącami, a o ich ustawieniu decydują w dziesięć minut. To odwrotnie niż powinno być. Średni zestaw dobrze ustawiony wygrywa z drogim dosuniętym do ściany, przy której akurat było wolne gniazdko.</p><p>Co naprawdę ma znaczenie: głośniki wysokotonowe blisko wysokości ucha na siedząco, efektowe lekko za Tobą i powyżej, a nie wycelowane w tył głowy, oraz kanał centralny skierowany na fotele, a nie w sufit &mdash; to on niesie prawie całe dialogi i dlatego tylu ludzi sięga po napisy.</p><p>Potem subwoofer, najmniej przewidywalny element pokoju. Bas kumuluje się w narożnikach i znika w innych punktach, a różnica między dobrym a złym miejscem oddalonym o metr nie jest subtelna. Sprawdzamy, zamiast zgadywać.</p>"
+        },
+        {
+          "h2": "Przewód głośnikowy a ściany w Chicago",
+          "html": "<p>Dźwięk przestrzenny oznacza przewód biegnący na tył pomieszczenia, a nikt nie chce go widzieć. Sposób ukrycia zależy wyłącznie od tego, z czego są Twoje ściany, a w tym mieście bywa to różne z ulicy na ulicę.</p><p><strong style=\"color:var(--paper);\">Płyta gipsowo-kartonowa</strong> to przypadek prosty: przewód schodzi wewnątrz i wychodzi na puszce przy głośniku.</p><p><strong style=\"color:var(--paper);\">Tynk na listwach</strong>, częsty w starszych chicagowskich two-flatach i bungalowach, przeciąga się wolniej i brudniej, a czasem nie warto go otwierać. Powiemy to wprost.</p><p><strong style=\"color:var(--paper);\">Cegła i beton</strong>, w tym większość ścian wewnętrznych w wieżowcach, nie da się przewiercić na przestrzał. Tam uczciwą odpowiedzią jest niski kanał kablowy pomalowany pod kolor ściany, poprowadzony przy listwie przypodłogowej lub linii sufitu, gdzie oko za nim nie podąża.</p><p>Wolimy powiedzieć Ci, z którym przypadkiem mamy do czynienia, podczas kosztorysu, a nie odkryć to z wiertarką w ręku.</p>"
+        },
+        {
+          "h2": "Dlaczego wycena jest za zlecenie",
+          "html": "<p>Ryczałt $100 widoczny u góry tej strony obejmuje powieszenie telewizora &mdash; każdego, w każdym rozmiarze. Prace audio są poza nim, a wycena ryczałtowa oznaczałaby złe wyceny dla większości osób.</p><p>Kino domowe nie ma stawki ryczałtowej, bo dwa zlecenia z tą samą liczbą głośników mogą oznaczać dwugodzinną wizytę albo cały dzień pracy.</p><p>Co zmienia kwotę: liczba kanałów, czy głośniki idą na ścianę czy w ścianę, czy przewód da się przeciągnąć wewnątrz czy musi iść po wierzchu, jak daleko jest tył pomieszczenia i czy jest szafka lub rack do podłączenia. Sufity dokładają własną zmienną.</p><p>Dlatego dostajesz bezpłatny kosztorys zamiast zgadywania. Opisz pomieszczenie i to, co już masz, a podamy konkretną kwotę, zanim ktokolwiek się pojawi.</p><p>Jeśli przy okazji wieszasz telewizor, powiedz o tym &mdash; to jedna wizyta i jeden komplet dziur w ścianie zamiast dwóch.</p>"
+        }
+      ],
+      "faq": [
+        [
+          "Czy montujecie kino domowe w Chicago?",
+          "Tak — amplitunery i wzmacniacze, dźwięk przestrzenny 5.1 i 7.1, Atmos i głośniki sufitowe oraz ustawienie subwoofera, w Chicago i na północnych i północno-zachodnich przedmieściach."
+        ],
+        [
+          "Ile kosztuje montaż kina domowego?",
+          "Wycena jest za zlecenie, a nie ryczałtowa. Liczba kanałów, możliwość poprowadzenia przewodu w ścianie i odległość tylnych głośników od amplitunera bardzo zmieniają zakres pracy. Opowiedz o pomieszczeniu, a otrzymasz konkretną kwotę w bezpłatnym kosztorysie."
+        ],
+        [
+          "Czy możecie poprowadzić przewód głośnikowy w ścianie?",
+          "W płycie gipsowo-kartonowej prawie zawsze. W tynku na listwach jest to możliwe, ale wolniejsze i czasem nie warte zamieszania. W cegle, betonie i większości ścian w wieżowcach nie da się, a schludnym rozwiązaniem jest tam wąski kanał kablowy pomalowany pod kolor ściany."
+        ],
+        [
+          "Czy możecie ustawić Dolby Atmos z głośnikami sufitowymi?",
+          "Tak, jeśli pozwala na to sufit — decyduje kierunek belek i to, co znajduje się nad pomieszczeniem. Sprawdzamy to podczas kosztorysu i mówimy przed rozpoczęciem cięcia, a nie po."
+        ],
+        [
+          "Czy możecie powiesić telewizor i ustawić dźwięk przestrzenny podczas jednej wizyty?",
+          "Tak i to rozsądny sposób. Robiąc obie rzeczy naraz, planujemy poprowadzenie kabli raz, a Ty nie płacisz za drugi dojazd ani nie zostajesz z drugim kompletem dziur."
+        ]
+      ]
+    }
+  }
+}

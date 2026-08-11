@@ -576,6 +576,7 @@ def rebuild_sitemap(suburb_data, suburb_flat):
         ("commercial-tv-installation", "0.8"),
         ("tv-dismounting", "0.8"),
         ("soundbar-installation", "0.7"),
+        ("home-theater-installation", "0.7"),
         ("furniture-assembly-and-hanging", "0.7"),
         ("tv-mounting-guide", "0.7"),
         ("whats-new", "0.6"),
