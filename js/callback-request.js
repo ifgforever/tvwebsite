@@ -23,6 +23,7 @@
     var SERVICE_EN = {
         'frame-tv': 'Frame TV installation (recessed box)',
         'mantelmount': 'MantelMount installation',
+        'pillar': 'Pillar mount installation (hand-made)',
         'mantel-pillar': 'MantelMount / pillar mount installation',
         'specialty': 'Specialty install (Frame TV / MantelMount / pillar mount)'
     };
@@ -32,6 +33,7 @@
             ask: {
                 'frame-tv': 'Would you like someone to reach out and set up your Frame TV installation?',
                 'mantelmount': 'Would you like someone to reach out and set up your MantelMount installation?',
+                'pillar': 'Would you like someone to reach out and set up your pillar mount installation?',
                 'mantel-pillar': 'Would you like someone to reach out about a MantelMount or pillar mount install?',
                 'specialty': 'Planning a Frame TV, MantelMount, or pillar mount install? We’ll reach out and set it up with you.'
             },
@@ -49,6 +51,7 @@
             ask: {
                 'frame-tv': '¿Quiere que le contactemos para organizar la instalación de su Frame TV?',
                 'mantelmount': '¿Quiere que le contactemos para organizar su instalación de MantelMount?',
+                'pillar': '¿Quiere que le contactemos para organizar su instalación de montaje en columna?',
                 'mantel-pillar': '¿Quiere que le contactemos sobre una instalación de MantelMount o montaje en columna?',
                 'specialty': '¿Planea un Frame TV, un MantelMount o un montaje en columna? Le contactamos y lo organizamos juntos.'
             },
@@ -66,6 +69,7 @@
             ask: {
                 'frame-tv': 'Chcesz, żebyśmy się odezwali i umówili montaż Twojego Frame TV?',
                 'mantelmount': 'Chcesz, żebyśmy się odezwali i umówili montaż MantelMount?',
+                'pillar': 'Chcesz, żebyśmy się odezwali i umówili Twój montaż kolumnowy?',
                 'mantel-pillar': 'Chcesz, żebyśmy się odezwali w sprawie montażu MantelMount albo montażu kolumnowego?',
                 'specialty': 'Planujesz Frame TV, MantelMount albo montaż kolumnowy? Odezwiemy się i wszystko umówimy.'
             },
