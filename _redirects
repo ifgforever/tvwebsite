@@ -8,6 +8,14 @@
 /pl/book.html https://shop.tvserviceschicago.com 301
 /pl/book https://shop.tvserviceschicago.com 301
 
+# Referral program signup. The real page lives on the public API worker, whose
+# workers.dev URL is too long and too technical to text to someone or print on
+# a card -- this gives out tvserviceschicago.com/refer instead. Every language
+# lands on the same page because that page is English-only today.
+/refer https://tv-ops-public-api.tvinstallchicago.workers.dev/partner-program 301
+/es/refer https://tv-ops-public-api.tvinstallchicago.workers.dev/partner-program 301
+/pl/refer https://tv-ops-public-api.tvinstallchicago.workers.dev/partner-program 301
+
 # The 77 Challenge scoreboard is retired. Same reasoning as book.html above —
 # send anyone with the old URL to the homepage in their language.
 /challenge.html / 301
