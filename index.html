@@ -491,6 +491,22 @@
                     </div>
                 </div>
 
+                <!-- TILE SURCHARGE -->
+                <div class="form-section">
+                    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color: var(--gold-text, #C8A94A); margin-bottom:6px;">Is Any Of This Going On Tile?</p>
+                    <p style="font-size:13px; color: var(--slate-light, #6B7E94); line-height:1.6; margin-bottom:14px;">Tile is the one wall that costs extra &mdash; <strong style="color: var(--paper, #F5F0E8);">$50 per TV</strong>. It destroys drill bits, and it's the only surcharge we have. Plaster, brick and metal studs are all normal Chicago walls and stay included.</p>
+                    <label for="tileSurface" style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px; color: var(--paper, #F5F0E8); text-transform:none; letter-spacing:normal; font-weight:400; margin:0;">
+                        <input type="checkbox" id="tileSurface" onchange="toggleTileCount(); calculateTotal();" style="width:18px; height:18px; flex-shrink:0; accent-color: var(--gold, #C8A94A); cursor:pointer;">
+                        Mounting onto a tile wall
+                    </label>
+                    <div id="tileCountWrap" class="hidden" style="margin-top:14px;">
+                        <label for="tileCount">How many of the TVs are going on tile?</label>
+                        <select id="tileCount" onchange="calculateTotal()" class="field-input">
+                            <option value="1">1 TV on tile</option>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- TOTAL -->
                 <div id="priceTotal" class="hidden total-bar">
                     <div>

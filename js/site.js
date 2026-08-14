@@ -149,9 +149,18 @@
                 sec.querySelectorAll('select').forEach(function (s) { s.required = true; });
             } else {
                 sec.classList.add('hidden');
-                sec.querySelectorAll('select').forEach(function (s) { s.required = false; s.value = ''; });
+                // selectedIndex = 0 rather than value = '': the size/mount/wire
+                // selects open with a blank placeholder so this is unchanged for
+                // them, but the soundbar select has no blank option, and setting
+                // value = '' left it at selectedIndex -1 for good. Raising the TV
+                // count again then threw on selectedOptions[0] and the total
+                // silently stopped updating.
+                sec.querySelectorAll('select').forEach(function (s) { s.required = false; s.selectedIndex = 0; });
             }
         }
+        // The tile count is capped at the number of TVs, so it has to follow
+        // this select rather than being set once at load.
+        if (window.toggleTileCount) toggleTileCount();
     };
 
     // Size buckets that are entirely above 65". MantelMount labor jumps
@@ -194,6 +203,47 @@
         }
     };
 
+    // How many TVs are going on tile. Zero unless the box is ticked, and never
+    // more than the number of TVs being mounted -- dropping the TV count with
+    // a higher tile count already chosen would otherwise bill for TVs that
+    // aren't in the job any more.
+    function tileTvCount(numTvs) {
+        var box = document.getElementById('tileSurface');
+        if (!box || !box.checked) return 0;
+        var sel = document.getElementById('tileCount');
+        var n = sel ? parseInt(sel.value, 10) : 1;
+        if (!(n > 0)) n = 1;
+        return Math.min(n, numTvs);
+    }
+
+    // Keeps the tile-count options in step with the number of TVs, preserving
+    // the current choice where it still fits.
+    window.syncTileCountOptions = function () {
+        var sel = document.getElementById('tileCount');
+        var numEl = document.getElementById('numTvs');
+        if (!sel || !numEl) return;
+        var num = parseInt(numEl.value, 10) || 1;
+        var prev = parseInt(sel.value, 10) || 1;
+        sel.innerHTML = '';
+        for (var i = 1; i <= num; i++) {
+            var opt = document.createElement('option');
+            opt.value = String(i);
+            opt.textContent = i + (i === 1 ? ' TV on tile' : ' TVs on tile');
+            sel.appendChild(opt);
+        }
+        sel.value = String(Math.min(prev, num));
+    };
+
+    window.toggleTileCount = function () {
+        var wrap = document.getElementById('tileCountWrap');
+        var box = document.getElementById('tileSurface');
+        if (!wrap || !box) return;
+        syncTileCountOptions();
+        // Only worth asking how many when there's more than one to choose from.
+        var num = parseInt(document.getElementById('numTvs').value, 10) || 1;
+        wrap.classList.toggle('hidden', !box.checked || num < 2);
+    };
+
     window.calculateTotal = function () {
         var num = parseInt(document.getElementById('numTvs').value);
         var total = num * 100;
@@ -207,6 +257,10 @@
             total += parseFloat(document.getElementById('wireConcealment' + i).selectedOptions[0].dataset.price || 0);
             total += parseFloat(document.getElementById('soundbar' + i).selectedOptions[0].dataset.price || 0);
         }
+        // Tile is asked once for the whole job rather than per TV, so the count
+        // dropdown is what keeps a mixed job honest -- three TVs with one on
+        // tile is +$50, not +$150.
+        total += 50 * tileTvCount(num);
         total = Math.round(total * 100) / 100;
         var el = document.getElementById('priceTotal');
         el.classList.remove('hidden');
@@ -308,6 +362,14 @@
             if (tv.soundbar === 'yes' && tv.soundbarPrice) {
                 lineItems.push({ description: 'Soundbar Mounting', price: tv.soundbarPrice });
             }
+        }
+
+        // Tile is asked once for the whole booking rather than per TV, so it
+        // arrives as a single line with a quantity instead of being attached
+        // to a particular TV.
+        var tilesOnTile = tileTvCount(tvs.length);
+        if (tilesOnTile > 0) {
+            lineItems.push({ description: 'Tile Drilling Surcharge', price: 50, quantity: tilesOnTile });
         }
 
         // Hourly add-ons ride along at $0 so the line-item sum still matches
@@ -458,6 +520,7 @@
             fd.append('additionalNotes', notes);
             fd.append('total', '$' + total);
             fd.append('addOnServices', addOnSummary(addOns) || 'None');
+            fd.append('tileWall', tileTvCount(num) > 0 ? tileTvCount(num) + ' TV(s) on tile (+$50 each)' : 'No');
             fd.append('liftingAgreement', 'Confirmed — customer will assist with lifting on larger TVs');
             fd.append('language', LANG);
 
