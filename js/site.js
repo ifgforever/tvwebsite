@@ -401,6 +401,9 @@
             // minutes as a basic drywall mount.
             if (isMantelMount(tvs[d].mount)) durationMinutes += 60;
         }
+        // Tile is an hour minimum per TV. It sits outside the per-TV loop
+        // above because the form asks about tile once for the whole job.
+        durationMinutes += 60 * tileTvCount(tvs.length);
         // Hourly add-ons have no fixed scope, so block an hour each -- the
         // 1-hour billing minimum makes that the realistic floor.
         if (addOns && addOns.shelves) durationMinutes += 60;
