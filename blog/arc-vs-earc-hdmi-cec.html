@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{var t=localStorage.getItem('tvicTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/public/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon-180.png">
+    <link rel="shortcut icon" href="/public/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC vs eARC vs HDMI-CEC: What Actually Connects Your Gear | TV Install Chicago</title>
+    <meta name="description" content="eARC carries the sound. HDMI-CEC carries the commands. They're different things on the same cable, every brand renames CEC something else, and that's why your remote won't control your receiver. The decoder table and the fix.">
+    <link rel="canonical" href="https://tvserviceschicago.com/blog/arc-vs-earc-hdmi-cec">
+    <link rel="alternate" hreflang="en" href="https://tvserviceschicago.com/blog/arc-vs-earc-hdmi-cec">
+    <link rel="alternate" hreflang="x-default" href="https://tvserviceschicago.com/blog/arc-vs-earc-hdmi-cec">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ARC vs eARC vs HDMI-CEC: What Actually Connects Your Gear">
+    <meta property="og:description" content="eARC carries the sound. CEC carries the commands. Two different things on one cable — and every manufacturer gives CEC a different name, which is why nothing talks to anything.">
+    <meta property="og:url" content="https://tvserviceschicago.com/blog/arc-vs-earc-hdmi-cec">
+    <meta property="og:image" content="https://tvserviceschicago.com/goldtvlogo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/tailwind.min.css">
+    <style>
+        :root {
+            --ink: #0A0A0A; --paper: #F5F0E8; --paper-dark: #EAE4D4;
+            --gold: #C8A94A; --gold-light: #E5C97A; --rust: #A8471F;
+            --slate: #3A4A5C; --slate-light: #6B7E94;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--ink); color: var(--paper); overflow-x: hidden; margin:0; }
+        .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+        .ticker-wrap { background: var(--gold); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+        .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item { display: inline-block; color: var(--on-gold, #0A0A0A); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 40px; }
+        .ticker-dot { display: inline-block; width: 6px; height: 6px; background: var(--on-gold, #0A0A0A); border-radius: 50%; vertical-align: middle; margin-right: 40px; }
+        .breadcrumb { font-size:12px; color:var(--slate-light); padding:18px 24px 0; max-width:820px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+        .breadcrumb a { color:var(--slate-light); text-decoration:none; }
+        .breadcrumb a:hover { color:var(--gold-text, #C8A94A); }
+        .hero-section { background: var(--ink); border-bottom: 1px solid rgba(var(--gold-rgb, 200,169,74),0.3); position: relative; overflow: hidden; padding: 48px 24px 36px; }
+        .hero-eyebrow { color: var(--slate-light); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+        .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 5.5vw, 56px); color: var(--paper); letter-spacing: 0.02em; line-height: 1.05; margin: 10px 0 14px; }
+        .hero-title span { color: var(--gold-text, #C8A94A); }
+        .hero-sub { color: var(--slate-light); font-size: 16px; max-width:600px; line-height:1.7; }
+        .content-wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+        .content-card { background:var(--surface, #0F0F0F); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.2); border-radius:4px; padding:32px; margin-bottom:28px; }
+        .content-card h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold-text, #C8A94A); letter-spacing:0.03em; margin:0 0 14px; }
+        .content-card h3 { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--paper); letter-spacing:0.03em; margin:22px 0 10px; }
+        .content-card p { color:var(--slate-light); font-size:15px; line-height:1.75; margin:0 0 14px; }
+        .content-card p:last-child { margin-bottom:0; }
+        .content-card ul, .content-card ol { margin:0 0 14px; padding-left:20px; }
+        .content-card li { color:var(--slate-light); font-size:15px; line-height:1.75; margin-bottom:10px; }
+        .content-card strong { color:var(--paper); }
+        .content-card .note { font-size:13px; color:var(--rust); background:rgba(var(--rust-rgb, 168,71,31),0.1); border:1px solid rgba(var(--rust-rgb, 168,71,31),0.3); border-radius:4px; padding:12px 14px; margin:0 0 18px; }
+        .pro-tip { background:rgba(var(--gold-rgb, 200,169,74),0.08); border:1px solid rgba(var(--gold-rgb, 200,169,74),0.45); border-left:4px solid var(--gold); border-radius:4px; padding:20px 22px; margin:22px 0; }
+        .pro-tip-label { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-text, #C8A94A); margin:0 0 8px; display:block; }
+        .pro-tip p { color:var(--paper-dark); font-size:15px; line-height:1.75; margin:0 0 12px; }
+        .pro-tip p:last-child { margin-bottom:0; }
+        .spec-table { width:100%; border-collapse:collapse; margin:6px 0 16px; font-size:15px; }
+        .spec-table th { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-text, #C8A94A); text-align:left; padding:10px 12px; border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.35); }
+        .spec-table td { color:var(--slate-light); padding:11px 12px; border-bottom:1px solid rgba(var(--gold-rgb, 200,169,74),0.12); line-height:1.5; vertical-align:top; }
+        .spec-table td:first-child { color:var(--paper); font-weight:600; white-space:nowrap; }
+        .spec-table tr:last-child td { border-bottom:none; }
+        .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        .cta-btn { background: var(--gold); color: var(--on-gold, #0A0A0A); border: 2px solid var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; padding: 18px 32px; border-radius: 3px; cursor: pointer; width: 100%; transition: background 0.2s, color 0.2s; display: block; text-align: center; text-decoration:none; }
+        .cta-btn:hover { background: transparent; color: var(--gold-text, #C8A94A); }
+        .site-footer { background: var(--surface-3, #050505); border-top: 1px solid rgba(var(--gold-rgb, 200,169,74),0.15); padding: 40px 24px; text-align: center; }
+        .contact-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2, #161616); border: 1px solid rgba(var(--gold-rgb, 200,169,74),0.2); color: var(--paper); padding: 12px 24px; border-radius: 3px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+        .contact-pill:hover { border-color: var(--gold); color: var(--gold-text, #C8A94A); }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "ARC vs eARC vs HDMI-CEC: What Actually Connects Your Gear",
+      "description": "eARC carries the sound and HDMI-CEC carries the commands. They are two different things on the same cable, every manufacturer renames CEC, and that is why one remote will not control everything.",
+      "datePublished": "2026-08-14",
+      "dateModified": "2026-08-14",
+      "author": { "@type": "Person", "name": "Lance Lee" },
+      "publisher": {
+        "@type": "LocalBusiness",
+        "name": "TV Install Chicago",
+        "url": "https://tvserviceschicago.com/",
+        "telephone": "+16305922982",
+        "priceRange": "$100",
+        "image": "https://tvserviceschicago.com/goldtvlogo.webp",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://tvserviceschicago.com/goldtvlogo.webp"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chicago",
+          "addressRegion": "IL",
+          "addressCountry": "US"
+        }
+      },
+      "mainEntityOfPage": "https://tvserviceschicago.com/blog/arc-vs-earc-hdmi-cec"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tvserviceschicago.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://tvserviceschicago.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "ARC vs eARC vs HDMI-CEC", "item": "https://tvserviceschicago.com/blog/arc-vs-earc-hdmi-cec" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between ARC and eARC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both send audio from the TV back down the HDMI cable to a receiver or soundbar. ARC, introduced with HDMI 1.4, has limited bandwidth — roughly 1 Mbps — so it can only carry compressed 5.1 formats like Dolby Digital and DTS. eARC, part of HDMI 2.1, carries roughly 37 Mbps, which is enough for uncompressed 7.1, Dolby TrueHD, DTS-HD Master Audio, and full-fat Dolby Atmos and DTS:X. eARC also makes lip-sync correction mandatory rather than optional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between eARC and HDMI-CEC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They do completely different jobs on the same cable. eARC moves audio — it is a sound pipe. HDMI-CEC moves commands, letting devices turn each other on, switch inputs, and pass volume between each other. Your remote controlling the receiver's volume is CEC, not eARC. You generally want both switched on, and they are enabled in different menus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why won't my TV remote control my receiver's volume?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almost always because HDMI-CEC is switched off somewhere in the chain. CEC has to be enabled on every device involved — the TV, the receiver, and the source — and it is off by default on a lot of gear. It is also renamed by nearly every manufacturer: Samsung calls it Anynet+, LG calls it SimpLink, Sony calls it BRAVIA Sync, Panasonic calls it VIERA Link, and Denon, Marantz and Yamaha call it HDMI Control. People turn on the one they recognise and never find the other two."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can an Apple TV control my television?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, over HDMI-CEC. With CEC enabled, the Apple TV remote can wake the television, switch it to the correct input automatically, and control volume on a connected receiver or soundbar, so the TV's own remote can stay in a drawer. Sony BRAVIA sets have a particularly reliable implementation of this."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a special HDMI cable for eARC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually yes. eARC needs the Ethernet channel in the cable, so it requires at minimum a High Speed HDMI cable with Ethernet, and an Ultra High Speed (48 Gbps) cable is the safe choice on any modern install. It also has to be plugged into the specific port labelled eARC or ARC on both the TV and the receiver — the other ports do not carry it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do my devices randomly turn on by themselves?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That is HDMI-CEC doing its job slightly too enthusiastically. Because CEC lets devices wake each other, one device stirring — a console checking for updates, a streaming box installing something overnight — can cascade a power-on command down the chain and switch the whole system on. The fix is to disable CEC on the specific device that keeps waking things up, rather than switching it off system-wide."
+          }
+        }
+      ]
+    }
+    </script>
+<link rel="stylesheet" href="/css/theme.css">
+<script src="/js/theme.js" defer></script>
+</head>
+<body>
+<main>
+
+<div class="ticker-wrap">
+    <div class="ticker-inner">
+        <span class="ticker-item">One Remote For Everything</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Home Theater Setup</span><span class="ticker-dot"></span>
+        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
+        <span class="ticker-item">One Remote For Everything</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Home Theater Setup</span><span class="ticker-dot"></span>
+        <span class="ticker-item">$100 Flat Rate</span><span class="ticker-dot"></span>
+    </div>
+</div>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    <span><a href="/">Home</a> &rsaquo; <a href="/blog/">Blog</a> &rsaquo; ARC vs eARC vs HDMI-CEC</span>
+</nav>
+
+<section class="hero-section">
+    <div style="max-width:720px; margin:0 auto; position:relative; z-index:1;">
+        <p class="hero-eyebrow">Home Theater &middot; August 2026</p>
+        <h1 class="hero-title">ARC, eARC AND HDMI-CEC: <span>WHAT ACTUALLY CONNECTS YOUR GEAR</span></h1>
+        <p class="hero-sub">Modern gear can genuinely run itself off one remote. The reason yours doesn't is almost never the hardware &mdash; it's that two separate features share one cable, and nobody tells you the second one exists.</p>
+    </div>
+</section>
+
+<div class="content-wrap">
+
+    <div class="content-card">
+        <h2>Two Different Things On One Cable</h2>
+        <p>Here's the confusion that costs people whole evenings, and it's worth getting straight before anything else.</p>
+        <p><strong>eARC is a sound pipe.</strong> It carries audio <em>backwards</em> down the HDMI cable &mdash; from the TV to your receiver or soundbar. That's all it does. It moves sound.</p>
+        <p><strong>HDMI-CEC is a command line.</strong> It carries instructions between devices: turn on, switch input, volume up. It moves nothing but messages.</p>
+        <p>They travel over the same cable, they're usually discussed in the same breath, and they are not the same feature. When you press volume on an LG remote and a Denon receiver responds, <strong>that's CEC</strong> &mdash; not eARC. When that Denon receives lossless Atmos from an app running on the TV itself, that's eARC.</p>
+        <p>This matters because they're enabled in different menus, and the classic failure is switching on the one you've heard of and assuming you're done. Someone turns on eARC, gets sound, and then can't work out why the remote still won't change the volume. Nothing is broken. The other half was never switched on.</p>
+    </div>
+
+    <div class="content-card">
+        <h2>ARC vs eARC: What Changed</h2>
+        <p>ARC arrived with HDMI 1.4 and solved a real problem: before it, sound from apps running on the TV had no way back to your receiver without a second optical cable. ARC gave it a path home.</p>
+        <p>The catch was bandwidth. ARC carries about 1 Mbps &mdash; enough for compressed 5.1 like Dolby Digital and DTS, and not enough for anything better. Feed it a Dolby TrueHD track and it either won't pass it or quietly downgrades to something it can fit.</p>
+        <p>eARC, introduced with HDMI 2.1, widens that pipe to roughly 37 Mbps. That's a different category of capacity.</p>
+
+        <div class="table-scroll">
+        <table class="spec-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ARC</th>
+                    <th>eARC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Introduced</td><td>HDMI 1.4</td><td>HDMI 2.1</td></tr>
+                <tr><td>Bandwidth</td><td>~1 Mbps</td><td>~37 Mbps</td></tr>
+                <tr><td>Surround</td><td>Compressed 5.1</td><td>Uncompressed up to 7.1</td></tr>
+                <tr><td>Dolby Atmos</td><td>Compressed only</td><td>Full, via Dolby TrueHD</td></tr>
+                <tr><td>DTS:X</td><td>No</td><td>Yes, via DTS-HD MA</td></tr>
+                <tr><td>Lip-sync fix</td><td>Optional</td><td>Built in, mandatory</td></tr>
+                <tr><td>Cable</td><td>Standard HDMI</td><td>High Speed with Ethernet, or Ultra High Speed</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <p>The practical translation: if you own a 4K Blu-ray player or you're streaming Atmos content and you care about hearing it properly, eARC is the difference between the format on the box and the format actually reaching your speakers. If you're running a soundbar on Dolby Digital, plain ARC was already fine and eARC changes very little.</p>
+        <p class="note">Both ends have to support it. An eARC television plugged into an ARC-only receiver negotiates down to ARC &mdash; no error message, just quietly less audio than you paid for.</p>
+    </div>
+
+    <div class="content-card">
+        <h2>The Decoder Ring: Every Brand Renamed CEC</h2>
+        <p>This is the single biggest reason people give up. HDMI-CEC is an industry standard, but almost nobody labels it &ldquo;HDMI-CEC&rdquo; in the menu. Every manufacturer branded their own version, so you go looking for a setting that, on your particular gear, is called something else entirely.</p>
+        <p>Same feature. Different name on every box in the rack:</p>
+
+        <div class="table-scroll">
+        <table class="spec-table">
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>What They Call HDMI-CEC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Samsung</td><td>Anynet+</td></tr>
+                <tr><td>LG</td><td>SimpLink</td></tr>
+                <tr><td>Sony</td><td>BRAVIA Sync</td></tr>
+                <tr><td>Panasonic</td><td>VIERA Link</td></tr>
+                <tr><td>Philips</td><td>EasyLink</td></tr>
+                <tr><td>Sharp</td><td>Aquos Link</td></tr>
+                <tr><td>Toshiba</td><td>CE-Link or Regza Link</td></tr>
+                <tr><td>Hitachi</td><td>HDMI-CEC</td></tr>
+                <tr><td>Vizio</td><td>CEC</td></tr>
+                <tr><td>Denon &amp; Marantz</td><td>HDMI Control</td></tr>
+                <tr><td>Yamaha</td><td>HDMI Control</td></tr>
+                <tr><td>Onkyo &amp; Integra</td><td>RIHD</td></tr>
+                <tr><td>Pioneer</td><td>Kuro Link</td></tr>
+                <tr><td>Roku TV</td><td>1-Touch Play &amp; System Audio Control</td></tr>
+                <tr><td>Apple TV</td><td>Control TVs and Receivers</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="pro-tip">
+            <span class="pro-tip-label">&#9733; Pro Tip</span>
+            <p><strong>CEC has to be on at every device in the chain, not just the TV.</strong> This is the step that gets missed on nearly every system we're called out to look at.</p>
+            <p>TV, receiver, and every source box &mdash; each one has its own switch, under its own brand name, and plenty of them ship with it off. A chain is only as connected as its least-configured link: one box with HDMI Control disabled and the commands stop dead there.</p>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <h2>What It Looks Like When It Works</h2>
+        <p>Sony deserves credit here &mdash; BRAVIA Sync is one of the more reliable implementations, and a Sony paired with an Apple TV is close to the ideal case.</p>
+        <p>Set up properly, you pick up the Apple TV remote and never touch anything else. It wakes the television, switches it to the right input on its own, and sends volume to whatever's actually producing the sound. The TV's remote goes in a drawer. Most people never realise the Apple TV remote can do this, because the setting that enables it lives under <em>Remotes and Devices &rarr; Control TVs and Receivers</em>, and nothing ever prompts you to look there.</p>
+        <p>Your LG-and-Denon example is the same mechanism from the other direction: press volume on the TV remote, the TV emits a CEC volume command, the Denon picks it up and acts on it. The television's own speakers stay out of it entirely.</p>
+        <p>That's the payoff for getting both halves right &mdash; a rack of gear from three manufacturers behaving like one appliance, driven by whichever remote is nearest.</p>
+    </div>
+
+    <div class="content-card">
+        <h2>When It Doesn't Work: The Checklist</h2>
+        <p>In rough order of how often each one turns out to be the culprit:</p>
+        <ol>
+            <li><strong>Wrong port.</strong> ARC and eARC live on <em>one specific HDMI port</em>, labelled on the back. Any other port and there is no return path at all. Check both the TV and the receiver.</li>
+            <li><strong>CEC off somewhere.</strong> Walk the chain device by device under the brand names in the table above. Assume nothing is on until you've seen it.</li>
+            <li><strong>eARC not enabled.</strong> Separate switch from CEC, usually buried in the TV's audio settings as eARC Mode or Digital Audio Output. Often defaults to off or auto.</li>
+            <li><strong>The cable.</strong> eARC needs the Ethernet channel. An older High Speed cable without it will pass picture perfectly and fail at eARC, which makes it look like a settings problem when it's a hardware one. Ultra High Speed cables are cheap; on a wall-mounted job it's worth using one from the start, because the run behind drywall is the one you least want to redo.</li>
+            <li><strong>TV speakers still selected.</strong> Audio output needs to be pointed at the external system, not the panel.</li>
+            <li><strong>Volume mode.</strong> Some sets need the audio output set to variable rather than fixed before CEC volume commands do anything.</li>
+            <li><strong>Everything off and on again, in order.</strong> CEC negotiates the device map at power-up, and a chain that was reconfigured while running often just needs to renegotiate. Power everything down, then bring it up starting with the TV.</li>
+        </ol>
+
+        <div class="pro-tip">
+            <span class="pro-tip-label">&#9733; Pro Tip</span>
+            <p><strong>If devices randomly switch themselves on, that's CEC working too well.</strong> A console phoning home or a streaming box installing an update overnight can send a wake command that cascades through the whole rack.</p>
+            <p>Don't disable CEC across the system to stop it &mdash; you'll lose everything above. Find the one device doing the waking and turn CEC off on that box alone.</p>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <h2>Why This Matters When The TV Goes On The Wall</h2>
+        <p>All of this is easy at a desk and genuinely annoying once the TV is mounted.</p>
+        <p>A wall-mounted TV usually means the cable is in the wall, the receiver is across the room in a cabinet, and getting to the back of the panel means taking the set off the mount. Discovering then that the cable you buried doesn't support eARC, or that the run went into the wrong HDMI port, is not a five-minute fix.</p>
+        <p>So on a <a href="/home-theater-installation" style="color:var(--gold-text, #C8A94A);">home theater install</a> we sort the handshake out before the TV goes up: right port, right cable, CEC confirmed on at every device, eARC negotiating, one remote proven to drive the whole chain. It's a few extra minutes standing at the rack, and it's the difference between a system somebody enjoys and one where three remotes live on the coffee table permanently.</p>
+        <p>Same logic applies to a <a href="/soundbar-installation" style="color:var(--gold-text, #C8A94A);">soundbar</a>: it's one HDMI cable to the eARC port and a couple of settings, and it either ends up controlled by the TV remote or it doesn't.</p>
+    </div>
+
+    <div class="content-card">
+        <h2>The Short Version</h2>
+        <ul>
+            <li>eARC moves audio. HDMI-CEC moves commands. Same cable, different features, different menus.</li>
+            <li>Your remote controlling the receiver is CEC. Lossless Atmos reaching that receiver is eARC.</li>
+            <li>eARC's ~37 Mbps versus ARC's ~1 Mbps is what allows uncompressed 7.1, Dolby TrueHD and DTS:X.</li>
+            <li>Every brand renamed CEC &mdash; Anynet+, SimpLink, BRAVIA Sync, VIERA Link, HDMI Control, RIHD.</li>
+            <li>It must be enabled on every device in the chain, and plenty ship with it off.</li>
+            <li>Use the labelled ARC/eARC port, and a High Speed-with-Ethernet or Ultra High Speed cable.</li>
+            <li>Devices waking by themselves is CEC misfiring &mdash; disable it on the one guilty box, not everywhere.</li>
+            <li>Sort all of it out <em>before</em> the TV goes on the wall.</li>
+        </ul>
+    </div>
+
+    <div class="content-card" style="text-align:center; border-color:rgba(var(--gold-rgb, 200,169,74),0.4);">
+        <h2>Want One Remote To Run Everything?</h2>
+        <p>We mount the TV, run the cable, and set up the handshake between your TV, receiver and sources &mdash; anywhere in the Chicago area. Flat rate, no surprises.</p>
+        <a href="/?source=Blog%20-%20eARC%20and%20CEC#bookingForm" class="cta-btn" style="margin-top:12px;">BOOK YOUR $100 INSTALL &rarr;</a>
+        <p style="margin-top:16px; font-size:13px;"><a href="/blog/" style="color:var(--slate-light);">&larr; More from the blog</a></p>
+    </div>
+
+</div>
+
+<footer class="site-footer">
+    <p class="bebas" style="font-size:28px; color: var(--gold-text, #C8A94A); letter-spacing:0.06em;">TV Install Chicago</p>
+    <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color: var(--slate-light); margin-top:4px;">$100 Flat Rate &middot; Any TV &middot; Any Size &middot; Always</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+        <a href="tel:+16305922982" class="contact-pill">&#128222; (630) 592-2982</a>
+        <!--email_off--><a href="mailto:tvinstallchicago@gmail.com" class="contact-pill">&#9993; tvinstallchicago@gmail.com</a><!--/email_off-->
+        <a href="/" class="contact-pill">&larr; Back to Home</a>
+    </div>
+    <p style="margin-top:24px; font-size:11px; color: rgba(var(--gold-rgb, 200,169,74),0.7); letter-spacing:0.05em;">&copy; TV Install Chicago &middot; The $100 Promise</p>
+</footer>
+<script src="/js/report-problem.js"></script></main>
+</body>
+</html>
