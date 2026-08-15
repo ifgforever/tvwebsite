@@ -24,3 +24,11 @@
 /es/challenge /es/ 301
 /pl/challenge.html /pl/ 301
 /pl/challenge /pl/ 301
+
+# "Premier TV Mounting & Home Theater Installation in Chicago" was a 359-word
+# services listing filed as a blog post -- What We Do / Why Choose Us / Ready To
+# Transform Your Space. It duplicated /home-theater-installation and competed
+# with it for the same term, splitting our own signal. It ranked for nothing, so
+# there is no traffic to lose. Send it to the real service page.
+/blog/tv-mounting-home-theater-chicago.html /home-theater-installation 301
+/blog/tv-mounting-home-theater-chicago /home-theater-installation 301

@@ -589,7 +589,6 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     # per-language loop below via EN_ONLY_PAGES.
     EN_ONLY_PAGES = [
         ("blog/tv-release-calendar", "0.5"),
-        ("blog/tv-mounting-home-theater-chicago", "0.5"),
     ]
     LANG_ROOT = {"en": "/", "es": "/es/", "pl": "/pl/"}
     urls = []
