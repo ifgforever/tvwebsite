@@ -40,6 +40,9 @@
   .feature-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:8px; background:rgba(var(--gold-rgb, 200,169,74),0.15); font-size:20px; flex-shrink:0; }
   .cta-pill { display:inline-flex; align-items:center; gap:8px; background:var(--paper); color:var(--ink); padding:12px 24px; border-radius:999px; font-weight:600; text-decoration:none; }
   .cta-pill:hover { background:var(--gold); color:var(--on-gold, #0A0A0A); }
+  .commitment-note { margin-top:56px; padding:28px; border-left:3px solid var(--gold); background:rgba(var(--gold-rgb, 200,169,74),0.06); border-radius:0 8px 8px 0; }
+  .commitment-note h2 { color:var(--gold-text, #C8A94A); }
+  @media (max-width: 640px) { .commitment-note { padding:22px 20px; } }
 </style>
 <link rel="stylesheet" href="/css/theme.css">
 <script src="/js/theme.js" defer></script>
@@ -149,6 +152,13 @@
     </div>
 
   </div>
+
+  <section class="commitment-note">
+    <h2 class="display text-3xl mb-4">Zobowiązanie, Które Sami Sobie Stawiamy</h2>
+    <p class="text-[15px] leading-relaxed mb-4">Wszystko, co jest na tej stronie, zaczęło się od uwagi jakiegoś klienta. To nie hasło reklamowe — to zobowiązanie, które podjęliśmy wobec samych siebie w takim samym stopniu, jak wobec Ciebie, bo doszliśmy do wniosku, że to jedyny dobry sposób prowadzenia firmy. Każdy kontakt z drugą osobą czegoś nas uczy, a po każdym zleceniu zadajemy to samo pytanie: co ułatwiłoby Ci całą sprawę? Potem to poprawiamy, zanim kolejny klient natrafi na to samo.</p>
+    <p class="text-[15px] leading-relaxed mb-4">Oto, czego od siebie wymagamy. Rezerwacji online, która naprawdę działa. Wyceny, która jest dobra za pierwszym razem, a nie za trzecim. Niejasności wyjaśnionych w kilka minut, a nie w kilka dni. Możliwości rozmowy z każdym w języku, którym naprawdę mówi. Od Twojej pierwszej wiadomości po ostatnią śrubę w ścianie poważnie traktujemy całą tę drogę — i żadnego jej odcinka nie uznajemy za skończony.</p>
+    <p class="text-[15px] leading-relaxed">Każdemu, kto pokazał nam lepszy sposób: dziękujemy, szczerze. Ta strona jest w takim samym stopniu Twoim dziełem, co naszym.</p>
+  </section>
 
   <div class="text-center mt-14">
     <a href="https://shop.tvserviceschicago.com" class="cta-pill">Zarezerwuj montaż za $100 &rarr;</a>

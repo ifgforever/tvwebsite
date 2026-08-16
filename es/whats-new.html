@@ -40,6 +40,9 @@
   .feature-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:8px; background:rgba(var(--gold-rgb, 200,169,74),0.15); font-size:20px; flex-shrink:0; }
   .cta-pill { display:inline-flex; align-items:center; gap:8px; background:var(--paper); color:var(--ink); padding:12px 24px; border-radius:999px; font-weight:600; text-decoration:none; }
   .cta-pill:hover { background:var(--gold); color:var(--on-gold, #0A0A0A); }
+  .commitment-note { margin-top:56px; padding:28px; border-left:3px solid var(--gold); background:rgba(var(--gold-rgb, 200,169,74),0.06); border-radius:0 8px 8px 0; }
+  .commitment-note h2 { color:var(--gold-text, #C8A94A); }
+  @media (max-width: 640px) { .commitment-note { padding:22px 20px; } }
 </style>
 <link rel="stylesheet" href="/css/theme.css">
 <script src="/js/theme.js" defer></script>
@@ -149,6 +152,13 @@
     </div>
 
   </div>
+
+  <section class="commitment-note">
+    <h2 class="display text-3xl mb-4">Un Compromiso Que Nos Exigimos</h2>
+    <p class="text-[15px] leading-relaxed mb-4">Todo lo que está en esta página empezó como algo que nos dijo un cliente. Eso no es un eslogan — es un compromiso que hemos hecho con nosotros mismos tanto como contigo, porque hemos llegado a creer que es la única buena manera de llevar un negocio. Cada interacción que tenemos con alguien nos enseña algo, y después de cada trabajo hacemos la misma pregunta: ¿qué habría hecho esto más fácil para ti? Luego lo arreglamos antes de que el próximo cliente se tope con lo mismo.</p>
+    <p class="text-[15px] leading-relaxed mb-4">Esto es lo que nos exigimos. Una reserva en línea que de verdad funcione. Un presupuesto que salga bien la primera vez y no a la tercera. Cualquier confusión aclarada en minutos, no en días. Poder hablar con cada persona en el idioma que de verdad habla. Desde tu primer mensaje hasta el último tornillo en la pared, nos tomamos en serio todo ese recorrido — y no damos ninguna parte por terminada.</p>
+    <p class="text-[15px] leading-relaxed">A quien nos haya enseñado una mejor manera de hacer esto: gracias, de verdad. Esta página es tanto obra tuya como nuestra.</p>
+  </section>
 
   <div class="text-center mt-14">
     <a href="https://shop.tvserviceschicago.com" class="cta-pill">Reserva tu instalación por $100 &rarr;</a>

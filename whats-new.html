@@ -40,6 +40,9 @@
   .feature-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:8px; background:rgba(var(--gold-rgb, 200,169,74),0.15); font-size:20px; flex-shrink:0; }
   .cta-pill { display:inline-flex; align-items:center; gap:8px; background:var(--paper); color:var(--ink); padding:12px 24px; border-radius:999px; font-weight:600; text-decoration:none; }
   .cta-pill:hover { background:var(--gold); color:var(--on-gold, #0A0A0A); }
+  .commitment-note { margin-top:56px; padding:28px; border-left:3px solid var(--gold); background:rgba(var(--gold-rgb, 200,169,74),0.06); border-radius:0 8px 8px 0; }
+  .commitment-note h2 { color:var(--gold-text, #C8A94A); }
+  @media (max-width: 640px) { .commitment-note { padding:22px 20px; } }
 </style>
 <link rel="stylesheet" href="/css/theme.css">
 <script src="/js/theme.js" defer></script>
@@ -149,6 +152,13 @@
     </div>
 
   </div>
+
+  <section class="commitment-note">
+    <h2 class="display text-3xl mb-4">A Commitment We Hold Ourselves To</h2>
+    <p class="text-[15px] leading-relaxed mb-4">Everything on this page started as something a customer told us. That's not a slogan — it's a commitment we've made to ourselves as much as to you, because we've come to believe it's the only good way to run a business. Every interaction we have with someone teaches us something, and after each job we ask the same question: what would have made this easier for you? Then we go fix it before the next client runs into it.</p>
+    <p class="text-[15px] leading-relaxed mb-4">So this is what we hold ourselves to. Online booking that actually works. A quote that's right the first time instead of the third. Confusion cleared up in minutes instead of days. Being able to talk with someone in the language they actually speak. From your first message to the last screw in the wall, we take that whole stretch seriously — and we don't treat any of it as finished.</p>
+    <p class="text-[15px] leading-relaxed">To anyone who's shown us a better way of doing this: thank you, sincerely. This page is your work as much as it is ours.</p>
+  </section>
 
   <div class="text-center mt-14">
     <a href="https://shop.tvserviceschicago.com" class="cta-pill">Book Your $100 Install &rarr;</a>
