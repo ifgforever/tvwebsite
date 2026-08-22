@@ -61,7 +61,10 @@ export function makeTv(wall: Wall, sizeClass = 75): TvComponent {
   const s = TV_SIZES[sizeClass] ?? TV_SIZES[75];
   return {
     id: uid('tv'), type: 'tv', label: `${sizeClass}" TV`,
-    x: snap(wall.widthIn / 2 - s.w / 2), y: 47, w: s.w, h: s.h, depthIn: 0,
+    // Stacked to clear a typical 8" fireplace clearance to combustibles with
+    // the soundbar between: fireplace top 35-1/2", soundbar at 44", TV at 48".
+    // Real clearances still come from the manual and are checked in validate.ts.
+    x: snap(wall.widthIn / 2 - s.w / 2), y: 48, w: s.w, h: s.h, depthIn: 0,
     locked: false, z: 30,
     props: {
       sizeClass, dimensionsVerified: false, manufacturer: '', model: '',
@@ -94,7 +97,7 @@ export function makeFireplace(wall: Wall, advertisedIn: number = 60): FireplaceC
 export function makeSoundbar(wall: Wall, w = 44): SoundbarComponent {
   return {
     id: uid('sb'), type: 'soundbar', label: 'Soundbar',
-    x: snap(wall.widthIn / 2 - w / 2), y: 41, w, h: 2.75, depthIn: 0,
+    x: snap(wall.widthIn / 2 - w / 2), y: 44, w, h: 2.75, depthIn: 0,
     locked: false, z: 25,
     props: { manufacturer: '', model: '', mount: 'wall', weightLb: 8, dimensionsVerified: false },
   };

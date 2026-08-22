@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes, useLocation, useNavigate, useParams } fro
 import { checkHealth, api } from './lib/api';
 import { flush, store, useStore } from './lib/store';
 import { validateDesign, blockers } from '@shared/calc/validate';
+import { COMPANY } from '@shared/company';
 import { Icon } from './components/icons';
 import { Toaster, toast } from './components/ui';
 import { STATUS_LABEL, STATUS_TONE } from './lib/format';
@@ -80,7 +81,7 @@ function Brand() {
       <div className="rail-mark">MW</div>
       <div>
         <div className="rail-name">MEDIA WALL</div>
-        <div className="rail-sub">DESIGNER · TV INSTALL CHICAGO</div>
+        <div className="rail-sub">DESIGNER · {COMPANY.nameDisplay}</div>
       </div>
     </Link>
   );

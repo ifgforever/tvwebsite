@@ -1,6 +1,6 @@
 # Media Wall Designer
 
-A field tool for TV Install Chicago: take a customer from a blank wall to a
+A field tool for TV Install Chicago (tvserviceschicago.com): take a customer from a blank wall to a
 dimensioned design, a realistic preview, a construction drawing set, a material
 list, an optimised cut list, a priced estimate and a printable proposal — in one
 sitting, on a phone, in somebody's living room.
@@ -32,6 +32,7 @@ npm run preview              # builds, then serves everything on :8787
 Useful extras:
 
 ```bash
+npm test                     # 36 assertions over the calculation engine
 npm run typecheck            # both tsconfigs — app and worker
 npm run calc                 # prints the whole take-off for a default project
 npm run icons                # regenerates the PWA icons from public/icon.svg

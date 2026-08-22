@@ -10,6 +10,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { CATEGORY_LABEL, MARKET_BENCHMARK } from '@shared/catalog';
+import { COMPANY, companyContactLine } from '@shared/company';
 import { computeTakeOff } from '@shared/calc/materials';
 import { computeEstimate } from '@shared/calc/estimate';
 import { buildTiers } from '@shared/calc/packages';
@@ -118,8 +119,9 @@ function DocPage({ title, sub, page, of, children, project }: {
       <header className="doc-head">
         <div className="doc-mark">MW</div>
         <div>
-          <div className="doc-co">TV INSTALL CHICAGO</div>
-          <div className="doc-co-sub">Custom media walls · tvinstallchicago.com · tvinstallchicago@gmail.com</div>
+          <div className="doc-co">{COMPANY.nameDisplay}</div>
+          <div className="doc-co-sub">{companyContactLine()}</div>
+          <div className="doc-co-sub">{COMPANY.email}</div>
         </div>
         <div className="doc-title">
           <div className="t">{title}</div>
@@ -129,6 +131,7 @@ function DocPage({ title, sub, page, of, children, project }: {
       {children}
       <footer className="doc-foot">
         <span>{project.customer.name || project.name}</span>
+        <span>{COMPANY.domain} · {COMPANY.phone}</span>
         <span>{fullDate(new Date().toISOString())}</span>
         <span className="pg">PAGE {page} / {of}</span>
       </footer>
@@ -161,7 +164,6 @@ function CustomerProposal({ project, take, est, tiers, issues, stamp }: Ctx) {
     <>
       <DocPage title="PROPOSAL" page={1} of={of} project={project}>
         <div style={{ position: 'relative' }}>
-          <Stamp on={stamp} />
           <div style={{ borderRadius: 4, overflow: 'hidden', border: '1px solid #DED7C8', marginBottom: 14 }}>
             {aiRender ? <img src={aiRender.url!} alt="" style={{ width: '100%', display: 'block' }} /> : <WallVector design={d} style={{ width: '100%', display: 'block' }} />}
           </div>
@@ -210,6 +212,11 @@ function CustomerProposal({ project, take, est, tiers, issues, stamp }: Ctx) {
           <p style={{ marginTop: 8, fontSize: 10.5 }}>
             {s.depositPct}% deposit of {money(est.deposit)} to schedule; balance of {money(est.balance)} on completion.
           </p>
+          {stamp && (
+            <p style={{ marginTop: 6, fontSize: 9.5, color: '#8A8278' }}>
+              Final dimensions are pending the items listed on the last page. Nothing is ordered or cut until they are confirmed.
+            </p>
+          )}
         </div>
       </DocPage>
 
@@ -318,7 +325,7 @@ function CustomerProposal({ project, take, est, tiers, issues, stamp }: Ctx) {
         </p>
 
         <div style={{ marginTop: 22, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 26 }}>
-          {['Customer signature', 'TV Install Chicago'].map((l) => (
+          {['Customer signature', COMPANY.name].map((l) => (
             <div key={l}>
               <div style={{ borderBottom: '1px solid #14110B', height: 30 }} />
               <div style={{ fontSize: 9, color: '#6B6357', marginTop: 3 }}>{l}</div>
@@ -348,9 +355,9 @@ function PlanSheet({ number, title, project, paper, stamp, notes, children, scal
         </div>
         <aside className="plan-block">
           <div className="blk">
-            <div className="co">TV INSTALL CHICAGO</div>
-            <div className="lbl" style={{ marginTop: 2 }}>CUSTOM MEDIA WALLS · CHICAGO, IL</div>
-            <div className="lbl">tvinstallchicago.com</div>
+            <div className="co">{COMPANY.nameDisplay}</div>
+            <div className="lbl" style={{ marginTop: 2 }}>{COMPANY.planSubtitle}</div>
+            <div className="lbl">{COMPANY.domain} · {COMPANY.phone}</div>
           </div>
           <div className="blk">
             <div className="lbl">PROJECT</div>

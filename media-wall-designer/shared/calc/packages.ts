@@ -5,7 +5,7 @@
  * multiplier on them. Each tier is a full model, so each tier has its own
  * drawings, take-off, cut list and price.
  */
-import type { Design, EstimateSettings, NicheComponent, TierId } from '../types';
+import type { Design, DesignComponent, EstimateSettings, NicheComponent, TierId } from '../types';
 import { computeTakeOff, type TakeOff } from './materials';
 import { computeEstimate, type EstimateResult } from './estimate';
 import { seedLighting } from '../defaults';
@@ -38,6 +38,20 @@ export const TIERS: TierDefinition[] = [
   },
 ];
 
+/**
+ * Deep-enough copy of a component: a new object with a new props object.
+ *
+ * The tier builders derive new designs from the one on screen. Without this they
+ * would be filtering the LIVE component array and holding the same object
+ * references, so any positional adjustment below would silently move the real
+ * design — which is exactly what happened: opening the estimate screen dropped
+ * the TV into the fireplace clearance and stamped the drawing set.
+ */
+const cloneComponent = <T extends DesignComponent>(c: T): T =>
+  ({ ...c, props: { ...(c as { props: object }).props } }) as T;
+
+const cloneAll = (components: DesignComponent[]) => components.map(cloneComponent);
+
 function stripDevices(design: Design, keepKinds: string[]): Design {
   return {
     ...design,
@@ -51,20 +65,28 @@ function stripDevices(design: Design, keepKinds: string[]): Design {
 
 /** GOOD — the wall, the TV, the wiring. Nothing else. */
 export function toGood(base: Design): Design {
+  const kept = cloneAll(base.components.filter((c) => c.type === 'tv' || c.type === 'soundbar'));
+  const devices = cloneAll(
+    stripDevices(base, ['recessed_receptacle', 'low_volt_plate', 'equipment_bay']).components
+      .filter((c) => ['outlet', 'lowvolt', 'equipment'].includes(c.type)),
+  );
   const d: Design = {
     ...base,
     wall: { ...base.wall, finish: 'painted_drywall' },
-    components: base.components.filter((c) => c.type === 'tv' || c.type === 'soundbar'),
+    components: [...kept, ...devices],
     lighting: [],
   };
-  const withDevices = stripDevices({ ...base, components: base.components }, ['recessed_receptacle', 'low_volt_plate', 'equipment_bay']);
-  d.components = [...d.components, ...withDevices.components.filter((c) => ['outlet', 'lowvolt', 'equipment'].includes(c.type))];
+
   const tv = d.components.find((c) => c.type === 'tv');
   if (tv && !tv.locked) {
     // Without a fireplace under it the panel drops to a comfortable height.
+    // These writes land on the clones above, never on the live design.
     const target = Math.max(24, Math.min(tv.y, base.wall.heightIn / 2 - tv.h / 2 + 4));
     const delta = target - tv.y;
-    for (const c of d.components) if (!c.locked) c.y = Math.max(0, c.y + (c.type === 'tv' || c.type === 'soundbar' ? delta : 0));
+    for (const c of d.components) {
+      if (c.locked) continue;
+      if (c.type === 'tv' || c.type === 'soundbar') c.y = Math.max(0, c.y + delta);
+    }
   }
   return d;
 }
@@ -77,7 +99,7 @@ export function toBetter(base: Design): Design {
   const left = niches.filter((n) => n.x < mid).sort((a, b) => Math.abs(mid - (a.y + a.h / 2)) - Math.abs(mid - (b.y + b.h / 2)))[0];
   const rightN = niches.filter((n) => n.x >= mid).sort((a, b) => Math.abs(mid - (a.y + a.h / 2)) - Math.abs(mid - (b.y + b.h / 2)))[0];
   const kept = [left, rightN].filter(Boolean).map((n) => ({
-    ...n,
+    ...cloneComponent(n),
     props: { ...n.props, lighting: { ...n.props.lighting, colorMode: 'warm' as const, colorHex: '#FFD9A0', kind: 'puck_and_strip' as const } },
   }));
 
@@ -85,9 +107,9 @@ export function toBetter(base: Design): Design {
     ...base,
     wall: { ...base.wall, finish: 'painted_drywall' },
     components: [
-      ...base.components.filter((c) => c.type === 'tv' || c.type === 'soundbar' || c.type === 'fireplace'),
+      ...cloneAll(base.components.filter((c) => c.type === 'tv' || c.type === 'soundbar' || c.type === 'fireplace')),
       ...kept,
-      ...base.components.filter((c) => ['outlet', 'lowvolt', 'switch', 'junction', 'equipment'].includes(c.type)),
+      ...cloneAll(base.components.filter((c) => ['outlet', 'lowvolt', 'switch', 'junction', 'equipment'].includes(c.type))),
     ],
     lighting: [],
   };
@@ -100,6 +122,7 @@ export function toBest(base: Design, premiumFinish: Design['wall']['finish'] = '
   return {
     ...base,
     wall: { ...base.wall, finish: base.wall.finish === 'painted_drywall' ? premiumFinish : base.wall.finish },
+    components: cloneAll(base.components),
   };
 }
 
