@@ -1,0 +1,95 @@
+/**
+ * Electrical / low-voltage take-off.
+ *
+ * Counts devices, circuits, wire and LED gear from the model. It does NOT size
+ * circuits, calculate load, or claim code compliance — see validate.ts. Every
+ * line-voltage item is flagged for a licensed electrician.
+ */
+import type { Design, DeviceComponent, LightingZone, NicheComponent } from '../types';
+
+export interface ElectricalResult {
+  devices: DeviceComponent[];
+  lineVoltageDevices: number;
+  lowVoltageDevices: number;
+  circuits: string[];
+  romexFt: number;
+  cat6Ft: number;
+  hdmiCount: number;
+  conduitFt: number;
+  boxes: { newWork: number; oldWork: number; recessed: number; junction: number };
+  puckCount: number;
+  stripFt: number;
+  stripReels: number;
+  channelSticks: number;
+  drivers: number;
+  controllers: number;
+  driverWatts: number;
+  notes: string[];
+}
+
+/** Assumed home-run length when the panel location is unknown. Editable per job. */
+export const DEFAULT_HOMERUN_FT = 45;
+
+/** Nameplate of the driver in the catalog. */
+export const DRIVER_WATTS = 150;
+
+export function calcElectrical(design: Design, homeRunFt = DEFAULT_HOMERUN_FT): ElectricalResult {
+  const devices = design.components.filter(
+    (c): c is DeviceComponent => c.type === 'outlet' || c.type === 'lowvolt' || c.type === 'switch' || c.type === 'junction' || c.type === 'equipment',
+  );
+  const niches = design.components.filter((c): c is NicheComponent => c.type === 'niche');
+  const zones: LightingZone[] = design.lighting;
+
+  const circuits = [...new Set(devices.filter((d) => d.props.lineVoltage && d.props.circuit).map((d) => d.props.circuit))].sort();
+  const lineVoltageDevices = devices.filter((d) => d.props.lineVoltage).length;
+  const lowVoltageDevices = devices.length - lineVoltageDevices;
+
+  const wallLf = (design.wall.widthIn + design.wall.heightIn) / 12;
+  const romexFt = Math.ceil(Math.max(1, circuits.length) * homeRunFt + lineVoltageDevices * wallLf * 0.6);
+  const cat6Ft = Math.ceil(homeRunFt + wallLf);
+  const hdmiCount = devices.some((d) => d.props.kind === 'low_volt_plate' || d.props.kind === 'hdmi') ? 2 : 0;
+  const conduitFt = Math.ceil(design.wall.heightIn / 12 + 6);
+
+  const puckCount = niches.reduce(
+    (s, n) => s + (n.props.lighting.kind === 'puck' || n.props.lighting.kind === 'puck_and_strip' ? n.props.lighting.puckCount : 0), 0,
+  );
+  const stripNiches = niches.filter((n) => n.props.lighting.kind === 'led_strip' || n.props.lighting.kind === 'puck_and_strip');
+  const nicheStripFt = stripNiches.reduce((s, n) => s + (2 * (n.w + n.h)) / 12, 0);
+  const otherStripFt = zones.filter((z) => z.kind !== 'niche_strip' && z.kind !== 'niche_puck').reduce((s, z) => s + z.lengthFt, 0);
+  const stripFt = Math.ceil(nicheStripFt + otherStripFt);
+
+  const driverWatts = Math.ceil(stripFt * 4.5 + puckCount * 3);
+  // 150 W drivers loaded to 80% — never run a supply at its nameplate.
+  const drivers = stripFt || puckCount ? Math.max(1, Math.ceil(driverWatts / (DRIVER_WATTS * 0.8))) : 0;
+  const controllers = zones.filter((z) => z.colorMode === 'rgb' || z.colorMode === 'rgbw').length ? Math.max(1, Math.ceil(stripFt / 65)) : 0;
+
+  const notes: string[] = [];
+  if (lineVoltageDevices) notes.push('All line-voltage work by a licensed electrician; permit may be required.');
+  if (drivers) notes.push('LED driver and controller must remain accessible — no concealed splices.');
+  if (design.components.some((c) => c.type === 'fireplace')) notes.push('Fireplace circuit, receptacle type and location per the manufacturer’s installation instructions.');
+
+  return {
+    devices,
+    lineVoltageDevices,
+    lowVoltageDevices,
+    circuits: circuits.length ? circuits : ['A'],
+    romexFt,
+    cat6Ft,
+    hdmiCount,
+    conduitFt,
+    boxes: {
+      newWork: devices.filter((d) => d.props.lineVoltage && d.props.kind !== 'junction_box' && d.props.kind !== 'recessed_receptacle' && d.props.kind !== 'led_driver').length,
+      oldWork: 1,
+      recessed: devices.filter((d) => d.props.kind === 'recessed_receptacle').length,
+      junction: devices.filter((d) => d.props.kind === 'junction_box' || d.props.kind === 'led_driver').length,
+    },
+    puckCount,
+    stripFt,
+    stripReels: Math.ceil(stripFt / 16.4),
+    channelSticks: Math.ceil(nicheStripFt / 6.6),
+    drivers,
+    controllers,
+    driverWatts,
+    notes,
+  };
+}

@@ -1,0 +1,32 @@
+name = "media-wall-designer"
+main = "worker/index.ts"
+compatibility_date = "2025-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+[observability]
+enabled = true
+
+# D1 — create with:  wrangler d1 create media_wall_designer
+# then paste the returned database_id below.
+[[d1_databases]]
+binding = "DB"
+database_name = "media_wall_designer"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# R2 is optional. Photos fall back to D1 storage when this binding is absent.
+# Create with: wrangler r2 bucket create media-wall-photos
+# [[r2_buckets]]
+# binding = "PHOTOS"
+# bucket_name = "media-wall-photos"
+
+[vars]
+# AI rendering is pluggable. Leave unset and the app uses its deterministic
+# vector renderer only. See worker/routes/renderings.ts.
+AI_IMAGE_PROVIDER = ""
+# Secrets (never put these in vars):  wrangler secret put AI_IMAGE_API_KEY

@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Print — two documents from one model.
+     · Customer proposal   → letter portrait, warm, no internal costs
+     · Plan set (blueprint)→ landscape sheets with a title block, at Letter,
+                             Tabloid 11×17 or ARCH D 24×36
+   Paper size is chosen in the UI and applied via a class on <html>.
+   ========================================================================== */
+
+@media screen {
+  .print-root { max-width: 1000px; margin: 0 auto; }
+  .sheet-page {
+    background: #fff; color: #111; margin: 0 auto 18px;
+    box-shadow: 0 10px 34px rgba(0, 0, 0, .6);
+    border-radius: 3px;
+    width: 100%; max-width: 1000px;
+  }
+}
+
+/* Page size is injected at print time by PackageScreen — @page can't be scoped
+   to a class, so the chosen sheet size is written into a <style> element. */
+@page { margin: 0; }
+
+@media print {
+  html, body { background: #fff !important; margin: 0; padding: 0; }
+  .no-print, .rail, .topbar, .tabbar, .toolbar, .toast { display: none !important; }
+  .content { padding: 0 !important; }
+  .print-root { max-width: none; }
+  .sheet-page {
+    box-shadow: none !important; border-radius: 0 !important;
+    page-break-after: always; break-after: page;
+    margin: 0 !important; width: 100% !important; max-width: none !important;
+  }
+  .sheet-page:last-child { page-break-after: auto; break-after: auto; }
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ------------------------------------------------------------ shared page */
+
+.sheet-page {
+  background: #fff; color: #14110B;
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  position: relative;
+  display: flex; flex-direction: column;
+  box-sizing: border-box;
+}
+.sheet-page * { box-sizing: border-box; }
+
+/* Proposal pages — portrait, generous, brand-warm. */
+.sheet-page.doc { padding: 0.6in 0.65in; aspect-ratio: 8.5 / 11; }
+.doc-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  border-bottom: 2.5px solid #C8A94A; padding-bottom: 11px; margin-bottom: 16px;
+}
+.doc-mark {
+  width: 40px; height: 40px; border-radius: 8px; flex: none;
+  background: linear-gradient(140deg, #E5C97A, #C8A94A 45%, #7A5E12);
+  color: #14110B; display: grid; place-items: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 21px; padding-top: 2px;
+}
+.doc-co { font-family: 'Bebas Neue', sans-serif; font-size: 23px; letter-spacing: .05em; line-height: 1; }
+.doc-co-sub { font-size: 10.5px; color: #6B6357; letter-spacing: .04em; }
+.doc-title { margin-left: auto; text-align: right; }
+.doc-title .t { font-family: 'Bebas Neue', sans-serif; font-size: 25px; letter-spacing: .06em; line-height: 1; }
+.doc-title .s { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .14em; color: #8A8278; text-transform: uppercase; }
+
+.doc h2 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: .06em;
+  border-bottom: 1px solid #DED7C8; padding-bottom: 4px; margin: 16px 0 9px;
+}
+.doc h2:first-of-type { margin-top: 0; }
+.doc p { font-size: 11.5px; line-height: 1.5; margin: 0 0 8px; }
+.doc-foot {
+  margin-top: auto; padding-top: 10px; border-top: 1px solid #DED7C8;
+  font-size: 8.5px; color: #8A8278; display: flex; gap: 12px; align-items: baseline;
+}
+.doc-foot .pg { margin-left: auto; font-family: 'JetBrains Mono', monospace; }
+
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 11.5px; }
+.kv dt { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: #8A8278; padding-top: 2px; }
+.kv dd { margin: 0; }
+
+table.doc-table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+table.doc-table th {
+  text-align: left; padding: 5px 6px; background: #F5F0E8;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: #6B6357;
+  border-bottom: 1px solid #C8A94A;
+}
+table.doc-table td { padding: 4px 6px; border-bottom: 1px solid #EDE7DA; vertical-align: top; }
+table.doc-table td.num, table.doc-table th.num { text-align: right; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+table.doc-table tr.sub td { background: #FAF7F1; font-weight: 700; }
+table.doc-table tr.group td { background: #14110B; color: #F5F0E8; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: .07em; padding: 4px 6px; }
+
+.total-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 12px; border-bottom: 1px solid #EDE7DA; }
+.total-row.big { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: .03em; border-bottom: 0; border-top: 2.5px solid #C8A94A; padding-top: 9px; margin-top: 5px; }
+.total-row .num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+.total-row.big .num { font-family: 'Bebas Neue', sans-serif; }
+
+.warn-box { border: 1.5px solid #A8471F; background: #FDF4EE; padding: 9px 11px; border-radius: 4px; font-size: 10px; line-height: 1.45; }
+.warn-box h4 { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .06em; color: #A8471F; margin: 0 0 4px; }
+.warn-box ul { margin: 0; padding-left: 15px; }
+.warn-box li { margin-bottom: 3px; }
+
+/* --------------------------------------------------------- plan sheets */
+
+/* A real sheet: border, title block down the right edge, drawing field left. */
+.sheet-page.plan {
+  aspect-ratio: var(--plan-ratio, 17 / 11);
+  padding: 0.28in;
+  background: #fff;
+}
+.plan-frame {
+  flex: 1; border: 2px solid #14110B; display: flex; min-height: 0;
+}
+.plan-field { flex: 1; position: relative; padding: 10px; min-width: 0; display: flex; flex-direction: column; }
+.plan-field > svg { flex: 1; width: 100%; height: 100%; }
+.plan-block {
+  width: 2.1in; flex: none; border-left: 2px solid #14110B;
+  display: flex; flex-direction: column; font-size: 8px;
+}
+.plan-block .blk { border-bottom: 1px solid #14110B; padding: 5px 6px; }
+.plan-block .blk:last-child { border-bottom: 0; }
+.plan-block .lbl { font-family: 'JetBrains Mono', monospace; font-size: 6.5px; letter-spacing: .12em; text-transform: uppercase; color: #6B6357; }
+.plan-block .val { font-size: 9.5px; line-height: 1.25; }
+.plan-block .co { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: .05em; line-height: 1; }
+.plan-block .sheet-no { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: .04em; line-height: 1; }
+.plan-notes { font-size: 7.5px; line-height: 1.35; }
+.plan-notes li { margin-bottom: 2px; }

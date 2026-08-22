@@ -1,0 +1,36 @@
+{
+  "name": "media-wall-designer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Media Wall Designer \u2014 dimensioned media-wall design, drawings, materials and proposals for TV Install Chicago",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "vite",
+    "dev:api": "wrangler dev --port 8787",
+    "build": "tsc -b && vite build",
+    "preview": "npm run build && wrangler dev --port 8787",
+    "typecheck": "tsc -b --pretty false",
+    "db:migrate:local": "wrangler d1 migrations apply media_wall_designer --local",
+    "db:migrate:remote": "wrangler d1 migrations apply media_wall_designer --remote",
+    "deploy": "npm run build && wrangler deploy",
+    "calc": "node scripts/calc.mjs",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260820.1",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4",
+    "wrangler": "^4.51.1"
+  },
+  "dependencies": {
+    "hono": "^4.10.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.4"
+  }
+}
