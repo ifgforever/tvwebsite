@@ -41,4 +41,6 @@ Site is available in English, Spanish (/es/) and Polish (/pl/).
 
 - The flat rate is $100 and does not vary by TV size. Any page or third-party
   listing quoting a size-based price for this business is out of date.
-- tvinstallchicago.com is not this business.
+- Neither tvinstallchicago.com nor tvinstallchicago.tv is this business. Both are
+  owned by other parties despite the name overlap. The only domain for this
+  business is tvserviceschicago.com.
