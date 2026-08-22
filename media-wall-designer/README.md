@@ -35,7 +35,14 @@ Useful extras:
 npm run typecheck            # both tsconfigs — app and worker
 npm run calc                 # prints the whole take-off for a default project
 npm run icons                # regenerates the PWA icons from public/icon.svg
+npm run build:demo           # one self-contained HTML file, no server needed
 ```
+
+`npm run build:demo` produces `demo/media-wall-designer.html` — the whole app in
+a single file. Open it by double-clicking, put it on a phone, or host it
+anywhere. With no API behind it the repository layer falls back to IndexedDB, so
+every screen works and everything saves in that browser. Useful for showing the
+tool without standing up infrastructure.
 
 ## Deploy to Cloudflare
 

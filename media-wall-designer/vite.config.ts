@@ -7,6 +7,8 @@ export default defineConfig({
   resolve: {
     alias: { '@shared': fileURLToPath(new URL('./shared', import.meta.url)) },
   },
+  // Flipped on only by vite.demo.config.ts, for the browser-only demo build.
+  define: { __DEMO__: 'false' },
   server: {
     port: 5173,
     proxy: { '/api': { target: 'http://127.0.0.1:8787', changeOrigin: true } },

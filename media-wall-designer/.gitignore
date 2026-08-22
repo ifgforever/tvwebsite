@@ -4,3 +4,7 @@ dist/
 .dev.vars
 *.local
 .DS_Store
+
+# Demo build intermediates. The single-file output in demo/ is committed so the
+# app can be opened with no toolchain; regenerate it with `npm run build:demo`.
+dist-demo/

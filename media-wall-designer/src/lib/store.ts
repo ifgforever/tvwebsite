@@ -8,6 +8,7 @@
 import { useSyncExternalStore } from 'react';
 import type { Design, DesignComponent, EstimateSettings, PhotoRef, Project, RenderingRef } from '@shared/types';
 import { api, getConnection, onConnectionChange } from './api';
+import { localDb } from './localdb';
 
 export type SaveState = 'clean' | 'dirty' | 'saving' | 'saved' | 'offline' | 'error';
 
@@ -50,6 +51,10 @@ export function useStore(): StoreState { return useSyncExternalStore(subscribe, 
 function scheduleSave(note = '') {
   if (saveTimer) clearTimeout(saveTimer);
   set({ saveState: 'dirty' });
+  // Write to the local mirror straight away — the debounce is about not
+  // hammering the network, not about risking the user's work. If the phone
+  // dies mid-edit, the last change is already on the device.
+  if (state.project) void localDb.put(state.project, true).catch(() => {});
   saveTimer = setTimeout(() => { void flush(note); }, AUTOSAVE_MS);
 }
 

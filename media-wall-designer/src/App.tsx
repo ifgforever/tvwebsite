@@ -110,9 +110,19 @@ function ProjectShell() {
   }, [id]);
 
   useEffect(() => {
-    const onHide = () => { if (document.visibilityState === 'hidden') void flush(); };
-    document.addEventListener('visibilitychange', onHide);
-    return () => document.removeEventListener('visibilitychange', onHide);
+    // Autosave is debounced, so anything that can end the page has to force a
+    // flush: a phone backgrounding the app, a reload, a closed tab. pagehide is
+    // the one that reliably fires on iOS Safari.
+    const onHide = () => { void flush(); };
+    const onVisibility = () => { if (document.visibilityState === 'hidden') void flush(); };
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pagehide', onHide);
+    window.addEventListener('beforeunload', onHide);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pagehide', onHide);
+      window.removeEventListener('beforeunload', onHide);
+    };
   }, []);
 
   if (loading) return <div className="app"><div className="main"><div className="content"><div className="empty"><div className="display">LOADING…</div></div></div></div></div>;

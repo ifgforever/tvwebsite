@@ -61,8 +61,16 @@ export function ProjectsScreen() {
         </div>
 
         {connection === 'offline' && (
-          <div className="note warn" style={{ marginBottom: 14 }}>
-            <strong>Offline.</strong> Projects are saving to this device and will sync when you get signal back.
+          <div className={`note ${__DEMO__ ? 'gold' : 'warn'}`} style={{ marginBottom: 14 }}>
+            {__DEMO__ ? (
+              <>
+                <strong>Demo build.</strong> There is no server behind this copy, so everything saves in this browser —
+                design, photos, prices and all. Edit anything, reload, it is still here. Deploy it with D1 and the same
+                screens read and write the database instead.
+              </>
+            ) : (
+              <><strong>Offline.</strong> Projects are saving to this device and will sync when you get signal back.</>
+            )}
           </div>
         )}
         {health && !health.db && (

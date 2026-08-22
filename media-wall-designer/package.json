@@ -9,6 +9,7 @@
     "dev:web": "vite",
     "dev:api": "wrangler dev --port 8787",
     "build": "tsc -b && vite build",
+    "build:demo": "vite build --config vite.demo.config.ts && node scripts/build-demo.mjs",
     "preview": "npm run build && wrangler dev --port 8787",
     "typecheck": "tsc -b --pretty false",
     "db:migrate:local": "wrangler d1 migrations apply media_wall_designer --local",
