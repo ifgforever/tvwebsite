@@ -32,8 +32,3 @@
 # there is no traffic to lose. Send it to the real service page.
 /blog/tv-mounting-home-theater-chicago.html /home-theater-installation 301
 /blog/tv-mounting-home-theater-chicago /home-theater-installation 301
-
-# Media Wall Designer is an internal sales/production tool that deploys as its
-# own Cloudflare Worker (see media-wall-designer/README.md). Its source lives in
-# this repo, so keep the marketing site from serving it.
-/media-wall-designer/* /404.html 404
