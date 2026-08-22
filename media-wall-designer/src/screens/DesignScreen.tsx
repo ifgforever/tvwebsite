@@ -99,6 +99,7 @@ function ObjectList({ design, selection }: { design: Design; selection: string[]
   const groups: { label: string; types: string[] }[] = [
     { label: 'Display', types: ['tv', 'soundbar', 'fireplace'] },
     { label: 'Niches & shelves', types: ['niche', 'shelf', 'custom'] },
+    { label: 'Casework & panelling', types: ['shelf_column', 'cabinet', 'panel', 'hearth'] },
     { label: 'Electrical & low voltage', types: ['outlet', 'lowvolt', 'switch', 'junction', 'equipment'] },
   ];
   return (

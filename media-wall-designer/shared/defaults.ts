@@ -10,8 +10,9 @@ import { LUMBER, TV_SIZES, FIREPLACE_PLACEHOLDER, LABOR_RATES, LABOR_ORDER } fro
 import { layoutNicheBanks } from './geometry';
 import { snap } from './units';
 import type {
-  Design, DeviceComponent, EstimateSettings, FireplaceComponent, LightingZone, NicheComponent,
-  Project, SoundbarComponent, TvComponent, Wall,
+  CabinetComponent, Design, DeviceComponent, EstimateSettings, FireplaceComponent,
+  HearthComponent, LightingZone, NicheComponent, PanelComponent, Project, ShelfColumnComponent,
+  SoundbarComponent, TvComponent, Wall,
 } from './types';
 
 /** The per-niche colours in the reference photo — this is the preview that sells. */
@@ -115,6 +116,78 @@ export function makeNiche(rect: { x: number; y: number; w: number; h: number }, 
   };
 }
 
+/* ------------------------------------------------------------- casework */
+
+export function makeShelfColumn(
+  rect: { x: number; y: number; w: number; h: number },
+  opts: Partial<ShelfColumnComponent['props']> & { label?: string; depthIn?: number } = {},
+): ShelfColumnComponent {
+  return {
+    id: uid('sc'), type: 'shelf_column', label: opts.label ?? 'Shelf column',
+    x: snap(rect.x), y: snap(rect.y), w: snap(rect.w), h: snap(rect.h),
+    depthIn: opts.depthIn ?? 12, locked: false, z: 12,
+    props: {
+      shelfCount: 4, shelfPositions: [], material: 'hardwood_ply_3_4',
+      shelfThicknessIn: 0.75, carcassThicknessIn: 0.75,
+      backPanel: true, adjustable: true, edgeBanding: true,
+      lighting: { kind: 'led_strip', colorMode: 'warm', colorHex: '#FFE3B0', intensityPct: 75, puckCount: 0 },
+      interiorColorHex: '#F2EFE9', faceColorHex: '#C8A97E',
+      ...opts,
+    },
+  };
+}
+
+export function makeCabinet(
+  rect: { x: number; y: number; w: number; h: number },
+  opts: Partial<CabinetComponent['props']> & { label?: string; depthIn?: number } = {},
+): CabinetComponent {
+  return {
+    id: uid('cab'), type: 'cabinet', label: opts.label ?? 'Base cabinet run',
+    x: snap(rect.x), y: snap(rect.y), w: snap(rect.w), h: snap(rect.h),
+    depthIn: opts.depthIn ?? 16, locked: false, z: 14,
+    props: {
+      bays: Math.max(1, Math.round(rect.w / 24)), doorStyle: 'slab', drawersPerBay: 0,
+      toeKickIn: 4, floating: false, material: 'ply_3_4', faceMaterial: 'hardwood_ply_3_4',
+      hardware: 'push_latch', countertop: false, ventilated: true, faceColorHex: '#C8A97E',
+      ...opts,
+    },
+  };
+}
+
+export function makePanel(
+  rect: { x: number; y: number; w: number; h: number },
+  opts: Partial<PanelComponent['props']> & { label?: string; depthIn?: number } = {},
+): PanelComponent {
+  return {
+    id: uid('pnl'), type: 'panel', label: opts.label ?? 'Slat panel',
+    x: snap(rect.x), y: snap(rect.y), w: snap(rect.w), h: snap(rect.h),
+    depthIn: opts.depthIn ?? 0.75, locked: false, z: 5,
+    props: {
+      pattern: 'slat', orientation: 'vertical',
+      slatWidthIn: 1.25, slatGapIn: 0.75, slatDepthIn: 0.75,
+      material: 'slat_panel_kit', colorHex: '#9A6E44', backerColorHex: '#1A1A1A',
+      inlay: false, inlayColorHex: '#C8A94A',
+      ...opts,
+    },
+  };
+}
+
+export function makeHearth(
+  rect: { x: number; y: number; w: number; h: number },
+  opts: Partial<HearthComponent['props']> & { label?: string } = {},
+): HearthComponent {
+  return {
+    id: uid('hth'), type: 'hearth', label: opts.label ?? 'Hearth ledge',
+    x: snap(rect.x), y: snap(rect.y), w: snap(rect.w), h: snap(rect.h),
+    depthIn: 0, locked: false, z: 16,
+    props: {
+      projectionIn: 12, material: 'ply_3_4', waterfall: false, litToeKick: true,
+      colorHex: '#E8E2D6', seating: false,
+      ...opts,
+    },
+  };
+}
+
 export function makeDevice(
   type: DeviceComponent['type'], kind: DeviceComponent['props']['kind'], label: string,
   x: number, y: number, opts: Partial<DeviceComponent['props']> = {}, size: [number, number] = [4.5, 4.5],
@@ -182,11 +255,33 @@ export interface DesignPresetOptions {
   tvSize: number;
   fireplaceSize: number | null;
   soundbar: boolean;
+  /** Which vocabulary the wall is built from. */
+  style: WallStyle;
 }
+
+/**
+ * The three ways these walls actually get built.
+ *
+ *  drywall_niches — framed build-out, recessed lit niches, painted. The
+ *                   reference job.
+ *  built_in       — furniture-grade casework: shelf columns flanking the TV,
+ *                   a base cabinet run under it.
+ *  slat_panel     — a slat or fluted panel field behind the TV, usually with a
+ *                   floating console and a projecting hearth.
+ */
+export type WallStyle = 'drywall_niches' | 'built_in' | 'slat_panel';
+
+export const WALL_STYLES: { id: WallStyle; label: string; note: string }[] = [
+  { id: 'drywall_niches', label: 'Drywall + lit niches', note: 'Framed build-out, recessed niches, painted' },
+  { id: 'built_in', label: 'Built-in casework', note: 'Shelf columns and a base cabinet run' },
+  { id: 'slat_panel', label: 'Slat panel + console', note: 'Slat field, floating console, hearth ledge' },
+];
 
 /** The reference layout, scaled to whatever wall you give it. */
 export function createDefaultDesign(wall = defaultWall(), opts: Partial<DesignPresetOptions> = {}): Design {
-  const o: DesignPresetOptions = { nichesPerSide: 3, tvSize: 75, fireplaceSize: 60, soundbar: true, ...opts };
+  const o: DesignPresetOptions = { nichesPerSide: 3, tvSize: 75, fireplaceSize: 60, soundbar: true, style: 'drywall_niches', ...opts };
+  if (o.style === 'built_in') return createBuiltInDesign(wall, o);
+  if (o.style === 'slat_panel') return createSlatPanelDesign(wall, o);
   const design: Design = {
     schemaVersion: 1, wall, components: [], lighting: [],
     basePhotoId: null, calibration: null, designNotes: '',
@@ -218,6 +313,104 @@ export function createDefaultDesign(wall = defaultWall(), opts: Partial<DesignPr
 
   design.components.push(...seedDevices(design));
   design.lighting = seedLighting(design);
+  return design;
+}
+
+/**
+ * Built-in casework: a lit shelf column each side, TV centred, base cabinet run
+ * across the bottom. The white-painted and oak built-ins in the reference set.
+ */
+export function createBuiltInDesign(wall: Wall, o: DesignPresetOptions): Design {
+  const design: Design = {
+    schemaVersion: 1, wall: { ...wall, finish: 'painted_drywall' }, components: [], lighting: [],
+    basePhotoId: null, calibration: null, designNotes: 'Built-in casework: lit shelf columns flanking the display, base cabinet run below.',
+  };
+  const baseH = 22;
+  const colW = Math.max(14, Math.min(30, wall.widthIn * 0.17));
+  const colH = wall.heightIn - baseH - 4;
+
+  design.components.push(
+    makeCabinet({ x: 0, y: 0, w: wall.widthIn, h: baseH }, { label: 'Base cabinet run', depthIn: 16, bays: Math.max(3, Math.round(wall.widthIn / 26)), drawersPerBay: 0 }),
+    makeShelfColumn({ x: 0, y: baseH, w: colW, h: colH }, { label: 'Left shelf column' }),
+    makeShelfColumn({ x: wall.widthIn - colW, y: baseH, w: colW, h: colH }, { label: 'Right shelf column' }),
+  );
+
+  // Stack the centre bay from the cabinet top up, so nothing collides:
+  // fireplace, then soundbar, then the panel.
+  const fpTop = o.fireplaceSize ? baseH + 2 + FIREPLACE_PLACEHOLDER.heightIn : baseH;
+  if (o.fireplaceSize) {
+    const fp = makeFireplace(wall, o.fireplaceSize);
+    fp.y = snap(baseH + 2);
+    fp.x = snap(wall.widthIn / 2 - o.fireplaceSize / 2);
+    design.components.push(fp);
+  }
+  if (o.soundbar) {
+    const sb = makeSoundbar(wall, Math.min(48, Math.round(TV_SIZES[o.tvSize]?.w ?? 66) * 0.62));
+    sb.y = snap(fpTop + 3);
+    design.components.push(sb);
+  }
+  const tv = makeTv(wall, o.tvSize);
+  tv.y = snap(fpTop + (o.soundbar ? 8 : 4));
+  // Bias light stays off here — these builds use shelf and cove light instead.
+  tv.props.biasLight = false;
+  design.components.push(tv);
+  design.components.push(...seedDevices(design));
+  design.lighting = seedLighting(design);
+  design.lighting.push({
+    id: uid('lz'), label: 'Shelf strip lighting', kind: 'shelf_strip', colorMode: 'warm', colorHex: '#FFE3B0',
+    targets: design.components.filter((c) => c.type === 'shelf_column').map((c) => c.id),
+    lengthFt: Math.ceil((colW * 8) / 12), controller: 'wifi', driverWatts: 60,
+    notes: 'Strip behind the front edge of every shelf, wired back to one driver',
+  });
+  return design;
+}
+
+/**
+ * Slat panel field behind the TV, floating console under it, hearth ledge at the
+ * base, cove light haloing the panel. The dark-slat and oak-slat references.
+ */
+export function createSlatPanelDesign(wall: Wall, o: DesignPresetOptions): Design {
+  const design: Design = {
+    schemaVersion: 1, wall: { ...wall, finish: 'painted_drywall', colorHex: '#6E6E76' }, components: [], lighting: [],
+    basePhotoId: null, calibration: null, designNotes: 'Vertical slat panel field behind the display, floating console, projecting hearth ledge.',
+  };
+  const hearthH = 14;
+  const panelW = Math.min(wall.widthIn - 12, Math.max(72, wall.widthIn * 0.62));
+  const panelX = snap(wall.widthIn / 2 - panelW / 2);
+
+  design.components.push(
+    makePanel({ x: panelX, y: hearthH, w: panelW, h: wall.heightIn - hearthH }, { label: 'Vertical slat panel' }),
+    makeHearth({ x: snap(panelX - 6), y: 0, w: snap(panelW + 12), h: hearthH }, { label: 'Hearth ledge', projectionIn: 12 }),
+  );
+
+  if (o.fireplaceSize) {
+    const fp = makeFireplace(wall, o.fireplaceSize);
+    fp.y = snap(hearthH + 4);
+    fp.x = snap(wall.widthIn / 2 - o.fireplaceSize / 2);
+    design.components.push(fp);
+  }
+  const tv = makeTv(wall, o.tvSize);
+  tv.y = snap(hearthH + 4 + FIREPLACE_PLACEHOLDER.heightIn + 12);
+  // The halo around the panel does the lighting work; a blue bias fights it.
+  tv.props.biasLight = false;
+  design.components.push(tv);
+  if (o.soundbar) {
+    const sb = makeSoundbar(wall, Math.min(48, Math.round(tv.w * 0.62)));
+    sb.y = snap(tv.y - 5);
+    design.components.push(sb);
+  }
+  design.components.push(makeCabinet({ x: snap(panelX - 6), y: hearthH, w: snap(panelW + 12), h: 0.01 }, { label: 'Floating console', floating: true, depthIn: 14, drawersPerBay: 1, doorStyle: 'none' }));
+  // The console is decorative in this preset until the user gives it height.
+  design.components = design.components.filter((c) => c.h > 0.5);
+
+  design.components.push(...seedDevices(design));
+  design.lighting = seedLighting(design);
+  design.lighting.push({
+    id: uid('lz'), label: 'Panel cove halo', kind: 'cove', colorMode: 'warm', colorHex: '#FFD9A0',
+    targets: design.components.filter((c) => c.type === 'panel').map((c) => c.id),
+    lengthFt: Math.ceil((panelW * 2 + wall.heightIn * 2) / 12), controller: 'wifi', driverWatts: 70,
+    notes: 'Concealed strip washing the wall around the panel edge',
+  });
   return design;
 }
 

@@ -9,6 +9,7 @@ import { CATALOG, FINISHES } from '../catalog';
 import { calcDrywall, type DrywallResult } from './drywall';
 import { calcElectrical, type ElectricalResult } from './electrical';
 import { calcCutList, type CutListResult } from './cutlist';
+import { calcCasework, type CaseworkResult } from './casework';
 import { generateFraming, type FramingResult } from './framing';
 import { sqIn2SqFt } from '../units';
 
@@ -17,6 +18,7 @@ export interface TakeOff {
   drywall: DrywallResult;
   electrical: ElectricalResult;
   cutList: CutListResult;
+  casework: CaseworkResult;
   bom: BomLine[];
   finishSqFt: number;
 }
@@ -35,7 +37,7 @@ interface LineSpec {
 }
 
 export function buildBom(design: Design, settings: EstimateSettings, parts: {
-  framing: FramingResult; drywall: DrywallResult; electrical: ElectricalResult; cutList: CutListResult;
+  framing: FramingResult; drywall: DrywallResult; electrical: ElectricalResult; cutList: CutListResult; casework: CaseworkResult;
 }): { bom: BomLine[]; finishSqFt: number } {
   const { wall } = design;
   const waste = wall.wasteFactorPct;
@@ -126,6 +128,34 @@ export function buildBom(design: Design, settings: EstimateSettings, parts: {
     specs.push({ sku: 'FIN-BASE', qty: Math.ceil((wall.widthIn + wall.featureDepthIn * 2) / 12), wastePct: waste, derivedFrom: `${wall.widthIn}" wall + returns` });
   }
 
+  /* --------------------------------------------------------- casework */
+  const cw = parts.casework;
+  for (const plan of cw.plans) {
+    specs.push({
+      sku: plan.sku, qty: plan.sheetCount, wastePct: 0,
+      derivedFrom: `${plan.sheets.reduce((n, sh) => n + sh.parts.length, 0)} parts nested at ${plan.yieldPct}% yield`,
+    });
+  }
+  if (cw.edgeBandingLf > 0) specs.push({ sku: 'CW-EDGE', qty: Math.ceil(cw.edgeBandingLf / 250), wastePct: 0, derivedFrom: `${cw.edgeBandingLf} lf of exposed edge` });
+  if (cw.hardware.hinges) specs.push({ sku: 'CW-HINGE', qty: cw.hardware.hinges, wastePct: 0, derivedFrom: `${cw.doorCount} doors` });
+  if (cw.hardware.slidePairs) specs.push({ sku: 'CW-SLIDE', qty: cw.hardware.slidePairs, wastePct: 0, derivedFrom: `${cw.drawerCount} drawers` });
+  if (cw.hardware.pulls) specs.push({ sku: 'CW-PULL', qty: cw.hardware.pulls, wastePct: 0, derivedFrom: 'One per door and drawer' });
+  if (cw.hardware.pushLatches) specs.push({ sku: 'CW-PUSH', qty: cw.hardware.pushLatches, wastePct: 0, derivedFrom: 'Handleless fronts' });
+  if (cw.hardware.shelfPins) specs.push({ sku: 'CW-PIN', qty: Math.max(1, Math.ceil(cw.hardware.shelfPins / 100)), wastePct: 0, derivedFrom: `${cw.hardware.shelfPins} pins for ${cw.shelfCount} adjustable shelves` });
+  if (cw.hardware.levelers) specs.push({ sku: 'CW-LEVEL', qty: Math.ceil(cw.hardware.levelers / 8), wastePct: 0, derivedFrom: `${cw.hardware.levelers} levelers on floor-standing cabinets` });
+  if (cw.parts.length) {
+    specs.push({ sku: 'CW-SCREW', qty: 1, wastePct: 0, derivedFrom: `${cw.parts.length} carcass parts` });
+    specs.push({ sku: 'CW-GLUE', qty: 1, wastePct: 0, derivedFrom: 'Carcass assembly' });
+    specs.push({ sku: 'CW-FILLER', qty: Math.max(1, Math.ceil(cw.cabinetLf / 8)), wastePct: 0, derivedFrom: `${cw.cabinetLf} lf of run scribed to the wall` });
+  }
+  if (cw.slatCount > 0) {
+    // Slat kits cover roughly 7.8 sf a panel; milled stock is priced by the foot.
+    specs.push({ sku: 'CW-SLAT', qty: Math.ceil((cw.panelSqFt * (1 + waste / 100)) / 7.8), wastePct: 0, derivedFrom: `${cw.panelSqFt} sf of panelling, ${cw.slatCount} slats` });
+    if (cw.backerSheets) specs.push({ sku: 'CW-BACKER', qty: cw.backerSheets, wastePct: 0, derivedFrom: `${cw.panelSqFt} sf of backer behind the slats` });
+  }
+  if (cw.inlayLf > 0) specs.push({ sku: 'CW-INLAY', qty: Math.ceil(cw.inlayLf / 8), wastePct: 0, derivedFrom: `${cw.inlayLf} lf of reveal between slats` });
+  if (cw.hearthSqFt > 0) specs.push({ sku: 'CW-HEARTH', qty: Math.ceil(cw.hearthSqFt * (1 + waste / 100)), wastePct: 0, derivedFrom: `${cw.hearthSqFt} sf of hearth top, ${cw.hearthLf} lf` });
+
   /* -------------------------------------------------------- equipment */
   const tv = design.components.find((c) => c.type === 'tv');
   if (tv) specs.push({ sku: 'EQ-MOUNT', qty: 1, wastePct: 0, derivedFrom: `${tv.label} — ${(tv as any).props.weightLb} lb`, optional: true });
@@ -172,7 +202,7 @@ export function buildBom(design: Design, settings: EstimateSettings, parts: {
     });
   }
 
-  const order: BomCategory[] = ['framing', 'drywall', 'electrical', 'low_voltage', 'finish', 'equipment'];
+  const order: BomCategory[] = ['framing', 'drywall', 'casework', 'electrical', 'low_voltage', 'finish', 'equipment'];
   bom.sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category) || a.name.localeCompare(b.name));
   return { bom, finishSqFt: Math.round(finishSqFt * 10) / 10 };
 }
@@ -183,8 +213,9 @@ export function computeTakeOff(design: Design, settings: EstimateSettings): Take
   const drywall = calcDrywall(design);
   const electrical = calcElectrical(design);
   const cutList = calcCutList(framing.members);
-  const { bom, finishSqFt } = buildBom(design, settings, { framing, drywall, electrical, cutList });
-  return { framing, drywall, electrical, cutList, bom, finishSqFt };
+  const casework = calcCasework(design);
+  const { bom, finishSqFt } = buildBom(design, settings, { framing, drywall, electrical, cutList, casework });
+  return { framing, drywall, electrical, cutList, casework, bom, finishSqFt };
 }
 
 export const wallFaceSqFt = (design: Design) => sqIn2SqFt(design.wall.widthIn * design.wall.heightIn);

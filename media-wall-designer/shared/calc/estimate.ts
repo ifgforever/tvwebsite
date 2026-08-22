@@ -76,6 +76,17 @@ export function autoLaborHours(design: Design, take: TakeOff): Record<LaborCateg
   const electrical_h = lineV ? 2 + lineV * 0.75 + take.electrical.circuits.length * 1.5 : 0;
   const low_voltage_h = 1 + take.electrical.lowVoltageDevices * 0.5 + take.electrical.conduitFt * 0.02;
   const drywall_h = take.drywall.sheets * 0.75 + niches.length * 1.25 + fireplaces.length * 1 + take.drywall.cornerBeadLf * 0.05 + 2;
+
+  // Casework is shop time plus install time, and it is the slowest trade on the
+  // wall: a door that hangs badly is visible from the sofa forever.
+  const cw = take.casework;
+  const casework_h = cw.parts.length
+    ? 2 + cw.totalSheets * 1.4 + cw.doorCount * 0.85 + cw.drawerCount * 1.1 + cw.shelfCount * 0.35
+      + cw.cabinetLf * 1.2 + cw.shelfColumnCount * 1.5 + (cw.hearthSqFt > 0 ? 2.5 : 0) + cw.edgeBandingLf * 0.02
+    : 0;
+  const paneling_h = cw.panelSqFt > 0
+    ? 1.5 + cw.panelSqFt * 0.11 + cw.slatCount * 0.03 + cw.inlayLf * 0.14
+    : 0;
   const finishing_h = isPaint ? 0 : take.finishSqFt * (heavyFinish ? 0.22 : 0.14) + 2;
   const painting_h = 1 + totalSqFt * 0.016 + niches.length * 0.35;
   const tv_install_h = tv ? 1.5 + ((tv as any).props.recessedBox ? 0.5 : 0) + ((tv as any).props.weightLb > 80 ? 0.5 : 0) : 0;
@@ -91,6 +102,8 @@ export function autoLaborHours(design: Design, take: TakeOff): Record<LaborCateg
     electrical: mk(electrical_h, `${lineV} line-voltage devices, ${take.electrical.circuits.length} circuit(s)`),
     low_voltage: mk(low_voltage_h, `${take.electrical.lowVoltageDevices} LV devices + ${take.electrical.conduitFt}' conduit`),
     drywall: mk(drywall_h, `${take.drywall.sheets} sheets, ${niches.length} niche returns, ${take.drywall.cornerBeadLf} lf bead`),
+    casework: mk(casework_h, cw.parts.length ? `${cw.totalSheets} sheets, ${cw.parts.length} parts, ${cw.doorCount} doors, ${cw.drawerCount} drawers` : 'No built-in casework'),
+    paneling: mk(paneling_h, cw.panelSqFt > 0 ? `${cw.panelSqFt} sf of panelling, ${cw.slatCount} slats` : 'No panelling'),
     finishing: mk(finishing_h, isPaint ? 'Painted drywall — no separate finish trade' : `${take.finishSqFt} sf of ${wall.finish.replace(/_/g, ' ')}`),
     painting: mk(painting_h, `${Math.round(totalSqFt)} sf incl. returns, 2 coats`),
     tv_install: mk(tv_install_h, tv ? `${tv.label}, ${(tv as any).props.weightLb} lb` : 'No TV'),

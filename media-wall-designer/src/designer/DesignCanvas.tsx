@@ -40,7 +40,8 @@ interface DragState {
 
 const TYPE_COLOR: Record<string, string> = {
   tv: '#6B7E94', fireplace: '#D2703F', niche: '#C8A94A', soundbar: '#8496AA',
-  shelf: '#9C8A6A', outlet: '#D2703F', lowvolt: '#6B7E94', switch: '#D2703F',
+  shelf: '#9C8A6A', shelf_column: '#A98455', cabinet: '#8C6E4A', panel: '#7A6A52',
+  hearth: '#9AA0A8', outlet: '#D2703F', lowvolt: '#6B7E94', switch: '#D2703F',
   junction: '#C8A94A', equipment: '#7A7A86', custom: '#8A8A96',
 };
 

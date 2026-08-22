@@ -5,7 +5,10 @@
  * compliance. What it does is refuse to let an unverified assumption reach a
  * construction document, and put the real-world questions in front of a human.
  */
-import type { Design, DesignIssue, FireplaceComponent, NicheComponent, TvComponent } from '../types';
+import type {
+  CabinetComponent, Design, DesignIssue, FireplaceComponent, HearthComponent,
+  NicheComponent, PanelComponent, ShelfColumnComponent, TvComponent,
+} from '../types';
 import { maxNicheDepth, suggestedFeatureDepth } from '../defaults';
 import { computeOpenings } from './framing';
 import { inchesToFeet } from '../units';
@@ -61,6 +64,9 @@ export function validateDesign(design: Design): DesignIssue[] {
     add({ id: 'wider_than_room', severity: 'warning', title: 'Feature wall runs past the room', detail: `The feature wall starts at ${inchesToFeet(wall.offsetXIn)} and is ${inchesToFeet(wall.widthIn)} wide, which is wider than the ${inchesToFeet(wall.roomWidthIn)} room wall.` });
   }
 
+  // Referenced by the casework checks below as well as the fireplace section.
+  const fpEarly = design.components.find((c): c is FireplaceComponent => c.type === 'fireplace');
+
   const wallRect = { x: 0, y: 0, w: wall.widthIn, h: wall.heightIn };
   for (const c of design.components) {
     if (c.type === 'outlet' || c.type === 'lowvolt' || c.type === 'switch' || c.type === 'junction' || c.type === 'equipment') continue;
@@ -75,6 +81,91 @@ export function validateDesign(design: Design): DesignIssue[] {
   for (const n of niches) {
     if (n.depthIn > maxDepth + 0.01) {
       add({ id: `niche_depth_${n.id}`, severity: 'blocker', title: `${n.label} is deeper than the wall`, detail: `Niche depth ${n.depthIn}" exceeds the ${maxDepth}" available behind the finished face. Deepen the wall or cut into the existing wall — which needs its own verification.`, componentId: n.id });
+    }
+  }
+
+  /* ---------------------------------------------------------- casework */
+  const columns = design.components.filter((c): c is ShelfColumnComponent => c.type === 'shelf_column');
+  for (const col of columns) {
+    // 3/4" shelf material sags visibly past about 32" of unsupported span.
+    const span = col.w - 1.5;
+    const limit = col.props.shelfThicknessIn >= 1 ? 42 : col.props.material === 'mdf_3_4' ? 28 : 32;
+    if (col.props.shelfCount > 0 && span > limit) {
+      add({
+        id: `shelf_span_${col.id}`, severity: 'warning',
+        title: `${col.label} shelves will sag`,
+        detail: `${Math.round(span)}" of unsupported span in ${col.props.material.replace(/_/g, ' ')}; the practical limit is about ${limit}". Add a centre divider, thicken the shelf, or stiffen the front edge with a hardwood band.`,
+        componentId: col.id,
+      });
+    }
+    if (col.depthIn > wall.featureDepthIn + 0.01 && col.props.backPanel) {
+      add({ id: `col_depth_${col.id}`, severity: 'info', title: `${col.label} projects past the wall`, detail: `The column is ${col.depthIn}" deep in a ${wall.featureDepthIn}" build-out, so it will stand proud. Intentional on a floating unit — check it is what you want.`, componentId: col.id });
+    }
+  }
+
+  const cabinets = design.components.filter((c): c is CabinetComponent => c.type === 'cabinet');
+  for (const cab of cabinets) {
+    if (cab.props.floating) {
+      add({
+        id: `float_${cab.id}`, severity: 'warning',
+        title: `${cab.label} is floating — needs real backing`,
+        detail: 'A floating cabinet carries its whole load plus whatever is put on it in shear at the wall. Continuous blocking behind it, lagged into framing, and a French cleat or steel bracket rated for the load. Drywall anchors are not a fixing method here.',
+        componentId: cab.id,
+      });
+    }
+    const holdsGear = design.components.some((d) => d.type === 'equipment' && d.x < cab.x + cab.w && d.x + d.w > cab.x);
+    if (cab.props.doorStyle !== 'none' && !cab.props.ventilated && holdsGear) {
+      add({
+        id: `vent_${cab.id}`, severity: 'warning',
+        title: `${cab.label} encloses AV equipment without ventilation`,
+        detail: 'Receivers and consoles behind a closed door overheat and shut down. Vent the back, use a fan kit, or specify open or mesh fronts. IR also needs a path unless everything is on IP control.',
+        componentId: cab.id,
+      });
+    }
+  }
+
+  /* ------------------------------------------------------- hearth & panels */
+  const hearths = design.components.filter((c): c is HearthComponent => c.type === 'hearth');
+  for (const h of hearths) {
+    if (fpEarly && h.props.projectionIn > 0) {
+      const clearFront = fpEarly.props.clearanceFrontIn;
+      if (clearFront != null && h.props.projectionIn > clearFront) {
+        add({ id: `hearth_front_${h.id}`, severity: 'blocker', title: `${h.label} projects into the fireplace's front clearance`, detail: `The hearth stands ${h.props.projectionIn}" proud but the manual requires ${clearFront}" clear in front of the unit.`, componentId: h.id });
+      }
+      const overlapsFp = h.y + h.h > fpEarly.y && h.y < fpEarly.y + fpEarly.h && h.x < fpEarly.x + fpEarly.w && h.x + h.w > fpEarly.x;
+      if (overlapsFp) {
+        add({ id: `hearth_overlap_${h.id}`, severity: 'blocker', title: `${h.label} covers part of the fireplace`, detail: 'Move the hearth below the unit, or raise the fireplace.', componentId: h.id });
+      }
+    }
+    if (h.props.seating && h.props.projectionIn < 14) {
+      add({ id: `hearth_seat_${h.id}`, severity: 'info', title: `${h.label} is narrow for seating`, detail: `${h.props.projectionIn}" deep — a bench people actually sit on wants 15–18" and framing to match.`, componentId: h.id });
+    }
+  }
+
+  const panels = design.components.filter((c): c is PanelComponent => c.type === 'panel');
+  for (const pn of panels) {
+    if (fpEarly) {
+      const gap = pn.y - (fpEarly.y + fpEarly.h);
+      const clearTop = fpEarly.props.clearanceTopIn;
+      const above = pn.y >= fpEarly.y + fpEarly.h && pn.x < fpEarly.x + fpEarly.w && pn.x + pn.w > fpEarly.x;
+      if (above && clearTop != null && gap < clearTop) {
+        add({
+          id: `panel_clear_${pn.id}`, severity: 'blocker',
+          title: `${pn.label} is inside the fireplace clearance`,
+          detail: `Wood slats are combustible. ${Math.round(gap)}" above the unit where the manual requires ${clearTop}".`,
+          componentId: pn.id,
+        });
+      } else if (above) {
+        add({
+          id: `panel_comb_${pn.id}`, severity: 'warning',
+          title: `${pn.label} sits above the fireplace`,
+          detail: 'Slat and timber panelling above a fireplace is a combustible finish. Confirm the clearance in the manual before installing it.',
+          componentId: pn.id,
+        });
+      }
+    }
+    if (pn.props.pattern !== 'flat' && pn.props.slatWidthIn + pn.props.slatGapIn <= 0) {
+      add({ id: `panel_pitch_${pn.id}`, severity: 'blocker', title: `${pn.label} has no slat pitch`, detail: 'Slat width plus gap must be greater than zero.', componentId: pn.id });
     }
   }
 
@@ -111,7 +202,7 @@ export function validateDesign(design: Design): DesignIssue[] {
   }
 
   /* -------------------------------------------------------- fireplace */
-  const fp = design.components.find((c): c is FireplaceComponent => c.type === 'fireplace');
+  const fp = fpEarly;
   if (fp) {
     const p = fp.props;
     const missing: string[] = [];

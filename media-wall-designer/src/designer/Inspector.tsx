@@ -7,11 +7,16 @@
  */
 import { useState } from 'react';
 import type {
-  Design, DesignComponent, DeviceComponent, FinishId, FireplaceComponent, LumberSize,
-  NicheComponent, SideReturns, StudSpacing, TvComponent,
+  CabinetComponent, CaseMaterial, Design, DesignComponent, DeviceComponent, FinishId,
+  FireplaceComponent, HearthComponent, LumberSize, NicheComponent, PanelComponent,
+  ShelfColumnComponent, SideReturns, StudSpacing, TvComponent,
 } from '@shared/types';
 import { TV_SIZES, TV_SIZE_LIST, FIREPLACE_SIZES, FINISHES } from '@shared/catalog';
-import { maxNicheDepth, suggestedFeatureDepth, NICHE_PALETTE, makeNiche, makeDevice } from '@shared/defaults';
+import {
+  maxNicheDepth, suggestedFeatureDepth, NICHE_PALETTE, makeNiche, makeDevice,
+  makeShelfColumn, makeCabinet, makePanel, makeHearth, createDefaultDesign, WALL_STYLES,
+} from '@shared/defaults';
+import { SHEET_MATERIAL } from '@shared/catalog';
 import { inchesToFeet, inchesToFraction, snap } from '@shared/units';
 import { alignComponents, distributeComponents, layoutNicheBanks } from '@shared/geometry';
 import { store } from '../lib/store';
@@ -59,6 +64,30 @@ function WallInspector({ design }: { design: Design }) {
           ))}
           <input type="color" value={w.colorHex} onChange={(e) => store.patchWall({ colorHex: e.target.value }, 'Colour')}
             style={{ width: 34, height: 30, padding: 2, minHeight: 0 }} />
+        </div>
+      </Field>
+
+      <Field label="Start from a wall style" hint="Replaces the design — undo brings it back">
+        <div className="grid" style={{ gap: 6 }}>
+          {WALL_STYLES.map((st) => (
+            <button key={st.id} className="btn" style={{ justifyContent: 'flex-start', textAlign: 'left', height: 'auto', padding: '8px 11px' }}
+              onClick={() => {
+                const tv = design.components.find((c) => c.type === 'tv');
+                const fp = design.components.find((c) => c.type === 'fireplace');
+                const next = createDefaultDesign(w, {
+                  style: st.id,
+                  tvSize: (tv && tv.type === 'tv' && typeof tv.props.sizeClass === 'number') ? tv.props.sizeClass : 75,
+                  fireplaceSize: fp && fp.type === 'fireplace' && typeof fp.props.advertisedIn === 'number' ? fp.props.advertisedIn : 60,
+                });
+                store.commitDesign({ ...next, basePhotoId: design.basePhotoId, calibration: design.calibration }, `Style: ${st.label}`);
+                toast(`${st.label} applied`);
+              }}>
+              <div>
+                <div style={{ fontWeight: 600 }}>{st.label}</div>
+                <div className="faint" style={{ fontSize: 11.5 }}>{st.note}</div>
+              </div>
+            </button>
+          ))}
         </div>
       </Field>
 
@@ -207,6 +236,10 @@ function SingleInspector({ design, component }: { design: Design; component: Des
       {c.type === 'tv' && <TvPanel tv={c as TvComponent} patch={patch} patchProps={patchProps} />}
       {c.type === 'fireplace' && <FireplacePanel fp={c as FireplaceComponent} patch={patch} patchProps={patchProps} />}
       {c.type === 'niche' && <NichePanel niche={c as NicheComponent} design={design} patch={patch} patchProps={patchProps} />}
+      {c.type === 'shelf_column' && <ShelfColumnPanel col={c as ShelfColumnComponent} patch={patch} patchProps={patchProps} />}
+      {c.type === 'cabinet' && <CabinetPanel cab={c as CabinetComponent} patch={patch} patchProps={patchProps} />}
+      {c.type === 'panel' && <SlatPanelPanel pnl={c as PanelComponent} patch={patch} patchProps={patchProps} />}
+      {c.type === 'hearth' && <HearthPanel hth={c as HearthComponent} patchProps={patchProps} />}
       {isDevice(c) && <DevicePanel device={c as DeviceComponent} patchProps={patchProps} />}
       {(c.type === 'soundbar' || c.type === 'shelf' || c.type === 'custom') && (
         <>
@@ -404,6 +437,153 @@ function NichePanel({ niche, design, patch, patchProps }: { niche: NicheComponen
   );
 }
 
+const MATERIAL_OPTIONS = Object.entries(SHEET_MATERIAL).map(([k, v]) => ({ value: k as CaseMaterial, label: v.label }));
+
+function ShelfColumnPanel({ col, patch, patchProps }: { col: ShelfColumnComponent; patch: (p: any) => void; patchProps: (p: any) => void }) {
+  const p = col.props;
+  const l = p.lighting;
+  const span = Math.round(col.w - p.carcassThicknessIn * 2);
+  const limit = p.shelfThicknessIn >= 1 ? 42 : p.material === 'mdf_3_4' ? 28 : 32;
+  return (
+    <>
+      <DimField label="Carcass depth" value={col.depthIn} onChange={(v) => patch({ depthIn: v })} min={4} max={36} />
+      <NumField label="Shelves" value={p.shelfCount} onChange={(v) => patchProps({ shelfCount: Math.max(0, Math.round(v)) })} min={0} max={12}
+        hint={`${p.shelfCount + 1} openings at about ${Math.round((col.h - p.carcassThicknessIn * 2) / (p.shelfCount + 1))}" each`} />
+      <Select label="Carcass material" value={p.material} options={MATERIAL_OPTIONS} onChange={(v) => patchProps({ material: v })} />
+      <DimField label="Shelf thickness" value={p.shelfThicknessIn} onChange={(v) => patchProps({ shelfThicknessIn: v })} min={0.25} max={2} />
+      {span > limit && (
+        <div className="note warn" style={{ fontSize: 12, marginBottom: 10 }}>
+          <strong>{span}" span.</strong> {p.material === 'mdf_3_4' ? 'MDF' : 'Ply'} at {p.shelfThicknessIn}" sags past about {limit}".
+          Add a centre divider, thicken the shelf, or band the front edge in hardwood.
+        </div>
+      )}
+      <Check label="Adjustable shelves on pins" checked={p.adjustable} onChange={(v) => patchProps({ adjustable: v })} />
+      <Check label="Back panel" checked={p.backPanel} onChange={(v) => patchProps({ backPanel: v })} />
+      <Check label="Edge-band exposed edges" checked={p.edgeBanding} onChange={(v) => patchProps({ edgeBanding: v })} />
+
+      <div className="eyebrow">Lighting</div>
+      <Field label="Fixture">
+        <Segmented value={l.kind} onChange={(v) => patchProps({ lighting: { ...l, kind: v } })}
+          options={[{ value: 'none', label: 'None' }, { value: 'led_strip', label: 'Shelf strip' }, { value: 'puck', label: 'Puck' }, { value: 'puck_and_strip', label: 'Both' }]} />
+      </Field>
+      <Field label="Colour">
+        <div className="swatches">
+          {['#FFE3B0', '#FFF4E0', '#FFFFFF', ...NICHE_PALETTE.slice(0, 5)].map((c) => (
+            <div key={c} className={`swatch${l.colorHex === c ? ' on' : ''}`} style={{ background: c }} onClick={() => patchProps({ lighting: { ...l, colorHex: c } })} />
+          ))}
+        </div>
+      </Field>
+      <Field label="Interior / face colour">
+        <div className="row" style={{ gap: 8 }}>
+          <input type="color" value={p.interiorColorHex} onChange={(e) => patchProps({ interiorColorHex: e.target.value })} style={{ width: 52, height: 34, padding: 2, minHeight: 0 }} />
+          <input type="color" value={p.faceColorHex} onChange={(e) => patchProps({ faceColorHex: e.target.value })} style={{ width: 52, height: 34, padding: 2, minHeight: 0 }} />
+          <span className="faint" style={{ fontSize: 11.5 }}>interior · carcass</span>
+        </div>
+      </Field>
+    </>
+  );
+}
+
+function CabinetPanel({ cab, patch, patchProps }: { cab: CabinetComponent; patch: (p: any) => void; patchProps: (p: any) => void }) {
+  const p = cab.props;
+  const bayW = Math.round((cab.w / Math.max(1, p.bays)) * 10) / 10;
+  return (
+    <>
+      <DimField label="Cabinet depth" value={cab.depthIn} onChange={(v) => patch({ depthIn: v })} min={6} max={30} />
+      <NumField label="Bays" value={p.bays} onChange={(v) => patchProps({ bays: Math.max(1, Math.round(v)) })} min={1} max={12}
+        hint={`${bayW}" per bay${bayW > 24 ? ' — wide for a single door, consider more bays' : ''}`} />
+      <Field label="Front style">
+        <Segmented value={p.doorStyle} onChange={(v) => patchProps({ doorStyle: v })}
+          options={[{ value: 'slab', label: 'Slab' }, { value: 'shaker', label: 'Shaker' }, { value: 'fluted', label: 'Fluted' }, { value: 'none', label: 'Open' }]} />
+      </Field>
+      <NumField label="Drawers per bay" value={p.drawersPerBay} onChange={(v) => patchProps({ drawersPerBay: Math.max(0, Math.round(v)) })} min={0} max={5}
+        hint={p.drawersPerBay === 0 ? 'Doors' : `${p.bays * p.drawersPerBay} drawers total`} />
+      <Field label="Mounting">
+        <Segmented value={p.floating ? 'float' : 'floor'} onChange={(v) => patchProps({ floating: v === 'float' })}
+          options={[{ value: 'floor', label: 'Floor standing' }, { value: 'float', label: 'Floating' }]} />
+      </Field>
+      {p.floating && (
+        <div className="note warn" style={{ fontSize: 12, marginBottom: 10 }}>
+          Floating carries its whole load in shear at the wall. Continuous blocking lagged into framing, plus a French
+          cleat or steel bracket rated for the load. Not an anchor job.
+        </div>
+      )}
+      {!p.floating && <DimField label="Toe kick" value={p.toeKickIn} onChange={(v) => patchProps({ toeKickIn: v })} min={0} max={8} />}
+      <Select label="Carcass material" value={p.material} options={MATERIAL_OPTIONS} onChange={(v) => patchProps({ material: v })} />
+      <Select label="Front material" value={p.faceMaterial} options={MATERIAL_OPTIONS} onChange={(v) => patchProps({ faceMaterial: v })} />
+      <Field label="Hardware">
+        <Segmented value={p.hardware} onChange={(v) => patchProps({ hardware: v })}
+          options={[{ value: 'pull', label: 'Pull' }, { value: 'knob', label: 'Knob' }, { value: 'push_latch', label: 'Handleless' }]} />
+      </Field>
+      <Check label="Countertop / finished top" checked={p.countertop} onChange={(v) => patchProps({ countertop: v })} />
+      <Check label="Ventilated for AV gear" checked={p.ventilated} onChange={(v) => patchProps({ ventilated: v })} />
+      <Field label="Front colour">
+        <input type="color" value={p.faceColorHex} onChange={(e) => patchProps({ faceColorHex: e.target.value })} style={{ width: 60, height: 34, padding: 2, minHeight: 0 }} />
+      </Field>
+    </>
+  );
+}
+
+function SlatPanelPanel({ pnl, patch, patchProps }: { pnl: PanelComponent; patch: (p: any) => void; patchProps: (p: any) => void }) {
+  const p = pnl.props;
+  const pitch = p.slatWidthIn + p.slatGapIn;
+  const across = p.orientation === 'vertical' ? pnl.w : pnl.h;
+  const count = p.pattern === 'flat' ? 0 : Math.ceil(across / Math.max(0.25, pitch));
+  return (
+    <>
+      <Field label="Pattern">
+        <Segmented value={p.pattern} onChange={(v) => patchProps({ pattern: v })}
+          options={[{ value: 'slat', label: 'Slat' }, { value: 'fluted', label: 'Fluted' }, { value: 'batten', label: 'Batten' }, { value: 'flat', label: 'Flat' }]} />
+      </Field>
+      <Field label="Direction">
+        <Segmented value={p.orientation} onChange={(v) => patchProps({ orientation: v })}
+          options={[{ value: 'vertical', label: 'Vertical' }, { value: 'horizontal', label: 'Horizontal' }]} />
+      </Field>
+      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', columnGap: 10, gap: 0 }}>
+        <DimField label="Slat width" value={p.slatWidthIn} onChange={(v) => patchProps({ slatWidthIn: v })} min={0.25} max={8} />
+        <DimField label="Gap" value={p.slatGapIn} onChange={(v) => patchProps({ slatGapIn: v })} min={0} max={8} />
+        <DimField label="Slat depth" value={p.slatDepthIn} onChange={(v) => patchProps({ slatDepthIn: v })} min={0.125} max={4} />
+        <DimField label="Panel depth" value={pnl.depthIn} onChange={(v) => patch({ depthIn: v })} min={0.25} max={6} />
+      </div>
+      <div className="note" style={{ fontSize: 12.5, marginBottom: 10 }}>
+        <strong>{count} slats</strong> at {pitch.toFixed(2)}" pitch across {Math.round(across)}".
+        That is {Math.ceil((count * (p.orientation === 'vertical' ? pnl.h : pnl.w)) / 12)} lineal feet of slat.
+      </div>
+      <Field label="Slat / backer colour">
+        <div className="row" style={{ gap: 8 }}>
+          <input type="color" value={p.colorHex} onChange={(e) => patchProps({ colorHex: e.target.value })} style={{ width: 52, height: 34, padding: 2, minHeight: 0 }} />
+          <input type="color" value={p.backerColorHex} onChange={(e) => patchProps({ backerColorHex: e.target.value })} style={{ width: 52, height: 34, padding: 2, minHeight: 0 }} />
+          <span className="faint" style={{ fontSize: 11.5 }}>slat · backer</span>
+        </div>
+      </Field>
+      <Check label="Metal reveal between slats" checked={p.inlay} onChange={(v) => patchProps({ inlay: v })} />
+      {p.inlay && (
+        <input type="color" value={p.inlayColorHex} onChange={(e) => patchProps({ inlayColorHex: e.target.value })} style={{ width: 60, height: 34, padding: 2, minHeight: 0 }} />
+      )}
+    </>
+  );
+}
+
+function HearthPanel({ hth, patchProps }: { hth: HearthComponent; patchProps: (p: any) => void }) {
+  const p = hth.props;
+  return (
+    <>
+      <DimField label="Projection from wall" value={p.projectionIn} onChange={(v) => patchProps({ projectionIn: v })} min={2} max={30}
+        hint={p.seating ? 'A bench people sit on wants 15–18"' : 'A decorative ledge is usually 8–14"'} />
+      <Check label="Rated for seating" checked={p.seating} onChange={(v) => patchProps({ seating: v })} />
+      <Check label="Waterfall the finish down the ends" checked={p.waterfall} onChange={(v) => patchProps({ waterfall: v })} />
+      <Check label="Lit toe kick underneath" checked={p.litToeKick} onChange={(v) => patchProps({ litToeKick: v })} />
+      <Field label="Top material">
+        <Segmented value={p.material as string} onChange={(v) => patchProps({ material: v })}
+          options={[{ value: 'ply_3_4', label: 'Painted' }, { value: 'solid_wood', label: 'Timber' }, { value: 'stone', label: 'Stone' }, { value: 'plaster', label: 'Plaster' }]} />
+      </Field>
+      <Field label="Colour">
+        <input type="color" value={p.colorHex} onChange={(e) => patchProps({ colorHex: e.target.value })} style={{ width: 60, height: 34, padding: 2, minHeight: 0 }} />
+      </Field>
+    </>
+  );
+}
+
 function DevicePanel({ device, patchProps }: { device: DeviceComponent; patchProps: (p: any) => void }) {
   const p = device.props;
   return (
@@ -462,6 +642,36 @@ export function AddMenu({ design, onClose }: { design: Design; onClose: () => vo
           options={[1, 2, 3, 4].map((n) => ({ value: n, label: String(n) }))} />
       </Field>
       <button className="btn gold block" onClick={addBank}><Icon name="plus" size={15} />Add {nichesPerSide * 2} niches, {nichesPerSide} per side</button>
+
+      <div className="eyebrow" style={{ marginTop: 16 }}>Built-in casework</div>
+      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <button className="btn" onClick={() => {
+          const colW = Math.max(14, Math.min(30, w.widthIn * 0.17));
+          addOne(makeShelfColumn({ x: 2, y: 22, w: colW, h: w.heightIn - 26 }, { label: 'Left shelf column' }), 'Shelf column');
+        }}><Icon name="layers" size={15} />Shelf column</button>
+        <button className="btn" onClick={() => {
+          const colW = Math.max(14, Math.min(30, w.widthIn * 0.17));
+          const rects = [
+            { x: 2, y: 22, w: colW, h: w.heightIn - 26 },
+            { x: w.widthIn - colW - 2, y: 22, w: colW, h: w.heightIn - 26 },
+          ];
+          store.addComponents(rects.map((r, i) => makeShelfColumn(r, { label: `${i === 0 ? 'Left' : 'Right'} shelf column` })), 'Shelf columns');
+          toast('Two shelf columns added');
+          onClose();
+        }}><Icon name="layers" size={15} />Pair of columns</button>
+        <button className="btn" onClick={() => addOne(makeCabinet({ x: 0, y: 0, w: w.widthIn, h: 22 }, { label: 'Base cabinet run' }), 'Cabinet run')}>
+          <Icon name="box" size={15} />Base cabinets
+        </button>
+        <button className="btn" onClick={() => addOne(makeCabinet({ x: snap(w.widthIn * 0.15), y: 16, w: snap(w.widthIn * 0.7), h: 14 }, { label: 'Floating console', floating: true, drawersPerBay: 1, depthIn: 14 }), 'Console')}>
+          <Icon name="box" size={15} />Floating console
+        </button>
+        <button className="btn" onClick={() => addOne(makePanel({ x: snap(w.widthIn * 0.18), y: 14, w: snap(w.widthIn * 0.64), h: w.heightIn - 14 }, { label: 'Slat panel' }), 'Slat panel')}>
+          <Icon name="grid" size={15} />Slat panel
+        </button>
+        <button className="btn" onClick={() => addOne(makeHearth({ x: snap(w.widthIn * 0.15), y: 0, w: snap(w.widthIn * 0.7), h: 14 }, { label: 'Hearth ledge' }), 'Hearth')}>
+          <Icon name="ruler" size={15} />Hearth ledge
+        </button>
+      </div>
 
       <div className="eyebrow" style={{ marginTop: 16 }}>Single objects</div>
       <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 8 }}>

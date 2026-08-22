@@ -119,13 +119,36 @@ reference/         BUILD-METHOD.md — the construction the generator reproduces
 |---|---|---|
 | 01 | Customer | Name, address, phone, email, status, notes, photos |
 | 02 | Wall photo | Camera or upload, straighten, mark the four wall corners, enter real dimensions |
-| 03 | Designer | Drag/resize/snap in real inches; wall, TV, fireplace, niches, lighting, devices |
+| 03 | Designer | Drag/resize/snap in real inches; wall, TV, fireplace, niches, casework, panelling, lighting, devices |
 | 04 | Before / after | The design composited onto the customer's own photo in perspective; optional AI pass |
 | 05 | Drawings | Dimensioned elevation, framing plan, electrical plan, schedules, checks |
-| 06 | Materials & cuts | Bill of materials, drywall take-off, optimised cut list with cutting diagram |
+| 06 | Materials & cuts | Bill of materials, drywall take-off, lumber cut list, sheet-goods parts list and nesting diagram |
 | 07 | Sourcing | The same list regrouped by supplier, with subtotals, search links and check-offs |
 | 08 | Estimate | Derived labor hours, pricing controls, profit, Good / Better / Best |
 | 09 | Print package | Customer proposal (Letter) or construction set (Letter / 11×17 / 24×36) |
+
+## Three ways to build the wall
+
+The designer isn't limited to drywall niches. Pick a style on the wall inspector
+and the whole model changes with it — drawings, quantities and price included.
+
+| Style | What it is | What it generates |
+|---|---|---|
+| **Drywall + lit niches** | Framed build-out, recessed niches, painted | Framing plan, drywall take-off, lumber cut list |
+| **Built-in casework** | Shelf columns flanking the TV, base cabinet run below | Parts list, sheet nesting, hinges/slides/pulls, edge banding |
+| **Slat panel + console** | Slat or fluted field behind the TV, floating console, hearth ledge | Slat count and footage, backer sheets, reveal trim, hearth top |
+
+Casework is modelled properly, not approximated. A shelf column knows how many
+shelves it holds and how thick they are; a cabinet knows its bays, door style,
+drawer count and toe kick. `shared/calc/casework.ts` explodes all of it into the
+parts a shop would actually cut, then nests those parts onto 4×8 sheets with a
+guillotine packer that charges saw kerf — so the sheet count is a number you can
+buy against, and the nesting diagram is one you can cut from.
+
+The checks come along too: a 3/4" shelf spanning more than about 32" gets
+flagged for sag, a floating cabinet gets flagged for blocking and shear, a closed
+cabinet holding AV gear gets flagged for ventilation, and slat panelling above a
+fireplace is treated as the combustible finish it is.
 
 ## Coordinate system
 

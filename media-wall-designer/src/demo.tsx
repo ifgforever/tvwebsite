@@ -78,8 +78,33 @@ async function seed() {
   second.design.wall.ptBottomPlate = true;
   second.design.wall.loadBearing = 'unknown';
 
+  // A built-in and a slat wall, so all three vocabularies are on the link.
+  const builtIn = createProject({
+    name: 'Delgado — oak built-in',
+    status: 'designing',
+    customer: {
+      name: 'Rosa Delgado', address: '2210 N Damen Ave', city: 'Chicago', state: 'IL',
+      zip: '60647', phone: '(773) 555-0119', email: 'rosa.delgado@example.com',
+    },
+    notes: 'Furniture-grade oak. Lit shelf columns either side, base cabinet run across the bottom, handleless fronts.',
+    design: createDefaultDesign({ ...defaultWall(), widthIn: 156, heightIn: 102, ceilingHeightIn: 102, roomWidthIn: 180 }, { style: 'built_in', tvSize: 75, fireplaceSize: 60 }),
+  });
+
+  const slat = createProject({
+    name: 'Whitcombe — slat feature wall',
+    status: 'lead',
+    customer: {
+      name: 'Ellis Whitcombe', address: '640 Sheridan Rd', city: 'Evanston', state: 'IL',
+      zip: '60202', phone: '(847) 555-0164', email: 'ellis.w@example.com',
+    },
+    notes: 'Vertical slat field behind the TV with a cove halo, projecting hearth ledge, linear fireplace under the panel.',
+    design: createDefaultDesign({ ...defaultWall(), widthIn: 168, heightIn: 108, ceilingHeightIn: 108, roomWidthIn: 192, colorHex: '#6E6E76' }, { style: 'slat_panel', tvSize: 85, fireplaceSize: 72 }),
+  });
+
   await localDb.put(reference, false);
   await localDb.put(second, false);
+  await localDb.put(builtIn, false);
+  await localDb.put(slat, false);
 }
 
 seed().finally(() => {

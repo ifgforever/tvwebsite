@@ -21,6 +21,21 @@ export const LUMBER: Record<Exclude<LumberSize, 'custom'>, { actualW: number; ac
 export const STOCK_LENGTHS_IN = [92.625, 96, 104.625, 116.625, 120, 144, 168, 192];
 export const KERF_IN = 0.125;
 
+/* ------------------------------------------------------------ sheet goods */
+
+/** A full sheet, and the blade width a table saw takes out of it. */
+export const SHEET_W_IN = 48;
+export const SHEET_H_IN = 96;
+export const SHEET_KERF_IN = 0.125;
+
+export const SHEET_MATERIAL: Record<string, { sku: string; label: string; thicknessIn: number }> = {
+  ply_3_4: { sku: 'CW-PLY34', label: '3/4" plywood', thicknessIn: 0.75 },
+  ply_1_2: { sku: 'CW-PLY12', label: '1/2" plywood', thicknessIn: 0.5 },
+  mdf_3_4: { sku: 'CW-MDF34', label: '3/4" MDF', thicknessIn: 0.75 },
+  melamine_3_4: { sku: 'CW-MEL34', label: '3/4" melamine', thicknessIn: 0.75 },
+  hardwood_ply_3_4: { sku: 'CW-HWDPLY', label: '3/4" hardwood ply', thicknessIn: 0.75 },
+};
+
 /* -------------------------------------------------------------------- TVs */
 
 /** Typical panel envelope by advertised class. Always verify against the model. */
@@ -133,6 +148,29 @@ export const CATALOG: Record<string, CatalogItem> = {
   'FIN-TRIM': { sku: 'FIN-TRIM', name: 'Trim / reveal', spec: 'Aluminum or wood trim, per ft', category: 'finish', unit: 'ft', unitCost: 4.20 },
   'FIN-GROUT': { sku: 'FIN-GROUT', name: 'Grout', spec: 'Unsanded grout, 10 lb', category: 'finish', unit: 'bag', unitCost: 22.00 },
 
+  /* ---- casework: sheet goods, edge banding, hardware ---- */
+  'CW-PLY34': { sku: 'CW-PLY34', name: '3/4" plywood 4×8', spec: 'Birch/maple veneer core', category: 'casework', unit: 'sheet', unitCost: 78.00 },
+  'CW-PLY12': { sku: 'CW-PLY12', name: '1/2" plywood 4×8', spec: 'Cabinet grade', category: 'casework', unit: 'sheet', unitCost: 62.00 },
+  'CW-PLY14': { sku: 'CW-PLY14', name: '1/4" plywood 4×8', spec: 'Cabinet back panel', category: 'casework', unit: 'sheet', unitCost: 34.00 },
+  'CW-MDF34': { sku: 'CW-MDF34', name: '3/4" MDF 4×8', spec: 'Paint-grade MDF', category: 'casework', unit: 'sheet', unitCost: 54.00 },
+  'CW-MEL34': { sku: 'CW-MEL34', name: '3/4" melamine 4×8', spec: 'White melamine, pre-finished', category: 'casework', unit: 'sheet', unitCost: 68.00 },
+  'CW-HWDPLY': { sku: 'CW-HWDPLY', name: '3/4" hardwood ply 4×8', spec: 'White oak / walnut veneer', category: 'casework', unit: 'sheet', unitCost: 145.00 },
+  'CW-EDGE': { sku: 'CW-EDGE', name: 'Edge banding', spec: 'Iron-on veneer, 250\' roll', category: 'casework', unit: 'roll', unitCost: 38.00 },
+  'CW-HINGE': { sku: 'CW-HINGE', name: 'Concealed hinge', spec: 'Soft-close 110° full overlay', category: 'casework', unit: 'ea', unitCost: 4.60 },
+  'CW-SLIDE': { sku: 'CW-SLIDE', name: 'Drawer slide pair', spec: 'Soft-close undermount, 18"', category: 'casework', unit: 'pair', unitCost: 22.00 },
+  'CW-PULL': { sku: 'CW-PULL', name: 'Pull / knob', spec: 'Matte black or brass', category: 'casework', unit: 'ea', unitCost: 9.50 },
+  'CW-PUSH': { sku: 'CW-PUSH', name: 'Push latch', spec: 'Touch-release, handleless', category: 'casework', unit: 'ea', unitCost: 5.20 },
+  'CW-PIN': { sku: 'CW-PIN', name: 'Shelf pins', spec: '5mm, 100 ct', category: 'casework', unit: 'pk', unitCost: 11.00 },
+  'CW-SCREW': { sku: 'CW-SCREW', name: 'Cabinet screws', spec: '#8 × 1-1/4" and pocket screws', category: 'casework', unit: 'box', unitCost: 24.00 },
+  'CW-GLUE': { sku: 'CW-GLUE', name: 'Wood glue', spec: 'PVA, 1 gal', category: 'casework', unit: 'ea', unitCost: 19.00 },
+  'CW-LEVEL': { sku: 'CW-LEVEL', name: 'Cabinet levelers', spec: 'Adjustable leg, 8 ct', category: 'casework', unit: 'pk', unitCost: 14.00 },
+  'CW-FILLER': { sku: 'CW-FILLER', name: 'Scribe / filler stock', spec: 'Matching filler and scribe moulding', category: 'casework', unit: 'ea', unitCost: 28.00 },
+  'CW-SLAT': { sku: 'CW-SLAT', name: 'Slat wall panel', spec: '94" × 12" acoustic slat panel on felt', category: 'casework', unit: 'panel', unitCost: 79.00 },
+  'CW-SLATSTOCK': { sku: 'CW-SLATSTOCK', name: 'Slat stock', spec: 'Milled slat, per lineal foot', category: 'casework', unit: 'ft', unitCost: 2.40 },
+  'CW-BACKER': { sku: 'CW-BACKER', name: 'Slat backer board', spec: '1/2" MDF, painted black', category: 'casework', unit: 'sheet', unitCost: 44.00 },
+  'CW-INLAY': { sku: 'CW-INLAY', name: 'Metal inlay reveal', spec: 'Brass / black anodised trim, 8\'', category: 'casework', unit: 'ea', unitCost: 26.00 },
+  'CW-HEARTH': { sku: 'CW-HEARTH', name: 'Hearth top material', spec: 'Stone, solid surface or built-up panel', category: 'casework', unit: 'sq ft', unitCost: 34.00 },
+
   'EQ-MOUNT': { sku: 'EQ-MOUNT', name: 'TV mount', spec: 'Heavy-duty low-profile / full-motion', category: 'equipment', unit: 'ea', unitCost: 149.00 },
   'EQ-SB-MOUNT': { sku: 'EQ-SB-MOUNT', name: 'Soundbar mount', spec: 'Universal soundbar bracket', category: 'equipment', unit: 'ea', unitCost: 39.00 },
   'EQ-FIREPLACE': { sku: 'EQ-FIREPLACE', name: 'Electric fireplace', spec: 'Linear recessed electric fireplace', category: 'equipment', unit: 'ea', unitCost: 899.00 },
@@ -151,6 +189,8 @@ export const LABOR_RATES: Record<LaborCategory, { label: string; rate: number; c
   design: { label: 'Design & measurement', rate: 95, cost: 42 },
   demo: { label: 'Demo & prep', rate: 85, cost: 38 },
   framing: { label: 'Framing', rate: 95, cost: 45 },
+  casework: { label: 'Built-in casework', rate: 110, cost: 55 },
+  paneling: { label: 'Slat / panel install', rate: 105, cost: 50 },
   electrical: { label: 'Electrical', rate: 135, cost: 95, licensed: true },
   low_voltage: { label: 'Low voltage', rate: 110, cost: 48 },
   drywall: { label: 'Drywall hang & finish', rate: 95, cost: 52 },
@@ -164,7 +204,8 @@ export const LABOR_RATES: Record<LaborCategory, { label: string; rate: number; c
 
 export const LABOR_ORDER: LaborCategory[] = [
   'design', 'demo', 'framing', 'electrical', 'low_voltage', 'drywall',
-  'finishing', 'painting', 'tv_install', 'fireplace_install', 'lighting_install', 'cleanup',
+  'casework', 'paneling', 'finishing', 'painting',
+  'tv_install', 'fireplace_install', 'lighting_install', 'cleanup',
 ];
 
 export const CATEGORY_LABEL: Record<BomCategory, string> = {
@@ -173,6 +214,7 @@ export const CATEGORY_LABEL: Record<BomCategory, string> = {
   electrical: 'Electrical',
   low_voltage: 'Low voltage',
   finish: 'Finish',
+  casework: 'Casework & paneling',
   equipment: 'Equipment & site',
 };
 
@@ -264,6 +306,27 @@ export const DEFAULT_SUPPLIER: Record<string, { supplier: SupplierId; searchTerm
   'EQ-FIREPLACE': { supplier: 'specialty', searchTerm: 'linear recessed electric fireplace' },
   'EQ-PROTECT': { supplier: 'home_depot', searchTerm: 'ram board floor protection' },
   'EQ-DISPOSAL': { supplier: 'other', searchTerm: 'debris haul away' },
+  'CW-PLY34': { supplier: 'lumberyard', searchTerm: '3/4 birch plywood 4x8' },
+  'CW-PLY12': { supplier: 'lumberyard', searchTerm: '1/2 cabinet grade plywood 4x8' },
+  'CW-PLY14': { supplier: 'lumberyard', searchTerm: '1/4 plywood cabinet back' },
+  'CW-MDF34': { supplier: 'home_depot', searchTerm: '3/4 mdf 4x8' },
+  'CW-MEL34': { supplier: 'lumberyard', searchTerm: '3/4 white melamine 4x8' },
+  'CW-HWDPLY': { supplier: 'lumberyard', searchTerm: 'white oak veneer plywood 3/4' },
+  'CW-EDGE': { supplier: 'amazon', searchTerm: 'iron on edge banding 250 ft' },
+  'CW-HINGE': { supplier: 'amazon', searchTerm: 'blum soft close concealed hinge' },
+  'CW-SLIDE': { supplier: 'amazon', searchTerm: 'soft close undermount drawer slides 18' },
+  'CW-PULL': { supplier: 'amazon', searchTerm: 'matte black cabinet pull' },
+  'CW-PUSH': { supplier: 'amazon', searchTerm: 'push to open cabinet latch' },
+  'CW-PIN': { supplier: 'amazon', searchTerm: '5mm shelf pins 100' },
+  'CW-SCREW': { supplier: 'home_depot', searchTerm: 'cabinet installation screws' },
+  'CW-GLUE': { supplier: 'home_depot', searchTerm: 'titebond wood glue gallon' },
+  'CW-LEVEL': { supplier: 'amazon', searchTerm: 'cabinet leveler legs' },
+  'CW-FILLER': { supplier: 'lumberyard', searchTerm: 'cabinet filler scribe moulding' },
+  'CW-SLAT': { supplier: 'specialty', searchTerm: 'acoustic slat wall panel 94 x 12' },
+  'CW-SLATSTOCK': { supplier: 'lumberyard', searchTerm: 'milled slat stock' },
+  'CW-BACKER': { supplier: 'home_depot', searchTerm: '1/2 mdf sheet' },
+  'CW-INLAY': { supplier: 'specialty', searchTerm: 'brass reveal trim' },
+  'CW-HEARTH': { supplier: 'specialty', searchTerm: 'stone hearth slab' },
 };
 
 export function supplierFor(sku: string): Supplier {

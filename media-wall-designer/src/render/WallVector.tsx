@@ -8,7 +8,10 @@
  * AI provider is configured.
  */
 import { useId } from 'react';
-import type { Design, FireplaceComponent, NicheComponent, TvComponent } from '@shared/types';
+import type {
+  CabinetComponent, Design, FireplaceComponent, HearthComponent, NicheComponent,
+  PanelComponent, ShelfColumnComponent, TvComponent,
+} from '@shared/types';
 import { FINISHES } from '@shared/catalog';
 import { FinishPattern, SceneDefs, alpha, shade } from './defs';
 
@@ -47,6 +50,11 @@ export function WallVector({ design, room = true, lightsOn = true, className, st
   const soundbar = design.components.find((c) => c.type === 'soundbar');
   const shelves = design.components.filter((c) => c.type === 'shelf');
   const custom = design.components.filter((c) => c.type === 'custom');
+  const panels = design.components.filter((c): c is PanelComponent => c.type === 'panel');
+  const columns = design.components.filter((c): c is ShelfColumnComponent => c.type === 'shelf_column');
+  const cabinets = design.components.filter((c): c is CabinetComponent => c.type === 'cabinet');
+  const hearths = design.components.filter((c): c is HearthComponent => c.type === 'hearth');
+  const coveZones = design.lighting.filter((z) => z.kind === 'cove');
 
   const finish = FINISHES[wall.finish];
   const faceFill = wall.finish === 'painted_drywall' ? wall.colorHex : `url(#${uid}-finish)`;
@@ -87,6 +95,49 @@ export function WallVector({ design, room = true, lightsOn = true, className, st
           <rect x={W} y={0} width={wall.featureDepthIn * 0.35} height={H} fill="#000" opacity={0.4} />
         </>
       )}
+
+      {/* ------------------------------------------------- slat panelling */}
+      {panels.map((p) => {
+        const pitch = Math.max(0.25, p.props.slatWidthIn + p.props.slatGapIn);
+        const vertical = p.props.orientation === 'vertical';
+        const across = vertical ? p.w : p.h;
+        const count = p.props.pattern === 'flat' ? 0 : Math.min(400, Math.ceil(across / pitch));
+        const cove = coveZones.find((z) => z.targets.includes(p.id));
+        return (
+          <g key={p.id}>
+            {/* Cove halo washing the wall around the panel */}
+            {cove && lightsOn && (
+              <rect x={p.x - 6} y={sy(p.y + p.h) - 6} width={p.w + 12} height={p.h + 12}
+                fill={alpha(cove.colorHex, 0.4)} filter={`url(#${uid}-glow-lg)`} />
+            )}
+            {/* Backer board behind the slats */}
+            <rect x={p.x} y={sy(p.y + p.h)} width={p.w} height={p.h} fill={p.props.backerColorHex} />
+            {/* Every slat drawn at its real width and pitch */}
+            {Array.from({ length: count }).map((_, i) => {
+              const off = i * pitch;
+              if (off > across) return null;
+              const w = Math.min(p.props.slatWidthIn, across - off);
+              return vertical ? (
+                <g key={i}>
+                  <rect x={p.x + off} y={sy(p.y + p.h)} width={w} height={p.h} fill={p.props.colorHex} />
+                  <rect x={p.x + off} y={sy(p.y + p.h)} width={Math.min(0.25, w * 0.3)} height={p.h} fill={shade(p.props.colorHex, 26)} opacity={0.75} />
+                  <rect x={p.x + off + w - Math.min(0.25, w * 0.3)} y={sy(p.y + p.h)} width={Math.min(0.25, w * 0.3)} height={p.h} fill={shade(p.props.colorHex, -34)} />
+                  {p.props.inlay && i < count - 1 && (
+                    <rect x={p.x + off + w + p.props.slatGapIn * 0.3} y={sy(p.y + p.h)} width={Math.max(0.08, p.props.slatGapIn * 0.35)} height={p.h}
+                      fill={p.props.inlayColorHex} opacity={0.9} />
+                  )}
+                </g>
+              ) : (
+                <g key={i}>
+                  <rect x={p.x} y={sy(p.y + p.h) + off} width={p.w} height={w} fill={p.props.colorHex} />
+                  <rect x={p.x} y={sy(p.y + p.h) + off} width={p.w} height={Math.min(0.25, w * 0.3)} fill={shade(p.props.colorHex, 26)} opacity={0.75} />
+                </g>
+              );
+            })}
+            <rect x={p.x} y={sy(p.y + p.h)} width={p.w} height={p.h} fill="none" stroke="#000" strokeOpacity={0.28} strokeWidth={0.3} />
+          </g>
+        );
+      })}
 
       {/* --------------------------------------------------------- niches */}
       {niches.map((n) => {
@@ -138,6 +189,106 @@ export function WallVector({ design, room = true, lightsOn = true, className, st
           </g>
         );
       })}
+
+      {/* -------------------------------------------------- shelf columns */}
+      {columns.map((col) => {
+        const p = col.props;
+        const t = p.carcassThicknessIn;
+        const lit = lightsOn && p.lighting.kind !== 'none';
+        const inner = { x: col.x + t, y: col.y + t, w: col.w - t * 2, h: col.h - t * 2 };
+        const gap = p.shelfCount > 0 ? inner.h / (p.shelfCount + 1) : inner.h;
+        return (
+          <g key={col.id}>
+            <rect x={col.x} y={sy(col.y + col.h)} width={col.w} height={col.h} fill={p.faceColorHex} />
+            <rect x={inner.x} y={sy(inner.y + inner.h)} width={inner.w} height={inner.h} fill={p.interiorColorHex} />
+            {lit && (
+              <rect x={inner.x} y={sy(inner.y + inner.h)} width={inner.w} height={inner.h}
+                fill={alpha(p.lighting.colorHex, 0.34 * (p.lighting.intensityPct / 100))} />
+            )}
+            {/* Each shelf, at its real thickness, with the strip glow under it */}
+            {Array.from({ length: p.shelfCount }).map((_, i) => {
+              const sYin = inner.y + gap * (i + 1);
+              return (
+                <g key={i}>
+                  {lit && (
+                    <rect x={inner.x} y={sy(sYin)} width={inner.w} height={Math.min(6, gap * 0.7)}
+                      fill={alpha(p.lighting.colorHex, 0.5)} filter={`url(#${uid}-glow)`} />
+                  )}
+                  <rect x={inner.x} y={sy(sYin + p.shelfThicknessIn)} width={inner.w} height={p.shelfThicknessIn} fill={p.faceColorHex} />
+                  <rect x={inner.x} y={sy(sYin + p.shelfThicknessIn)} width={inner.w} height={Math.min(0.2, p.shelfThicknessIn * 0.3)} fill={shade(p.faceColorHex, 24)} />
+                </g>
+              );
+            })}
+            {/* Carcass shadow line so the column reads as a box */}
+            <rect x={col.x} y={sy(col.y + col.h)} width={col.w} height={col.h} fill="none" stroke="#000" strokeOpacity={0.32} strokeWidth={0.35} />
+            <rect x={inner.x} y={sy(inner.y + inner.h)} width={inner.w} height={inner.h} fill="none" stroke="#000" strokeOpacity={0.22} strokeWidth={0.25} />
+          </g>
+        );
+      })}
+
+      {/* -------------------------------------------------------- cabinets */}
+      {cabinets.map((cab) => {
+        const p = cab.props;
+        const bays = Math.max(1, p.bays);
+        const kick = p.floating ? 0 : p.toeKickIn;
+        const boxY = cab.y + kick;
+        const boxH = Math.max(1, cab.h - kick);
+        const bayW = cab.w / bays;
+        const reveal = 0.125;
+        const rows = Math.max(1, p.drawersPerBay || 1);
+        const underGlow = design.lighting.find((z) => z.kind === 'under_cabinet' || z.kind === 'toe_kick');
+        return (
+          <g key={cab.id}>
+            {p.floating && lightsOn && underGlow && (
+              <rect x={cab.x} y={sy(cab.y)} width={cab.w} height={8} fill={alpha(underGlow.colorHex, 0.35)} filter={`url(#${uid}-glow-lg)`} />
+            )}
+            {/* Toe kick sits back in shadow */}
+            {kick > 0 && <rect x={cab.x + 2} y={sy(cab.y + kick)} width={cab.w - 4} height={kick} fill="#0C0C0E" opacity={0.75} />}
+            <rect x={cab.x} y={sy(boxY + boxH)} width={cab.w} height={boxH} fill={shade(p.faceColorHex, -18)} />
+            {/* Door and drawer fronts, drawn as real fronts with real reveals */}
+            {Array.from({ length: bays }).map((_, b) =>
+              Array.from({ length: rows }).map((_, r) => {
+                const fw = bayW - reveal * 2;
+                const fh = boxH / rows - reveal * 2;
+                const fx = cab.x + b * bayW + reveal;
+                const fy = boxY + boxH - (r + 1) * (boxH / rows) + reveal;
+                return (
+                  <g key={`${b}-${r}`}>
+                    <rect x={fx} y={sy(fy + fh)} width={fw} height={fh} rx={0.2} fill={p.faceColorHex} />
+                    {p.doorStyle === 'shaker' && (
+                      <rect x={fx + 2.2} y={sy(fy + fh) + 2.2} width={Math.max(0, fw - 4.4)} height={Math.max(0, fh - 4.4)}
+                        fill={shade(p.faceColorHex, -10)} stroke={shade(p.faceColorHex, -22)} strokeWidth={0.15} />
+                    )}
+                    {p.doorStyle === 'fluted' && Array.from({ length: Math.max(0, Math.floor(fw / 1.6)) }).map((_, k) => (
+                      <rect key={k} x={fx + 0.4 + k * 1.6} y={sy(fy + fh)} width={0.9} height={fh} fill={shade(p.faceColorHex, -12)} />
+                    ))}
+                    <rect x={fx} y={sy(fy + fh)} width={fw} height={0.18} fill={shade(p.faceColorHex, 22)} />
+                    {p.hardware !== 'push_latch' && (
+                      <rect x={fx + fw / 2 - Math.min(3, fw * 0.2)} y={sy(fy + fh * 0.5)} width={Math.min(6, fw * 0.4)} height={0.45} rx={0.22} fill="#26262B" />
+                    )}
+                  </g>
+                );
+              }),
+            )}
+            {p.countertop && <rect x={cab.x - 0.4} y={sy(cab.y + cab.h + 1)} width={cab.w + 0.8} height={1} fill={shade(p.faceColorHex, 30)} />}
+            <rect x={cab.x} y={sy(cab.y + cab.h)} width={cab.w} height={cab.h} fill="none" stroke="#000" strokeOpacity={0.28} strokeWidth={0.3} />
+          </g>
+        );
+      })}
+
+      {/* ---------------------------------------------------------- hearth */}
+      {hearths.map((h) => (
+        <g key={h.id}>
+          {h.props.litToeKick && lightsOn && (
+            <rect x={h.x} y={sy(h.y)} width={h.w} height={6} fill="rgba(255,214,150,0.32)" filter={`url(#${uid}-glow-lg)`} />
+          )}
+          <rect x={h.x} y={sy(h.y + h.h)} width={h.w} height={h.h} fill={h.props.colorHex} />
+          {/* Top face reads as a projecting slab */}
+          <rect x={h.x} y={sy(h.y + h.h)} width={h.w} height={Math.min(1.4, h.h * 0.25)} fill={shade(h.props.colorHex, 22)} />
+          <rect x={h.x} y={sy(h.y + h.h)} width={h.w} height={h.h} fill="none" stroke="#000" strokeOpacity={0.3} strokeWidth={0.3} />
+          <rect x={h.x} y={sy(h.y)} width={h.w} height={0.5} fill="#000" opacity={0.35} />
+        </g>
+      ))}
 
       {/* ------------------------------------------------------ fireplace */}
       {fp && (
@@ -200,13 +351,31 @@ export function WallVector({ design, room = true, lightsOn = true, className, st
       ))}
 
       {/* -------------------------------------------------------- baseboard */}
-      {wall.baseboardKeep && wall.baseboardHeightIn > 0 && (
-        <>
-          <rect x={room ? vbX : 0} y={sy(wall.baseboardHeightIn)} width={room ? vbW : W} height={wall.baseboardHeightIn} fill="#EFEAE0" />
-          <rect x={room ? vbX : 0} y={sy(wall.baseboardHeightIn)} width={room ? vbW : W} height={0.5} fill="#FFF" opacity={0.6} />
-          <rect x={room ? vbX : 0} y={sy(0.5)} width={room ? vbW : W} height={0.5} fill="#000" opacity={0.25} />
-        </>
-      )}
+      {/* Base runs across the wall except where floor-standing casework or a
+          hearth already meets the floor — you do not trim behind a cabinet. */}
+      {wall.baseboardKeep && wall.baseboardHeightIn > 0 && (() => {
+        const blockers = [
+          ...cabinets.filter((c) => !c.props.floating && c.y < 1),
+          ...hearths.filter((h) => h.y < 1),
+        ].map((c) => ({ a: c.x, b: c.x + c.w })).sort((p, q) => p.a - q.a);
+
+        const runs: { a: number; b: number }[] = [];
+        let cursor = room ? vbX : 0;
+        const end = room ? vbX + vbW : W;
+        for (const bl of blockers) {
+          if (bl.a > cursor) runs.push({ a: cursor, b: Math.min(bl.a, end) });
+          cursor = Math.max(cursor, bl.b);
+        }
+        if (cursor < end) runs.push({ a: cursor, b: end });
+
+        return runs.filter((r) => r.b - r.a > 0.5).map((r, i) => (
+          <g key={i}>
+            <rect x={r.a} y={sy(wall.baseboardHeightIn)} width={r.b - r.a} height={wall.baseboardHeightIn} fill="#EFEAE0" />
+            <rect x={r.a} y={sy(wall.baseboardHeightIn)} width={r.b - r.a} height={0.5} fill="#FFF" opacity={0.6} />
+            <rect x={r.a} y={sy(0.5)} width={r.b - r.a} height={0.5} fill="#000" opacity={0.25} />
+          </g>
+        ));
+      })()}
 
       {/* ---------------------------------------------------- room ambience */}
       {room && (

@@ -112,6 +112,14 @@ export type ComponentType =
   | 'niche'
   | 'soundbar'
   | 'shelf'
+  /** Open shelving column — a carcass with N shelves in it. */
+  | 'shelf_column'
+  /** Base or wall cabinet run with doors and/or drawers. */
+  | 'cabinet'
+  /** A panelled region of the wall: slats, fluting, battens. */
+  | 'panel'
+  /** Projecting hearth, bench or plinth at the base of the wall. */
+  | 'hearth'
   | 'outlet'
   | 'lowvolt'
   | 'switch'
@@ -230,6 +238,89 @@ export interface ShelfComponent extends BaseComponent {
   props: { material: string; floating: boolean; capacityLb: number };
 }
 
+/* ------------------------------------------------------------- casework */
+
+/** Sheet material a carcass is built from. Drives the sheet-goods take-off. */
+export type CaseMaterial = 'ply_3_4' | 'ply_1_2' | 'mdf_3_4' | 'melamine_3_4' | 'hardwood_ply_3_4';
+
+export type DoorStyle = 'none' | 'slab' | 'shaker' | 'fluted' | 'glass';
+
+/**
+ * An open shelving column — the tall lit bookcases flanking the TV in a
+ * built-in. Shelves are evenly divided unless `shelfPositions` is set, and each
+ * one becomes a real part in the sheet-goods cut list.
+ */
+export interface ShelfColumnComponent extends BaseComponent {
+  type: 'shelf_column';
+  props: {
+    shelfCount: number;
+    /** Explicit shelf heights above the column's own base, inches. Empty = even. */
+    shelfPositions: number[];
+    material: CaseMaterial;
+    shelfThicknessIn: number;
+    /** Carcass sides/top/bottom thickness. */
+    carcassThicknessIn: number;
+    backPanel: boolean;
+    adjustable: boolean;
+    edgeBanding: boolean;
+    lighting: NicheLighting;
+    /** Interior finish colour, or match the wall. */
+    interiorColorHex: string;
+    faceColorHex: string;
+  };
+}
+
+/**
+ * A cabinet run — the base units under a built-in, or a floating console.
+ * `bays` is how many door/drawer openings across; the take-off counts doors,
+ * hinges, slides and pulls from it.
+ */
+export interface CabinetComponent extends BaseComponent {
+  type: 'cabinet';
+  props: {
+    bays: number;
+    doorStyle: DoorStyle;
+    /** 0 = doors in every bay; otherwise this many drawers per bay. */
+    drawersPerBay: number;
+    toeKickIn: number;
+    floating: boolean;
+    material: CaseMaterial;
+    faceMaterial: CaseMaterial;
+    hardware: 'pull' | 'knob' | 'push_latch';
+    countertop: boolean;
+    /** Ventilation matters when AV gear lives behind a closed door. */
+    ventilated: boolean;
+    faceColorHex: string;
+  };
+}
+
+/**
+ * A panelled region: vertical slats, fluting, battens. Modelled as its own
+ * object rather than a wall-wide finish so a slat field can sit behind the TV
+ * with painted drywall around it — which is how these walls are actually built.
+ */
+export type PanelPattern = 'slat' | 'fluted' | 'batten' | 'shiplap' | 'flat';
+
+export interface PanelComponent extends BaseComponent {
+  type: 'panel';
+  props: {
+    pattern: PanelPattern;
+    orientation: 'vertical' | 'horizontal';
+    /** Face width of one slat and the gap between them. */
+    slatWidthIn: number;
+    slatGapIn: number;
+    /** How far the slat stands off its backer. */
+    slatDepthIn: number;
+    material: CaseMaterial | 'slat_panel_kit' | 'solid_wood';
+    colorHex: string;
+    /** Backer board behind the slats, usually painted black. */
+    backerColorHex: string;
+    /** Metallic reveal strips between slats, as in the reference photo. */
+    inlay: boolean;
+    inlayColorHex: string;
+  };
+}
+
 export type DeviceKind =
   | 'receptacle'
   | 'recessed_receptacle'
@@ -264,12 +355,37 @@ export interface CustomComponent extends BaseComponent {
   props: { notes: string; colorHex: string; recessed: boolean };
 }
 
+/**
+ * The projecting ledge under a fireplace — a hearth, bench or plinth. It reads
+ * as a solid slab in elevation but is a framed box with a finished top, so it
+ * carries its own framing, sheet goods and finish quantities.
+ */
+export interface HearthComponent extends BaseComponent {
+  type: 'hearth';
+  props: {
+    /** How far it stands proud of the finished wall face. */
+    projectionIn: number;
+    material: CaseMaterial | 'stone' | 'solid_wood' | 'plaster';
+    /** Finished top returning down the front face. */
+    waterfall: boolean;
+    /** Recessed toe-kick lighting under the front edge. */
+    litToeKick: boolean;
+    colorHex: string;
+    /** Seating-rated construction rather than a decorative ledge. */
+    seating: boolean;
+  };
+}
+
 export type DesignComponent =
   | TvComponent
   | FireplaceComponent
   | NicheComponent
   | SoundbarComponent
   | ShelfComponent
+  | ShelfColumnComponent
+  | CabinetComponent
+  | PanelComponent
+  | HearthComponent
   | DeviceComponent
   | CustomComponent;
 
@@ -278,7 +394,8 @@ export type DesignComponent =
 export interface LightingZone {
   id: string;
   label: string;
-  kind: 'niche_strip' | 'niche_puck' | 'tv_bias' | 'cove' | 'toe_kick' | 'perimeter';
+  kind: 'niche_strip' | 'niche_puck' | 'tv_bias' | 'cove' | 'toe_kick' | 'perimeter'
+    | 'shelf_strip' | 'slat_reveal' | 'vertical_bar' | 'under_cabinet';
   colorMode: LightColorMode;
   colorHex: string;
   /** Component ids this zone serves; empty = wall-level. */
@@ -348,6 +465,8 @@ export type BomCategory =
   | 'electrical'
   | 'low_voltage'
   | 'finish'
+  /** Sheet goods, edge banding, hardware — everything a carcass needs. */
+  | 'casework'
   | 'equipment';
 
 export interface BomLine {
@@ -373,6 +492,8 @@ export type LaborCategory =
   | 'design'
   | 'demo'
   | 'framing'
+  | 'casework'
+  | 'paneling'
   | 'electrical'
   | 'low_voltage'
   | 'drywall'

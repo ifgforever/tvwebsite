@@ -1,6 +1,6 @@
 /** Bill of materials, drywall take-off, and the optimised cut list. */
 import { useMemo, useState } from 'react';
-import { CATEGORY_LABEL } from '@shared/catalog';
+import { CATEGORY_LABEL, SHEET_MATERIAL } from '@shared/catalog';
 import { computeTakeOff } from '@shared/calc/materials';
 import { inchesToFraction, money } from '@shared/units';
 import { store, useStore } from '../lib/store';
@@ -9,7 +9,7 @@ import type { BomCategory } from '@shared/types';
 
 export function MaterialsScreen() {
   const { project } = useStore();
-  const [tab, setTab] = useState<'bom' | 'cuts' | 'drywall'>('bom');
+  const [tab, setTab] = useState<'bom' | 'cuts' | 'sheets' | 'drywall'>('bom');
   if (!project) return null;
 
   const design = project.design;
@@ -40,7 +40,12 @@ export function MaterialsScreen() {
     <div className="content">
       <div className="row wrap" style={{ marginBottom: 14 }}>
         <Segmented value={tab} onChange={(v) => setTab(v as typeof tab)} gold
-          options={[{ value: 'bom', label: 'Material list' }, { value: 'cuts', label: 'Cut list' }, { value: 'drywall', label: 'Drywall' }]} />
+          options={[
+            { value: 'bom', label: 'Material list' },
+            { value: 'cuts', label: 'Lumber cuts' },
+            ...(take.casework.hasCasework ? [{ value: 'sheets' as const, label: `Sheet goods (${take.casework.totalSheets})` }] : []),
+            { value: 'drywall', label: 'Drywall' },
+          ]} />
         <span className="spacer" />
         <span className="eyebrow">Waste</span>
         <Segmented value={design.wall.wasteFactorPct} onChange={(v) => store.patchWall({ wasteFactorPct: v as number }, 'Waste')}
@@ -165,6 +170,93 @@ export function MaterialsScreen() {
               Each bar is one board; each block is one cut, drawn to scale.
             </div>
           </Panel>
+        </div>
+      )}
+
+      {tab === 'sheets' && (
+        <div className="grid">
+          <div className="grid three">
+            <Stat label="Sheets" value={take.casework.totalSheets} note={take.casework.plans.map((p) => `${p.sheetCount} × ${p.label}`).join(' · ')} />
+            <Stat label="Parts" value={take.casework.parts.reduce((n, p) => n + p.qty, 0)} note={`${take.casework.doorCount} doors · ${take.casework.drawerCount} drawers · ${take.casework.shelfCount} shelves`} />
+            <Stat label="Edge banding" value={`${take.casework.edgeBandingLf} lf`} note={`${Math.ceil(take.casework.edgeBandingLf / 250)} roll(s)`} />
+          </div>
+
+          {take.casework.notes.map((n, i) => (
+            <div key={i} className="note warn" style={{ fontSize: 12.5 }}>{n}</div>
+          ))}
+
+          <Panel title="Parts list" eyebrow="Cut from sheet stock" tight
+            actions={<CopyButton label="Copy parts" text={take.casework.parts.map((p) => `${p.qty} × ${inchesToFraction(p.lengthIn)} × ${inchesToFraction(p.widthIn)}\t${p.label}`).join('\n')} />}>
+            <div className="table-wrap">
+              <table className="data">
+                <thead><tr><th className="num">Qty</th><th>Part</th><th className="num">Length</th><th className="num">Width</th><th>Material</th><th className="num">Banded</th></tr></thead>
+                <tbody>
+                  {take.casework.parts.map((p) => (
+                    <tr key={p.id}>
+                      <td className="num" style={{ fontWeight: 700 }}>{p.qty}</td>
+                      <td>{p.label}</td>
+                      <td className="num gold">{inchesToFraction(p.lengthIn)}</td>
+                      <td className="num gold">{inchesToFraction(p.widthIn)}</td>
+                      <td className="faint">{SHEET_MATERIAL[p.material]?.label ?? p.material}</td>
+                      <td className="num faint">{p.bandedEdges ? `${p.bandedEdges} edge${p.bandedEdges > 1 ? 's' : ''}` : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Panel>
+
+          {take.casework.plans.map((plan) => (
+            <Panel key={plan.material} title={`${plan.label} — ${plan.sheetCount} sheet${plan.sheetCount === 1 ? '' : 's'}`}
+              eyebrow={`Nested at ${plan.yieldPct}% yield · 4×8 · 1/8" kerf`}>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 10 }}>
+                {plan.sheets.map((sheet) => (
+                  <div key={sheet.index}>
+                    <svg viewBox="0 0 48 96" style={{ width: '100%', border: '1px solid var(--line)', borderRadius: 4, background: 'var(--ink-2)', display: 'block' }}>
+                      {sheet.parts.map((part, i) => (
+                        <g key={i}>
+                          <rect x={part.x} y={part.y} width={part.w} height={part.h}
+                            fill={i % 2 ? 'rgba(200,169,74,0.5)' : 'rgba(200,169,74,0.32)'} stroke="#0A0A0A" strokeWidth={0.3} />
+                          {part.w > 7 && part.h > 4 && (
+                            <text x={part.x + part.w / 2} y={part.y + part.h / 2 + 1.1} textAnchor="middle" fontSize={2.6}
+                              fill="#F5F0E8" fontFamily="'JetBrains Mono', monospace">
+                              {Math.round(part.w)}×{Math.round(part.h)}
+                            </text>
+                          )}
+                        </g>
+                      ))}
+                    </svg>
+                    <div className="faint" style={{ fontSize: 11, marginTop: 4, textAlign: 'center' }}>
+                      Sheet {sheet.index + 1} · {sheet.parts.length} parts · {sheet.wastePct}% waste
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          ))}
+
+          <Panel title="Hardware" eyebrow="Counted from the design">
+            <div className="grid three">
+              <Stat label="Hinges" value={take.casework.hardware.hinges} note={`${take.casework.doorCount} doors`} />
+              <Stat label="Drawer slides" value={`${take.casework.hardware.slidePairs} pr`} note={`${take.casework.drawerCount} drawers`} />
+              <Stat label="Pulls" value={take.casework.hardware.pulls || take.casework.hardware.pushLatches} note={take.casework.hardware.pulls ? 'Pulls / knobs' : 'Push latches'} />
+              <Stat label="Shelf pins" value={take.casework.hardware.shelfPins} note="4 per adjustable shelf" />
+              <Stat label="Levelers" value={take.casework.hardware.levelers} note="Floor-standing runs" />
+              <Stat label="Cabinet run" value={`${take.casework.cabinetLf} lf`} note={`${take.casework.shelfColumnCount} shelf columns`} />
+            </div>
+          </Panel>
+
+          {take.casework.panelSqFt > 0 && (
+            <Panel title="Panelling" eyebrow="Slat and backer take-off">
+              <div className="grid three">
+                <Stat label="Panel area" value={`${take.casework.panelSqFt} sf`} note="Face area of every panel" />
+                <Stat label="Slats" value={take.casework.slatCount} note={`${take.casework.slatLf} lf of slat stock`} />
+                <Stat label="Backer" value={`${take.casework.backerSheets} sheets`} note="Behind the slats" />
+                {take.casework.inlayLf > 0 && <Stat label="Metal reveal" value={`${take.casework.inlayLf} lf`} note={`${Math.ceil(take.casework.inlayLf / 8)} sticks`} />}
+                {take.casework.hearthSqFt > 0 && <Stat label="Hearth top" value={`${take.casework.hearthSqFt} sf`} note={`${take.casework.hearthLf} lf of front edge`} />}
+              </div>
+            </Panel>
+          )}
         </div>
       )}
 

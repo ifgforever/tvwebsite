@@ -123,6 +123,68 @@ export function ElevationDrawing({ design, theme = 'screen', showTags = true, cl
         <rect key={c.id} x={c.x} y={sy(c.y + c.h)} width={c.w} height={c.h} fill={s.fillAlt} stroke={s.line} strokeWidth={u * 0.1} />
       ))}
 
+      {/* Casework and panelling, drawn with the detail a joiner needs */}
+      {design.components.filter((c) => c.type === 'panel').map((c) => {
+        const p = c as any;
+        const pitch = Math.max(0.25, p.props.slatWidthIn + p.props.slatGapIn);
+        const vertical = p.props.orientation === 'vertical';
+        const across = vertical ? c.w : c.h;
+        const n = p.props.pattern === 'flat' ? 0 : Math.min(200, Math.floor(across / pitch));
+        return (
+          <g key={c.id}>
+            <rect x={c.x} y={sy(c.y + c.h)} width={c.w} height={c.h} fill="none" stroke={s.line} strokeWidth={u * 0.13} />
+            {Array.from({ length: n }).map((_, i) => (vertical
+              ? <line key={i} x1={c.x + i * pitch} y1={sy(c.y + c.h)} x2={c.x + i * pitch} y2={sy(c.y)} stroke={s.lineLight} strokeWidth={u * 0.04} opacity={0.7} />
+              : <line key={i} x1={c.x} y1={sy(c.y + c.h) + i * pitch} x2={c.x + c.w} y2={sy(c.y + c.h) + i * pitch} stroke={s.lineLight} strokeWidth={u * 0.04} opacity={0.7} />))}
+            <text x={c.x + c.w / 2} y={sy(c.y) - u * 0.8} fill={s.dim} fontSize={u * 0.7} textAnchor="middle" fontFamily="'JetBrains Mono', monospace">
+              {n} SLATS @ {inchesToFraction(p.props.slatWidthIn)} + {inchesToFraction(p.props.slatGapIn)} GAP
+            </text>
+          </g>
+        );
+      })}
+      {design.components.filter((c) => c.type === 'shelf_column').map((c) => {
+        const p = c as any;
+        const t = p.props.carcassThicknessIn;
+        const inner = { x: c.x + t, y: c.y + t, w: c.w - t * 2, h: c.h - t * 2 };
+        const gap = p.props.shelfCount > 0 ? inner.h / (p.props.shelfCount + 1) : 0;
+        return (
+          <g key={c.id}>
+            <rect x={c.x} y={sy(c.y + c.h)} width={c.w} height={c.h} fill={s.fillAlt} stroke={s.line} strokeWidth={u * 0.15} />
+            <rect x={inner.x} y={sy(inner.y + inner.h)} width={inner.w} height={inner.h} fill="none" stroke={s.line} strokeWidth={u * 0.08} />
+            {Array.from({ length: p.props.shelfCount }).map((_, i) => (
+              <rect key={i} x={inner.x} y={sy(inner.y + gap * (i + 1) + p.props.shelfThicknessIn)} width={inner.w} height={p.props.shelfThicknessIn} fill={s.line} opacity={0.8} />
+            ))}
+            <text x={c.x + c.w / 2} y={sy(c.y) + u * 1.4} fill={s.dim} fontSize={u * 0.66} textAnchor="middle" fontFamily="'JetBrains Mono', monospace">
+              {p.props.shelfCount} SH @ {inchesToFraction(gap)}
+            </text>
+          </g>
+        );
+      })}
+      {design.components.filter((c) => c.type === 'cabinet').map((c) => {
+        const p = c as any;
+        const bays = Math.max(1, p.props.bays);
+        const bayW = c.w / bays;
+        return (
+          <g key={c.id}>
+            <rect x={c.x} y={sy(c.y + c.h)} width={c.w} height={c.h} fill={s.fillAlt} stroke={s.line} strokeWidth={u * 0.15} />
+            {Array.from({ length: bays - 1 }).map((_, i) => (
+              <line key={i} x1={c.x + bayW * (i + 1)} y1={sy(c.y + c.h)} x2={c.x + bayW * (i + 1)} y2={sy(c.y)} stroke={s.line} strokeWidth={u * 0.08} />
+            ))}
+            <text x={c.x + c.w / 2} y={sy(c.y + c.h) + c.h / 2 + u * 0.3} fill={s.text} fontSize={u * 0.78} textAnchor="middle" fontFamily="'JetBrains Mono', monospace">
+              {bays} BAY {p.props.drawersPerBay > 0 ? `${p.props.bays * p.props.drawersPerBay} DRAWER` : 'DOOR'} — {inchesToFraction(bayW)} EA
+            </text>
+          </g>
+        );
+      })}
+      {design.components.filter((c) => c.type === 'hearth').map((c) => (
+        <g key={c.id}>
+          <rect x={c.x} y={sy(c.y + c.h)} width={c.w} height={c.h} fill={s.fillAlt} stroke={s.line} strokeWidth={u * 0.15} />
+          <text x={c.x + c.w / 2} y={sy(c.y + c.h) + c.h / 2 + u * 0.3} fill={s.text} fontSize={u * 0.72} textAnchor="middle" fontFamily="'JetBrains Mono', monospace">
+            HEARTH — PROJECTS {inchesToFraction((c as any).props.projectionIn)}
+          </text>
+        </g>
+      ))}
+
       {/* ---- dimension strings ---- */}
       {/* Overall width, below */}
       <Ext x1={0} y1={H} x2={0} y2={H + u * 8.4} s={s} size={u} />

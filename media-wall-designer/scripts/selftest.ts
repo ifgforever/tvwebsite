@@ -12,6 +12,7 @@ import { validateDesign } from '../shared/calc/validate';
 import { generateFraming } from '../shared/calc/framing';
 import { calcCutList, PURCHASE_LENGTHS } from '../shared/calc/cutlist';
 import { parseDimension, inchesToFraction } from '../shared/units';
+import { SHEET_W_IN, SHEET_H_IN } from '../shared/catalog';
 import type { FireplaceComponent, TvComponent } from '../shared/types';
 
 let passed = 0;
@@ -139,6 +140,63 @@ function verifiedProject() {
   const niche = bad.design.components.find((c) => c.type === 'niche')!;
   niche.depthIn = 99;
   check('an over-deep niche is caught', validateDesign(bad.design).some((i) => i.severity === 'blocker' && i.id.startsWith('niche_depth')));
+}
+
+/* -- 8. Casework: parts must fit the sheets they were nested onto ---------- */
+{
+  for (const style of ['built_in', 'slat_panel'] as const) {
+    const p = createProject({ name: style, design: createDefaultDesign(defaultWall(), { style }) });
+    const take = computeTakeOff(p.design, p.estimateSettings);
+    const cw = take.casework;
+    check(`${style}: produces casework`, cw.hasCasework);
+
+    let offSheet = 0;
+    let overlaps = 0;
+    for (const plan of cw.plans) {
+      for (const sheet of plan.sheets) {
+        for (const part of sheet.parts) {
+          if (part.x < -1e-6 || part.y < -1e-6 || part.x + part.w > SHEET_W_IN + 1e-6 || part.y + part.h > SHEET_H_IN + 1e-6) offSheet++;
+        }
+        // No two parts may occupy the same area of the sheet.
+        for (let i = 0; i < sheet.parts.length; i++) {
+          for (let j = i + 1; j < sheet.parts.length; j++) {
+            const a = sheet.parts[i], b = sheet.parts[j];
+            if (a.x < b.x + b.w - 1e-6 && a.x + a.w > b.x + 1e-6 && a.y < b.y + b.h - 1e-6 && a.y + a.h > b.y + 1e-6) overlaps++;
+          }
+        }
+      }
+    }
+    check(`${style}: every nested part sits on its sheet`, offSheet === 0, `${offSheet} off-sheet`);
+    check(`${style}: no two parts overlap on a sheet`, overlaps === 0, `${overlaps} overlaps`);
+    check(`${style}: every part is placed or reported oversize`, (() => {
+      const placed = cw.plans.reduce((n, pl) => n + pl.sheets.reduce((m, sh) => m + sh.parts.length, 0), 0);
+      const total = cw.parts.reduce((n, x) => n + x.qty, 0);
+      const oversize = cw.parts.filter((x) => Math.max(x.lengthIn, x.widthIn) > SHEET_H_IN || Math.min(x.lengthIn, x.widthIn) > SHEET_W_IN)
+        .reduce((n, x) => n + x.qty, 0);
+      return placed + oversize === total;
+    })());
+    check(`${style}: sheet yield is plausible`, cw.plans.every((pl) => pl.yieldPct > 0 && pl.yieldPct <= 100));
+  }
+
+  // Casework must add labor and cost, not vanish into the drywall numbers.
+  const plain = createProject({ name: 'plain', design: createDefaultDesign(defaultWall(), { style: 'drywall_niches' }) });
+  const built = createProject({ name: 'built', design: createDefaultDesign(defaultWall(), { style: 'built_in' }) });
+  const pt = computeTakeOff(plain.design, plain.estimateSettings);
+  const bt = computeTakeOff(built.design, built.estimateSettings);
+  check('built-ins cost more labor than drywall niches',
+    computeEstimate(built.design, built.estimateSettings, bt).laborHours > computeEstimate(plain.design, plain.estimateSettings, pt).laborHours);
+  check('built-ins add casework lines to the BOM', bt.bom.some((l) => l.category === 'casework'));
+  check('a drywall wall has no casework lines', !pt.bom.some((l) => l.category === 'casework'));
+
+  // Slat maths: count and lineal footage must follow the pitch.
+  const slat = createProject({ name: 'slat', design: createDefaultDesign(defaultWall(), { style: 'slat_panel' }) });
+  const st2 = computeTakeOff(slat.design, slat.estimateSettings);
+  const panel = slat.design.components.find((c) => c.type === 'panel')!;
+  const props = (panel as any).props;
+  const expected = Math.ceil(panel.w / (props.slatWidthIn + props.slatGapIn));
+  check('slat count follows the panel width and pitch', st2.casework.slatCount === expected, `${st2.casework.slatCount} vs ${expected}`);
+  check('slat lineal feet follow the count and panel height',
+    st2.casework.slatLf === Math.ceil((expected * panel.h) / 12), `${st2.casework.slatLf}`);
 }
 
 console.log(`\n${passed} passed, ${failures.length} failed`);
