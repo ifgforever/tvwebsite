@@ -27,6 +27,9 @@ Site is available in English, Spanish (/es/) and Polish (/pl/).
   do-it-yourself guide — reading the wall, picking a mount, height and
   placement, tools, common mistakes.
 - [Blog](https://tvserviceschicago.com/blog/): TV buying and mounting advice.
+- [Best floating TV stands](https://tvserviceschicago.com/best-floating-tv-stands):
+  which wall-mounted media consoles to buy for a given TV size, and how they fix to the
+  wall. Contains Wayfair affiliate links, disclosed on the page.
 - [Chicago neighborhoods](https://tvserviceschicago.com/neighborhoods/): a page
   per community area with local mounting detail.
 - [Chicago suburbs](https://tvserviceschicago.com/suburbs/): a page per suburb

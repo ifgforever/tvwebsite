@@ -588,7 +588,19 @@ def rebuild_sitemap(suburb_data, suburb_flat):
     # EN-only pages (no es/pl translations exist yet) -- appended after the
     # per-language loop below via EN_ONLY_PAGES.
     EN_ONLY_PAGES = [
+        # Commercial-intent buying page. Pairs with /blog/floating-tv-stands,
+        # which is the how-to-choose half -- keep both, they target different
+        # searches and link to each other.
+        ("best-floating-tv-stands", "0.6"),
         ("blog/tv-release-calendar", "0.5"),
+        ("blog/floating-tv-stands", "0.5"),
+        ("blog/how-high-to-mount-a-tv", "0.5"),
+        ("blog/arc-vs-earc-hdmi-cec", "0.5"),
+        ("blog/mounting-tv-metal-studs", "0.5"),
+        ("blog/how-to-hide-tv-wires", "0.5"),
+        ("blog/how-to-drill-into-tile", "0.5"),
+        ("blog/powerbridge-metal-vs-plastic", "0.5"),
+        ("blog/what-tv-mounting-costs", "0.6"),
     ]
     LANG_ROOT = {"en": "/", "es": "/es/", "pl": "/pl/"}
     urls = []
