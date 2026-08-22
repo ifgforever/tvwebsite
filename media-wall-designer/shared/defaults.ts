@@ -18,6 +18,14 @@ import type {
 /** The per-niche colours in the reference photo — this is the preview that sells. */
 export const NICHE_PALETTE = ['#FF3DBE', '#8B5CFF', '#3D9BFF', '#FF2E7E', '#2EE6C4', '#FF4FA3', '#FFB03D', '#4DFF88'];
 
+/** Deepen a wall so a recessed fireplace can physically fit in it. */
+export function wallForFireplace(wall: Wall, fireplaceSize: number | null): Wall {
+  if (!fireplaceSize) return wall;
+  if (wall.lumber !== '2x3' && wall.lumber !== '2x4') return wall;
+  if (wall.featureDepthIn >= 6) return wall;
+  return { ...wall, lumber: '2x6', featureDepthIn: snap(LUMBER['2x6'].actualD + wall.drywallThickness) };
+}
+
 export function defaultWall(): Wall {
   return {
     roomWidthIn: 168,
@@ -278,8 +286,13 @@ export const WALL_STYLES: { id: WallStyle; label: string; note: string }[] = [
 ];
 
 /** The reference layout, scaled to whatever wall you give it. */
-export function createDefaultDesign(wall = defaultWall(), opts: Partial<DesignPresetOptions> = {}): Design {
+export function createDefaultDesign(baseWall = defaultWall(), opts: Partial<DesignPresetOptions> = {}): Design {
   const o: DesignPresetOptions = { nichesPerSide: 3, tvSize: 75, fireplaceSize: 60, soundbar: true, style: 'drywall_niches', ...opts };
+  // A linear electric fireplace typically wants 5–6" of recess, which a 2×4
+  // build-out cannot give. Start a wall that carries one deep enough to be
+  // buildable; the real rough depth still comes from the manual and is still
+  // checked against this in validate.ts.
+  const wall = wallForFireplace(baseWall, o.fireplaceSize);
   if (o.style === 'built_in') return createBuiltInDesign(wall, o);
   if (o.style === 'slat_panel') return createSlatPanelDesign(wall, o);
   const design: Design = {

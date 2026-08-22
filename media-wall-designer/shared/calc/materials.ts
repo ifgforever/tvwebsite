@@ -5,7 +5,7 @@
  * printed on the installer package so a quantity can always be argued with.
  */
 import type { BomCategory, BomLine, Design, EstimateSettings, FireplaceComponent, NicheComponent } from '../types';
-import { CATALOG, FINISHES } from '../catalog';
+import { CATALOG, FINISHES, SLAT_PANEL_SQFT } from '../catalog';
 import { calcDrywall, type DrywallResult } from './drywall';
 import { calcElectrical, type ElectricalResult } from './electrical';
 import { calcCutList, type CutListResult } from './cutlist';
@@ -149,8 +149,7 @@ export function buildBom(design: Design, settings: EstimateSettings, parts: {
     specs.push({ sku: 'CW-FILLER', qty: Math.max(1, Math.ceil(cw.cabinetLf / 8)), wastePct: 0, derivedFrom: `${cw.cabinetLf} lf of run scribed to the wall` });
   }
   if (cw.slatCount > 0) {
-    // Slat kits cover roughly 7.8 sf a panel; milled stock is priced by the foot.
-    specs.push({ sku: 'CW-SLAT', qty: Math.ceil((cw.panelSqFt * (1 + waste / 100)) / 7.8), wastePct: 0, derivedFrom: `${cw.panelSqFt} sf of panelling, ${cw.slatCount} slats` });
+    specs.push({ sku: 'CW-SLAT', qty: Math.ceil((cw.panelSqFt * (1 + waste / 100)) / SLAT_PANEL_SQFT), wastePct: 0, derivedFrom: `${cw.panelSqFt} sf of panelling ÷ ${SLAT_PANEL_SQFT} sf per panel, ${cw.slatCount} slats` });
     if (cw.backerSheets) specs.push({ sku: 'CW-BACKER', qty: cw.backerSheets, wastePct: 0, derivedFrom: `${cw.panelSqFt} sf of backer behind the slats` });
   }
   if (cw.inlayLf > 0) specs.push({ sku: 'CW-INLAY', qty: Math.ceil(cw.inlayLf / 8), wastePct: 0, derivedFrom: `${cw.inlayLf} lf of reveal between slats` });

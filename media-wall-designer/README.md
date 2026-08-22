@@ -32,7 +32,7 @@ npm run preview              # builds, then serves everything on :8787
 Useful extras:
 
 ```bash
-npm test                     # 36 assertions over the calculation engine
+npm test                     # 60 assertions over the calculation engine
 npm run typecheck            # both tsconfigs — app and worker
 npm run calc                 # prints the whole take-off for a default project
 npm run icons                # regenerates the PWA icons from public/icon.svg

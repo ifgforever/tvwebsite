@@ -28,6 +28,10 @@ export const SHEET_W_IN = 48;
 export const SHEET_H_IN = 96;
 export const SHEET_KERF_IN = 0.125;
 
+/** A 94" × 12" slat panel is 7.83 sf. Both the finish path and the panel-
+ *  component path must buy it at the same rate. */
+export const SLAT_PANEL_SQFT = 7.83;
+
 export const SHEET_MATERIAL: Record<string, { sku: string; label: string; thicknessIn: number }> = {
   ply_3_4: { sku: 'CW-PLY34', label: '3/4" plywood', thicknessIn: 0.75 },
   ply_1_2: { sku: 'CW-PLY12', label: '1/2" plywood', thicknessIn: 0.5 },
@@ -67,7 +71,7 @@ export const FIREPLACE_PLACEHOLDER = { heightIn: 21.5, depthIn: 5.5 };
 
 export const FINISHES: Record<string, { label: string; sqftCost: number; sku: string; unit: string; coverage: number; note: string }> = {
   painted_drywall: { label: 'Painted drywall', sqftCost: 0, sku: 'FIN-PAINT', unit: 'gal', coverage: 350, note: 'Primer + 2 coats' },
-  wood_slat: { label: 'Wood slat panel', sqftCost: 9.5, sku: 'FIN-SLAT', unit: 'panel', coverage: 11.5, note: '94"×12" acoustic slat panel' },
+  wood_slat: { label: 'Wood slat panel', sqftCost: 9.5, sku: 'FIN-SLAT', unit: 'panel', coverage: 7.83, note: '94"×12" acoustic slat panel' },
   stone: { label: 'Stone / ledger', sqftCost: 12.0, sku: 'FIN-STONE', unit: 'sq ft', coverage: 1, note: 'Stacked stone panel + thinset' },
   tile: { label: 'Tile', sqftCost: 7.5, sku: 'FIN-TILE', unit: 'sq ft', coverage: 1, note: 'Standard format tile' },
   large_format_tile: { label: 'Large-format tile', sqftCost: 14.0, sku: 'FIN-LFT', unit: 'sq ft', coverage: 1, note: '24"×48"+ panel, requires leveling system' },

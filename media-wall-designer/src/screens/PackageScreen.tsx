@@ -16,6 +16,7 @@ import { computeEstimate } from '@shared/calc/estimate';
 import { buildTiers } from '@shared/calc/packages';
 import { buildSourcing } from '@shared/calc/sourcing';
 import { validateDesign, STANDARD_DISCLAIMERS, blockers } from '@shared/calc/validate';
+import { derivedZones } from '@shared/calc/electrical';
 import { AI_DISCLAIMER } from '@shared/ai/prompt';
 import { inchesToFeet, inchesToFraction, money, money0 } from '@shared/units';
 import { useStore } from '../lib/store';
@@ -519,8 +520,13 @@ function ConstructionSet({ project, take, est, sourcing, issues, stamp, paper }:
             <table className="doc-table">
               <thead><tr><th>Zone</th><th>Type</th><th className="num">Length</th><th className="num">W</th></tr></thead>
               <tbody>
-                {d.lighting.map((z) => (
-                  <tr key={z.id}><td>{z.label}</td><td>{z.colorMode.toUpperCase()}</td><td className="num">{z.lengthFt}′</td><td className="num">{z.driverWatts}</td></tr>
+                {derivedZones(d).map((z) => (
+                  <tr key={z.id}>
+                    <td>{z.label}</td>
+                    <td>{z.colorMode.toUpperCase()}</td>
+                    <td className="num">{z.derivedLengthFt}′</td>
+                    <td className="num">{Math.ceil(z.derivedLengthFt * 4.5)}</td>
+                  </tr>
                 ))}
               </tbody>
             </table>

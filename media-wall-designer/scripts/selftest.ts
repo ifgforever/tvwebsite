@@ -12,7 +12,8 @@ import { validateDesign } from '../shared/calc/validate';
 import { generateFraming } from '../shared/calc/framing';
 import { calcCutList, PURCHASE_LENGTHS } from '../shared/calc/cutlist';
 import { parseDimension, inchesToFraction } from '../shared/units';
-import { SHEET_W_IN, SHEET_H_IN } from '../shared/catalog';
+import { SHEET_W_IN, SHEET_H_IN, SLAT_PANEL_SQFT, FINISHES } from '../shared/catalog';
+import { calcElectrical } from '../shared/calc/electrical';
 import type { FireplaceComponent, TvComponent } from '../shared/types';
 
 let passed = 0;
@@ -197,6 +198,50 @@ function verifiedProject() {
   check('slat count follows the panel width and pitch', st2.casework.slatCount === expected, `${st2.casework.slatCount} vs ${expected}`);
   check('slat lineal feet follow the count and panel height',
     st2.casework.slatLf === Math.ceil((expected * panel.h) / 12), `${st2.casework.slatLf}`);
+}
+
+/* -- 9. Three bugs a research pass turned up. Each check is the proof. ------ */
+{
+  // (a) The fireplace rough DEPTH was collected from the manual and never
+  //     compared to the wall, so a 6" unit in a 4" build-out drew a framing plan.
+  const p = verifiedProject();
+  const fp = p.design.components.find((c): c is FireplaceComponent => c.type === 'fireplace')!;
+  // Put a 6" unit in a 4" 2x4 build-out — the case that used to draw a framing plan.
+  p.design.wall.lumber = '2x4';
+  p.design.wall.featureDepthIn = 4;
+  fp.props.roughDIn = 6;
+  const deep = validateDesign(p.design).filter((i) => i.severity === 'blocker');
+  check('a fireplace deeper than the wall is blocked', deep.some((i) => i.id === 'fp_depth'), deep.map((i) => i.id).join(','));
+  check('the block names lumber that would actually fit',
+    (deep.find((i) => i.id === 'fp_depth')?.detail ?? '').includes('2×6'),
+    deep.find((i) => i.id === 'fp_depth')?.detail.slice(0, 90));
+
+  p.design.wall.lumber = '2x6';
+  p.design.wall.featureDepthIn = 6;
+  check('deepening the wall clears it', !validateDesign(p.design).some((i) => i.id === 'fp_depth'));
+
+  // And a wall that starts with a fireplace in it must start deep enough.
+  const seeded = createProject({ name: 'seeded' });
+  check('a new project with a fireplace starts deep enough to hold one',
+    seeded.design.wall.featureDepthIn >= 6, `${seeded.design.wall.featureDepthIn}"`);
+  const noFp = createDefaultDesign(defaultWall(), { fireplaceSize: null });
+  check('a wall with no fireplace stays a 2x4 build-out', noFp.wall.lumber === '2x4', noFp.wall.lumber);
+
+  // (b) Lighting footage was computed once at seed time, so resizing the object
+  //     a zone lit left its length, watts, drivers and BOM line frozen.
+  const slat = createProject({ name: 'l', design: createDefaultDesign(defaultWall(), { style: 'slat_panel' }) });
+  const panel = slat.design.components.find((c) => c.type === 'panel')!;
+  const before = calcElectrical(slat.design);
+  panel.w = panel.w / 2;
+  panel.h = panel.h / 2;
+  const after = calcElectrical(slat.design);
+  check('lighting footage follows the geometry it lights', after.stripFt < before.stripFt, `${before.stripFt} -> ${after.stripFt}`);
+  check('driver load follows too', after.driverWatts < before.driverWatts, `${before.driverWatts} -> ${after.driverWatts}`);
+
+  // (c) The same 94"x12" slat panel was bought at two different coverages.
+  check('one slat panel has one coverage number', Math.abs(FINISHES.wood_slat.coverage - SLAT_PANEL_SQFT) < 0.01,
+    `${FINISHES.wood_slat.coverage} vs ${SLAT_PANEL_SQFT}`);
+  check('slat coverage matches a 94x12 panel', Math.abs(SLAT_PANEL_SQFT - (94 * 12) / 144) < 0.02);
 }
 
 console.log(`\n${passed} passed, ${failures.length} failed`);

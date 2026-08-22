@@ -9,7 +9,8 @@ import type {
   CabinetComponent, Design, DesignIssue, FireplaceComponent, HearthComponent,
   NicheComponent, PanelComponent, ShelfColumnComponent, TvComponent,
 } from '../types';
-import { maxNicheDepth, suggestedFeatureDepth } from '../defaults';
+import { LUMBER } from '../catalog';
+import { maxNicheDepth, studDepth, suggestedFeatureDepth } from '../defaults';
 import { computeOpenings } from './framing';
 import { inchesToFeet } from '../units';
 
@@ -223,6 +224,38 @@ export function validateDesign(design: Design): DesignIssue[] {
     if (!p.specsVerified) {
       add({ id: 'fp_signoff', severity: 'blocker', title: 'Fireplace specs not signed off', detail: 'Tick "verified against the installation manual" on the fireplace once the numbers are checked. The final construction package will not print as approved until then.', componentId: fp.id, requiresVerification: true });
     }
+    /* The deepest object on the wall had no depth check at all: rough depth was
+       collected from the manual, stored, and never compared to the space behind
+       the finished face. A 6" unit in a 4" build-out printed a framing plan. */
+    if (p.roughDIn != null) {
+      const available = wall.featureDepthIn;
+      if (p.roughDIn > available + 0.01) {
+        // Name the lumber that would actually fix it rather than just refusing.
+        // Build-out depth = framing depth + drywall, and the recess is measured
+        // from the finished face, so the target is the rough depth itself.
+        const fix = (Object.keys(LUMBER) as (keyof typeof LUMBER)[])
+          .sort((a, b) => LUMBER[a].actualD - LUMBER[b].actualD)
+          .find((k) => LUMBER[k].actualD + wall.drywallThickness >= p.roughDIn! - 0.01);
+        add({
+          id: 'fp_depth', severity: 'blocker',
+          title: 'Fireplace is deeper than the wall',
+          detail: `The unit needs ${p.roughDIn}" of recess and the build-out gives ${available}". `
+            + (fix
+              ? `${LUMBER[fix].label} framing plus ${wall.drywallThickness}" drywall would give ${LUMBER[fix].actualD + wall.drywallThickness}". `
+              : 'No standard framing lumber is deep enough — the wall needs furring out. ')
+            + 'The alternative is cutting into the existing wall, which needs its own verification of what is behind it, or a partial recess with the manufacturer\'s trim kit if they publish one.',
+          componentId: fp.id,
+        });
+      } else if (p.roughDIn > studDepth(wall) + 0.01) {
+        add({
+          id: 'fp_depth_tight', severity: 'warning',
+          title: 'Fireplace recess is tighter than the framing',
+          detail: `${p.roughDIn}" of recess in ${studDepth(wall)}" of framing — the unit will bear on the drywall plane rather than sitting fully inside the studs. Check the manual allows it.`,
+          componentId: fp.id,
+        });
+      }
+    }
+
     if (p.clearanceToTvIn != null && tv) {
       const gap = tv.y - (fp.y + fp.h);
       if (gap < p.clearanceToTvIn) {
